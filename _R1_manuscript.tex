@@ -1,11 +1,14 @@
 
-\documentclass[a4paper,man, natbib,floatsintext]{apa6} %jou, man, report, doc
+%\documentclass[a4paper,man, natbib,floatsintext]{apa6} %jou, man, report, doc
+
+\documentclass{article}
 
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
+\usepackage{markdown}
 
 \usepackage{multicol}
 \usepackage{multirow}
@@ -20,6 +23,8 @@
 \usepackage{longtable}
 \usepackage{times}
 \usepackage{upgreek}
+
+%% For the revision
 \usepackage{changes}
 \definechangesauthor[name={JJ}, color=orange]{jj}
 %% Use "final" option to remove all tracking markups
@@ -49,6 +54,8 @@ Correspondence concerning this article should be addressed to Janine Christin Ho
 
 \begin{document}
 \maketitle
+\markdownInput{study1_results.md}
+
 In everyday life, people often form preferences on the basis of past experiences. How strong these preferences are arguably depends on the amount of previous experience. Someone who has visited a restaurant for many years and has always had positive experiences likely has a stronger positive preference for this restaurant than someone who visited the restaurant only once and had a positive experience. Thus, even if the relative frequency of positive experiences is similar, the strength of preferences can differ. We examined how people's preferences in an experience-based judgment situation evolve as a function of growing experience. 
 
 %In everyday life people often base their preferences on past experiences. How much experience people have made with an option arguably influences how strong people's opinion about this option is. Someone who had made 50 out of 50 good experiences with a restaurant probably has a stronger preference for this restaurant than someone who had made 1 out of 1 good experience with this restaurant although the relative frequency of good experiences is the same in both situations. Here, we study, how people's preferences (i.e. valuations) in an experience-based task evolve as a function of growing experience. 
