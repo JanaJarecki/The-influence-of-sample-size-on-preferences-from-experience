@@ -52,8 +52,6 @@ Correspondence concerning this article should be addressed to Janine Christin Ho
 \begin{document}
 \maketitle
 
-\input{analyses/code/study1_results}
-
 In everyday life, people often form preferences on the basis of past experiences. How strong these preferences are arguably depends on the amount of previous experience. Someone who has visited a restaurant for many years and has always had positive experiences likely has a stronger positive preference for this restaurant than someone who visited the restaurant only once and had a positive experience. Thus, even if the relative frequency of positive experiences is similar, the strength of preferences can differ. We examined how people's preferences in an experience-based judgment situation evolve as a function of growing experience. 
 
 %In everyday life people often base their preferences on past experiences. How much experience people have made with an option arguably influences how strong people's opinion about this option is. Someone who had made 50 out of 50 good experiences with a restaurant probably has a stronger preference for this restaurant than someone who had made 1 out of 1 good experience with this restaurant although the relative frequency of good experiences is the same in both situations. Here, we study, how people's preferences (i.e. valuations) in an experience-based task evolve as a function of growing experience. 
@@ -219,11 +217,7 @@ To understand this logic, consider the following example: A person has a true se
 } Detailed instructions as well as an example of the BDM auction were presented to explain the auction's mechanism. We used a short questionnaire to ensure that all participants had understood how the auction worked.
 
 \subsection{Results}
-
-For all analyses we used the software R \citep{R2014}. For the linear model comparisons, we used the BayesFactor package \citep{BayesFactor}. We based our inferences on the Bayes factor ($BF\textsubscript{ij}$), which quantifies how much more or less likely the data are under Model i ($\mathrm{M}\textsubscript{i}$) than Model j ($\mathrm{M}\textsubscript{j}$). A Bayes factor of 1 ($BF\textsubscript{ij} = 1$) means that the data do not discriminate between the two models $\mathrm{M}\textsubscript{i}$ and $\mathrm{M}\textsubscript{j}$. A Bayes factor of 5 (i.e., $BF\textsubscript{ij} = 5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{i}$ than under $\mathrm{M}\textsubscript{j}$. A Bayes factor of $1/5$ ($BF\textsubscript{ij} = 1/5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{j}$ (note that $BF\textsubscript{ji} = 1/BF\textsubscript{ij}$). 
-In all analyses below, we included participant as a random factor if not mentioned otherwise.
-
-
+\input{analyses/code/study1_results}
 
 \subsubsection{Sample size}
 Table \ref{table:meansStudy2} displays the mean and median valuations from experience, that is, the monetary amount elicited with the BDM method, separately for each gamble and each sample-size category. The data suggest that sample size does not affect valuations from experience consistently. A model comparison supports this indication. Model $\mathrm{M}\textsubscript{0}$, which predicts valuations from experience as a function of the random factor expected value and the fixed factor gamble type (p-bet vs. \$-bet), is preferred over a model that takes into account sample size as an additional fixed factor ($BF\textsubscript{01} = 409$) and a model that additionally takes into account the interaction between sample size and gamble type ($BF\textsubscript{01} > 1,000$). 
