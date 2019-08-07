@@ -28,6 +28,46 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -102,6 +142,76 @@ likely under \(\mathrm{M}\textsubscript{i}\) than under
 (\(BF\textsubscript{ij} = 1/5\)) means that the data are 5 times more
 likely under \(\mathrm{M}\textsubscript{j}\) (note that
 \(BF\textsubscript{ji} = 1/BF\textsubscript{ij}\)).
+
+Table \ref{table:meansStudy2} displays the mean and median valuations
+from experience, that is, the monetary amount elicited with the BDM
+method, separately for each gamble and each sample-size category. The
+data suggest that sample size does not affect valuations from experience
+consistently. A model comparison supports this indication. Model
+\(\mathrm{M}\textsubscript{0}\), which predicts valuations from
+experience as a function of the random factor expected value and the
+fixed factor gamble type (p-bet vs. \$-bet), is preferred over a model
+that takes into account sample size as an additional fixed factor
+(\(BF\textsubscript{01} = 409\)) and a model that additionally takes
+into account the interaction between sample size and gamble type
+(\(BF\textsubscript{01} > 1,000\)).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(data.table)}
+\KeywordTok{library}\NormalTok{(papaja)}
+\CommentTok{# ==========================================================================}
+\CommentTok{# Produces table 1}
+\CommentTok{# ==========================================================================}
+
+
+\NormalTok{d <-}\StringTok{ }\KeywordTok{fread}\NormalTok{(}\StringTok{"../../data/processed/study1_values_confidence.csv"}\NormalTok{, }\DataTypeTok{colClasses =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{factor =} \KeywordTok{c}\NormalTok{(}\StringTok{'id'}\NormalTok{, }\StringTok{'gametype'}\NormalTok{, }\StringTok{'samplesizecat'}\NormalTok{, }\StringTok{'gambleid'}\NormalTok{)))}
+\NormalTok{d[, samplesizecat }\OperatorTok{:}\ErrorTok{=}\StringTok{ }\KeywordTok{factor}\NormalTok{(samplesizecat, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{'xs'}\NormalTok{, }\StringTok{'s'}\NormalTok{, }\StringTok{'m'}\NormalTok{, }\StringTok{'l'}\NormalTok{))]}
+
+\NormalTok{tab <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(d[gametype }\OperatorTok{!=}\StringTok{ 'description'}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{'gambleid'}\NormalTok{, }\StringTok{'gambletype'}\NormalTok{, }\StringTok{'gamblex'}\NormalTok{, }\StringTok{'gamblep'}\NormalTok{, }\StringTok{'gambleev'}\NormalTok{, }\StringTok{'samplesizecat'}\NormalTok{, }\StringTok{'samplesize'}\NormalTok{)])[}\KeywordTok{order}\NormalTok{(gambleid)]}
+\NormalTok{tab <-}\StringTok{ }\KeywordTok{dcast}\NormalTok{(tab, ... }\OperatorTok{~}\StringTok{ }\NormalTok{samplesizecat, }\DataTypeTok{value.var =} \StringTok{'samplesize'}\NormalTok{)}
+
+
+\KeywordTok{apa_table}\NormalTok{(tab,}
+  \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{'Gamble ID'}\NormalTok{, }\StringTok{'Type'}\NormalTok{, }\StringTok{'X'}\NormalTok{, }\StringTok{'Pr'}\NormalTok{, }\StringTok{'EV'}\NormalTok{, }\StringTok{'xs'}\NormalTok{, }\StringTok{'s'}\NormalTok{, }\StringTok{'m'}\NormalTok{, }\StringTok{'l'}\NormalTok{)}
+\NormalTok{  , }\DataTypeTok{align =} \KeywordTok{c}\NormalTok{(}\StringTok{'l'}\NormalTok{, }\StringTok{'l'}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\StringTok{'c'}\NormalTok{, }\DecValTok{7}\NormalTok{))}
+\NormalTok{  , }\DataTypeTok{note =} \StringTok{'}\CharTok{\textbackslash{}t}\StringTok{extit\{X\} = gain in Swiss Fr., }\CharTok{\textbackslash{}t}\StringTok{extit\{Pr\} = probability of gain, }\CharTok{\textbackslash{}t}\StringTok{extit\{EV\} = expected value, }\CharTok{\textbackslash{}t}\StringTok{extit\{Sample Size\} = total number of observations in the experience condition categorized as }\CharTok{\textbackslash{}t}\StringTok{extit\{xs\} = extra small, }\CharTok{\textbackslash{}t}\StringTok{extit\{s\} = small, }\CharTok{\textbackslash{}t}\StringTok{extit\{m\} = medium, }\CharTok{\textbackslash{}t}\StringTok{extit\{l\} = large. The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble, namely 1/5, 1/6, 1/7, 4/5, 5/6, and 6/7 for gamble IDS 1 through 6, respectively.'}
+\NormalTok{  , }\DataTypeTok{caption =} \StringTok{'Gambles and Sample Sizes Used in Studies 1 and 2\{table:Lotteries\}\}'}
+\NormalTok{  , }\DataTypeTok{placement =} \StringTok{'H'}
+\NormalTok{  , }\DataTypeTok{col_spanners =} \KeywordTok{list}\NormalTok{(}\StringTok{'Sample Size'}\NormalTok{ =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{))}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+
+\begin{table}[H]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:unnamed-chunk-1}Gambles and Sample Sizes Used in Studies 1 and 2\{table:Lotteries\}\}}
+\begin{tabular}{llccccccc}
+\toprule
+ &  &  &  &  & \multicolumn{4}{c}{Sample Size} \\
+\cmidrule(r){6-9}
+Gamble ID & Type & X & Pr & EV & xs & s & m & l\\
+\midrule
+1 & \$-bet & 16.00 & 0.20 & 3.20 & 5 & 10 & 15 & 30\\
+2 & \$-bet & 12.00 & 0.17 & 2.00 & 6 & 12 & 18 & 36\\
+3 & \$-bet & 28.00 & 0.14 & 4.00 & 7 & 14 & 21 & 42\\
+4 & p-bet & 4.00 & 0.80 & 3.20 & 5 & 10 & 15 & 30\\
+5 & p-bet & 2.40 & 0.83 & 2.00 & 6 & 12 & 18 & 36\\
+6 & p-bet & 4.70 & 0.86 & 4.03 & 7 & 14 & 21 & 42\\
+\bottomrule
+\addlinespace
+\end{tabular}
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.}  extit\{X\} = gain in Swiss Fr.,     extit\{Pr\} = probability of gain,  extit\{EV\} = expected value,   extit\{Sample Size\} = total number of observations in the experience condition categorized as  extit\{xs\} = extra small,  extit\{s\} = small,     extit\{m\} = medium,    extit\{l\} = large. The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble, namely 1/5, 1/6, 1/7, 4/5, 5/6, and 6/7 for gamble IDS 1 through 6, respectively.}
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+\end{table}
+\end{verbatim}
 
 
 \end{document}
