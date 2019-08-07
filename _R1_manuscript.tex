@@ -220,67 +220,64 @@ To understand this logic, consider the following example: A person has a true se
 \input{analyses/code/study1_results}
 
 \subsubsection{Sample size}
-Table \ref{table:meansStudy2} displays the mean and median valuations from experience, that is, the monetary amount elicited with the BDM method, separately for each gamble and each sample-size category. The data suggest that sample size does not affect valuations from experience consistently. A model comparison supports this indication. Model $\mathrm{M}\textsubscript{0}$, which predicts valuations from experience as a function of the random factor expected value and the fixed factor gamble type (p-bet vs. \$-bet), is preferred over a model that takes into account sample size as an additional fixed factor ($BF\textsubscript{01} = 409$) and a model that additionally takes into account the interaction between sample size and gamble type ($BF\textsubscript{01} > 1,000$). 
-\newpage
-\begin{ThreePartTable}
-\begin{TableNotes}
-\small
-\item \textit{Note}. Median and mean valuations across participants. The heading $p$(gain) describes the probability $(p)$ with which a gain occurred and the gain amount in Swiss francs (gain). The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble. D--E describes the difference between mean valuations from description (D) and those from experience (E). Bayes factor $BF\textsubscript{10}$ quantifies the evidence for a linear model ($\mathrm{M}\textsubscript{1}$) that predicts that valuations differ between description and experience over a linear model ($\mathrm{M}\textsubscript{0}$) that predicts no such difference. Both models contain participant as a random factor. EV = expected value; xs = extra small; s = small; m = medium; l = large. Gambles 1, 2, and 3 represent \$-bets and Gambles 4, 5, and 6 represent p-bets.
-\end{TableNotes}
-\footnotesize
-\begin{longtable}{ccccccccc}
-\caption{Valuations, Study 1}\label{table:meansStudy2}\\
-\toprule
-Gamble & Condition & Sample size & \(p\)(gain) & EV& Median & Mean& D--E & $BF\textsubscript{10}$\\
-\midrule
-\multirow{5}{*}{1} &\multirow{4}{*}{E} & 5 (xs)  & \multirow{5}{*}{1/5(16.00)}& \multirow{5}{*}{3.20}
- & 5.00 & 5.16 & 0.56 & 4.43\\
-&& 10 (s) &&& 4.55 & 5.30& 0.70&64.94 \\
-&& 15 (m)&&&5.00 & 5.34 & 0.74&24.12\\
-&& 30 (l)&&& 5.00 & 5.29& 0.69&147.10\\
-& D &&&&  4.00 & 4.60 && \\
-\midrule
-\multirow{5}{*}{2} &\multirow{4}{*}{E} & 6 (xs)  & \multirow{5}{*}{1/6(12.00)}&  \multirow{5}{*}{2.00}
-& 4.00 & 4.33 & 0.72 &132.21\\
-&& 12 (s) &&&   4.00 & 4.31 & 0.70&625.86 \\
-&& 18 (m) &&&   4.00 & 4.04 & 0.43&4.46 \\
-&& 36 (l) &&&   4.00 & 3.99 & 0.38 &1.85\\
-& D &&&&   3.00 & 3.61 && \\
-\midrule
-\multirow{5}{*}{3} &\multirow{4}{*}{E} & 7 (xs)  & \multirow{5}{*}{1/7(28.00)}& \multirow{5}{*}{4.03}
-& 6.00 & 7.56 & 0.99&4.32\\
-&& 14 (s) &&& 6.70 & 8.40 & 1.83&905.21\\
-&& 21 (m) &&&  6.20 & 7.92 & 1.35&141.95\\
-&& 42 (l) &&& 6.00 & 7.68 & 1.11&15.99\\
-& D&&&&  5.00 & 6.57  &&\\
-\midrule
-\multirow{5}{*}{4} &\multirow{4}{*}{E} & 5 (xs)  & \multirow{5}{*}{4/5(4.00)}& \multirow{5}{*}{3.20}
-& 3.00 & 2.80 & -0.28&>1,000\\
-&& 10 (s) &&& 3.20 & 2.92 & -0.16&3.24\\
-&& 15 (m) &&&3.00 & 2.80 & -0.28&57.41\\
-&& 30 (l) &&&3.00 & 2.95& -0.13&1.41\\
-& D &&&&  3.20 & 3.08 & &\\
-\midrule
-\multirow{5}{*}{5} &\multirow{4}{*}{E} & 6 (xs)  & \multirow{5}{*}{5/6(2.40)}&  \multirow{5}{*}{2.00} 
-& 2.00 & 1.77 & -0.10&8.03\\
-&& 12 (s) &&&  2.00 & 1.75 & -0.12&14.56\\
-&& 18 (m) &&&  2.00 & 1.73 & -0.14&28.34\\
-&& 36 (l) &&&  2.00 & 1.81 & 0.06&0.71\\
-& D &&&&   2.00 & 1.87 && \\
-\midrule
-\multirow{5}{*}{6} &\multirow{4}{*}{E} & 7 (xs)  & \multirow{5}{*}{6/7(4.70)}& \multirow{5}{*}{4.03}
-& 4.00 & 3.46 & -0.18&2.66\\
-&& 14 (s) &&&  4.00 & 3.55 & -0.09&0.34\\
-&& 21 (m) &&&  4.00 & 3.58 & -0.06&0.19\\
-&& 42 (l) &&&  4.00 & 3.70 & 0.06&0.22\\
-& D &&&&   4.00 & 3.64 & &\\
-\bottomrule
-\insertTableNotes
-\end{longtable}
-\end{ThreePartTable}
-%\end{table*}
+%Table \ref{table:meansStudy2} displays the mean and median valuations from experience, that is, the monetary amount elicited with the BDM method, separately for each gamble and each sample-size category. The data suggest that sample size does not affect valuations from experience consistently. A model comparison supports this indication. Model $\mathrm{M}\textsubscript{0}$, which predicts valuations from experience as a function of the random factor expected value and the fixed factor gamble type (p-bet vs. \$-bet), is preferred over a model that takes into account sample size as an additional fixed factor ($BF\textsubscript{01} = 409$) and a model that additionally takes into account the interaction between sample size and gamble type ($BF\textsubscript{01} > 1,000$). 
 
-
+% \begin{ThreePartTable}
+% \begin{TableNotes}
+% \small
+% \item \textit{Note}. Median and mean valuations across participants. The heading $p$(gain) describes the probability $(p)$ with which a gain occurred and the gain amount in Swiss francs (gain). The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble. D--E describes the difference between mean valuations from description (D) and those from experience (E). Bayes factor $BF\textsubscript{10}$ quantifies the evidence for a linear model ($\mathrm{M}\textsubscript{1}$) that predicts that valuations differ between description and experience over a linear model ($\mathrm{M}\textsubscript{0}$) that predicts no such difference. Both models contain participant as a random factor. EV = expected value; xs = extra small; s = small; m = medium; l = large. Gambles 1, 2, and 3 represent \$-bets and Gambles 4, 5, and 6 represent p-bets.
+% \end{TableNotes}
+% \footnotesize
+% \begin{longtable}{ccccccccc}
+% \caption{Valuations, Study 1}\label{table:meansStudy2}\\
+% \toprule
+% Gamble & Condition & Sample size & \(p\)(gain) & EV& Median & Mean& D--E & $BF\textsubscript{10}$\\
+% \midrule
+% \multirow{5}{*}{1} &\multirow{4}{*}{E} & 5 (xs)  & \multirow{5}{*}{1/5(16.00)}& \multirow{5}{*}{3.20}
+%  & 5.00 & 5.16 & 0.56 & 4.43\\
+% && 10 (s) &&& 4.55 & 5.30& 0.70&64.94 \\
+% && 15 (m)&&&5.00 & 5.34 & 0.74&24.12\\
+% && 30 (l)&&& 5.00 & 5.29& 0.69&147.10\\
+% & D &&&&  4.00 & 4.60 && \\
+% \midrule
+% \multirow{5}{*}{2} &\multirow{4}{*}{E} & 6 (xs)  & \multirow{5}{*}{1/6(12.00)}&  \multirow{5}{*}{2.00}
+% & 4.00 & 4.33 & 0.72 &132.21\\
+% && 12 (s) &&&   4.00 & 4.31 & 0.70&625.86 \\
+% && 18 (m) &&&   4.00 & 4.04 & 0.43&4.46 \\
+% && 36 (l) &&&   4.00 & 3.99 & 0.38 &1.85\\
+% & D &&&&   3.00 & 3.61 && \\
+% \midrule
+% \multirow{5}{*}{3} &\multirow{4}{*}{E} & 7 (xs)  & \multirow{5}{*}{1/7(28.00)}& \multirow{5}{*}{4.03}
+% & 6.00 & 7.56 & 0.99&4.32\\
+% && 14 (s) &&& 6.70 & 8.40 & 1.83&905.21\\
+% && 21 (m) &&&  6.20 & 7.92 & 1.35&141.95\\
+% && 42 (l) &&& 6.00 & 7.68 & 1.11&15.99\\
+% & D&&&&  5.00 & 6.57  &&\\
+% \midrule
+% \multirow{5}{*}{4} &\multirow{4}{*}{E} & 5 (xs)  & \multirow{5}{*}{4/5(4.00)}& \multirow{5}{*}{3.20}
+% & 3.00 & 2.80 & -0.28&>1,000\\
+% && 10 (s) &&& 3.20 & 2.92 & -0.16&3.24\\
+% && 15 (m) &&&3.00 & 2.80 & -0.28&57.41\\
+% && 30 (l) &&&3.00 & 2.95& -0.13&1.41\\
+% & D &&&&  3.20 & 3.08 & &\\
+% \midrule
+% \multirow{5}{*}{5} &\multirow{4}{*}{E} & 6 (xs)  & \multirow{5}{*}{5/6(2.40)}&  \multirow{5}{*}{2.00} 
+% & 2.00 & 1.77 & -0.10&8.03\\
+% && 12 (s) &&&  2.00 & 1.75 & -0.12&14.56\\
+% && 18 (m) &&&  2.00 & 1.73 & -0.14&28.34\\
+% && 36 (l) &&&  2.00 & 1.81 & 0.06&0.71\\
+% & D &&&&   2.00 & 1.87 && \\
+% \midrule
+% \multirow{5}{*}{6} &\multirow{4}{*}{E} & 7 (xs)  & \multirow{5}{*}{6/7(4.70)}& \multirow{5}{*}{4.03}
+% & 4.00 & 3.46 & -0.18&2.66\\
+% && 14 (s) &&&  4.00 & 3.55 & -0.09&0.34\\
+% && 21 (m) &&&  4.00 & 3.58 & -0.06&0.19\\
+% && 42 (l) &&&  4.00 & 3.70 & 0.06&0.22\\
+% & D &&&&   4.00 & 3.64 & &\\
+% \bottomrule
+% \insertTableNotes
+% \end{longtable}
+% \end{ThreePartTable}
 
 
 % der Unterschied zw. experience and description wird aber bei den meisten gambles mit einem grossen sample geringer. Könnte man noch erwähnen, müsste man nicht auf sig. testen, wäre aber auch möglich
