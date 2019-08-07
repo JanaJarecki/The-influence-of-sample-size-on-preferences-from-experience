@@ -1,0 +1,1353 @@
+---
+title: "Resubmission_QJEP"
+author: "JanineHoffart"
+date: "31 1 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Editor
+-	Both reviewers (and I) feel that the key inference about an effect of sample size in the Bayesian group is too strong a conclusion to draw from the results shown in Figures 3 and 6. 
+At least visually there does not seem to be much of a decrease in valuation for $-bets, and in Study 2 the increase in valuation for $-bets in the frequentist group seems about as large as the increase for p-bets in the Bayesian group. I think some
+statistical assessment of these sample size effects in the two groups are necessary. 
+
+```{r }
+```
+-	Reviewer 1 makes a number of helpful suggestions with regard to relevant literature. This reviewer also encourages you to explore the reversed description-experience gap in more depth. 
+
+```{r }
+```
+## Sensitivity Analysis
+-	Reviewer 2 makes an important point about the role of the prior and the absence of probability weighting. This reviewer suggests an alternative prior and I think some kind of sensitivity analysis along these lines is important here. 
+Repeat modeling with four Bayeisan models that have differnt prior beliefs:
+
+1.) Beta \~ (1,1)
+2.) Beta \~ (.5,.5)
+3.) Beta \~ (2,0)
+4.) Beta \~ (0,1)
+
+```{r sensitivity analysis,fig.height = 8, fig.width = 16,fig.cap="\\label{fig:sensi.prior}XXX."}
+save = T
+
+if(save == T){
+  setwd("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/Resubmission_QJEP/Figures")
+  setEPS(width = 15, height = 8)
+  postscript("sensi.eps")
+}
+par(mfrow = c(3,5),bty = "n", cex.lab = 1.5, cex.axis = 1.3, cex.main = 2 )
+
+
+
+
+p1 = c(1,1)
+p2 = c(.5,.5)
+p3 = c(1.99,.01)
+p4 = c(.01,1.99)
+
+prior = matrix(c(p1,p2,p3,p4), ncol = 2, byrow = T)
+
+plot.new()
+text(.5,.5, "Prior Belief", cex = 2)
+par(xpd =T)
+text(0,1, "(a)", cex = 2)
+par(xpd =F)
+# 
+# curve(dbeta(x,1,1), xlab = "Reward probability", ylab = "Density", main = "Uniform\nBeta ~ (1,1)", ylim = c(0,4))
+# curve(dbeta(x,.5,.5), xlab = "Reward probability", ylab = "Density", main = "Bimodal\nBeta ~ (.5,.5)", ylim = c(0,4))
+# curve(dbeta(x,1.99,.01), xlab = "Reward probability", ylab = "Density", main = "Gain\nBeta ~ (1.99,.01)", ylim = c(0,4), xlim = c(0,1))
+# curve(dbeta(x,.01,1.99), xlab = "Reward probability", ylab = "Density", main = "Loss\nBeta ~ (.01,1.99)", ylim = c(0,4))
+
+
+plot(seq(0,1,.0001),dbeta(seq(0,1,.0001),1,1), type = "l",xlab = "Reward probability", ylab = "Density", main = "Uniform\nBeta ~ (1,1)", ylim = c(0,4))
+plot(seq(0,1,.0001),dbeta(seq(0,1,.0001),.5,.5), type = "l", xlab = "Reward probability", ylab = "Density", main = "Bimodal\nBeta ~ (.5,.5)", ylim = c(0,4))
+
+plot(seq(0,1,.0001),dbeta(seq(0,1,.0001),1.99,.01), type = "l",xlab = "Reward probability", ylab = "Density", main = "Gain\nBeta ~ (1.99,.01)", ylim = c(0,4), xlim = c(0,1))
+
+plot(seq(0,1,.0001),dbeta(seq(0,1,.0001),.01,1.99), type = "l",xlab = "Reward probability", ylab = "Density", main = "Loss\nBeta ~ (.01,1.99)", ylim = c(0,4))
+
+
+for(j in 1:2){
+  for(i in 0:nrow(prior)){
+    if(i == 0 & j == 1){
+      plot.new()
+      #4 x Gain\n1 x Zero
+      text(.5,.5, "Reward\nfrequency:\n1/5", cex = 2)
+      par(xpd =T)
+      text(0,1, "(b)", cex = 2)
+      par(xpd =F)
+      p = .2
+      N1 = 5
+      N2 = 30
+      
+    }
+    if(i == 0 & j == 2){
+      plot.new()
+      #4 x Gain\n1 x Zero
+      text(.5,.5, "Reward\nfrequency:\n4/5", cex = 2)
+      par(xpd =T)
+      text(0,1, "(c)", cex = 2)
+      par(xpd =F)
+      p = .8
+      N1 = 5
+      N2 = 30
+      
+    }
+    if(i !=0){
+      curve(dbeta(x,prior[i,1]+N2*p,
+                  prior[i,2]+N2*(1-p)), xlab = "Reward probability", ylab = "Density",
+            col = "darkgrey")
+      
+      
+      points(x = (prior[i,1]+N2*p)/sum(c(prior[i,1]+N2*p,prior[i,2]+N2*(1-p))),
+             y = 0, col = "darkgrey",
+             pch = 17, cex = 1.5)
+      
+      
+      curve(dbeta(x,prior[i,1]+N1*p,
+                  prior[i,2]+N1*(1-p)), add = T, lty = 1)
+      
+      
+      points(x = (prior[i,1]+N1*p)/sum(c(prior[i,1]+N1*p,prior[i,2]+N1*(1-p))),
+             y = 0, col = "black",
+             pch = 16, cex = 1.5)
+      if(j == 1){
+        legend("topright",
+               title = "Observations", 
+               lty = c(2,1),
+               pch = c(16,17),
+               col = c("black", "grey"), 
+               legend = c(paste0(N1*p," Gain & ",N1*(1-p)," Zeros"),
+                          paste0(N2*p," Gains & ",N2*(1-p)," Zeros")),
+               bty = "n", ncol = 1, cex = 1.5)
+      }
+      if(j == 2){
+        legend("topleft",
+               title = "Observations", 
+               lty = c(2,1),
+               pch = c(16,17),
+               col = c("black", "grey"),
+               legend = c(paste0(N1*p," Gains & ",N1*(1-p)," Zero"),
+                          paste0(N2*p," Gains & ",N2*(1-p)," Zeros")),
+               bty = "n", ncol = 1, cex = 1.5)
+      }
+    }
+  }
+}
+if(save == T){
+  dev.off()
+}
+```
+
+
+As Figure \ref{fig:sensi.prior} shows, depending on the prior belief (1st row, main title) the posterir belief changes.
+The effect vanishes when more information is observed (compare 2nd row with 3rd row).
+
+```{r read data }
+whichdata = "B"
+if(whichdata == "A"){
+  wd <- "/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis"
+  load("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/data_analysis_A.RData")
+  require(BayesFactor)
+  require(plyr)
+  require(knitr)
+  require(truncnorm)
+  colnames(sd)[colnames(sd) == "ptypeprob"] = "ptype"
+  colnames(conf)[colnames(conf) == "ptypeprob"] = "ptype"
+  conf = conf[conf$gamble %in% 1:6,]
+  d$s = factor(d$s, levels = c("us", "s", "m", "l", "d"))
+  de$s = factor(de$s, levels = c("us", "s", "m", "l", "d"))
+  sd$s = factor(sd$s, levels = c("us", "s", "m", "l", "d"))
+  conf$s = factor(conf$s, levels = c("us", "s", "m", "l", "d"))
+  de$ev = round(de$ev,2)
+  de$id = factor(de$id)
+  conf$id = factor(conf$id)
+  
+  sd$p <- as.numeric(as.character(sd$p))
+  sd$gain <- as.numeric(as.character(sd$gain))
+  sd$ev = sd$p * sd$gain
+  sd$evf = as.factor(round(sd$ev,1))
+  sd$id = factor(sd$id)
+  sd$ptype = factor(sd$ptype)
+  niter = 1000000
+}
+
+
+if(whichdata == "B"){
+  wd <- "/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis"
+  load("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/data_analysis_B.RData")
+  require(BayesFactor)
+  require(plyr)
+  require(knitr)
+  require(truncnorm)
+  colnames(sd)[colnames(sd) == "ptypeprob"] = "ptype"
+  colnames(conf)[colnames(conf) == "ptypeprob"] = "ptype"
+  conf = conf[conf$gamble %in% 1:6,]
+  d$s = factor(d$s, levels = c("us", "s", "m", "l", "d"))
+  de$s = factor(de$s, levels = c("us", "s", "m", "l", "d"))
+  sd$s = factor(sd$s, levels = c("us", "s", "m", "l", "d"))
+  conf$s = factor(conf$s, levels = c("us", "s", "m", "l", "d"))
+  
+  de$p <- as.numeric(as.character(de$p))
+  de$gain <- as.numeric(as.character(de$gain))
+  de$ev = de$p*de$gain
+  de$evf = round(de$ev,2)
+  de$id = factor(de$id)
+  conf$id = factor(conf$id)
+  
+  sd$p <- as.numeric(as.character(sd$p))
+  sd$gain <- as.numeric(as.character(sd$gain))
+  sd$ev = sd$p * sd$gain
+  sd$evf = as.factor(round(sd$ev,1))
+  sd$id = factor(sd$id)
+  sd$ptype = factor(sd$ptype)
+  niter = 1000000
+}
+```
+
+
+
+```{r modeling sensitivity,fig.height = 8, fig.width = 16,}
+
+### compare all models
+infoCrit = function(nlnLs, Npar, N, names){
+  # Calculate information criteria (AIC BIC),
+  #   IC differences from best model (AICd BICd),
+  #   and model weights (AICw, BICw)
+  #   from a vector of negative lnLs
+  # Each cell in the vectors corresponds to a model
+  # Npar is a vector indicating the 
+  #   number of parameters in each model
+  # N is the number of observations on which
+  #   the log-likelihoods were calculated
+  AIC <- nlnLs + 2.*Npar
+  BIC <- nlnLs + Npar*log(N)
+  
+  AICd <- AIC-min(AIC)
+  BICd <- BIC-min(BIC)
+  
+  AICw <- exp(-.5*AICd)/sum(exp(-.5*AICd))
+  BICw <- exp(-.5*BICd)/sum(exp(-.5*BICd))
+  ret = as.data.frame(matrix(c(AIC,BIC,AICd,BICd,round(AICw,10),round(BICw,10)),length(names),6))
+  colnames(ret) = c("AIC", "BIC", "DeltaAIC", "DeltaBIC", "ModelWeightAic","ModelWeightBic")
+  rownames(ret) = names
+  return(ret)
+}
+
+modelB <- function(ss, p, out,  param, prior){
+  
+  a <- prior[1] + ss*p
+  b <- prior[2] + ss*(1-p)
+  val <- ((a/(a+b))*(out^param[2]))^(1/param[2])
+  val[val>out] <- out
+  return(val)
+}
+
+modelF <- function(p,out,param,...){
+  val <- (p*(out^param[2]))^(1/param[2])
+  val[val>out] <- out
+  return(val)
+}
+
+LogL = function(data,param,valuefunct, prior = prior){
+  p = data$p
+  ss = data$SS
+  out = data$gain
+  response = data$rating
+  ptype = as.numeric(data$ptype)
+  
+  pred = valuefunct(p = p, ss = ss, out = out, param = param, prior)
+  ll = log(dtruncnorm(x = response/out, a = 0, b = 1,
+                      mean = pred/out, sd = param[1]))
+  
+  ll[ll < -9999] = -9999999
+  ll[ll > 9999] = 9999999
+  return(ll) 
+}
+
+
+
+min2sumLL = function(data,param, valuefunct, prior){
+  LL = numeric();
+  for(i in 1:nrow(data)){
+    LL[i] = LogL(data = data[i,],param = param, valuefunct = valuefunct, prior = prior)
+  }
+  m2LL = (-2) * sum(LL)
+  return(m2LL)
+}
+
+
+```
+
+
+```{r comparison}
+sds <- seq(.00001, .3, .01)
+alphas <- seq(0.1,3,.025)
+
+LL.mB_unif <-LL.mB_bi <-LL.mB_gain <- LL.mB_loss<- LL.mF <- array(NA, dim = c(length(sds), length(alphas), length(unique(sd$id))))
+
+res.mB_unif <- data.frame(matrix(NA, length(unique(sd$id)), 3))
+colnames(res.mB_unif) <- c( "min2sumLL",
+                            "param.sd", "param.alpha")
+res.mF <- res.mB_bi <- res.mB_loss <- res.mB_gain<- res.mB_unif
+
+for(i in 1:length(unique(sd$id))){#unique(s$id)
+  print(Sys.time())
+  k <- sd[sd$id == i,]
+  for(j in 1:length(sds)){
+    for(p in 1:length(alphas)){
+      LL.mB_unif[j,p,i] <- min2sumLL(data = k, param = c(sds[j], alphas[p]), prior = c(1,1), valuefunct = modelB)
+      LL.mB_bi[j,p,i] <- min2sumLL(data = k, param = c(sds[j], alphas[p]), prior = c(.5,.5), valuefunct = modelB)
+      LL.mB_gain[j,p,i] <- min2sumLL(data = k, param = c(sds[j], alphas[p]), prior = c(2-.01,.01), valuefunct = modelB)
+      LL.mB_loss[j,p,i] <- min2sumLL(data = k, param = c(sds[j], alphas[p]), prior = c(.01,2-.01), valuefunct = modelB)
+      
+      LL.mF[j,p,i] <- min2sumLL(data = k, param = c(sds[j], alphas[p]),  valuefunct = modelF)
+      
+    }
+  }
+  
+  LL.mB_unif[LL.mB_unif == Inf] = NA
+  LL.mB_bi[LL.mB_bi == Inf] = NA
+  LL.mB_gain[LL.mB_gain == Inf] = NA
+  LL.mB_loss[LL.mB_loss == Inf] = NA
+  LL.mF[LL.mF == Inf] = NA
+  
+  
+  res.mB_unif$param.sd[i] <- sds[which(LL.mB_unif[,,i] == min(LL.mB_unif[,,i], na.rm = TRUE),
+                                       arr.ind = TRUE)[,1]]
+  res.mB_unif$param.alpha[i]<- alphas[which(LL.mB_unif[,,i] == min(LL.mB_unif[,,i], na.rm = TRUE),
+                                            arr.ind = TRUE)[,2]]
+  res.mB_unif$min2sumLL[i] <- min(LL.mB_unif[,,i], na.rm = T)
+  
+  
+  res.mB_bi$param.sd[i] <- sds[which(LL.mB_bi[,,i] == min(LL.mB_bi[,,i], na.rm = TRUE),
+                                     arr.ind = TRUE)[,1]]
+  res.mB_bi$param.alpha[i]<- alphas[which(LL.mB_bi[,,i] == min(LL.mB_bi[,,i], na.rm = TRUE),
+                                          arr.ind = TRUE)[,2]]
+  res.mB_bi$min2sumLL[i] <- min(LL.mB_bi[,,i], na.rm = T)
+  
+  
+  
+  res.mB_gain$param.sd[i] <- sds[which(LL.mB_gain[,,i] == min(LL.mB_gain[,,i], na.rm = TRUE),
+                                       arr.ind = TRUE)[,1]]
+  res.mB_gain$param.alpha[i]<- alphas[which(LL.mB_gain[,,i] == min(LL.mB_gain[,,i], na.rm = TRUE),
+                                            arr.ind = TRUE)[,2]]
+  res.mB_gain$min2sumLL[i] <- min(LL.mB_gain[,,i], na.rm = T)
+  
+  
+  res.mB_loss$param.sd[i] <- sds[which(LL.mB_loss[,,i] == min(LL.mB_loss[,,i], na.rm = TRUE),
+                                       arr.ind = TRUE)[,1]]
+  res.mB_loss$param.alpha[i]<- alphas[which(LL.mB_loss[,,i] == min(LL.mB_loss[,,i], na.rm = TRUE),
+                                            arr.ind = TRUE)[,2]]
+  res.mB_loss$min2sumLL[i] <- min(LL.mB_loss[,,i], na.rm = T)
+  
+  
+  
+  res.mF$param.sd[i] <- sds[which(LL.mF[,,i] == min(LL.mF[,,i], na.rm = TRUE),
+                                  arr.ind = TRUE)[,1]]
+  res.mF$param.alpha[i]<- alphas[which(LL.mF[,,i] == min(LL.mF[,,i], na.rm = TRUE),
+                                       arr.ind = TRUE)[,2]]
+  res.mF$min2sumLL[i] <- min(LL.mF[,,i], na.rm = T)
+  print(i)
+  
+}
+```
+
+
+```{r ModelComparison, claculate Bayesian model weights.}
+vglALL  = list()
+for (i in 1:40){
+  nlnLs <- c(res.mB_unif[i,1], res.mB_bi[i,1],res.mB_gain[i,1],res.mB_loss[i,1],res.mF[i,1], 0)
+  vglALL [[i]] = infoCrit(nlnLs = nlnLs,
+                          Npar = c(2,2,2,2,2,0),
+                          N = c(72,72,72,72,72,72), 
+                          names = c("mB_unif", "mB_bi","mB_gain","mB_loss","mF", "mBase") )
+}
+nmodels = 6
+nids = length(unique(sd$id))
+mw = as.data.frame(matrix(NA,nmodels,nids))
+for(i in 1:nids){
+  mw[,i] =  data.frame(matrix(unlist(vglALL[[i]]), nrow=nmodels, byrow=F))[,6]
+}
+rownames(mw) <- c("mB_unif", "mB_bi","mB_gain","mB_loss","mF", "mBase") 
+
+
+bestmodel = as.data.frame(matrix(NA,nids,3))
+colnames(bestmodel) = c("model", "modelweight", "evidence.strength")
+for(i in 1:nids){
+  bestmodel[i,1] = rownames(mw)[which(mw[,i]== max(mw[,i], na.rm = TRUE))]
+  bestmodel[i,2] = max(mw[,i], na.rm = TRUE)
+}
+bestmodel[which(bestmodel[,2]>=0.166666667 & bestmodel[,2] <=0.375),3] = "weak"
+bestmodel[which(bestmodel[,2]>=0.375 & bestmodel[,2] <=0.8),3] = "positiv"
+bestmodel[which(bestmodel[,2]>=0.8 & bestmodel[,2] <=0.967741935),3] = "strong"
+bestmodel[which(bestmodel[,2]>0.967741935),3] = "very.strong"
+
+
+bestmodel$model[bestmodel$model == "mBase"] = "Baseline"
+bestmodel$model[bestmodel$model == "mF"] = "RF"
+bestmodel$model[bestmodel$model == "mB_bi"] = "BVU (bimodal prior)"
+bestmodel$model[bestmodel$model == "mB_gain"] = "BVU (gain prior)"
+bestmodel$model[bestmodel$model == "mB_loss"] = "BVU (loss prior)"
+bestmodel$model[bestmodel$model == "mB_unif"] = "BVU (uniform prior)"
+
+bestmodel$model <- factor(bestmodel$model, levels = c("BVU (uniform prior)","BVU (bimodal prior)", "BVU (gain prior)","BVU (loss prior)", "RF","Baseline" ))
+bestmodel$rowname = 1:nrow(bestmodel)
+
+## compare only bestfitting BVU with RF and Baseline
+vglBVU  = list()
+
+nmodels =3
+mw_bvu = as.data.frame(matrix(NA,nmodels,nids))
+rownames( mw_bvu) <- c("mBVU","mF", "mBase") 
+bestmodel_bvu  = as.data.frame(matrix(NA,nids,3))
+
+for (i in 1:40){
+  nlnLs <- c(min(c(res.mB_unif[i,1], res.mB_bi[i,1],res.mB_gain[i,1],res.mB_loss[i,1])),res.mF[i,1], 0)
+  vglBVU [[i]] = infoCrit(nlnLs = nlnLs,
+                          Npar = c(2,2,0),
+                          N = c(72,72,72), 
+                          names = c("mBVU","mF", "mBase") )
+  
+  mw_bvu[,i] =  data.frame(matrix(unlist(vglBVU[[i]]), nrow=nmodels, byrow=F))[,6]
+  
+  bestmodel_bvu[i,1] = rownames(mw_bvu)[which(mw_bvu[,i]== max(mw_bvu[,i], na.rm = TRUE))]
+  bestmodel_bvu[i,2] = max(mw_bvu[,i], na.rm = TRUE)
+}
+bestmodel_bvu[which(bestmodel_bvu[,2]>=0.333333333 & bestmodel_bvu[,2] <=0.6),3] = "weak"
+bestmodel_bvu[which(bestmodel_bvu[,2]>=0.6 & bestmodel_bvu[,2] <=0.909090909),3] = "positiv"
+bestmodel_bvu[which(bestmodel_bvu[,2]>=0.909090909 & bestmodel_bvu[,2] <= 0.986842105),3] = "strong"
+bestmodel_bvu[which(bestmodel_bvu[,2]> 0.986842105),3] = "very.strong"
+
+
+table(bestmodel_bvu[,1], bestmodel_bvu[,3])
+
+```
+
+
+
+
+
+
+
+
+## Quantitative model comparison: Results
+```{r Plot results, fig.cap="\\label{fig:modeling_quant}Number of people who were best fit by each model. Evidence strength is indicated by shades of gray. Baseline = Baseline model; BVU = Bayesian value updating model; RF = relative frequency model."}
+
+bestmodel$evidence.strength = factor(bestmodel$evidence.strength, levels = c("very.strong", "strong", "positiv", "weak"))
+#setwd("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/Figures")
+#setEPS(width = 6, height = 5)
+#postscript("modelcomp2.eps")
+
+cols = gray.colors(4, start = 0, end = .9)
+par(mfrow = c(1,1), mar = c(5,12,4,1) + 0.1, cex.axis = 1.2, cex.lab = 1.2,
+    cex.lab = 1.5)
+barplot(table(list(bestmodel$evidence.strength, bestmodel$model)), 
+        horiz = T,axes = F, 
+        legend = F, xlab = "Number of people", las = 1,
+        xlim = c(0,20), col = cols)
+axis(1, seq(0,15,5))
+title(ylab = "Model",line = 9)
+
+legend(7,9.5, fill = cols, title = "Evidence strength", 
+       legend = c("Very strong", "Strong",
+                  "Positive", "Weak"), bty = "n", ncol = 2)
+#dev.off()
+
+```
+
+#### Quantitative
+```{r Modelcomp: Quantitative plot with points, fig.height = 4, fig.width = 10,fig.align='center'}
+require(plyr)
+require(lsmeans)
+require(arm)
+require(lme4)
+save = F
+bestmodel$name = bestmodel$model
+
+
+bestmodel$name <- factor(bestmodel$name , levels = c("BVU (uniform prior)",
+                                                     "", 
+                                                     "BVU (bimodal prior)",
+                                                     "", 
+                                                     "BVU (gain prior)",
+                                                     "", 
+                                                     "BVU (loss prior)",
+                                                     "", 
+                                                     
+                                                     "", 
+                                                     "RF",
+                                                     "", 
+                                                     "", 
+                                                     "Baseline" ))
+
+
+if (save == T){
+  setwd(paste0(wd, "/Resubmission_QJEP/Figures"))
+  setEPS(width = 8, height =4)
+  if(whichdata == "A"){
+    postscript("modelcomp_rs1.eps")
+  }
+  if(whichdata == "B"){
+    postscript("modelcomp_rs2.eps")
+  }
+}
+
+
+cols = gray.colors(4, start = 0, end = .9)
+bestmodel = bestmodel[order(bestmodel$model),] 
+bestmodel$col[bestmodel$evidence.strength == "very.strong"] = cols[1]
+bestmodel$col[bestmodel$evidence.strength == "strong"] = cols[2]
+bestmodel$col[bestmodel$evidence.strength == "positiv"] = cols[3]
+bestmodel$col[bestmodel$evidence.strength == "weak"] = cols[4]
+
+bestmodel$y[bestmodel$model == levels(bestmodel$model)[1]] = 1
+bestmodel$y[bestmodel$model == levels(bestmodel$model)[2]] = 3
+bestmodel$y[bestmodel$model == levels(bestmodel$model)[3]] = 5
+bestmodel$y[bestmodel$model == levels(bestmodel$model)[4]] = 7
+
+bestmodel$y[bestmodel$model == levels(bestmodel$model)[5]] = 10
+bestmodel$y[bestmodel$model == levels(bestmodel$model)[6]] = 13
+#bestmodel$y[bestmodel$model == "m11"] =4
+
+
+bestmodel$evidence.strength = factor(bestmodel$evidence.strength, levels = c("very.strong", "strong", "positiv", "weak"))
+
+bestmodel = bestmodel[order(bestmodel$evidence.strength, decreasing = F),] 
+
+
+bestmodel$x = 1
+for(i in unique(bestmodel$model)){
+  bestmodel$x[bestmodel$model == i] = 1:length( bestmodel$x[bestmodel$model == i])
+}
+
+
+
+par(cex.main = 1.2, mar = c(5,11,6,4) + 0.1, mgp = c(3.5, 1, 0), cex.lab = 1.2,
+    font.lab = 1, cex.axis = 1.2, bty = "n", las=1, mfrow = c(1,1));
+
+plot(bestmodel$x,
+     bestmodel$y,
+     ylim = c(0,15),
+     xlim = c(0,max(bestmodel$x)),
+     cex = 2.5,
+     pch = 16,
+     col =  c(bestmodel$col),
+     axes = F,
+     ylab = "",
+     xlab = ""
+)
+
+
+
+axis(1, seq(0,max(bestmodel$x),5))
+title(xlab = "Number of people best fit",
+      tick = F)
+
+
+axis(2, 1:length(levels(bestmodel$name)), 
+     levels(bestmodel$name),
+     tick = F)
+
+title(ylab = "Model",
+      line = 10)
+par(xpd=T)
+legend(max(bestmodel$x)/2,23, 
+       xjust = .5,
+       pch = rep(16,4),
+       col= cols, title = "Evidence strength", 
+       legend = c("Very strong", "Strong",
+                  "Positive", "Weak"),
+       bty = "n", ncol = 4)
+
+
+par(xpd=T)
+lines(  c(12,13),rep(7,2), lwd = 3, col = "grey")
+lines(  c(12,13),rep(1,2), lwd = 3, col = "grey")
+lines(  c(13,13),c(1,7), lwd = 3, col = "grey")
+
+text(13.5, 4,
+     paste0("BVU (total)\nN = ",sum(substr(bestmodel$model,1,3) == "BVU")),
+     cex = 1, pos = 4)
+par(xpd= F)
+
+
+#lines( c(40,43),c(bmplot[1],bmplot[1]), lwd = 5, col = "grey")
+#lines( c(40,43),c(bmplot[3],bmplot[3]), lwd = 5, col = "grey")
+#lines( c(43,43),c(bmplot[c(1,3)]), lwd = 5, col = "grey")
+#text(52, mean(bmplot[1:3]), "Cue-integrating\nmodels", cex = 1.2)
+if(save == T){
+  dev.off()
+}
+
+```
+
+
+```{r predict, fig.height = 40, fig.width = 20, fig.cap="\\label{fig:ind.fits1}Individual valuations plotted against model predictions given the optimal parameter estimates for each individual. The titles reflect the model that best fitted the data and produced the predictions. BVU = Bayesian value updating; RF = relative frequency."}
+
+##### predict data with best fitting parameters:
+pred = F
+save =T
+
+s = d[d$block == "sampling" &  d$gamble %in% 1:6,]
+
+sd$gain = as.numeric(paste(sd$gain))
+sd$p = as.numeric(paste(sd$p))
+if (save == T){
+  setwd(paste0(wd, "/Resubmission_QJEP/Figures"))
+  setEPS(width = 20, height = 40)
+  if(whichdata == "A"){
+    postscript("indqual1.eps")
+  }
+  if(whichdata == "B"){
+    postscript("indqual2.eps")
+  }
+}
+
+
+
+par(mfrow = c(9,5), mar = c(5,5,4,1) + 0.1, cex.axis = 2, 
+    cex.lab = 3,las=1,bty = "n", cex.main =3, mgp = c(3, 1,0))
+
+layout(matrix(c(rep(1,5),2:41),9,5, byrow = T)
+       , height = c(.25/4,rep(.5,8)/4));
+#bestmodel[c(19,24,31,38),1] = "Baseline"
+
+ids = as.numeric(rownames(bestmodel[with(bestmodel, order(model)), ]))
+bestmodel = bestmodel[with(bestmodel, order(model, modelweight)), ]
+k = 1
+gs = gray.colors(3)
+cols = rep(gs[1], length(ids))
+cols[1:length(grep( "BVU",bestmodel$model, 1,3))] = gs[2]
+cols[(1:40)[bestmodel$model == "Baseline"]] = gs[3]
+pre = rep("", 40)
+if(whichdata == "A"){
+  cut = c(19,31,24,38)
+  pre[cut] = " x"
+  
+}
+
+if(whichdata == "B"){
+  cut = c()
+  pre[cut] = " x"
+  
+}
+n =0
+for(i in as.numeric(bestmodel$rowname)){
+  n = n+1
+  if(k == 1){
+    
+    plot(0, type = "n", axes = F, ylab = "", xlab = "")
+    par(xpd = T)
+    legend("center", legend = c("BVU","RF" ),
+           pch = 16:17, col = c("black", "grey"), title = "Predictions", bty = "n",
+           cex = 3, ncol = 2) 
+    k = 2}
+  sd$bestmodel[sd$id == i] = bestmodel$model[bestmodel$rowname == i]
+  
+  if(pred == T){
+    
+    for(j in unique(sd$trial[sd$id == i])){
+      par(xpd = F)
+      
+      sd$pf[sd$id == i & sd$trial == j] = modelF(p = sd$p[sd$id == i & sd$trial == j],
+                                                 out = sd$gain[sd$id == i & sd$trial == j],
+                                                 param = res.mF[i,2:3])
+      sd$pb[sd$id == i & sd$trial == j] = modelB(ss = sd$SS[sd$id == i & sd$trial == j],
+                                                 p = sd$p[sd$id == i & sd$trial == j],
+                                                 out = sd$gain[sd$id == i & sd$trial == j],
+                                                 param = res.mB_unif[i,2:3], prior = c(1,1))
+      
+      sd$pb2[sd$id == i & sd$trial == j] = modelB(ss = sd$SS[sd$id == i & sd$trial == j],
+                                                  p = sd$p[sd$id == i & sd$trial == j],
+                                                  out = sd$gain[sd$id == i & sd$trial == j],
+                                                  param = res.mB_bi[i,2:3], prior = c(.5,.5))
+      
+      
+      sd$pb3[sd$id == i & sd$trial == j] = modelB(ss = sd$SS[sd$id == i & sd$trial == j],
+                                                  p = sd$p[sd$id == i & sd$trial == j],
+                                                  out = sd$gain[sd$id == i & sd$trial == j],
+                                                  param = res.mB_gain[i,2:3], prior = c(2-.0001,.0001))
+      
+      
+      sd$pb4[sd$id == i & sd$trial == j] = modelB(ss = sd$SS[sd$id == i & sd$trial == j],
+                                                  p = sd$p[sd$id == i & sd$trial == j],
+                                                  out = sd$gain[sd$id == i & sd$trial == j],
+                                                  param = res.mB_loss[i,2:3], prior = c(.0001,2-.0001))
+      
+      
+    }
+  }
+  min = round(min(c(sd$rating[sd$id == i], 
+                    sd$pf[sd$id == i],
+                    sd$pb[sd$id == i]))-.5)
+  
+  max = round(max(c(sd$rating[sd$id == i], 
+                    sd$pf[sd$id == i],
+                    sd$pb[sd$id == i]))+2.5)
+  
+  
+  # par(bg = cols[i])
+  
+  
+  plot(sd$rating[sd$id == i],
+       sd$pb[sd$id == i], pch = 16,
+       main =  paste0(bestmodel$model[bestmodel$rowname == i], i,pre[i]),
+       xlab = "",
+       ylab = "",
+       ylim = c(min,max),
+       xlim = c(min,max),
+       col = "black",
+       axes = F)
+  axis(1, seq(min,max,5), seq(min,max,5))
+  axis(2, seq(min,max,5), seq(min,max,5))
+  title(xlab = "Valuation",line = 3.1, cex = 4)
+  title(ylab = "Prediction",line = 3.1)
+  rect(min,min,max,max, col =cols[n], border = NA )
+  
+  
+  if(bestmodel$model[bestmodel$rowname == i] == "BVU (uniform prior)"){
+    points(sd$rating[sd$id == i],
+           sd$pb[sd$id == i], pch = 16, col = "black", cex = 5)
+    
+    
+    # abline(lm( sd$pb[sd$id == i]~sd$rating[sd$id == i]), col = "grey")
+    
+  }
+  if(bestmodel$model[bestmodel$rowname == i] == "BVU (bimodal prior)"){
+    points(sd$rating[sd$id == i],
+           sd$pb2[sd$id == i], pch = 16, col = "black", cex = 5)
+    
+    # abline(lm( sd$pb2[sd$id == i]~sd$rating[sd$id == i]), col = "grey")
+    
+  }
+  if(bestmodel$model[bestmodel$rowname == i] == "BVU (gain prior)" ){
+    points(sd$rating[sd$id == i],
+           sd$pb3[sd$id == i], pch = 16, col = "black", cex = 5)
+    
+    
+    #  abline(lm( sd$pb3[sd$id == i]~sd$rating[sd$id == i]), col = "grey")
+    
+  }
+  if(bestmodel$model[bestmodel$rowname == i] == "BVU (loss prior)"){
+    points(sd$rating[sd$id == i],
+           sd$pb4[sd$id == i], pch = 16, col = "black", cex = 5)
+    #  abline(lm( sd$pb4[sd$id == i]~sd$rating[sd$id == i]), col = "grey")
+    
+  }
+  
+  
+  
+  if(bestmodel$model[bestmodel$rowname==i] == "RF"){
+    points(sd$rating[sd$id == i],
+           sd$pf[sd$id == i], pch = 17, col = "grey", cex = 5)
+    #  abline(lm( sd$pf[sd$id == i]~sd$rating[sd$id == i]), col = "grey")
+    
+  }
+  if(bestmodel$model[bestmodel$rowname==i] == "Baseline"){
+    points(sd$rating[sd$id == i],
+           sd$pb[sd$id == i], pch = 16, col = "black", cex = 5)
+    points(sd$rating[sd$id == i],
+           sd$pf[sd$id == i], pch = 17, col = "grey", cex = 5)
+    
+  }
+  #abline(0,1)
+  
+}
+if(save == T){
+  dev.off()
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r plots qual, fig.height = 8, fig.cap="\\label{fig:qualgroups}Mean valuations of participants who were best described by the Bayesian value updating (BVU) model (black) and the relative frequency (RF) model (gray). Error bars indicate the standard error of the mean. Sample sizes: xs = extra small; s = small; m = medium; l = large."}
+sd$stand = sd$rating/sd$gain
+save = F
+median = F
+stand = T
+require(plyr)
+if(whichdata == "A"){
+  
+  ylims1 = c( 4.3,7.5)
+  ylims1_text = c( 4.5,7.5)
+  
+  ylims1 = c(0,1)
+  ylims1_text = c( 0,1)
+  if(median == T){
+    ylims1 = c( 3.5,6.5)
+    ylims1_text = c( 3.5,6.5)
+    ylims2 = c( 2.3,4.2)
+    ylims2_text = c( 2.5,3.5)
+    
+    
+  }
+  
+  
+}
+if(whichdata == "B"){
+  ylims1 = c(5,9)
+  ylims1_text =  c(5,9)
+  
+  ylims2= c(2,3.5)
+  
+}
+
+if(stand == T){
+  seq1 = .1
+  seq2 = .1
+  
+  if(whichdata == "B"){
+    ylims1 = c(.3,.5)
+    ylims1_text = c(.3,.5)
+    
+    ylims2 = c(.6,.92)
+    ylims2_text = c(.6,1)
+  }
+  
+  if(whichdata == "A"){
+    ylims1 = c(.2,.4)
+    ylims1_text = c(.2,.4)
+    
+    ylims2 = c(.69,.9)
+    ylims2_text = c(.6,.9)
+  }
+  
+}
+
+
+
+ylims1 = c(-1,1)
+ylims1_text = c(-1,1)
+
+ylims2 = c(-1,1)
+ylims2_text = c(-1,1)
+cols = gray.colors(3, start = 0, end = .6)
+sd$group = 0
+sd$group = factor(sd$bestmodel, labels = levels(bestmodel$model))
+
+# sd$group[sd$bestmodel %in% 1] = 1
+# sd$group[sd$bestmodel %in% "RF"] = 2
+sd$group = 1
+sd$group[sd$ptype == 1 & sd$bestmodel %in% 1:3] = 2 # muss fallen
+
+sd$group[sd$ptype == 2 & sd$bestmodel %in% 3] = 2 # muss fallen
+sd$group[sd$bestmodel == 5] = 3
+sd$group[sd$bestmodel == 6] = 9999
+
+sd$bayes  = 3
+sd$bayes[sd$bestmodel %in% 1:4]  = 1
+sd$bayes[sd$bestmodel %in% 5]  = 0
+sd$bayes[sd$id %in% cut] = 3
+mg = ddply(sd[!sd$id %in% cut & sd$bestmodel != 6,], #[!sd$id %in%c(38,19,40,7),]
+           .(ptype,bestmodel = group,s), #ptypeprob
+           summarize, 
+           m = median(rating),
+           se = sd(rating)/sqrt(length(rating)),
+           
+           N = length(rating))
+
+if(stand == T){
+  mg = ddply(sd[!sd$id %in% cut & sd$bestmodel != 6,], #[!sd$id %in%c(38,19,40,7),]
+             .(ptype,bestmodel = group,s), #ptypeprob
+             summarize, 
+             m = median(stand),
+             se = sd(z)/sqrt(length(z)),
+             N = length(stand))
+}
+
+mgid = ddply(sd[!sd$id %in% cut & sd$bestmodel != 6,], #[!sd$id %in%c(38,19,40,7),]
+             .(ptype,bestmodel = group,id), #ptypeprob
+             summarize, 
+             m = mean(rating[s == "us"]) - mean(rating[s == "l"]) )
+
+mg$s = as.numeric(mg$s)
+mg$bestmodel = as.numeric(mg$bestmodel)
+
+if (save == T){
+  setwd(paste0(wd, "/Resubmission_QJEP/Figures"))
+  setEPS(width =  7, height = 6)
+  if(whichdata == "A"){
+    
+    if(median == T){
+      postscript("groupqual1_median.eps")
+      
+    }
+    if(median == F){
+      postscript("groupqual1_stand.eps")
+      
+    }  
+  }  
+  if(whichdata == "B"){
+    postscript("groupqual2_stand.eps")
+  }
+}
+
+
+
+
+layout(mat = matrix(c(1,2,1,3), ncol = 2),
+       heights = c(.25,.75))
+par(mar = c(0,0,2,0) + 0.1, cex.axis =1,
+    cex.lab = 1,las=1,bty = "n", cex.main = 1,mgp = c(3, 1,0))
+plot.new()#(0, type = "n", axes=FALSE, xlab="", ylab="")
+
+legend(x = "top", legend =  
+         c("BVU: Increase",
+           "BVU: Decrease",
+           "RF"), 
+       ncol = 1, 
+       col =cols, 
+       cex = 1.2,
+       pch = c(16:(16+length(unique(mg$bestmodel)))), 
+       lty = 3:1,
+       title = "Best fit:", bty = "n", pt.cex = 2)
+par(mar = c(5,10,3,1),cex.axis =1, 
+    cex.lab = 1.5, cex.main = 1.5)
+
+
+plot(mg$s[mg$bestmodel == 1 & mg$ptype == 1],
+     mg$m[mg$bestmodel == 1 & mg$ptype == 1],
+     pch = 16, 
+     ylim = ylims1,
+     ylab = "Mean\n(standardized valuation)",
+     xlim = c(.5,4.5),
+     axes = F,
+     xlab = "Sample size",
+     main = "$-bets",
+     cex = 2,
+     type = "n")
+
+
+axis(1, 1:4, labels = c("xs", "s", "m", "l"))
+axis(2, seq(ylims1_text[1], ylims1_text[2],seq1),seq(ylims1_text[1], ylims1_text[2],seq1))
+
+par(xpd = T)
+
+
+
+
+lines(c(0.1,.5), c(ylims1[1]-.01,ylims1[1]))
+lines(c(0.1,.5), c(ylims1[1]-.015,ylims1[1]-.005))
+par(xpd = F)
+
+for(i in 1:length(unique(mg$bestmodel))){
+  points(mg$s[mg$bestmodel == i & mg$ptype == 1]- i/20 * (1-i),
+         mg$m[mg$bestmodel == i & mg$ptype == 1],
+         pch = 15+i,
+         cex = 1.5,
+         lty = 4-i,
+         type = "b",
+         col =cols[i])
+  
+  if(whichdata == "A"){
+    dist = c(-.015, +.015,-.025)
+    
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 1] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 1])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 1][1]/9),
+         col = cols[i])
+  }
+  if(whichdata == "B"){
+    dist = c(+.02, +.02,-.02)
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 1] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 1])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 1][1]/9),
+         col = cols[i]  )
+    
+    
+    
+    
+    
+    
+  }
+  
+  
+  arrows(x0 = as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 1])- i/20 * (1-i),
+         y0= mg$m[mg$bestmodel == i & mg$ptype == 1] +
+           mg$se[mg$bestmodel == i & mg$ptype == 1],
+         x1= as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 1])- i/20 * (1-i),
+         y1= mg$m[mg$bestmodel == i & mg$ptype == 1] -
+           mg$se[mg$bestmodel == i & mg$ptype == 1],
+         lwd = 1, angle = 90, col = cols[i], lty =1,
+         code = 3, length = 0.00)
+}
+
+
+
+plot(mg$s[mg$bestmodel == 1 & mg$ptype == 2],
+     mg$m[mg$bestmodel == 1 & mg$ptype == 2],
+     pch = 16, 
+     ylim = ylims2,
+     xlim = c(.5,5),
+     ylab = "Mean\n(standardized valuation)",
+     axes = F,
+     xlab = "Sample size",
+     main = "p-bets",
+     cex = 2,
+     type = "n")
+axis(1, 1:4, labels = c("xs", "s", "m", "l"))
+
+axis(2, seq(ylims2_text[1], ylims2_text[2],seq1),seq(ylims2_text[1], ylims2_text[2],seq2))
+
+par(xpd = T)
+
+lines(c(0.1,.5), c(ylims2[1]-.02,ylims2[1]-.0075))
+lines(c(0.1,.5), c(ylims2[1]-.0275,ylims2[1]-.015))
+par(xpd = F)
+for(i in 1:length(unique(mg$bestmodel))){
+  points(mg$s[mg$bestmodel == i & mg$ptype == 2] - i/20 * (1-i),
+         mg$m[mg$bestmodel == i & mg$ptype == 2],
+         pch = 15+i,
+         cex = 1.5,
+         lty = 4-i,
+         type = "b",
+         col =cols[i])
+  if(whichdata == "A"){
+    dist = c(-.025, +.025,+.025)
+    
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 2] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 2])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 2][1]/9),
+         col = cols[i]
+    )
+  }
+  if(whichdata == "B"){
+    dist = c(-.05, +.05,-.03)
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 2] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 2])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 2][1]/9),
+         col = cols[i]  )
+  }
+  
+  
+  
+  arrows(x0 = as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 2]) - i/20 * (1-i),
+         y0= mg$m[mg$bestmodel == i & mg$ptype == 2] +
+           mg$se[mg$bestmodel == i & mg$ptype == 2],
+         x1= as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 2]) - i/20 * (1-i),
+         y1= mg$m[mg$bestmodel == i & mg$ptype == 2] -
+           mg$se[mg$bestmodel == i & mg$ptype == 2],
+         lwd = 1, angle = 90,col = cols[i],
+         code = 3, length = 0.00)
+}
+if(save == T){
+  dev.off()
+}
+
+
+```
+```{r plot val z-standardized}
+sdz = ddply(sd, .(id,gamble), summarize, z_score=scale(rating), s = s, bestmodel = group, ptype = ptype, evf = evf)
+sdz$z_score[is.nan(sdz$z_score)] = 0
+
+mg_id = ddply(sdz, .(bestmodel,ptype, s, id), summarize,m = mean(z_score))
+mg = ddply(mg_id, .(bestmodel,ptype, s),
+           summarize,m = mean(m),
+           se = sd(m)/sqrt(m),
+           N = length(unique(id)))
+
+mg$s = as.numeric(mg$s)
+
+ylims1 =ylims1_text=  ylims2 =ylims2_text= c(-.3,.3)
+seq1 = seq2 = .3
+layout(mat = matrix(c(1,2,1,3), ncol = 2),
+       heights = c(.25,.75))
+par(mar = c(0,0,2,0) + 0.1, cex.axis =1,
+    cex.lab = 1,las=1,bty = "n", cex.main = 1,mgp = c(3, 1,0))
+plot.new()#(0, type = "n", axes=FALSE, xlab="", ylab="")
+
+legend(x = "top", legend =  
+         c("BVU: Increase",
+           "BVU: Decrease",
+           "RF"), 
+       ncol = 1, 
+       col =cols, 
+       cex = 1.2,
+       pch = c(16:(16+length(unique(mg$bestmodel)))), 
+       lty = 3:1,
+       title = "Best fit:", bty = "n", pt.cex = 2)
+par(mar = c(5,10,3,1),cex.axis =1, 
+    cex.lab = 1.5, cex.main = 1.5)
+
+
+plot(mg$s[mg$bestmodel == 1 & mg$ptype == 1],
+     mg$m[mg$bestmodel == 1 & mg$ptype == 1],
+     pch = 16, 
+     ylim = ylims1,
+     ylab = "Mean\n(standardized valuation)",
+     xlim = c(.5,4.5),
+     axes = F,
+     xlab = "Sample size",
+     main = "$-bets",
+     cex = 2,
+     type = "n")
+
+
+axis(1, 1:4, labels = c("xs", "s", "m", "l"))
+axis(2, seq(ylims1_text[1], ylims1_text[2],seq1),seq(ylims1_text[1], ylims1_text[2],seq1))
+
+par(xpd = T)
+
+
+
+
+lines(c(0.1,.5), c(ylims1[1]-.01,ylims1[1]))
+lines(c(0.1,.5), c(ylims1[1]-.015,ylims1[1]-.005))
+par(xpd = F)
+
+for(i in 1:length(unique(mg$bestmodel))){
+  points(mg$s[mg$bestmodel == i & mg$ptype == 1]- i/20 * (1-i),
+         mg$m[mg$bestmodel == i & mg$ptype == 1],
+         pch = 15+i,
+         cex = 1.5,
+         lty = 4-i,
+         type = "b",
+         col =cols[i])
+  
+  if(whichdata == "A"){
+    dist = c(-.015, +.015,-.025)
+    
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 1] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 1])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 1][1]),
+         col = cols[i])
+  }
+  if(whichdata == "B"){
+    dist = c(+.02, +.02,-.02)
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 1] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 1])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 1][1]),
+         col = cols[i]  )
+    
+    
+    
+    
+    
+    
+  }
+  
+  
+  arrows(x0 = as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 1])- i/20 * (1-i),
+         y0= mg$m[mg$bestmodel == i & mg$ptype == 1] +
+           mg$se[mg$bestmodel == i & mg$ptype == 1],
+         x1= as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 1])- i/20 * (1-i),
+         y1= mg$m[mg$bestmodel == i & mg$ptype == 1] -
+           mg$se[mg$bestmodel == i & mg$ptype == 1],
+         lwd = 1, angle = 90, col = cols[i], lty =1,
+         code = 3, length = 0.00)
+}
+
+
+
+plot(mg$s[mg$bestmodel == 1 & mg$ptype == 2],
+     mg$m[mg$bestmodel == 1 & mg$ptype == 2],
+     pch = 16, 
+     ylim = ylims2,
+     xlim = c(.5,5),
+     ylab = "Mean\n(standardized valuation)",
+     axes = F,
+     xlab = "Sample size",
+     main = "p-bets",
+     cex = 2,
+     type = "n")
+axis(1, 1:4, labels = c("xs", "s", "m", "l"))
+
+axis(2, seq(ylims2_text[1], ylims2_text[2],seq1),seq(ylims2_text[1], ylims2_text[2],seq2))
+
+par(xpd = T)
+
+lines(c(0.1,.5), c(ylims2[1]-.02,ylims2[1]-.0075))
+lines(c(0.1,.5), c(ylims2[1]-.0275,ylims2[1]-.015))
+par(xpd = F)
+for(i in 1:length(unique(mg$bestmodel))){
+  points(mg$s[mg$bestmodel == i & mg$ptype == 2] - i/20 * (1-i),
+         mg$m[mg$bestmodel == i & mg$ptype == 2],
+         pch = 15+i,
+         cex = 1.5,
+         lty = 4-i,
+         type = "b",
+         col =cols[i])
+  if(whichdata == "A"){
+    dist = c(-.025, +.025,+.025)
+    
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 2] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 2])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 2][1]),
+         col = cols[i]
+    )
+  }
+  if(whichdata == "B"){
+    dist = c(-.05, +.05,-.03)
+    text(x = mean((mg$s[mg$bestmodel == i & mg$ptype == 2] - i/10 * (1-i))[2:3]),
+         y = mean((mg$m[mg$bestmodel == i & mg$ptype == 2])[2:3])+dist[i],
+         paste0("N = ",mg$N[mg$bestmodel == i & mg$ptype == 2][1]),
+         col = cols[i]  )
+  }
+  
+  
+  
+  arrows(x0 = as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 2]) - i/20 * (1-i),
+         y0= mg$m[mg$bestmodel == i & mg$ptype == 2] +
+           mg$se[mg$bestmodel == i & mg$ptype == 2],
+         x1= as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 2]) - i/20 * (1-i),
+         y1= mg$m[mg$bestmodel == i & mg$ptype == 2] -
+           mg$se[mg$bestmodel == i & mg$ptype == 2],
+         lwd = 1, angle = 90,col = cols[i],
+         code = 3, length = 0.00)
+}
+
+
+```
+
+```{r}
+sd1 = sd
+if(whichdata == "B"){
+  load("~/Desktop/Arbeit/Study2_SS/SS_Analysis/Resubmission_QJEP/modelcomp_S1_allBU_GRIDS_v2.RData")
+}
+sd2 = rbind(sd[,c("id", "s", "rating", "bayes", "bestmodel", "ptype", "group")],sd1[,c("id", "s", "rating", "bayes", "bestmodel","ptype",
+                                                                                       "group")])
+head(sd2)
+
+
+sd2$id = as.factor(sd2$id)
+sd2$s = factor(sd2$s, ordered = T)
+sd2$ptype = factor(sd2$ptype)
+```
+
+
+```{r confidence per modelwinner}
+#bestmodel[14,1] = "Baseline"
+for(i in 1:40){
+  conf$bestmodel[conf$id == i] = bestmodel$model[bestmodel$rowname == i]
+  conf$bayes[conf$id == i] =  sd$bayes[sd$id == i][1]
+  
+}
+confidencedescrmodel = ddply(conf[conf$bayes %in% c(0,1),], .(bayes,samplesize = s), summarize, mean = round(mean(rating),2), sd = round(sd(rating),2))
+kable(confidencedescrmodel)
+
+
+bfBVU = anovaBF(rating ~  id+s, whichRandom = "id", data = conf[conf$block %in% "sampling" & conf$bayes == 1,] , iterations = niter)
+bfRF = anovaBF(rating ~  id+s, whichRandom = "id", data = conf[conf$block %in% "sampling" & conf$bayes == 0,] , iterations = niter)
+
+```
+
+
+
+
+
+
+
+
+```{r ss effects per group: repeat abalysis from above (influence of ss on val separately per group)}
+cut = c()
+if(whichdata == "A"){
+  cut = c(19,31,24,38)
+}
+sd$gamble
+
+
+
+sd1 = sd
+sd1$id = as.numeric(sd1$id)
+sd1$id = sd1$id + 40
+sd$id = as.numeric(sd$id)
+sd2 = rbind(sd3[, c("id", "rating","s", "group", "ptype", "evf")],sd1[, c("id", "rating","s", "group", "ptype", "evf")])
+sd = sd2
+sd$id = factor(sd$id)
+sd$group = factor(sd$group)
+sd$exp = 1
+sd$exp[sd$id %in% 41:80] = 2
+sd$exp = factor(sd$exp)
+
+
+sd1 = sd[sd$id %in% 1:40,]
+sd2 = sd[sd$id %in% 42:80,]
+sd = sd2
+
+
+
+sd$group = 1
+sd$group[sd$ptype == 1 & sd$bestmodel %in% 1:3] = 2 # muss fallen
+
+sd$group[sd$ptype == 2 & sd$bestmodel %in% 3] = 2 # muss fallen
+sd$group[sd$bestmodel == 5] = 3
+sd$group[sd$bestmodel == 6] = 9999
+pt1Bincr = anovaBF(rating~s+evf+ id, whichRandom = c("id", "evf"), data = sd[sd$ptype == 1 & sd$group == 1 & !sd$id %in% cut,], iterations = niter)
+1/pt1Bincr
+pt2Bincr = anovaBF(rating~s+evf+ id, whichRandom = c("id", "evf"), data = sd[sd$ptype == 2 & sd$group == 1 & !sd$id %in% cut,], iterations = niter)
+pt2Bincr
+
+
+pt1Bdecr = anovaBF(rating~s+evf+ id, whichRandom = c("id", "evf"), data = sd[sd$ptype == 1 & sd$group == 2 & !sd$id %in% cut,], iterations = niter)
+1/pt1Bdecr
+pt2Bdecr = anovaBF(rating~s+evf+ id, whichRandom = c("id", "evf"), data = sd[sd$ptype == 2 & sd$group == 2 & !sd$id %in% cut,], iterations = niter)
+1/pt2Bdecr
+
+pt1RF = anovaBF(rating~s+evf+id, whichRandom = c("id", "evf"), data = sd[sd$ptype == 1 & sd$group == 3 & !sd$id %in% cut,], iterations = niter)
+1/pt1RF
+pt2RF = anovaBF(rating~s+evf+ id, whichRandom = c("id", "evf"), data = sd[sd$ptype == 2 & sd$group == 3 & !sd$id %in% cut,], iterations = niter)
+pt2RF
+
+```
+```{r zscore}
+require(plyr)
+sdz = ddply(sd, .(id,gamble), summarize, z_score=scale(rating), ss = s, group = group, ptype = ptype, evf = evf)
+sdz$z_score[is.nan(sdz$z_score)] = 0
+
+mg_id = ddply(sdz, .(group,ptype, ss, id), summarize,m = mean(z_score))
+mg = ddply(mg_id, .(group,ptype, ss), summarize,m = mean(m))
+
+
+ggline(mg_id, x = "ss", y =  "m", 
+       combine = T,
+       add = c("mean_se"),
+       color = "group", 
+       palette = "jco",
+       facet.by = "ptype")
+
+
+```
+```{r do models have diff}
+require(ggpubr)
+sd$group = factor(sd$group)
+sd$stand = sd$rating/sd$gain
+ggerrorplot(sd[sd$ptype == 2,], x = "group", y = "rating", 
+            desc_stat = "mean_sd",
+            color = "group", palette = "jco",
+            position = position_dodge(0.8),
+            add = c("mean_se", "jitter"))
+
+anovaBF(rating~group+evf*ptype+id, whichRandom = c("id"),data = sd[sd$group %in% 1:3,])
+
+ggline(sd[sd$ptype == 2,], x = "s", y =  "rating", 
+       add = c("mean_se", "jitter"),
+       color = "group", palette = "jco")
+
+
+anovaBF( z_score~group+evf*ptype+id, whichRandom = c("id"),data = sdz[sdz$group %in% 1:3,])
+
+
+anovaBF(z_score~ss+id, whichRandom = c("id"),data = sdz[sdz$group== 1 & sdz$ptype == 2,])
+
+
+
+```
+
+
+
+
+
+

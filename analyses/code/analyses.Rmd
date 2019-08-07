@@ -1,0 +1,667 @@
+---
+title: "ReportExp3"
+author: "Janine Hoffart & Jana B. Jarecki"
+date: "24 1 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(BayesFactor)
+require(plyr)
+require(knitr)
+require(truncnorm)
+```
+Experiment c): Experiment, where people first see both outcomes and then give selling prices on a scale from 1 - 6. The difference in scale is the major difference between experiment 1 (exp a.) and c)
+
+```{r format raw data}
+# 1.) read in file that contains all data
+#a <- read.csv2("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/all_data.csv")
+# Für Studie a ist "nur" dataframe aber keine Rohdaten vorhancen
+
+c <- read.csv2("../../data/processed/study1.csv")
+
+c <- c[,c(2,3,4,7,9,10,11,12,14,17,18,19,20,21)]
+
+colnames(c) <- c("id", "block", "gt", "trial", "pid", "SS", "p", "gain", "rating", "subid","gamble", "s","resp", "ptype" )
+
+c$p <- as.numeric(paste(c$p))
+c$gain <- as.numeric(paste(c$gain))
+c$rating <- as.numeric(paste(c$rating))
+c$ev <- c$p *c$gain
+c$id = c$id -4
+c$id <- as.factor(c$id)
+
+c$s <- factor(c$s, levels = c("us", "s", "m", "l", "d"))
+d = c
+## only sampling trials
+s <- c[c$block == "sampling" & c$gamble %in% 1:6,]
+
+## only sampling decision
+sd <- c[c$gt == "sampling.decision"& c$gamble %in% 1:6,]
+
+## experience & description decisions
+de <- c[c$gt %in%  c("sampling.decision", "description")& c$gamble %in% 1:6,]
+## confidence
+conf <- c[c$gt %in%  c("samplingconf", "description.conf")& c$gamble %in% 1:6,]
+```
+
+
+```{r read data}
+#wd <- "/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis"
+#load("/Users/jhoffart/Desktop/Arbeit/Study2_SS/2ndstudy/workspace/finalModels.RData")
+require(BayesFactor)
+require(plyr)
+require(knitr)
+require(truncnorm)
+colnames(sd)[colnames(sd) == "ptypeprob"] = "ptype"
+colnames(conf)[colnames(conf) == "ptypeprob"] = "ptype"
+conf = conf[conf$gamble %in% 1:6,]
+d$s = factor(d$s, levels = c("us", "s", "m", "l", "d"))
+de$s = factor(de$s, levels = c("us", "s", "m", "l", "d"))
+sd$s = factor(sd$s, levels = c("us", "s", "m", "l", "d"))
+conf$s = factor(conf$s, levels = c("us", "s", "m", "l", "d"))
+
+de$p <- as.numeric(as.character(de$p))
+de$gain <- as.numeric(as.character(de$gain))
+de$ev = de$p*de$gain
+de$evf = round(de$ev,2)
+de$id = factor(de$id)
+conf$id = factor(conf$id)
+
+sd$p <- as.numeric(as.character(sd$p))
+sd$gain <- as.numeric(as.character(sd$gain))
+sd$ev = sd$p * sd$gain
+sd$evf = as.factor(round(sd$ev,1))
+sd$id = factor(sd$id)
+sd$ptype = factor(sd$ptype)
+sd$resp = as.numeric(as.character(sd$resp))
+niter = 1000
+```
+
+
+
+
+```{r description vs. experience}
+### Mean and median ratings experience per sample size category and description
+### Do valuations differ betwen description and experience per gamble and sample size
+descriptives = ddply(de, .(gamble,gain,ev,s), summarize, median= round(median(rating),2),mean = round(mean(rating),2))
+for(i in unique(descriptives$gamble)){
+  for(s in c("us", "s", "m", "l")){
+    descriptives$"D-E"[ descriptives$gamble == i &  descriptives$s == s] =
+      round(descriptives$mean[descriptives$gamble == i &  descriptives$s == s] - descriptives$mean[ descriptives$gamble == i &  descriptives$s == "d"] ,2)
+    bf10 = anovaBF(rating ~ gt + id, whichRandom = "id",data = de[de$gamble == i & de$s %in% c(s, "d"),], iterations = niter)
+    descriptives$BF10[ descriptives$gamble == i &  descriptives$s == s] = round(extractBF(bf10, onlybf = T),2)
+  }
+}
+
+descriptives$"D-E"[which(is.na(descriptives$"D-E"))] = " "
+descriptives$BF10[which(is.na(descriptives$BF10))] = " "
+kable(descriptives)
+
+```
+
+
+```{r influence of sample size}
+m1ss <- anovaBF(rating~id+evf+ptype*s, data = sd, whichRandom = c("id", "evf"), iterations = niter)
+m1ss <- recompute(m1ss, iterations = niter*3)
+
+comp1 = as.character(round(extractBF(m1ss[2]/m1ss[3], onlybf = T),2))
+comp2 = as.character(round(extractBF(m1ss[2]/m1ss[4], onlybf = T),2))
+```
+# Sample size
+The table above displays the mean and median valuations from experience, that is, the monetary amount elicited with the BDM method, separately for each gamble and each sample-size category. The data suggest that sample size does not affect valuations from experience consistently. A model comparison supports this indication. Model M0, which predicts valuations from experience as a function of the random factor expected value and the fixed factor gamble type (p-bet vs. \$-bet), is preferred over a model that takes into account sample size as an additional fixed factor (BF10 =  `r comp1`) and a model that additionally takes into account the interaction between sample size and gamble type  (BF10 =  `r comp2`).
+
+
+# Model Comparison
+To study the role of sample size more closely, we examined how well the RF model and the BVU model modeled participants' valuations in the experience-based condition. To test the psychological plausibility of both models, we also compared them to a baseline model. This baseline model predicts random responses, where each response between zero and the gain amount is equally likely. 
+
+Before estimation, we rescaled both the observed and the model-predicted valuations by dividing them by the possible gain of the gamble in a trial. Consequently, all data points lay in the interval between 0 and 1. All models were estimated by applying maximum likelihood methods to participants' individual data. To compute the likelihood, we assumed that observed valuations followed a truncated normal distribution around the model's predicted valuation with a standard deviation that was estimated as a free parameter for each participant. Thus, the RF and BVU models, but not the baseline model, were equipped with one additional free standard deviation parameter. We searched for the set of parameter values that minimized the deviance, defined as the negative log likelihood of the data given the model and its parameter values. To identify the best model parameters, we used a brute-force grid-search approach. We searched the parameter space for the utility parameter $alpha$ between $0$ and $3$ in steps of $0.025$ and for the standard deviation of the truncated normal distribution between $0.00001$ and $0.3$ in steps of $0.01$. We compared the models based on Bayesian model weights that we computed from the Bayesian information criterion.
+
+```{r Fit models}
+runcomp =T
+if(runcomp == T){
+  modelB <- function(ss, p, out,  param){
+    a <- .5 + ss*p
+    b <- .5 + ss*(1-p)
+    val <- ((a/(a+b))*(out^param[2]))^(1/param[2])
+    val[val>out] <- out
+    return(val)
+  }
+  
+  modelF <- function(p,out,param,...){
+    val <- (p*(out^param[2]))^(1/param[2])
+    val[val>out] <- out
+    return(val)
+  }
+  
+  
+  #modelBaseline
+  log(dunif(seq(0,6,.1)/6,0,1))
+  
+  ################### are probabilities over- or underweighted?
+  
+  LogL = function(data,param,valuefunct){
+    p = data$p
+    ss = data$SS
+    out = data$gain
+    response = data$rating
+    pred = valuefunct(p = p, ss = ss, out = out, param = param)
+    ## 6 is the maximum valuation
+    return(log(dtruncnorm(x = response/6, a = 0, b = 1,
+                          mean = pred/6, sd = param[1]))) 
+  }
+  
+  
+  
+  min2sumLL = function(data,param, valuefunct){
+    LL = numeric();
+    for(i in 1:nrow(data)){
+      LL[i] = LogL(data = data[i,],param = param, valuefunct = valuefunct)
+    }
+    m2LL = (-2) * sum(LL)
+    return(m2LL)
+  }
+  
+  
+  ### GRIDSEARCH
+  
+  #sds <- seq(.00001, .3, .001)
+  #alphas <- seq(0.1,3,.025)
+  
+  ## fore testing purpose: use larger grid
+    
+  sds <- seq(.00001, .3, .025)
+  alphas <- seq(0.1,3,.05)
+  
+  LL.mB <- LL.mF <- array(NA, dim = c(length(sds), length(alphas), length(unique(sd$id))))
+  #trn$cond<- as.numeric(trn$cond)
+  res.mB <- data.frame(matrix(NA, length(unique(sd$id)), 3))
+  colnames(res.mB) <- c( "min2sumLL",
+                         "param.sd", "param.alpha")
+  res.mF <- res.mB
+  
+  for(i in 1:length(unique(sd$id))){#unique(s$id)
+    k <- sd[sd$id == i,]
+    for(j in 1:length(sds)){
+      for(p in 1:length(alphas)){
+        LL.mB[j,p,i] <- min2sumLL(data = k, param = c(sds[j], alphas[p]),  valuefunct = modelB)
+        LL.mF[j,p,i] <- min2sumLL(data = k, param = c(sds[j], alphas[p]),  valuefunct = modelF)
+        
+      }
+    }
+    LL.mB[LL.mB == Inf] = NA
+    LL.mF[LL.mF == Inf] = NA
+    
+    res.mB$param.sd[i] <- sds[which(LL.mB[,,i] == min(LL.mB[,,i], na.rm = TRUE),
+                                    arr.ind = TRUE)[,1]]
+    res.mB$param.alpha[i]<- alphas[which(LL.mB[,,i] == min(LL.mB[,,i], na.rm = TRUE),
+                                         arr.ind = TRUE)[,2]]
+    res.mB$min2sumLL[i] <- min(LL.mB[,,i], na.rm = T)
+    
+    
+    res.mF$param.sd[i] <- sds[which(LL.mF[,,i] == min(LL.mF[,,i], na.rm = TRUE),
+                                    arr.ind = TRUE)[,1]]
+    res.mF$param.alpha[i]<- alphas[which(LL.mF[,,i] == min(LL.mF[,,i], na.rm = TRUE),
+                                         arr.ind = TRUE)[,2]]
+    res.mF$min2sumLL[i] <- min(LL.mF[,,i], na.rm = T)
+    print(i)
+    print("BAYES vs. FREQ:")
+    print(res.mB[i,] - res.mF[i,])
+    
+    
+   # # print("FREQ:")
+   #  print(res.mF[i,])
+  }
+}
+
+
+#if(runcomp == F){
+  #load("~/Desktop/Arbeit/Study2_SS/SS_Analysis/Results/Modelcomp_Study2_20171103.RData")
+#}
+```
+
+
+```{r ModelComparison}
+
+
+
+### compare all models
+infoCrit = function(nlnLs, Npar, N, names){
+  # Calculate information criteria (AIC BIC),
+  #   IC differences from best model (AICd BICd),
+  #   and model weights (AICw, BICw)
+  #   from a vector of negative lnLs
+  # Each cell in the vectors corresponds to a model
+  # Npar is a vector indicating the 
+  #   number of parameters in each model
+  # N is the number of observations on which
+  #   the log-likelihoods were calculated
+  AIC <- nlnLs + 2.*Npar
+  BIC <- nlnLs + Npar*log(N)
+  
+  AICd <- AIC-min(AIC)
+  BICd <- BIC-min(BIC)
+  
+  AICw <- exp(-.5*AICd)/sum(exp(-.5*AICd))
+  BICw <- exp(-.5*BICd)/sum(exp(-.5*BICd))
+  ret = as.data.frame(matrix(c(AIC,BIC,AICd,BICd,round(AICw,2),round(BICw,2)),length(names),6))
+  colnames(ret) = c("AIC", "BIC", "DeltaAIC", "DeltaBIC", "ModelWeightAic","ModelWeightBic")
+  rownames(ret) = names
+  return(ret)
+}
+
+
+vglALL  = list()
+for (i in 1:40){
+  nlnLs <- c(res.mB[i,1], res.mF[i,1], 100000)
+  vglALL [[i]] = infoCrit(nlnLs = nlnLs ,
+                          Npar = c(2,2,0), 
+                          N = c(72,72,72), 
+                          names = c("mB", "mF", "mBase") )
+}
+nmodels = 3
+nids = length(unique(sd$id))
+mw = as.data.frame(matrix(NA,nmodels,nids))
+for(i in 1:nids){
+  mw[,i] =  data.frame(matrix(unlist(vglALL[[i]]), nrow=nmodels, byrow=F))[,6]
+}
+rownames(mw) <- c("Bayes", "Freq", "Base")
+
+
+bestmodel = as.data.frame(matrix(NA,nids,3))
+colnames(bestmodel) = c("model", "modelweight", "evidence.strength")
+for(i in 1:nids){
+  bestmodel[i,1] = rownames(mw)[which(mw[,i]== max(mw[,i], na.rm = TRUE))]
+  bestmodel[i,2] = max(mw[,i], na.rm = TRUE)
+}
+bestmodel[which(bestmodel[,2]>=.33333333 & bestmodel[,2] <=0.6),3] = "weak"
+bestmodel[which(bestmodel[,2]>=0.60000000000000001 & bestmodel[,2] <=0.909090909),3] = "positiv"
+bestmodel[which(bestmodel[,2]>=0.909090909 & bestmodel[,2] <=0.986842105),3] = "strong"
+bestmodel[which(bestmodel[,2]>0.986842105),3] = "very.strong"
+
+
+bestmodel$model[bestmodel$model == "Base"] = "Baseline"
+bestmodel$model[bestmodel$model == "Freq"] = "RF"
+bestmodel$model[bestmodel$model == "Bayes"] = "BVU"
+bestmodel$model <- factor(bestmodel$model, levels = c("BVU", "RF","Baseline" ))
+```
+
+
+## Quantitative model comparison: Results
+```{r Plot results, fig.cap="\\label{fig:modeling1}Number of people who were best fit by each model. Evidence strength is indicated by shades of gray. Baseline = Baseline model; BVU = Bayesian value updating model; RF = relative frequency model."}
+
+bestmodel$evidence.strength = factor(bestmodel$evidence.strength, levels = c("very.strong", "strong", "positiv", "weak"))
+#setwd("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/Figures")
+#setEPS(width = 6, height = 5)
+#postscript("modelcomp2.eps")
+
+cols = gray.colors(4, start = 0, end = .9)
+par(mfrow = c(1,1), mar = c(5,7,4,1) + 0.1, cex.axis = 1.2, cex.lab = 1.2,
+    cex.lab = 1.5)
+barplot(table(list(bestmodel$evidence.strength, bestmodel$model)), 
+        horiz = T,axes = F, 
+        legend = F, xlab = "Number of people", las = 1,
+        xlim = c(0,25), col = cols)
+axis(1, seq(0,20,5))
+title(ylab = "Model",line = 5)
+
+legend(7,3.5, fill = cols, title = "Evidence strength", 
+       legend = c("Very strong", "Strong",
+                  "Positive", "Weak"), bty = "n", ncol = 2)
+#dev.off()
+```
+
+Figure \ref{fig:modeling1} displays the relative evidence for each of the models. It shows for how many participants ($x$ axis) each model is favored and how strong this evidence is (grayscale). The data of `r as.numeric(table(bestmodel[,1]))[1]` participants (`r as.numeric(table(bestmodel[,1])[1]/sum(table(bestmodel[,1])))*100`%) were best described by the BVU model. Evidence for individual participants is predominantly very strong or strong. For `r as.numeric(table(bestmodel[,1]))[2]` participants  (`r as.numeric(table(bestmodel[,1])[2]/sum(table(bestmodel[,1])))*100`%), the RF model performed best. The data of  `r as.numeric(table(bestmodel[,1]))[3]` participants (`r as.numeric(table(bestmodel[,1])[3]/sum(table(bestmodel[,1])))*100`%) were fit best by the baseline model.
+
+
+
+
+
+
+```{r predict, fig.height = 40, fig.width = 20, fig.cap="\\label{fig:ind.fits1}Individual valuations plotted against model predictions given the optimal parameter estimates for each individual. The titles reflect the model that best fitted the data and produced the predictions. BVU = Bayesian value updating; RF = relative frequency."}
+
+##### predict data with best fitting parameters:
+
+s = d[d$block == "sampling" &  d$gamble %in% 1:6,]
+
+sd$gain = as.numeric(paste(sd$gain))
+sd$p = as.numeric(paste(sd$p))
+
+#setwd("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/Figures")
+#setEPS(width = 20, height = 40)
+#postscript("check22.eps")
+
+par(mfrow = c(9,5), mar = c(5,5,4,1) + 0.1, cex.axis = 2, 
+    cex.lab = 3,las=1,bty = "n", cex.main =3, mgp = c(3, 1,0))
+
+layout(matrix(c(rep(1,5),2:41),9,5, byrow = T)
+       , height = c(.25/4,rep(.5,8)/4));
+#bestmodel[c(19,24,31,38),1] = "Baseline"
+
+ids = as.numeric(rownames(bestmodel[with(bestmodel, order(model)), ]))
+k = 1
+gs = gray.colors(3)
+cols = rep(gs[1], length(ids))
+cols[bestmodel$model == "BVU"] = gs[2]
+cols[bestmodel$model == "RF"] = gs[3]
+pre = rep("", 40)
+pre[c(14)] = " x"
+for(i in ids){
+  if(k == 1){
+    
+    plot(0, type = "n", axes = F, ylab = "", xlab = "")
+    par(xpd = T)
+    legend("center", legend = c("BVU","RF" ),
+           pch = 16:17, col = c("black", "grey"), title = "Predictions", bty = "n",
+           cex = 3, ncol = 2) 
+    k = 2}
+  sd$bestmodel[sd$id == i] = bestmodel$model[i]
+  for(j in unique(s$trial)){
+    par(xpd = F)
+    
+    sd$pf[sd$id == i & sd$trial == j] = modelF(p = sd$p[sd$id == i & sd$trial == j],
+                                               out = sd$gain[sd$id == i & sd$trial == j],
+                                               param = c(NA, res.mF[i,3]))
+    sd$pb[sd$id == i & sd$trial == j] = modelB(ss = sd$SS[sd$id == i & sd$trial == j],
+                                               p = sd$p[sd$id == i & sd$trial == j],
+                                               out = sd$gain[sd$id == i & sd$trial == j],
+                                               param = c(NA, res.mB[i,3]))
+    
+  }
+  min = round(min(c(sd$rating[sd$id == i], 
+                    sd$pf[sd$id == i],
+                    sd$pb[sd$id == i]))-.5)
+  
+  max = round(max(c(sd$rating[sd$id == i], 
+                    sd$pf[sd$id == i],
+                    sd$pb[sd$id == i]))+2.5)
+  
+  
+  # par(bg = cols[i])
+  
+  
+  plot(sd$rating[sd$id == i],
+       sd$pb[sd$id == i], pch = 16,
+       main =  paste0(bestmodel$model[i], pre[i],i),
+       xlab = "",
+       ylab = "",
+       ylim = c(min,max),
+       xlim = c(min,max),
+       col = "black",
+       axes = F)
+  axis(1, seq(min,max,5), seq(min,max,5))
+  axis(2, seq(min,max,5), seq(min,max,5))
+  title(xlab = "Valuation",line = 3.1, cex = 4)
+  title(ylab = "Prediction",line = 3.1)
+  rect(min,min,max,max, col =cols[i], border = NA )
+  
+  
+  if(bestmodel$model[i] == "BVU"){
+    points(sd$rating[sd$id == i],
+           sd$pb[sd$id == i], pch = 16, col = "black", cex = 5)
+  }
+  if(bestmodel$model[i] == "RF"){
+    points(sd$rating[sd$id == i],
+           sd$pf[sd$id == i], pch = 17, col = "grey", cex = 5)
+  }
+  if(bestmodel$model[i] == "Baseline"){
+    points(sd$rating[sd$id == i],
+           sd$pb[sd$id == i], pch = 16, col = "black", cex = 5)
+    points(sd$rating[sd$id == i],
+           sd$pf[sd$id == i], pch = 17, col = "grey", cex = 5)
+  }
+  abline(0,1)
+  #  abline(lm( sd$pb[sd$id == i]~sd$rating[sd$id == i]))
+  #  abline(lm( sd$pf[sd$id == i]~sd$rating[sd$id == i]), col = "grey")
+  
+}
+#dev.off()
+```
+
+Next, we explored the data using the results of the quantitative model comparison. For this purpose, we plotted individual valuations against the predictions made by the best fitting model separately for every participant given the optimal parameter estimates for that participant. This plot gives an indication of whether the models qualitatively capture data patterns. Figure \ref{fig:ind.fits1} shows that the models generally capture the data well. However, inspecting the figure reveals that in some cases, even the better fitting model does not capture the data patterns well. More precisely, this holds for four participants (marked with an x in Figure \ref{fig:ind.fits1}). For these participants the model is rejected because of the lack of qualitative fit.
+
+
+
+```{r plots qual, fig.cap="\\label{fig:qual1}Mean valuations of participants who were best described by the Bayesian value updating (BVU) model (black) and the relative frequency (RF) model (gray). Error bars indicate the standard error of the mean. Sample sizes: xs = extra small; s = small; m = medium; l = large."}
+#sd$bestmodel[sd$id %in% c(14)] = 3 # Those people were qualitatively not well described by the winning model
+### model graphs
+require(plyr)
+#sd$ptype = sd$ptypeprob
+mg = ddply(sd[!sd$id %in%c(24,38,40,31,19,7),], #c #[!sd$id %in% 14,] #
+           .(ptype,s,bestmodel), #ptypeprob
+           summarize, 
+           m = mean(rating),
+           se = sd(rating)/sqrt(length(rating)),
+           pb = mean(pb),
+           sepb = sd(pb)/sqrt(length(pb)))
+mgid = ddply(sd, #c #[!sd$id %in% 14,] #[!sd$id %in%c(19,24,31,38),]
+           .(ptype,s,bestmodel, id), #ptypeprob
+           summarize, 
+           m = mean(rating),
+           se = sd(rating)/sqrt(length(rating)),
+           pb = mean(pb),
+           sepb = sd(pb)/sqrt(length(pb)))
+#mg$s[mg$s == "us"] = 1
+#mg$s[mg$s == "s"] = 2
+#mg$s[mg$s == "m"] = 3
+#mg$s[mg$s == "l"] = 4
+#mg$bestmodel[mg$bestmodel == "Freq"] = 2
+#mg$bestmodel[mg$bestmodel == "Base"] = 1
+#mg$ptypeprob = mg$ptype
+mg$s = as.numeric(mg$s)
+mgid$s = as.numeric(mgid$s)
+mg$bestmodel = as.numeric(mg$bestmodel)
+
+#setwd("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/Figures")
+#setEPS(width = 7, height = 6)
+#postscript("qual_study21.eps")
+layout(mat = matrix(c(1,2,1,3), ncol = 2),
+       heights = c(.15,.85))
+par(mar = c(0,0,2,0) + 0.1, cex.axis =1, 
+    cex.lab = 1,las=1,bty = "n", cex.main = 1,mgp = c(3, 1,0))
+plot.new()#(0, type = "n", axes=FALSE, xlab="", ylab="")
+
+legend(x = "top",legend = c("BVU model", "RF model"), 
+       ncol = 2, col = c("black", "grey"), pch = c(16,18), cex = 1.2,
+       title = "Best fit:", bty = "n", pt.cex = 2)
+par(mar = c(5,5,3,1),cex.axis =1, 
+    cex.lab = 1.5, cex.main = 1.5)
+plot(mg$s[mg$bestmodel == 1 & mg$ptype == 1],
+     mg$m[mg$bestmodel == 1 & mg$ptype == 1],
+     pch = 16, 
+    ylim = c(4,7),
+     
+     ylab = "Mean valuation",
+     xlim = c(.5,4.5),
+     axes = F,
+     xlab = "Sample size",
+     main = "$-bets",
+     cex = 2,
+     type = "b")
+#points(mg$s[mg$bestmodel == 1 & mg$ptype == 1],
+#     mg$pb[mg$bestmodel == 1 & mg$ptype == 1],
+#   col = "red", pch = 19)
+
+axis(1, 1:4, labels = c("xs", "s", "m", "l"))
+axis(2, seq(6,9,1),seq(6,9,1))
+
+par(xpd = T)
+
+lines(c(0.1,.5), c(6-.04,6-.01))
+lines(c(0.1,.5), c(6-.06,6-.03))
+par(xpd = F)
+
+points(mg$s[mg$bestmodel == 2 & mg$ptype == 1],
+       mg$m[mg$bestmodel == 2 & mg$ptype == 1],
+       pch = 18,
+       cex = 2,
+       type = "b",
+       col = "grey")
+
+for(i in 1:2){
+  arrows(x0 = as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 1]),
+         y0= mg$m[mg$bestmodel == i & mg$ptype == 1] +
+           mg$se[mg$bestmodel == i & mg$ptype == 1],
+         x1= as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 1]),
+         y1= mg$m[mg$bestmodel == i & mg$ptype == 1] -
+           mg$se[mg$bestmodel == i & mg$ptype == 1],
+         lwd = 1, angle = 90,
+         code = 3, length = 0.05)
+}
+
+#for(j in unique(mgid$id)){
+ # points(mgid$s[ mgid$ptype == 1 & mgid$id == j],
+  #     mgid$m[ mgid$ptype == 1 & mgid$id == j],
+  #     col = mgid$bestmodel[mgid$ptype == 1 & mgid$id == j],
+   #    type = "l")
+#}
+
+plot(mg$s[mg$bestmodel == 1 & mg$ptype == 2],
+     mg$m[mg$bestmodel == 1 & mg$ptype == 2],
+     pch = 16, 
+
+ ylim = c(2.5,3.1),
+     
+     xlim = c(.5,4.5),
+     ylab = "Mean valuation",
+     axes = F,
+     xlab = "Sample size",
+     main = "p-bets",
+     cex = 2,
+     type = "b")
+axis(1, 1:4, labels = c("xs", "s", "m", "l"))
+
+axis(2, seq(2.5,3.5,.5),seq(2.5,3.5,.5))
+
+par(xpd = T)
+
+lines(c(0.1,.5), c(2.5-.02,2.5))
+lines(c(0.1,.5), c(2.5-.03,2.5-.01))
+par(xpd = F)
+
+points(mg$s[mg$bestmodel == 2 & mg$ptype == 2],
+       mg$m[mg$bestmodel == 2 & mg$ptype == 2],
+       pch = 18,
+       cex = 2,
+       type = "b",
+       col = "grey")
+for(i in 1:2){
+  arrows(x0 = as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 2]),
+         y0= mg$m[mg$bestmodel == i & mg$ptype == 2] +
+           mg$se[mg$bestmodel == i & mg$ptype == 2],
+         x1= as.numeric(mg$s[mg$bestmodel == i & mg$ptype == 2]),
+         y1= mg$m[mg$bestmodel == i & mg$ptype == 2] -
+           mg$se[mg$bestmodel == i & mg$ptype == 2],
+         lwd = 1, angle = 90,
+         code = 3, length = 0.05)
+}
+
+#for(j in unique(mgid$id)){
+ ## points(mgid$s[ mgid$ptype == 2 & mgid$id == j],
+  ##     mgid$m[ mgid$ptype == 2 & mgid$id == j],
+   #    col = mgid$bestmodel[mgid$ptype == 2 & mgid$id == j],
+   #    type = "l")
+#}
+#dev.off()
+#points(mg$s[mg$bestmodel == 1 & mg$ptype == 2],
+  #  mg$pb[mg$bestmodel == 1 & mg$ptype == 2],
+   # col = "red", pch = 19)
+
+```
+we next qualitatively investigated how the valuations of frequentist and Bayesian learners differ. We expected an effect of sample size only for Bayesian and not for frequentist learners. As explained previously, the BVU model predicts that valuations decrease as a function of sample size for \$-bets and increase for p-bets. Figure \ref{fig:qual1} shows the mean ratings for \$-bets and p-bets separately for people quantitatively and qualitatively best described by either the BVU or the RF model. The figure shows that the mean valuations of Bayesian learners indeed differed from the mean valuations of frequentist learners: The mean valuations of Bayesian learners slightly decreased as a function of sample size for \$-bets and increased as a function of sample size for p-bets. The effect appears to be more pronounced for p-bets than for \$-bets. The mean valuations of frequentist learners did not show consistent variation.
+
+
+#Effect of gamble type and sampling order
+```{r influence of gambletype}
+mgta <- anovaBF(rating~id+evf*ptype, data = sd, whichRandom = c("id", "evf"), iterations = niter)
+mgta <- recompute(mgta, iterations = niter* 3)
+bf = as.character(round(extractBF(mgta, onlybf = T),2))
+```
+
+
+The mean and median ratings in the Table show that valuations for \$-bets (Gambles 1--3) were higher than for p-bets (Gambles 4--6), even if the gambles had the same expected value. This finding is supported by comparing model M0, which assumes that gamble valuation can be predicted as a function of the random factor expected value, and model M1, which makes the additional assumption that valuations differ between p-bets and $-bets (BF10 = `r bf`). 
+```{r memory}
+
+s <- d[d$block == "sampling" & d$gamble %in% 1:6, ]
+s$id <- as.numeric(as.character(s$id))
+for(i in unique(s$id)){
+  for(j in unique(s$pid)){
+    fh <- 1: round((s$SS[s$id == i & s$pid == j][1]/2))
+    sh <- (fh[length(fh)]+1) : s$SS[s$id == i & s$pid == j][1]
+    s$fh[s$id == i & s$pid == j] <-  mean(s$rating[s$id == i & s$pid == j &s$gt == "sampling"][fh])
+    s$sh[s$id == i & s$pid == j] <-  mean(s$rating[s$id == i & s$pid == j &s$gt == "sampling"][sh])
+    
+  }
+}
+
+sdm <- s[s$gt == "sampling.decision", ]
+sdm$id <- as.factor(sdm$id)
+m0pr <- lmBF(rating ~ gamble + id, whichRandom = c("id", "gamble"), 
+             data = sdm, iterations = 50000)
+m1p <- lmBF(rating ~ gamble + id + fh, whichRandom = c("id", "gamble"), 
+            data = sdm, iterations = 50000)
+m1r <- lmBF(rating ~ gamble + id + sh, whichRandom = c("id", "gamble"), 
+            data = sdm, iterations = 50000)
+
+
+comp1 = as.character(round(extractBF(m0pr/m1p, onlybf = T),2))
+comp2 = as.character(round(extractBF(m0pr/m1r, onlybf = T),2))
+
+
+```
+
+
+To test also for recency or primacy effects, we compared how well the first half and the second half of the sample sequence in each trial predicts valuations. A linear model M0 that predicts valuations as a function of the random factor gamble (1--6) outperforms model M1, which also includes the mean of the first half of the observed samples as a fixed factor (BF01 = `r comp1`) and model M2,, which includes the mean of the second half of observed samples (BF02 = `r comp2`). In summary, our analysis did not provide evidence for recency or primacy effects.
+
+# Confidence Ratings
+```{r confidence}
+
+
+##       Confidence D vs. E    ## 
+confidencedescr = ddply(conf, .(samplesize = s), summarize, mean = round(mean(rating),2), sd = round(sd(rating),2))
+confidencedescr$BF10 = NA
+for(s in c("us", "s", "m", "l")){
+  
+  bf10 = anovaBF(rating ~ s + id, whichRandom = "id",data = conf[de$s %in% c(s, "d"),], iterations = niter)
+  confidencedescr$BF10[confidencedescr$samplesize == s] = round(extractBF(bf10, onlybf = T),2)
+}
+
+kable(confidencedescr)
+
+mca = anovaBF(rating~id + s, whichRandom = c("id"), data = conf[conf$s != "d",], iterations = niter)
+bfconf = as.character(round(1/extractBF(mca, onlybf = T),2))
+
+
+```
+
+Sample size did not influence participants' confidence systematically: M0, which predicts confidence rating as a function of a random participant effect, was strongly preferred over M1, which in addition includes the sample-size category as a predictor (BF01 = `r bfconf`).
+
+
+```{r confidence per modelwinner}
+#bestmodel[14,1] = "Baseline"
+for(i in 1:40){
+  conf$bestmodel[conf$id == i] = bestmodel$model[i]
+}
+
+confidencedescrmodel = ddply(conf, .(samplesize = s,  bestmodel), summarize, mean = round(mean(rating),2), sd = round(sd(rating),2))
+kable(confidencedescrmodel)
+
+
+
+bfBVU = anovaBF(rating ~  id+s, whichRandom = "id", data = conf[conf$block %in% "sampling" & conf$bestmodel == 1,] , iterations = niter)
+bfRF = anovaBF(rating ~  id+s, whichRandom = "id", data = conf[conf$block %in% "sampling" & conf$bestmodel == 2,] , iterations = niter)
+ 
+
+
+
+```
+
+
+Because only the BVU model predicts increasing confidence ratings as a function of sample size, we repeated the previous analysis separately for Bayesian and frequentist learners. Interestingly, the analysis of those participants who were quantitatively and qualitatively best described by the BVU model revealed a small effect of sample size. (Means: see tabke above,  BF10 = `r as.character(round(extractBF(bfBVU, onlybf = T),2))`). The analysis of those participants who were quantitatively and qualitatively best described by the RF model did not show an effect of sample size on confidence ratings (Means: see tabke above,  BF10 = `r as.character(round(extractBF(bfRF, onlybf = T),2))`).
+
+
+
+
+
+
