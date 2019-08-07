@@ -3,8 +3,9 @@ title: "Results"
 author: "Jana B. Jarecki"
 date: "Aug. 2019"
 output:
-  html_document:
-    keep_md: true
+  pdf_document:
+    keep_tex: true
+documentclass: standalone
 ---
 
 Test
