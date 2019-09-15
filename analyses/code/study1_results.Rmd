@@ -4,7 +4,7 @@ author: "Jana B. Jarecki"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   pdf_document:
-    keep_tex: TRUE
+    keep_tex: yes
 documentclass: "apa6"
 classoption:
   a4paper,
@@ -144,7 +144,8 @@ plot2 <- ggplot(weights2,
     legend.key = element_rect(fill = "white")) 
 
 
-plot1 + plot2 +plot_layout(nrow=2, ncol = 1, heights = c(.15,.8))
+combined <- plot1 + plot2 +plot_layout(nrow=2, ncol = 1, heights = c(.15,.8))
+ggsave(combined, "../figures/fig3.png")
 ```
 
 ```{r, parameter}
