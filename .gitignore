@@ -9,5 +9,5 @@ data/
 
 *.pdf
 
-!*/analyses/*.pdf
+!/analyses/*.pdf
 
