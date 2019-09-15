@@ -24,13 +24,16 @@ header-includes:
 ---
 
 ```{r, setup, echo=FALSE, warning=FALSE, message=FALSE, results="hide"}
+knitr::opts_knit$set(
+  base.url = "/",
+  base.dir = "../")
 knitr::opts_chunk$set(
   comment = NA,
   results = "asis",
   warning = FALSE,
   message = FALSE,
   echo = FALSE,
-  fig.path = "../figures",
+  fig.path = "figures/",
   knitr.kable.NA = "",
   dev = "cairo_pdf",
   fig.align = "center")
@@ -143,9 +146,7 @@ plot2 <- ggplot(weights2,
     legend.key.height = unit(1.2, "lines"),
     legend.key = element_rect(fill = "white")) 
 
-
-combined <- plot1 + plot2 +plot_layout(nrow=2, ncol = 1, heights = c(.15,.8))
-ggsave(combined, "../figures/fig3.png")
+plot1 + plot2 +plot_layout(nrow=2, ncol = 1, heights = c(.15,.8))
 ```
 
 ```{r, parameter}
