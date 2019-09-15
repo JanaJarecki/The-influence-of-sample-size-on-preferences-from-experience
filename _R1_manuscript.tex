@@ -1,11 +1,11 @@
 \documentclass[a4paper, man, natbib, floatsintext]{apa6} %jou, man, report, doc
 
+\usepackage{standalone}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
-\usepackage{standalone}
 
 \usepackage{multicol}
 \usepackage{multirow}
@@ -92,15 +92,33 @@ Both models that we propose are expected utility models. According to expected u
 
 \subsubsection{Relative frequency model}
 
-The relative frequency (RF) model formalizes how people who believe in the law of small numbers deal with sample sizes. It suggests that people simply calculate the relative frequency of all observed samples when forming a belief about the gain probability to make a valuation of the gamble. 
+\added[id=jj]{The \textit{relative frequency model (RF)} estimates probabilities from relative frequencies. It formalizes how people who trust in the law of small numbers---that frequencies in small samples represent population probabilities---estimate probabilities given different sample sizes.} It suggests that the probabilities of gains is estimated from the relative frequency of observed gains. The relative frequency model predicts that the belief about the gain probability after sampling $t$ times is
+$${B}_{\mathrm{RF}, t}  =  \frac{1}{t} \times n_t,$$
+\added{where $n_t$ represents the number of gains observed until $t$.}
 
-Formally, the belief ${B}_{\mathrm{RF}}$ about the gain probability after $t$ observations is given by ${B}_{\mathrm{RF}, t}  =  \frac{1}{t} \times \sum\limits_{t=1}^t f(t)$, where $f(t)$ is a sign function that equals $1$ when the observed outcome is a gain and 0 otherwise. In our experiments, we presented gambles with two outcomes, one a gain and the other 0. Thus, we can formulate the valuation after sample $t$ ($V_{\mathrm{RF}, t}$) as $V_{\mathrm{RF}, t} = \sqrt[\mathrm{\alpha}]{{B}_{\mathrm{RF}, t} \times u({g})}$, where $u(g)$ describes the subjective utility of the gain defined as $u(g) = g^{\mathrm{\alpha}}$. The RF model predicts that sample size in itself does not influence valuations.
+\added{Critically, the relative frequency model predicts that changes in sample size do not influence valuations. It also predicts that only the sampled outcome frequency influences the estimated probabilities.}
+
+\subsubsection{Bayesian value updating model}
+The \emph{Bayesian value updating (BVU)} model  implements a Bayesian perspective on probability estimation and how people deal with uncertainty from sampling. Accordingly, peoples' beliefs about the gain probabilities follow Bayesian principles. \added[id=jj]{Unlike the relative frequency model, the Bayesian model highlights the role of prior beliefs about outcome probabilities before sampling. The beliefs about gain probabilities follow a beta distribution ${B}_{\mathrm{BVU}} \sim Beta(a,b)$. Before sampling, at $t = 0$, the beliefs are represented by a prior belief distribution $B_{\mathrm{BVU},0} \sim Beta(\theta_G$, $\theta_0)$, which is person-specific. The prior belief is updated from the sampled number of gains and zero-outcomes. The updated beliefs after sampling $t$ times follow the distribution}
+
+$$B_{\mathrm{BVU},t} \sim Beta(\theta_G + \delta a_t, \theta_0 + \delta b_t)$$,
+
+where  $\delta$ is a learning rate to account for individual differences in conservatism \citep{Edwards}, $a_t, b_t$ are the counts of gains and zero-outcomes (respectively) after sample $t$, and $\theta_G$, $\theta_0$ are the gain and zero-outcome priors, respectively. The point estimate for the gain probability is the posterior mean of this distribution, ${B}_\mathrm{BVU, t} = \frac{A}{A + B}$, with $A$ being a short-hand for $\theta_G + \delta a_t$ (and respectively for B). \textcolor{blue}{The updating process is illustrated in Figure \ref{fig:sensi} (see also below).}
+
+\subsubsection{Utility Function}
+\added[id=jj]{Both, the relative frequency model and Bayesian value updating model, capture individual differences in utility of monetary gamble outcomes by a one-parameter power utility function, $u(g) = g^{\mathrm{\alpha}}$, where $g$ is the gain outcome. Thus, the predicted evaluation by the relative frequency (RF) and Bayesian updating (BVU) model after sample $t$ is given by }
+
+$$V_{\mathrm{RF}, t} = \sqrt[\mathrm{\alpha}]{{B}_{\mathrm{RF}, t} \times u({g})}$$
+
+$$V_{\mathrm{BVU}, t} = \sqrt[\mathrm{\alpha}]{{B}_{\mathrm{BVU}, t} \times u({g})}$$
+
 
 Following \cite{Griffin1992}, we also asked participants for their confidence in their valuations. We tested whether people would be more confident about their responses when the sample size was small, as found by \cite{Griffin1992}. 
 
-\subsubsection{Bayesian value updating model}
-The Bayesian value updating (BVU) model implements a Bayesian view of how people deal with uncertainty as they gain new information about risky options. The model assumes that people update probability beliefs by following Bayesian principles. 
-For the two-outcome gambles, we formulated the BVU model as follows: A person's belief about the gain probability after sampling $t$ outcomes is represented by a beta distribution, ${B}_{\mathrm{BVU}, t} \sim Beta(a,b)$. \textcolor{blue}{Before sampling ($t = 0$), people have a belief about the gain probabilities. Here, we test four different prior beliefs: first, a uniform prior belief (${B}_\mathrm{BVU, t = 0} \sim Beta(1,1)$) that represents  the belief that every gain probability is equally likely; second, a bimodal prior belief (${B}_\mathrm{BVU, t = 0} \sim Beta(.5,.5)$) representing the belief that the gain probability is either very low or very high; third, a "gain" prior belief (${B}_\mathrm{BVU, t = 0} \sim Beta(1.99, .01)$) representing the belief that the gain probability is very high; and fourth, a "loss" prior belief (${B}_\mathrm{BVU, t = 0} \sim Beta(.01, 1.99)$) representing the belief that the gain probability is very low. Figure \ref{fig:sensi}a illustrates these prior beliefs.}
+\textcolor{blue}{Figures \ref{fig:sensi}b  and c illustrate how prior beliefs change as people observe new samples. The black curves illustrate how the beliefs change after observing few outcomes (5) with a reward frequencies of 1/5 (20\%, Figure \ref{fig:sensi}b)  and 4/5 (80\%, Figure \ref{fig:sensi}c). The gray curves illustrate how the beliefs change after observing many outcomes (30) with similar reward frequencies.}
+
+
+Figure \ref{fig:sensi}a illustrates these prior beliefs.
 \begin{figure}[htbp] 
   \centering
 \includegraphics[width=1\linewidth, keepaspectratio]{sensi1.eps}
@@ -108,10 +126,8 @@ For the two-outcome gambles, we formulated the BVU model as follows: A person's 
   \label{fig:sensi}
 \end{figure}
 
-As people sample, they update their initial belief about the gain probability by adding a value of 1 to the \textit{a} parameter when observing a gain and a value of 1 to the \textit{b} parameter when observing a 0. 
-\textcolor{blue}{Figures \ref{fig:sensi}b  and c illustrate how prior beliefs change as people observe new samples. The black curves illustrate how the beliefs change after observing few outcomes (5) with a reward frequencies of 1/5 (20\%, Figure \ref{fig:sensi}b)  and 4/5 (80\%, Figure \ref{fig:sensi}c). The gray curves illustrate how the beliefs change after observing many outcomes (30) with similar reward frequencies.}
-The belief at time $t$ about the probability of a gain is simplified as the mean of this distribution at that moment: ${B}_\mathrm{BVU, t} = \frac{a_{t}}{a_{t} + b_{t}}$. 
-\textcolor{blue}{This mean is illustrated in Figure \ref{fig:sensi} with the black and gray dots.} Similar to the formulation of the RF model, the valuation is then formulated as $V_\mathrm{BVU, t} = \sqrt[\alpha]{{B}_\mathrm{BVU, t} \times u({g})}$.
+
+
 
 The BVU model predicts that sample size influences valuations. This is because as sample size increases, the beta-distributed belief shifts from the \textcolor{blue}{mean of the prior belief (see Figure \ref{fig:sensi}a) in the direction of the true underlying probability of the gain. Whether the model predicts a decrease or an increase in valuations as a function of sample size depends on the shape of the prior belief and the true gain probability. If the gain probability is lower than 50\% and the prior belief is uniform, bimodal, or peaked over gains, the model predicts that valuations decrease as a function of sample size. However, if the prior belief is more peaked over losses, the model predicts that valuations increase as a function of sample size. If the gain probability is larger than 50\% and the prior belief is uniform, bimodal, or peaked over losses, the model predicts that valuations increase as a function of sample size. However, if the prior belief is more peaked over gains, the model predicts that valuations decrease as a function of sample size. In all cases}, the probability belief gets increasingly peaked around the true probability of the gain as sample size grows. Therefore, the model also predicts that confidence in valuations increases with increasing sample size. %We also test this prediction by assessing confidence ratings.
 
@@ -210,7 +226,7 @@ Gamble ID & Type & X & Pr & EV & xs & s & m & l\\
 
 
 \subsubsection{Procedure}
-Participants read printed instructions and completed a questionnaire that ensured their understanding of the instructions. \added[id=jj]{During the experiment, participants' evaluated the gambles shown in Table~\ref{table:Lotteries} and reported their confidence. They began with an experience block followed by a description block. In the experience block, participants knew the gamble's outcomes but not the probabilities; they sampled outcomes to learn about the probability distribution of outcomes before evaluating the gamble. A trial began by showing the possible outcomes on a screen (as circle icon or ``marble'', labelled with the gain amount or 0); gain marbles were black; zero-marbles were white; marbles were shown throughout the trial. Participants pressed the space bar to sample an outcome, the realized outcome (black or white marble) appeared for 250 ms; participants drew a predefined number of samples (sample sizes, Table~\ref{table:Lotteries}). Then they evaluated the gamble, reported confidence, and stared the next trial. Sample size changed from trial to trial, and participants knew, that the number of samples was predefined.} The trial order and outcome sequence within a trial was randomized for individual participants. \deleted[id=jj]{After participants had drawn the required number of outcomes, they were prompted for (1) their valuation of the gamble (see below) and (2) their confidence in their valuation} 
+Participants read printed instructions and completed a questionnaire that ensured their understanding of the instructions; the experimental task was computerized. \added[id=jj]{Participants' task was to judge the value of risky gambles (in Table~\ref{table:Lotteries}) and to report confidence in their judgment. Participants judged the gambles first in an experience format given different sample sizes and then in a description format; gambles were judged one-by-one. In the experience format participants were shown the outcomes but \textit{not} the probabilities of a gamble, which they learned by repeatedly sampling outcomes. Each sampling trial began by informing participants about the possible outcomes (shown on screen as numbers in a circle icon, gain circles were filled black, zero-outcomes white). Pressing the space bar sampled an outcome; the realized outcome appeared for 250 ms (a black or white icon); sampling ended after a predefined sample size ranging from 5 to 42 samples (Table~\ref{table:Lotteries}). The possible outcomes stayed on screen throughout sampling. After sampling, participants judged the gamble and reported confidence, and proceeded to the next trial. Sample size changed from trial to trial. Participants were informed a priori about the pre-specification of the sample size.} The trial order and outcome sequence within a trial was randomized for individual participants. \deleted[id=jj]{After participants had drawn the required number of outcomes, they were prompted for (1) their valuation of the gamble (see below) and (2) their confidence in their valuation} 
 
 Confidence was measured on a 7-point Likert scale (from 0 = \textit{very unconfident} to 6 = \textit{very confident}). Valuations of gambles were measured as selling prices following the Becker--DeGroot--Marschak (BDM) method \citep{Becker1964}: \deleted[id=jj]{For each gamble}Participants stated their selling prices in terms of the lowest monetary amount for which they would give up the right to gamble. Prices could range from 0.00 to the current gain in CHF, with increments of 0.10 CHF. The BDM auction was incentivized as follows. The selling price that a participant entered was compared to a random value drawn from all possible selling prices in the trial. If this random number was larger than the stated selling price, the participant ``sold'' the gamble and received a monetary amount \replaced[id=jj]{that equaled}{equal to} the random number. If the random number was equal to or smaller than the selling price, the participant got to gamble. For the BDM, the optimal strategy is always to report the true selling price.\footnote{\label{logic.BDM} 
 To understand this logic, consider the following example: A person has a true selling price for a given gamble of \$3. If this person sets her selling price too low (e.g., \$2) and the randomly generated number is \$2.10, she sells her gamble for a lower price than her true selling price. If, however, she sets her selling price too high (e.g., \$5) and the randomly generated number is \$4, she keeps and plays her gamble, although she actually would have preferred to receive the \$4.
