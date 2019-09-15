@@ -9,7 +9,7 @@ data/
 
 *.pdf
 
-!/analyses/*.pdf
+!/analyses/figures/*.pdf
 
 _R1_manuscript.tex
 
