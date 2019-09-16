@@ -24,26 +24,25 @@ header-includes:
 ---
 
 ```{r, setup, echo=FALSE, warning=FALSE, message=FALSE, results="hide"}
-knitr::opts_knit$set(
-  base.url = "/",
-  base.dir = "../")
 knitr::opts_chunk$set(
   comment = NA,
   results = "asis",
   warning = FALSE,
   message = FALSE,
   echo = FALSE,
-  fig.path = "figures/",
+  fig.path = "../figures/",
   knitr.kable.NA = "",
   dev = "cairo_pdf",
   fig.align = "center")
+knitr::opts_knit$set(
+  base.url = "/",
+  base.dir = "../../")
+
 library(papaja)
 library(cogscimodels)
 library(data.table)
 source("fig_setup.R")
 ```
-
-All analyses were conducted in the statistical programming environment R \citep{R2019}; linear models were compared using the BayesFactor package \citep{BayesFactor}; inferences were based on the Bayes factor ($BF\textsubscript{ij}$).\footnote{Bayes factors quantifiy how much more or less likely the data are under Model i ($\mathrm{M}\textsubscript{i}$) than Model j ($\mathrm{M}\textsubscript{j}$). A Bayes factor of 1 ($BF\textsubscript{ij} = 1$) means that the data do not discriminate between the two models $\mathrm{M}\textsubscript{i}$ and $\mathrm{M}\textsubscript{j}$. A Bayes factor of 5 (i.e., $BF\textsubscript{ij} = 5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{i}$ than under $\mathrm{M}\textsubscript{j}$. A Bayes factor of $1/5$ ($BF\textsubscript{ij} = 1/5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{j}$ (note that $BF\textsubscript{ji} = 1/BF\textsubscript{ij}$).} 
 
 \subsection{Evaluations of Gambles by Condition and Sample Size}
 Table \ref{tab:meansStudy1} shows participants' evaluations of the gambles in the experience and description conditions. The evaluations in the experience condition are not a linear function of sample size. In the best mixed regression model $\mathrm{M}\textsubscript{0}$ gamble type (p-bet vs. \$-bet) has a (fixed) effect on evaluations and sample size is only a random factor. It outperforms a model with sample size as fixed effect ($BF\textsubscript{01} = 409$) and a model with sample-size$\times$gamble-type interaction ($BF\textsubscript{01} > 1,000$).
@@ -51,6 +50,25 @@ Table \ref{tab:meansStudy1} shows participants' evaluations of the gambles in th
 ```{r, include=0}
 source('tab2.R')
 ```
+
+```{r, study1_evaluations, fig.cap = "Mean gamble evaluations of \\$-bets and p-bets in the experience condition across sample sizes and in the the description condition."}
+dagg <- d[, .(M=mean(value), SD=sd(value)), by = .(samplesizecat, gambletype)]
+ggplot(dagg, aes(samplesizecat)) +
+  geom_jitter(data=d, aes(y=value), alpha = 0.01) +
+  geom_violin(data=d, aes(y=value), color = "grey", fill = "grey", alpha = .4) +
+  geom_boxplot(data=d, aes(y=value), fill = NA, color = "white", width = 0.2, size = 1) +
+  geom_errorbar(aes(ymin = M-SD, ymax=M+SD), width = 0.1, size = 0.8) +
+  geom_point(aes(y=M), size = 3) +
+  facet_wrap(~gambletype) +
+  ylim(0,27) +
+  ylab("Evaluation (M +/- SD)") +
+  xlab("Sample Size") +
+  labs(caption = "Note: -- denotes description condition") +
+  geom_segment(aes(x = "xs", xend = "l", y = 27, yend = 27), color = "grey") +
+  geom_label(aes(y = 27, x = "s", label = " Experience"), hjust = 0.03, label.size = 0, size = 2.7, fontface = 3, vjust = 0.4) +
+  theme(aspect.ratio = 1)
+```
+
 
 ```{r, meansStudy1}
 options(knitr.kable.NA = '')

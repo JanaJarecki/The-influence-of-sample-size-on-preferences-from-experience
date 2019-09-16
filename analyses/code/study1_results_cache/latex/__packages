@@ -7,3 +7,6 @@ ggplot2
 themejj
 scales
 patchwork
+coda
+Matrix
+BayesFactor
