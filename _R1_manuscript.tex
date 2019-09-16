@@ -95,21 +95,23 @@ Both models that we propose are expected utility models. According to expected u
 
 \subsubsection{Relative frequency model}
 
-\added[id=jj]{The \textit{relative frequency model (RF)} estimates probabilities from relative frequencies. It formalizes how people who trust in the law of small numbers---that frequencies in small samples represent population probabilities---estimate probabilities given different sample sizes.} It suggests that the probabilities of gains is estimated from the relative frequency of observed gains. The relative frequency model predicts that the belief about the gain probability after sampling $t$ times is
+\added[id=jj]{The \textit{relative frequency model (RF)} estimates probabilities from relative frequencies. It formalizes how people, who trust in the law of small numbers, estimate probabilities. Accordingly people estimate the probability of gains from the observed relative frequencies of gains.} This model predicts that after sampling $t$ times the belief about the gain probability corresponds to
 $${B}_{\mathrm{RF}, t}  =  \frac{1}{t} \times n_t,$$
-\added{where $n_t$ represents the number of gains observed until $t$.}
+\added[id=jj]{where $n_t$ represents the number of gains observed until $t$.}
 
-\added{Critically, the relative frequency model predicts that changes in sample size do not influence valuations. It also predicts that only the sampled outcome frequency influences the estimated probabilities.}
+\added[id=jj]{Critically, the relative frequency model suggests that changes in sample size do not influence valuations,and furthermore that only the sampled outcome frequency influences the estimated probabilities. The model does not incorporate prior beliefs about the probabilities of outcomes. Further, it makes no direct prediction about people's certainty about the probabilities.}
 
 \subsubsection{Bayesian value updating model}
 The \emph{Bayesian value updating (BVU)} model  implements a Bayesian perspective on probability estimation and how people deal with uncertainty from sampling. Accordingly, peoples' beliefs about the gain probabilities follow Bayesian principles. \added[id=jj]{Unlike the relative frequency model, the Bayesian model highlights the role of prior beliefs about outcome probabilities before sampling. The beliefs about gain probabilities follow a beta distribution ${B}_{\mathrm{BVU}} \sim Beta(a,b)$. Before sampling, at $t = 0$, the beliefs are represented by a prior belief distribution $B_{\mathrm{BVU},0} \sim Beta(\theta_G$, $\theta_0)$, which is person-specific. The prior belief is updated from the sampled number of gains and zero-outcomes. The updated beliefs after sampling $t$ times follow the distribution}
 
 $$B_{\mathrm{BVU},t} \sim Beta(\theta_G + \delta a_t, \theta_0 + \delta b_t)$$,
 
-where  $\delta$ is a learning rate to account for individual differences in conservatism \citep{Edwards}, $a_t, b_t$ are the counts of gains and zero-outcomes (respectively) after sample $t$, and $\theta_G$, $\theta_0$ are the gain and zero-outcome priors, respectively. The point estimate for the gain probability is the posterior mean of this distribution, ${B}_\mathrm{BVU, t} = \frac{A}{A + B}$, with $A$ being a short-hand for $\theta_G + \delta a_t$ (and respectively for B). \textcolor{blue}{The updating process is illustrated in Figure \ref{fig:sensi} (see also below).}
+\added[id=jj]{where  $\delta$ is a learning rate to account for individual differences in conservatism \citep{Edwards1967,Tauber2017}; the values $a_t, b_t$ are the counts of gains and zero-outcomes, respectively, after sample $t$, and $\theta_G$, $\theta_0$ are the gain and zero-outcome priors, respectively. The point estimate for the updated belief about the gain probability equals the posterior mean of this distribution, ${B}_\mathrm{BVU, t} = \frac{A}{A + B}$, with $A$ being a short-hand for $\theta_G + \delta a_t$ (and respectively for B).}
+
+\textcolor{blue}{The updating process is illustrated in Figure \ref{fig:sensi} (see also below).}
 
 \subsubsection{Utility Function}
-\added[id=jj]{Both, the relative frequency model and Bayesian value updating model, capture individual differences in utility of monetary gamble outcomes by a one-parameter power utility function, $u(g) = g^{\mathrm{\alpha}}$, where $g$ is the gain outcome. Thus, the predicted evaluation by the relative frequency (RF) and Bayesian updating (BVU) model after sample $t$ is given by }
+\added[id=jj]{The beliefs about the gain probabilities from the models can then be used to form an expected value of a gamble. Both models capture individual differences in the utility of monetary gains by a one-parameter power utility function, $u(g) = g^{\mathrm{\alpha}}$, where $g$ is the gain outcome. Thus, the predicted evaluation by the relative frequency (RF) and Bayesian updating (BVU) model after sample $t$ is given by }
 
 $$V_{\mathrm{RF}, t} = \sqrt[\mathrm{\alpha}]{{B}_{\mathrm{RF}, t} \times u({g})}$$
 
@@ -236,10 +238,11 @@ To understand this logic, consider the following example: A person has a true se
 } Detailed instructions as well as an example of the BDM auction were presented to explain the auction's mechanism. We used a short questionnaire to ensure that all participants had understood how the auction worked.
 
 \subsection{Results}
-All analyses were conducted in the statistical programming environment R \citep{R2019}; linear models were compared using the BayesFactor package \citep{BayesFactor}; inferences were based on the Bayes factor ($BF\textsubscript{ij}$).\footnote{Bayes factors quantifiy how much more or less likely the data are under Model i ($\mathrm{M}\textsubscript{i}$) than Model j ($\mathrm{M}\textsubscript{j}$). A Bayes factor of 1 ($BF\textsubscript{ij} = 1$) means that the data do not discriminate between the two models $\mathrm{M}\textsubscript{i}$ and $\mathrm{M}\textsubscript{j}$. A Bayes factor of 5 (i.e., $BF\textsubscript{ij} = 5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{i}$ than under $\mathrm{M}\textsubscript{j}$. A Bayes factor of $1/5$ ($BF\textsubscript{ij} = 1/5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{j}$ (note that $BF\textsubscript{ji} = 1/BF\textsubscript{ij}$).} 
+\added[id=jj]{All analyses were conducted in the statistical programming environment R version 6.0.1 \citep{R}; linear models were compared using the BayesFactor package version 0.9.12 \citep{BayesFactor}; inferences were based on the Bayes factor ($BF\textsubscript{ij}$).}\footnote{Bayes factors quantifiy how much more or less likely the data are under Model i ($\mathrm{M}\textsubscript{i}$) than Model j ($\mathrm{M}\textsubscript{j}$). A Bayes factor of 1 ($BF\textsubscript{ij} = 1$) means that the data do not discriminate between the two models $\mathrm{M}\textsubscript{i}$ and $\mathrm{M}\textsubscript{j}$. A Bayes factor of 5 (i.e., $BF\textsubscript{ij} = 5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{i}$ than under $\mathrm{M}\textsubscript{j}$. A Bayes factor of $1/5$ ($BF\textsubscript{ij} = 1/5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{j}$ (note that $BF\textsubscript{ji} = 1/BF\textsubscript{ij}$).} 
+
+
 \input{analyses/code/study1_results}
 
-\subsubsection{Sample size}
 %Table \ref{table:meansStudy2} displays the mean and median valuations from experience, that is, the monetary amount elicited with the BDM method, separately for each gamble and each sample-size category. The data suggest that sample size does not affect valuations from experience consistently. A model comparison supports this indication. Model $\mathrm{M}\textsubscript{0}$, which predicts valuations from experience as a function of the random factor expected value and the fixed factor gamble type (p-bet vs. \$-bet), is preferred over a model that takes into account sample size as an additional fixed factor ($BF\textsubscript{01} = 409$) and a model that additionally takes into account the interaction between sample size and gamble type ($BF\textsubscript{01} > 1,000$). 
 
 % \begin{ThreePartTable}
@@ -559,7 +562,7 @@ While information that is described is more abstract, experienced information ha
 
 
 
-\bibliography{refJanine}
+\bibliography{refJanine,references}
 
 %\section{Footnotes}
 
