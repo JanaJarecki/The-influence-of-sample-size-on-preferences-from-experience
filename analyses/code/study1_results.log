@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.7)  16 SEP 2019 19:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.7)  17 SEP 2019 14:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1128,6 +1128,12 @@ Package: truncate 2001/08/20  ver 3.6
 \Changes@truncate@width=\skip78
 \Changes@summary@width=\skip79
 )
+\c@Changes@addedCountjj=\count165
+\c@Changes@deletedCountjj=\count166
+\c@Changes@replacedCountjj=\count167
+\c@Changes@highlightCountjj=\count168
+\c@Changes@commentCountjj=\count169
+
 (c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/was/upgreek
 .sty
 Package: upgreek 2003/02/12 v2.0 (WaS)
@@ -1242,7 +1248,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count165
+\c@section@level=\count170
 )
 LaTeX Info: Redefining \ref on input line 91.
 LaTeX Info: Redefining \pageref on input line 91.
@@ -1254,26 +1260,26 @@ LaTeX Info: Redefining \nameref on input line 91.
 ABD: EveryShipout initializing macros
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 93.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 98.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 99.
 
 (c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.f
 d
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 98.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 99.
 
 (c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.f
 d
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 98.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 99.
 
 
 (c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.
 fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 98.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 99.
 
 
 (c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.
@@ -1281,62 +1287,68 @@ fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 98.
+(Font)              <12> on input line 99.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 98.
+(Font)              <8> on input line 99.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 98.
-LaTeX Font Info:    Try loading font information for U+msa on input line 98.
+(Font)              <6> on input line 99.
+LaTeX Font Info:    Try loading font information for U+msa on input line 99.
 
 (c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/um
 sa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 98.
+LaTeX Font Info:    Try loading font information for U+msb on input line 99.
 
 (c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/um
 sb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<../figures/study1_evaluations-1.pdf, id=48, 469.755pt x 325.215pt>
-File: ../figures/study1_evaluations-1.pdf Graphic file (type pdf)
-<use ../figures/study1_evaluations-1.pdf>
-Package pdftex.def Info: ../figures/study1_evaluations-1.pdf  used on input lin
-e 107.
-(pdftex.def)             Requested size: 452.96669pt x 313.59232pt.
 
-LaTeX Warning: Float too large for page by 32.46417pt on input line 166.
+LaTeX Warning: Float too large for page by 32.46417pt on input line 159.
+
+
+Package natbib Warning: Citation `Ghalanos2015' on page 1 undefined on input li
+ne 172.
+
+
+Package natbib Warning: Citation `Kass1995' on page 1 undefined on input line 1
+72.
+
+
+Package natbib Warning: Citation `Lewandowsky2011' on page 1 undefined on input
+ line 172.
 
 [1{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/upd
 map/pdftex.map}
 
- <../figures/study1_evaluations-1.pdf>] [2]
-
-Package natbib Warning: Citation `Kass1995' on page 3 undefined on input line 1
-78.
-
-
-Package natbib Warning: Citation `Lewandowsky2011' on page 3 undefined on input
- line 178.
-
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 190.
-<../figures/model_weights-1.pdf, id=82, 361.35pt x 289.08pt>
+] [2]
+<../figures/model_weights-1.pdf, id=76, 361.35pt x 216.81pt>
 File: ../figures/model_weights-1.pdf Graphic file (type pdf)
 <use ../figures/model_weights-1.pdf>
-Package pdftex.def Info: ../figures/model_weights-1.pdf  used on input line 195
+Package pdftex.def Info: ../figures/model_weights-1.pdf  used on input line 190
 .
-(pdftex.def)             Requested size: 361.34912pt x 289.07928pt.
+(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
+[3 <../figures/model_weights-1.pdf>]
+<../figures/ind_fits1-1.pdf, id=93, 505.89pt x 505.89pt>
+File: ../figures/ind_fits1-1.pdf Graphic file (type pdf)
+<use ../figures/ind_fits1-1.pdf>
+Package pdftex.def Info: ../figures/ind_fits1-1.pdf  used on input line 233.
+(pdftex.def)             Requested size: 452.97328pt x 452.97328pt.
+<../figures/qual1-1.pdf, id=95, 505.89pt x 325.215pt>
+File: ../figures/qual1-1.pdf Graphic file (type pdf)
+<use ../figures/qual1-1.pdf>
+Package pdftex.def Info: ../figures/qual1-1.pdf  used on input line 251.
+(pdftex.def)             Requested size: 452.97328pt x 291.19711pt.
 
-Package natbib Warning: Citation `Edwards1967' on page 3 undefined on input lin
-e 215.
+LaTeX Warning: Reference `tab:Lotteries' on page 4 undefined on input line 255.
 
 
-Package natbib Warning: Citation `Tauber2017' on page 3 undefined on input line
- 215.
 
-AED endfloat: Processing end Figures and Tables [3] [4 <../figures/model_weight
-s-1.pdf>]
+Underfull \vbox (badness 2961) has occurred while \output is active []
+
+[4] AED endfloat: Processing end Figures and Tables [5] [6 <../figures/ind_fits
+1-1.pdf>] [7 <../figures/qual1-1.pdf>]
 
 Package natbib Warning: There were undefined citations.
 
@@ -1346,26 +1358,29 @@ Package natbib Warning: There were undefined citations.
 \tf@loc=\write8
 \openout8 = `study1_results.loc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 239.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 239.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 263.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 263.
 (./study1_results.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 239.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 239.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 263.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 263.
 Package rerunfilecheck Info: File `study1_results.out' has not changed.
-(rerunfilecheck)             Checksum: 08E56C43512C8F3943EA3766CBB37ECA;906.
+(rerunfilecheck)             Checksum: B751C34CE20F0243893E1467BC2B6EAE;1340.
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 24363 strings out of 494553
- 435823 string characters out of 6175493
- 496300 words of memory out of 5000000
- 27542 multiletter control sequences out of 15000+600000
- 47682 words of font info for 62 fonts, out of 8000000 for 9000
+ 24386 strings out of 494553
+ 436523 string characters out of 6175493
+ 499181 words of memory out of 5000000
+ 27568 multiletter control sequences out of 15000+600000
+ 39814 words of font info for 53 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 69i,15n,83p,1373b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/
-lm-rm.enc}{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/d
-vips/lm/lm-mathit.enc}{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist
-/fonts/enc/dvips/base/8r.enc}{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/tex
+ 69i,15n,83p,1526b,592s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/bas
+e/8r.enc}{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dv
+ips/lm/lm-rm.enc}{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/font
+s/enc/dvips/lm/lm-mathit.enc}{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/tex
 mf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}<c:/Users/Jana Jarecki/AppData/Roaming
 /TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/Jana Jarecki/App
 Data/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/Jana 
@@ -1376,10 +1391,10 @@ lic/lm/lmsy10.pfb><c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/fon
 ts/type1/urw/times/utmb8a.pfb><c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/te
 xmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/Jana Jarecki/AppData/Roamin
 g/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on study1_results.pdf (4 pages, 318780 bytes).
+Output written on study1_results.pdf (7 pages, 251564 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 106 compressed objects within 2 object streams
- 15 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 178 PDF objects out of 1000 (max. 8388607)
+ 132 compressed objects within 2 object streams
+ 21 named destinations out of 1000 (max. 500000)
+ 172 words of extra memory for PDF output out of 10000 (max. 10000000)
 

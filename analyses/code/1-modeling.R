@@ -3,6 +3,7 @@
 # Author: Jana B. Jarecki
 # ==========================================================================
 library(data.table)
+library(cogscimodels)
 
 
 # Load data
@@ -12,13 +13,9 @@ d <- fread('../../data/processed/study1.csv', colClasses = list(character = "id"
 # Data preprocessing
 # --------------------------------------------------------------------------
 d <- d[condition == "experience"]
-d <- melt(d, measure = patterns('sample[0-9]'), variable.name = 'samplenum', value.name = 'outcome', na.rm=TRUE)
-d[, samplenum := as.numeric(gsub('sample', '', samplenum))]
-d <- d[, .(relfreq_x = mean(outcome != 0),
-      count_0 = sum(outcome == 0),
-      count_x = sum(outcome != 0)), by = .(id, samplesizecat, trial, gambleid, gamblex, value, confidence)]
-
-
+d[, relfreq_x := gamblep]
+d[, count_x := round(gamblep * samplesize)]
+d[, count_0 := samplesize - count_x]
 ## Rescale values to have a range of 0 - 1
 d[, value_scaled := value / gamblex]
 
@@ -30,6 +27,7 @@ model_options <- list(
   fit_args = list(
     options = list(pdf = "truncnormal", a = 0, b = 1))
   )
+
 # Set up the models
 RF <- function(d) {
   start(data = d) %+%
@@ -73,7 +71,7 @@ Baseline <- function(d) {
   baseline_mean(value_scaled ~ ., type = "const", mode = "continuous") %>%
     end(options = model_options[-1])
 }
-model_list <- list(bvu = BVU, bvu3 = BVU3, baseline = Baseline, rf = RF)
+model_list <- list(bvu = BVU3, baseline = Baseline, rf = RF)
 
 
 # Estimate mdoel parameters
