@@ -116,32 +116,32 @@ Condition & Sample size category & Effective sample size & \textit{Med} & \texti
 \midrule
 Gamble ID 1 &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 4\\
-\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 64\\
-\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 26\\
-\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 149\\
+\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 61\\
+\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 23\\
+\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 140\\
 \ \ \ D & -- & -- & 4.00 & 4.60 & -- & --\\
 Gamble ID 2 &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 136\\
-\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 631\\
+\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 139\\
+\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 651\\
 \ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 5\\
 \ \ \ E & l & 36 & 4.00 & 3.99 & -0.37 & 2\\
 \ \ \ D & -- & -- & 3.00 & 3.61 & -- & --\\
 Gamble ID 3 &  &  &  &  &  & \\
 \ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 4\\
-\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 919\\
-\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 147\\
+\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 986\\
+\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 145\\
 \ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 16\\
 \ \ \ D & -- & -- & 5.00 & 6.57 & -- & --\\
 Gamble ID 4 &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 3.00 & 2.80 & 0.28 & >1000\\
 \ \ \ E & s & 10 & 3.20 & 2.91 & 0.16 & 3\\
-\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 56\\
+\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 534\\
 \ \ \ E & l & 30 & 3.00 & 2.95 & 0.13 & 1\\
 \ \ \ D & -- & -- & 3.20 & 3.08 & -- & --\\
 Gamble ID 5 &  &  &  &  &  & \\
 \ \ \ E & xs & 6 & 2.00 & 1.77 & 0.10 & 8\\
 \ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 14\\
-\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 27\\
+\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 29\\
 \ \ \ E & l & 36 & 2.00 & 1.81 & 0.06 & 1\\
 \ \ \ D & -- & -- & 2.00 & 1.87 & -- & --\\
 Gamble ID 6 &  &  &  &  &  & \\
@@ -168,9 +168,8 @@ value judgments more closely. We compared the performance of the
 \added[id=jj]{Bayesian value updating} (BVU) model.
 \added{The models were compared to a baseline model, which predicts a constant evaluation equal to the mean individual evaluation. Sensible models are expected to outperform this baseline model.}
 
-\subsubsection{Modeling Procedure}
-
-\added[id=jj]{The observed and predicted evaluations were normalized to a common range (range 0 - 1, by division through the gain magnitude). Maximum likelihood was used to estimate the free model parameters at the participant level, assuming observations follow a truncated normal distribution around the model predictions (truncated between 0 and 1) with a constant standard deviation ($\sigma$), that was estimated as a free parameter ($0 < \sigma \leq 1$).  Therefore, the relative frequency model had 2 free parameter, the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$) and $\sigma$. The Bayesian value updating model had 4 free parameter the gain prior $\theta_G$ ($0 \leq \theta_G \leq 1$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$; the loss prior was constrained $\theta_0=2-\theta_G$. The baseline model had 2 free parameter, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. We compared the models by the Bayesian information criterion (BIC), transformed into Bayesian evidence weights \citep[][1 means very strong evidence for a competitor model]{Kass1995, Lewandowsky2011}}.
+\subsubsection{Modeling Procedure} 
+\added[id=jj]{The observed and predicted evaluations were normalized to a common range (range 0 - 1, by division through the gain magnitude). Maximum likelihood was used to estimate the free model parameters at the participant level, assuming observations follow a truncated normal distribution around the model predictions (truncated between 0 and 1) with a constant standard deviation ($\sigma$), that was estimated as a free parameter ($0 < \sigma \leq 1$).  Therefore, the relative frequency model had 2 free parameter, the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$) and $\sigma$. The Bayesian value updating model had 4 free parameter the gain prior $\theta_G$ ($0 \leq \theta_G \leq 1$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$; the loss prior was constrained $\theta_0=2-\theta_G$. The baseline model had 2 free parameter, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. We compared the models by the Bayesian information criterion (BIC), transformed into Bayesian evidence weights \cite{Kass1995, Lewandowsky2011}, with higher weights indicting stronger evidence favoring a model.}
 
 \subsubsection{Modeling Results}
 \added[id=jj]{We will first outline the quantitative model fit, followed by the qualitative model fit, and lastly analyze the effects of sample size given the cognitive strategies.}
@@ -199,7 +198,7 @@ The estimated parameter of the winning models, which Table
 exponent (\(\alpha\)) is almost identical for the participants using a
 Bayesian value updating strategy (\(M_{\alpha}= 1.43\)) and those using
 a relative frequency strategy (\(M_{\alpha}=1.60\)), \(M = -0.14\) 95\%
-HDI \([-0.70\), \(0.39]\), \(\mathrm{BF}_{\textrm{01}} = 3.26\).
+HDI \([-0.69\), \(0.38]\), \(\mathrm{BF}_{\textrm{01}} = 3.26\).
 Participants using the Bayesian strategy had, on average, a prior belief
 that gains occur with 46\% (gain prior \(\theta_G = 0.92\); zero-outcome
 prior \(\theta_0 = 1.08\)). Also, their estimated learning rate
@@ -251,12 +250,24 @@ relative-frequency-type and Bayesian-type learners. We expected that
 sample size leads to changes in the evaluations of the Bayesian learners
 depending on their priors, and that sample size does not affect the
 evaluations of the relative-frequency learners. \added[id=jj]{
-The Bayesian model predicts that sample size changes the evaluations depending on individual priors. Participants with a gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the evaluations of \$-bets as sample sizes increase, because participants overwrite their priors, learning that gains of \$-bets are less likely than zero-outcomes (see Table~\ref{table:Lotteries}). By contrast, participants with a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase their evaluations of p-bets as sample size increases, because they learn that p-bets are characterized by gains that are are more likely than zero-outcomes (Table~\ref{table:Lotteries}).
+The Bayesian model predicts that sample size changes the evaluations differently as a function of prior beliefs. Participants with a gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the evaluations of \$-bets as sample sizes increase, because participants overwrite their priors through sampling and learn that gains of \$-bets are less likely than zero-outcomes. By contrast, participants with a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase their evaluations of p-bets as sample size increases, because they learn that gains of p-bets are more likely than zero-outcomes (see the probabilities in Table~\ref{table:Lotteries}).
 }
 
-\added[id=jj]{
-Participants were classified based on the best-fitting model into relative-frequency learners, Bayesian learners with gain priors (parameter $\theta_G > 1$), and Bayesian learners with loss priors (parameter $\theta_G \leq 1$). Figure \ref{fig:qual1} shows how the three sub-groups' evaluations of p-bets and \$-bets change with sample size. The relative-frequency learners evaluated both p-bets and \$-bets relatively constantly across sample sizes, whereas the Bayesian learners increased their evaluations if they started with a loss prior and decreased their evaluations after starting with a gain prior, at least for p-bets (high-gain low-probability gambles). The Bayesian learners were relatively constant in their evaluations of \$-bets across sample sizes.
-}
+Iteration: 1 Iteration: 2 Iteration: 3 Iteration: 4 Iteration: 5
+Iteration: 6 Iteration: 1 Iteration: 2 Iteration: 3 Iteration: 4
+
+\textbackslash{}added{[}id=jj{]}\{ Based on the cognitive modeling
+results, participants were classified into three learner types,
+relative-frequency learners, Bayesian learners with gain priors (prior
+\(\theta_G > 1\)), and Bayesian learners with loss priors (prior
+\(\theta_G \leq 1\)). Figure \ref{fig:qual1} shows how the learner
+types' evaluations of p-bets and \$-bets change with increasing sample
+size. The relative-frequency learner types evaluated both p-bets and
+\$-bets quite unaffected by sample sizes, whereas the Bayesian learner
+types changed their evaluations slightly with sample size in the
+predicted directions. Statistical analyses by means of a Bayesian
+generalized linear
+model\footnote{regressing the (normalized) evaluations on the predictors sample size, gamble type (p-bet, \$-bet), and type (BVU-gain, BVU-loss, RF) with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions \citep[for details, see][]{SingmannForthcoming}), however, showed no substantial support that including the learner type as predictor improves goodness of fit, $BF\textsubscript{01}=0.405144519802029FALSE$, where $0=$model with predictor type, 1$=$ model excluding type. The evidence is thus qualitative in nature.}
 
 \begin{figure}[H]
 
@@ -266,11 +277,6 @@ Participants were classified based on the best-fitting model into relative-frequ
 
 \caption{Mean evaluation (standardized to 0 - 1) by winning model and prior beliefs of the BVU model. \textit{BVU}$=$Bayesian value updating model, \textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. \textit{\$-bet}: low-probability high-outcome gambles, \textit{p-bet}: high-probability low-outcome gambles. Sample sizes (xs, x, m, l), see Table \ref{tab:Lotteries}. \textit{n=16, 13, 6} denotes the number of participants best-described by the respective models.}\label{fig:qual1}
 \end{figure}
-
-\added[id=jj]{
-A Bayesian generalized linear model of the (normalized) evaluations of gambles as a function of sample size, gamble type (p-bet, \$-bet), and best-fitting cognitive model with a by-participant random intercept confirmed the expectations. Participants that were classified as Bayesian with gain priors decreased their normalized evaluation of \$-bets by about 2\% as sample size increased, trend $-0.02$, 95\% HPD [$-0.03, -0.004$] (where HPD $=$ highest probability density region). Bayesian participants with loss priors did not systematically change their \$-bet evaluations with sample size (trend $-0.00$, 95\% HPD $[-0.01, 0.01]$), and neither did relative-frequency participants (trend $0.01$, 95\% HPD $[-0.004, 0.03]$). Regarding p-bets, participants that were best-described by a Bayesian model with loss priors increased their evaluation by about 2\% with increasing sample size, as expected (trend $0.02$, 95\% HPD $[0.01, 0.04]$); participants with gain priors decreased their p-bet evaluations with sample size (trend $-0.003$, 95\% HPD $[-0.02, 0.01]$). Also as expected, the relative-frequency participants did not change their p-bet evaluations with sample size $-0.01$, 95\% HPD $[-0.02, 0.01]$.
-
-}
 
 
 \end{document}

@@ -31,15 +31,21 @@ options(contrasts = c("contr.sum", "contr.poly"))
 fit <- brm(
   formula = value_scaled ~ samplesizecat_num * priorx_cat * gambletype + (1 | id),
   data   = d,
-  cores  = 3)
-
+  cores  = 3,
+  save_all_pars = TRUE,
+  iter = 5000)
 saveRDS(fit, "study1_bayes_models_fit.rds")
 
-library(emmeans)
-library(data.table)
-fit <- readRDS("study1_bayes_models_fit.rds")
-trends <- emtrends(fit, ~ priorx_cat | gambletype, var = "samplesizecat_num")
-trends <- as.data.table(trends)
-trends_p <- trends[gambletype == "p-bet"]
-trends_d <- trends[gambletype == "$-bet"]
+# Fit model without priorx_cat
+null_fit = update(fit, formula = ~ samplesizecat_num * gambletype + (1 | id))  # Same but without the predictor model-and-prior
+saveRDS(null_fit, "study1_bayes_models_fit_noprior.rds")
 
+
+# compare the models
+BF01 <- bayes_factor(fit, null_fit)
+
+# Compare the models
+cv <- loo(fit, fit_noprior)
+fit <- add_criterion(fit, "waic")
+fit_noprior <- add_criterion(fit_noprior, "waic")
+waic <- loo_compare(fit, fit_noprior, criterion = "waic")
