@@ -10,3 +10,6 @@ patchwork
 coda
 Matrix
 BayesFactor
+Rcpp
+brms
+emmeans

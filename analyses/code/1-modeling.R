@@ -9,7 +9,6 @@ library(cogscimodels)
 # Load data
 d <- fread('../../data/processed/study1.csv', colClasses = list(character = "id"))
 
-#
 # Data preprocessing
 # --------------------------------------------------------------------------
 d <- d[condition == "experience"]
@@ -19,120 +18,18 @@ d[, count_0 := samplesize - count_x]
 ## Rescale values to have a range of 0 - 1
 d[, value_scaled := value / gamblex]
 
-## Set up the models
-model_options <- list(
-  lb = c(rp = 0, sigma = 0.0001), # parameter lower bound: alpha (rp) and sigma
-  ub = c(sigma = 1), # parameter upper bound
-  fit_solver = "solnp", # solver
-  fit_args = list(
-    options = list(pdf = "truncnormal", a = 0, b = 1))
-  )
 
-# Set up the models
-RF <- function(d) {
-  start(data = d) %+%
-    utility_pow(value_scaled ~ gamblex, fix = list(rn = NA)) %>%
-    fun(function(pred, data, par) {
-      y <- data$relfreq_x * pred
-      rp <- par["rp"]
-      y <- (sign(rp) * y)^((1/rp)*(rp!=0)) * exp(y)^(rp==0)
-      y <- replace(y, y > data$gamblex, data$gamblex[y > data$gamblex])
-      y / data$gamblex
-    }) %>%
-    end(options = model_options)
-}
-BVU <- function(d) {
-  start(data = d) %+%
-    bayes_beta(~ count_x + count_0, format = "count") %+%
-    utility_pow(value_scaled ~ gamblex, fix = list(rn = NA)) %>%
-    fun(function(pred, data, par) {
-      y <- data$pred_count_x * pred
-      rp <- par["rp"]
-      y <- (sign(rp) * y)^((1/rp)*(rp!=0)) * exp(y)^(rp==0)
-      y / data$gamblex
-    }) %>%
-    end(options = model_options)
-}
-# 3-parameter version of the BVU
-BVU3 <- function(d) {
-  start(data = d) %+%
-    bayes_beta(~ count_x + count_0, fix = list(delta = 1), format = "count") %+%
-    utility_pow(value_scaled ~ gamblex, fix = list(rn = NA)) %>%
-    fun(function(pred, data, par) {
-      y <- data$pred_count_x * pred
-      rp <- par["rp"]
-      y <- (sign(rp) * y)^((1/rp)*(rp!=0)) * exp(y)^(rp==0)
-      y / data$gamblex
-    }) %>%
-    end(options = model_options)
-}
-Baseline <- function(d) {
-  start(data = d) %+%
-  baseline_mean(value_scaled ~ ., type = "const", mode = "continuous") %>%
-    end(options = model_options[-1])
-}
-model_list <- list(bvu = BVU3, baseline = Baseline, rf = RF)
+# Combine the models into a list
+source("setup_models.R")
+model_list <- list(bvu = BVU, baseline = Baseline, rf = RF)
 
 
-# Estimate mdoel parameters
-# separately by-participant (by id)
-ids <- unique(d$id)
-ids_models <- lapply(ids,
-  function(i) sapply(model_list, function(m) m(d[id == i])))
-names(ids_models) <- ids
-
-## Save fitted model object
-saveRDS(ids_models, "../fitted_models/study1_fitted_models.Rds")
-
-
-ggplot(weights, aes(x = 1, fill = factor(winner, levels = sort(names(table(weights$winner)))))) +
-  geom_bar(position = "stack") 
-
-lapply(ids_models, function(id) lapply(id, function(m) m$AIC()))
-lapply(ids_models, function(id) lapply(id, logLik))
-lapply(ids_models, function(id) lapply(id, coef))
-pred <- rbindlist(lapply(ids_models, function(id) lapply(id, predict)), id = "id")
-
-
-w_bounds <- c(0,0.166666667, 0.375, 0.80.967741935, 1)
-weights[, .SD[winner]]
-
-pred <- lapply(ids_models, function(id) lapply(id, predict))
-pred <- rbindlist(pred)
-
-d[, colnames(pred) := pred * gamblex]
-dl <- melt(d, measure = colnames(pred), value= "pred", variable = "model")
-
-ggplot(dl, aes(value, pred, color = model)) +geom_point() +facet_wrap(~id, scales = "free")  +theme(aspect = 1)
-
-
-
-bestmodel[which(bestmodel[,2]>=0.166666667 & bestmodel[,2] <=0.375),3] = "weak"
-bestmodel[which(bestmodel[,2]>=0.375 & bestmodel[,2] <=0.8),3] = "positiv"
-bestmodel[which(bestmodel[,2]>=0.8 & bestmodel[,2] <=0.967741935),3] = "strong"
-bestmodel[which(bestmodel[,2]>0.967741935),3] = "very.strong"
-table(weights$winner)
-
-
-
-
-M <- BVU_UNIF(d)
-
-d1 <- d[, "value", drop = F]
-d1$pred <- M$predict()[,1] * d1$gamblex
-
-hist(M$predict()[,1])
-hist(d$value)
-
-ggplot(dd, aes(value, pred)) +geom_point()
-
-d[, names(pred) := pred]
-
-setnames(d, make.names(d))
-library(ggplot2)
-ggplot(melt(d, measure = c("relfr", "bvu", "bvud1", "baseline"), val = "pred", var = "model"), aes(x = gambleid)) +geom_point(data=d[!duplicated(trial)], color = "black", size = 4, aes(y=value_scaled), shape = 21) +geom_point(aes(y = pred, shape = model, color = model)) +facet_wrap(~factor(samplesizecat, levels = c("xs", "s", "m", "l")), nrow = 1)
-
-
+# Fit the model parameters by = id (by-participant)
+# --------------------------------------------------------------------------
+# Estimate mdoel parameters separately by=id
+modelfit <- d[, .(model=names(model_list), fit=lapply(model_list, do.call, args = list(d=.SD))), by=id]
+# Save resulting object
+saveRDS(modelfit, "study1_cognitive_smodels_fit.Rds")
 
 # modelB <- function(ss, p, out, param, prior) {  
 #   a <- prior[1] + ss*p
