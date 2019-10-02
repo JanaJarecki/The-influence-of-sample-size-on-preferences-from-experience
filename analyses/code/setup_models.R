@@ -27,7 +27,7 @@ RF <- function(d, fix = list(rn = NA)) {
 # BVU Model
 BVU <- function(d, fix = list(rn = NA)) {
   start(data = d) %+%
-    bayes_beta(~ count_x + count_0, format = "count", fix = fix) %+%
+    bayes_beta(~ count_x + count_0, format = "count") %+%
     utility_pow(value_scaled ~ gamblex, fix = fix) %>%
     fun(function(pred, data, par) {
       y <- data$pred_count_x * pred

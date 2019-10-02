@@ -25,94 +25,99 @@ header-includes:
 ---
 
 ```{r, setup, echo=FALSE, warning=FALSE, message=FALSE, results="hide"}
-knitr::opts_chunk$set(
-  comment = NA,
-  results = "asis",
-  warning = FALSE,
-  message = FALSE,
-  echo = FALSE,
-  fig.path = "../figures/",
-  knitr.kable.NA = "",
-  dev = "cairo_pdf",
-  fig.align = "center")
-knitr::opts_knit$set(
-  # base.url = "../../",
-  # base.dir = "../../"
-  )
-knitr::knit_hooks$set(inline = function (x) {
-  # Register an inline hook for printing numbers with 3 digits
-  if (is.numeric(x)) {
-    res <- ifelse(x == ceiling(x) & x == floor(x),
-      sprintf("%d", x),
-      sprintf("%.3f", x)
-    )
-    paste(res, collapse = ", ")
-  }
-})
-library(papaja)
-options(papaja.na_string = "--")
-library(cogscimodels)
-library(data.table)
-library(BayesFactor)
-library(brms)
-library(emmeans)
-source("fig_setup.R")
-niter <- 1000 # Bayesian modeling iterations
+  knitr::opts_chunk$set(
+    comment = NA,
+    results = "asis",
+    warning = FALSE,
+    message = FALSE,
+    echo = FALSE,
+    fig.path = "../figures/",
+    knitr.kable.NA = "",
+    dev = "cairo_pdf",
+    fig.align = "center",
+    fig.pos = "H")
+  knitr::opts_knit$set(
+    base.url = "../../",
+    base.dir = "../../"
+   )
+  knitr::knit_hooks$set(inline = function (x) {
+    # Register an inline hook for printing numbers with 3 digits
+    if (is.numeric(x)) {
+      res <- ifelse(x == ceiling(x) & x == floor(x),
+        sprintf("%d", x),
+        sprintf("%.3f", x)
+      )
+      paste(res, collapse = ", ")
+    }
+  })
+  library(papaja)
+  options(papaja.na_string = "--")
+  library(cogscimodels)
+  library(data.table)
+  library(BayesFactor)
+  library(brms)
+  library(emmeans)
+  source("fig_setup.R")
+  niter <- 1000 # Bayesian modeling iterations
 ```
 
-```{r, load_data, echo=FALSE, warning=FALSE, message=FALSE, results="hide", cache=TRUE}
-source("tab2.R")
-fits <- readRDS("study1_cognitive_models_fit.rds")
-d <- fread("../../data/processed/study1.csv", colClasses=list(character="id"))
-d <- d[condition=="experience"]
-parameter <- fits[, .(par = names(coef(fit[[1]])), val = coef(fit[[1]])), by = .(id, model)]
-gof <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), anova(fit[[1]], fit[[2]], fit[[3]])[, c("wAIC", "AIC", "BIC")])), by = id]
-weights <- gof[, c("id", "model", "wAIC")]
-weights <- dcast(weights, id ~ model, value.var = "wAIC")
-weights[, winner := names(.SD)[which.max(.SD)], by = id] # winning models
+```{r, load_data, cache=TRUE}
+  source("tab2.R")
+  fits <- readRDS("study1_cognitive_models_fit.rds")
+```
 
-# Winners
-winners <- sort(table(weights$winner))
-weights[, winner := factor(winner, names(winners), model_labels[names(winners)])]
-N <- gof[, length(unique(id))]
 
-# Prediction dat
-pred <- fits[, fit[[1]]$predict(), by=.(id,model)]
-pred[, t := 1:.N, by=.(id, model)]
-setnames(pred, "V1", "pred")
-d[, t := 1:.N, by=id]
-dpred <- d[pred, on = c("id", "t")]
-dpred[, pred_scaled := pred]
-dpred[, pred := pred * gamblex]
-dpred <- dpred[weights[, c("id", "winner")], on = "id"]
+```{r, preprocess}
+  d <- fread("../../data/processed/study1.csv", colClasses=list(character="id"))
+  d <- d[condition=="experience"]
+  parameter <- fits[, .(par = names(coef(fit[[1]])), val = coef(fit[[1]])), by = .(id, model)]
+  gof <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), anova(fit[[1]], fit[[2]], fit[[3]])[, c("wAIC", "AIC", "BIC")])), by = id]
+  weights <- gof[, c("id", "model", "wAIC")]
+  weights <- dcast(weights, id ~ model, value.var = "wAIC")
+  weights[, winner := names(.SD)[which.max(.SD)], by = id] # winning models
+  # Winners
+  winners <- sort(table(weights$winner))
+  weights[, winner := factor(winner, names(winners), model_labels[names(winners)])]
+  N <- gof[, length(unique(id))]
+  # Prediction dat
+  pred <- fits[, fit[[1]]$predict(), by=.(id,model)]
+  pred[, t := 1:.N, by=.(id, model)]
+  setnames(pred, "V1", "pred")
+  d[, t := 1:.N, by=id]
+  dpred <- d[pred, on = c("id", "t")]
+  dpred[, pred_scaled := pred]
+  dpred[, pred := pred * gamblex]
+  dpred <- dpred[weights[, c("id", "winner")], on = "id"]
 ```
 
 \subsection{Evaluations of Gambles by Condition and Sample Size}
-Table \ref{tab:means_study1} shows participants' evaluations of the gambles in the experience and description conditions. Notably, the evaluations in the experience condition stay relatively constant across sample sizes. In the best-fitting mixed regression model $\mathrm{M}\textsubscript{0}$ sample size  was included as a random effect, and gamble type---p-bet vs. \$-bet---as a fixed effect, resulting in higher evaluations of the p-bets (gamble IDs 1 to 3) compared to the \$-bets (IDs 4 to 6). This model outperformed a model with sample size as fixed effect ($BF\textsubscript{01} = 409$), and a model with a sample-size$\times$gamble-type interaction ($BF\textsubscript{01} > 1,000$).
+Table \ref{tab:means_study1} shows participants' evaluations of the gambles in the experience and description conditions. In the experience condition it seems that sample size has no influence on evaluations. In the best-fitting mixed regression model $\mathrm{M}\textsubscript{0}$ sample size was a random effect, and gamble type---p-bet vs. \$-bet---a fixed effect, resulting in higher evaluations of the p-bets (gamble IDs 1 to 3) compared to the \$-bets (IDs 4 to 6). This model outperformed a model with sample size as fixed effect ($BF\textsubscript{01} = 409$), and a model with a sample-size$\times$gamble-type interaction ($BF\textsubscript{01} > 1,000$). Although this suggests that sample size does not reliably influence the evaluations of gambles in a decision from experience paradigm, the cognitive modeling analyses will show a more nuanced picture.
 
 
-<!-- ```{r, study1_evaluations, fig.cap = "Mean gamble evaluations of \\$-bets and p-bets in the experience condition across sample sizes and in the the description condition."}
-dagg <- d[, .(M=mean(value), SD=sd(value)), by = .(samplesizecat, gambletype)]
-ggplot(dagg, aes(samplesizecat)) +
-  geom_jitter(data=d, aes(y=value), alpha = 0.01) +
-  geom_violin(data=d, aes(y=value), color = "grey", fill = "grey", alpha = .4) +
-  geom_boxplot(data=d, aes(y=value), fill = NA, color = "white", width = 0.2, size = 1) +
-  geom_errorbar(aes(ymin = M-SD, ymax=M+SD), width = 0.1, size = 0.8) +
-  geom_point(aes(y=M), size = 3) +
-  facet_wrap(~gambletype) +
-  ylim(0,27) +
-  ylab("Evaluation (M +/- SD)") +
-  xlab("Sample Size") +
-  labs(caption = "Note: -- denotes description condition") +
-  geom_segment(aes(x = "xs", xend = "l", y = 27, yend = 27), color = "grey") +
-  geom_label(aes(y = 27, x = "s", label = " Experience"), hjust = 0.03, label.size = 0, size = 2.7, fontface = 3, vjust = 0.4) +
-  theme(aspect.ratio = 1)
-``` -->
 
+<!-- 
+```{r, study1_evaluations, fig.cap = "Mean gamble evaluations of \\$-bets and p-bets in the experience condition across sample sizes and in the the description condition."}
+  dagg <- d[, .(M=mean(value), SD=sd(value)), by = .(samplesizecat, gambletype)]
+  ggplot(dagg, aes(samplesizecat)) +
+    geom_jitter(data=d, aes(y=value), alpha = 0.01) +
+    geom_violin(data=d, aes(y=value), color = "grey", fill = "grey", alpha = .4) +
+    geom_boxplot(data=d, aes(y=value), fill = NA, color = "white", width = 0.2, size = 1) +
+    geom_errorbar(aes(ymin = M-SD, ymax=M+SD), width = 0.1, size = 0.8) +
+    geom_point(aes(y=M), size = 3) +
+    facet_wrap(~gambletype) +
+    ylim(0,27) +
+    ylab("Evaluation (M +/- SD)") +
+    xlab("Sample Size") +
+    labs(caption = "Note: -- denotes description condition") +
+    geom_segment(aes(x = "xs", xend = "l", y = 27, yend = 27), color = "grey") +
+    geom_label(aes(y = 27, x = "s", label = " Experience"), hjust = 0.03, label.size = 0, size = 2.7, fontface = 3, vjust = 0.4) +
+    theme(aspect.ratio = 1)
+``` 
+-->
 
 ```{r, means_study1}
-M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
-apa_table(M
+  M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
+  apa_table(M
     , caption = "Valuations of Gambles in Study 1"
     , col.names = c("Condition", 'Sample size category', 'Effective sample size', '\\textit{Med}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
     , align = c('l', rep('c', 4), 'r', 'r')
@@ -122,104 +127,97 @@ apa_table(M
     )
 ```
 
-\subsection{Cognitive Modeling of Experience-based Evaluations by Sample Size}
-To unpack the role of sample size in value judgments more closely, we used cognitive computational modeling. We compared the performance of the \added[id=jj]{relative frequency} (RF) model and the \added[id=jj]{Bayesian value updating} (BVU) model regarding the observed evaluations. \added{The models were compared to a baseline model, predicting a constant evaluation equal to the mean  individual evaluation (sensible models are expected to outperform this baseline model).}
+\subsection{Cognitive modeling of experience-based evaluations}
+We used computational modeling to analyze the role of sample size in value judgments more closely. We compared the performance of the \added[id=jj]{relative frequency} (RF) model and the \added[id=jj]{Bayesian value updating} (BVU) model. \added{The models were compared to a baseline model, which predicts a constant evaluation equal to the mean individual evaluation. Sensible models are expected to outperform this baseline model.}
 
 \subsubsection{Modeling Procedure} 
-\added[id=jj]{The observed and predicted evaluations were normalized to a common range (0 - 1, by division through the gain magnitude and truncation of normalized values $>$ 1). The free model parameters were estimated by maximum likelihood at the participant level, assuming observations follow a truncated normal distribution, censored at 0 and 1, around the model predictions with a constant standard deviation ($\sigma$) estimated as a free parameter ($0 < \sigma \leq 1$).  Therefore, the relative frequency model had 2 free parameter, the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$) and $\sigma$. The Bayesian value updating model had 4 free parameter the gain prior $\theta_G$ ($0 \leq \theta_G \leq 1$; the loss prior was $\theta_0=2-\theta_G$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$. A 3-parameter Bayesian value updating model was also tested, which had a fixed learning rate of $\delta=1$ (optimal Bayesian updating). The baseline model had 2 free parameter, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters with a local solver using a augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. We compared the models by the Bayesian information criterion (BIC), transformed into Bayesian evidence weights \citep[][1 means very strong evidence for a competitor model]{Kass1995, Lewandowsky2011}}.
+\added[id=jj]{The observed and predicted evaluations were normalized to a common range (range 0 - 1, by division through the gain magnitude). Maximum likelihood was used to estimate the free model parameters at the participant level, assuming observations follow a truncated normal distribution around the model predictions (truncated between 0 and 1) with a constant standard deviation ($\sigma$), that was estimated as a free parameter ($0 < \sigma \leq 1$).  Therefore, the relative frequency model had 2 free parameter, the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$) and $\sigma$. The Bayesian value updating model had 4 free parameter the gain prior $\theta_G$ ($0 \leq \theta_G \leq 1$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$; the loss prior was constrained $\theta_0=2-\theta_G$. The baseline model had 2 free parameter, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. We compared the models by the Bayesian information criterion (BIC), transformed into Bayesian evidence weights \citep[][1 means very strong evidence for a competitor model]{Kass1995, Lewandowsky2011}}.
 
 
 
-```{r, model_fit, echo=FALSE, warning=FALSE}
-n_bvu <- winners["bvu"]
-n_rf <- winners["rf"]
-n_base <- winners["baseline"]
-N <- nrow(weights)
-bic <- setNames(gof[, round(mean(BIC)), by=model]$V1, c("base", "rf", "bvu"))
+```{r, model_fit}
+  N <- nrow(weights)
+  bic <- setNames(gof[, round(mean(BIC)), by=model]$V1, c("base", "rf", "bvu"))
 ```
 
 \subsubsection{Modeling Results}
 \added[id=jj]{We will first outline the quantitative model fit, followed by the qualitative model fit, and lastly analyze the effects of sample size given the cognitive strategies.}
-\subsubsection{Quantitative Model Fit.}The Bayesian value updating model described about half of the participants best (`r n_bvu` of `r N`; `r round(n_bvu/N*100)`\%), and the relative frequency model described a minority of participants   (`r n_rf`; `r round(n_rf/N*100)`\%). The baseline model described `r n_base` participants best. Figure \ref{fig:model_weights} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$=$ `r bic["bvu"]`, BIC\textsubscript{RF}$=$ `r bic["rf"]`, and BIC\textsubscript{BASE}$=$ `r bic["baseline"]`.
+
+\textit{Quantitative Model Fit.} The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described only `r winners["base"]` participants best. Figure \ref{fig:model_weights} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["baseline"]`$ (lower values indicate better fit).
 
 
-
-```{r, model_weights, fig.width = 5, fig.height = 3 , fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
-# Order of participant ids (x-axis) for the plot
-id_order <- order_evidence(unique(weights$id), weights[, 2:4])
-
-p1 <- ggplot(weights, aes(x=1, fill=winner)) +
-  geom_bar(position = "stack") +
-  scale_fill_manual("Model",
-    values = model_colors,
-    labels = unname(model_labels[names(winners)]),
-    drop = FALSE,
-    guide = guide_legend(reverse = TRUE)) +
-  scale_y_continuous(expand = c(0,0.15)) +
-  xlim(0.5,1.5) +
-  xlab("Count")+
-  geom_text(stat = "count", aes(label = (..count..), color = winner), position = position_stack(vjust = 0.5), family = "Arial", size = 3.4) +
-  scale_color_manual(values = c("black", "black", "white")) +
-  coord_flip() +
-  guides(color = "none") +
-  theme(
-    axis.line = element_blank(),
-    axis.ticks = element_blank(),
-    axis.title.x = element_blank(),
-    axis.text = element_blank(),
-    legend.spacing.x = unit(0.4, "lines"),
-    legend.text = element_text(margin = margin(r = 0.4, unit = "lines")),
-    legend.key = element_rect(color = "grey", size = 0.2))
-
-p2 <- ggplot(melt(weights, id = 1, measure = 2:4),
-    aes(x = factor(id, levels = id_order),  y = value, fill = factor(variable, model_levels, model_labels))) +
-  geom_bar(stat = "identity", color = "white", size = 0.01) +
-  geom_hline(yintercept = 0.5, linetype = 2, color = "grey80", alpha = 0.8, size = 0.4) +
-  scale_fill_manual("Model", values = model_colors) +
-  scale_y_continuous("Evidence Strength", expand  = c(0,0), labels = percent, breaks = c(0,0.5,1)) +
-  xlab(paste("Participant, N =", N)) +
-  guides(fill = guide_legend(override.aes = list(linetype = 0, size = 4.5))) +
-  theme(axis.ticks = element_blank(), 
-    axis.text.x=element_blank(),
-    legend.position = "none",
-    legend.direction = "vertical",
-    axis.line = element_blank(),
-    axis.text.y = element_text(vjust = c(0,.5,.5,.5,1)),
-    axis.title.x = element_text(margin = margin(t = 0.5, unit = "lines")),
-    legend.key.height = unit(1.2, "lines"),
-    legend.key = element_rect(fill = "white")) 
-
-p1 + p2 +plot_layout(nrow=2, heights=c(.2,.75))
+```{r, model_weights, fig.width = 5, fig.height = 3, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+  # Order of participant ids (x-axis) for the plot
+  id_order <- order_evidence(unique(weights$id), weights[, 2:4])
+  # Make the plots
+  p1 <- ggplot(weights, aes(x=1, fill=winner)) +
+    geom_bar(position = "stack") +
+    scale_fill_manual("Model",
+      values = model_colors,
+      labels = unname(model_labels[names(winners)]),
+      drop = FALSE,
+      guide = guide_legend(reverse = TRUE)) +
+    scale_y_continuous(expand = c(0,0.15)) +
+    xlim(0.5,1.5) +
+    xlab("Count")+
+    geom_text(stat = "count", aes(label = (..count..), color = winner), position = position_stack(vjust = 0.5), family = "Arial", size = 3.4) +
+    scale_color_manual(values = c("black", "black", "white")) +
+    coord_flip() +
+    guides(color = "none") +
+    theme(
+      axis.line = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title.x = element_blank(),
+      axis.text = element_blank(),
+      legend.spacing.x = unit(0.4, "lines"),
+      legend.text = element_text(margin = margin(r = 0.4, unit = "lines")),
+      legend.key = element_rect(color = "grey", size = 0.2))
+  p2 <- ggplot(melt(weights, id = 1, measure = 2:4), aes(x = factor(id, levels = id_order),  y = value, fill = factor(variable, model_levels, model_labels))) +
+    geom_bar(stat = "identity", color = "white", size = 0.01) +
+    geom_hline(yintercept = 0.5, linetype = 2, color = "grey80", alpha = 0.8, size = 0.4) +
+    scale_fill_manual("Model", values = model_colors) +
+    scale_y_continuous("Evidence Strength", expand  = c(0,0), labels = percent, breaks = c(0,0.5,1)) +
+    xlab(paste("Participant, N =", N)) +
+    guides(fill = guide_legend(override.aes = list(linetype = 0, size = 4.5))) +
+    theme(axis.ticks = element_blank(), 
+      axis.text.x=element_blank(),
+      legend.position = "none",
+      legend.direction = "vertical",
+      axis.line = element_blank(),
+      axis.text.y = element_text(vjust = c(0,.5,.5,.5,1)),
+      axis.title.x = element_text(margin = margin(t = 0.5, unit = "lines")),
+      legend.key.height = unit(1.2, "lines"),
+      legend.key = element_rect(fill = "white")) 
+  # Combine the plots
+  p1 + p2 +plot_layout(nrow=2, heights=c(.2,.75))
 ```
 
 ```{r, parameter}
 parameter <- parameter[weights[, c("id","winner")], on = "id"]
-
+# Mean parameter to display
 M_alpha_bvu <- parameter[winner=="BVU" & par=="rp", mean(val)]
 M_alpha_rf  <- parameter[winner=="RF" & par=="rp", mean(val)]
 M_thetag_bvu <- parameter[winner=="BVU" & par=="count_x", mean(val)]
 M_theta0_bvu <- parameter[winner=="BVU" & par=="count_0", mean(val)]
 M_delta_bvu <- parameter[winner=="BVU" & par=="delta", mean(val)]
-prior_p_gain = M_thetag_bvu / (M_theta0_bvu + M_thetag_bvu) * 100
-
-# T-test
+prior_p_gain = round(M_thetag_bvu / (M_theta0_bvu + M_thetag_bvu) * 100)
+# T-test of alpha parameter (power-utility exponent) called "rp" here
 bf = ttestBF(parameter[winner=="BVU" & par=="rp", val], parameter[winner=="RF" & par=="rp", val])
 ```
 
-The estimated parameter of the winning models, which Table \ref{tab:model_par} summarizes, reveal that the power utility exponent ($\alpha$) is almost identical for the participants using a Bayesian value updating strategy ($M_{\alpha}= `r M_alpha_bvu`$) and those using a relative frequency strategy ($M_{\alpha}=`r M_alpha_rf`$) `r papaja::apa_print(bf)$full_result`. Participants using the Bayesian strategy had a prior belief that gains are less likely (B\textsubscript{BVU,0}=`r prior_p_gain`\%) than zero outcomes (gain prior $\theta_G = `r M_thetag_bvu`; zero-outcome prior \theta_0 = `r M_theta0_bvu`$). Their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=`r M_delta_bvu`$, values $<$ 1 mean conservative, 1 is optimal Bayesian, $>$ 1 is liberal learning), which is contrary to other findings indicate conservative Bayesian learners \citep{Edwards1967,Tauber2017}. The reason for their liberal learning may be the repeated exposure to the same gambles.
-
+The estimated parameter of the winning models, which Table \ref{tab:model_par} summarizes, reveal that the power utility exponent ($\alpha$) is almost identical for the participants using a Bayesian value updating strategy ($M_{\alpha}= `r M_alpha_bvu`$) and those using a relative frequency strategy ($M_{\alpha}=`r M_alpha_rf`$), `r papaja::apa_print(bf)$full_result`. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with $`r prior_p_gain`\%$ (gain prior $\theta_G = `r M_thetag_bvu`; zero-outcome prior \theta_0 = `r M_theta0_bvu`$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=`r M_delta_bvu`$; values $<$ 1 are conservative, 1 is optimal Bayesian, $>$ 1 are liberal); this is contrary to other findings indicate conservative Bayesian learners \citep{Edwards1967,Tauber2017}, but can be explained by that people learned faster because they were repeatedly exposed to the same set of gambles.
 
 ```{r, model_par}
 tab <- parameter[, val[grepl(tolower(winner), model)], by=.(winner,par)]
-# tab[,
-#   winner := paste0(winner, "(\\textit{n}$=$", .N, ")"),
-#   by=winner]
+tab[,
+   winner_n := paste0(winner, " (\\textit{n}$=$", .N, ")"),
+  by=winner]
 tab <- tab[,
   .(M=mean(V1), SD=sd(V1)),
-  by = .(winner,par)]
+  by = .(winner_n,par)]
 tab[, val := paste0(sprintf("%.2f", M), " (", sprintf("%.2f", SD), ")")]
-tab <- dcast(tab, winner ~ par, value.var = "val")
-papaja::apa_table(tab[, c("winner", "rp", "delta", "count_x","m", "sigma")]
+tab <- dcast(tab, winner_n ~ par, value.var = "val")
+papaja::apa_table(tab[, c("winner_n", "rp", "delta", "count_x","m", "sigma")]
     , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
     , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\mu$","$\\sigma$")
     , align = c("l", rep("c", 5)),
@@ -227,7 +225,7 @@ papaja::apa_table(tab[, c("winner", "rp", "delta", "count_x","m", "sigma")]
     , escape = FALSE
     )
 ```
-\subsubsection{Qualitative Model Fit.}
+\textit{Qualitative Model Fit.}
 \added[id==jj]{The qualitative fit between the models and the data can be examined by plotting observed evaluations against the predicted evaluations, where predictions stem from the respective participant's best-fitting model with optimized parameters. Figure \ref{fig:ind_fits1} shows that the models generally capture the data well, except in four cases, where even the winning model fails to resemble the data. For participants number 1, 19, 24, and 38, for whom the winning model is the Bayesian updating (BVU) model, even the Bayesian model must be rejected because it mis-fits the data qualitatively.}
 
 ```{r, ind_fits1, fig.width = 7, fig.height = 7 , fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
@@ -270,11 +268,6 @@ d_n <- d_n[(gambletype == "$-bet" & samplesizecat == "l" )| (gambletype == "p-be
 dpred[, relfreq_x := gamblep]
 dpred[, count_x := round(gamblep * samplesize)]
 dpred[, count_0 := samplesize - count_x]
-
-library(cogscimodels)
-
-BVU(d = dpred[id=="1"], fix = list(rn=NA, rp=1, count_x = 0.05, count_0 = 1.95, delta=1, sigma=0.3))
-
 
 
 pd <- position_dodge(width = 0.1)
