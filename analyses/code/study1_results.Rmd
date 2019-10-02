@@ -25,39 +25,15 @@ header-includes:
 ---
 
 ```{r, setup, echo=FALSE, warning=FALSE, message=FALSE, results="hide"}
-  knitr::opts_chunk$set(
-    comment = NA,
-    results = "asis",
-    warning = FALSE,
-    message = FALSE,
-    echo = FALSE,
-    fig.path = "../figures/",
-    knitr.kable.NA = "",
-    dev = "cairo_pdf",
-    fig.align = "center",
-    fig.pos = "H")
-  knitr::opts_knit$set(
-    base.url = "../../",
-    base.dir = "../../"
-   )
-  knitr::knit_hooks$set(inline = function (x) {
-    # Register an inline hook for printing numbers with 3 digits
-    if (is.numeric(x)) {
-      res <- ifelse(x == ceiling(x) & x == floor(x),
-        sprintf("%d", x),
-        sprintf("%.3f", x)
-      )
-      paste(res, collapse = ", ")
-    }
-  })
+  source("knitr_setup.R")
+  source("fig_setup.R")
   library(papaja)
   options(papaja.na_string = "--")
   library(cogscimodels)
   library(data.table)
   library(BayesFactor)
   library(brms)
-  library(emmeans)
-  source("fig_setup.R")
+  library(emmeans)  
   niter <- 1000 # Bayesian modeling iterations
 ```
 
@@ -65,7 +41,6 @@ header-includes:
   source("tab2.R")
   fits <- readRDS("study1_cognitive_models_fit.rds")
 ```
-
 
 ```{r, preprocess}
   d <- fread("../../data/processed/study1.csv", colClasses=list(character="id"))
@@ -135,7 +110,7 @@ We used computational modeling to analyze the role of sample size in value judgm
 
 
 
-```{r, model_fit}
+```{r, study1_model_fit}
   N <- nrow(weights)
   bic <- setNames(gof[, round(mean(BIC)), by=model]$V1, c("base", "rf", "bvu"))
 ```
@@ -143,10 +118,10 @@ We used computational modeling to analyze the role of sample size in value judgm
 \subsubsection{Modeling Results}
 \added[id=jj]{We will first outline the quantitative model fit, followed by the qualitative model fit, and lastly analyze the effects of sample size given the cognitive strategies.}
 
-\textit{Quantitative Model Fit.} The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described only `r winners["base"]` participants best. Figure \ref{fig:model_weights} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["baseline"]`$ (lower values indicate better fit).
+\textit{Quantitative Model Fit.} The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described only `r winners["base"]` participants best. Figure \ref{fig:study1_model_weights} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["baseline"]`$ (lower values indicate better fit).
 
 
-```{r, model_weights, fig.width = 5, fig.height = 3, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r, study1_model_weights, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
   # Order of participant ids (x-axis) for the plot
   id_order <- order_evidence(unique(weights$id), weights[, 2:4])
   # Make the plots
@@ -169,9 +144,7 @@ We used computational modeling to analyze the role of sample size in value judgm
       axis.ticks = element_blank(),
       axis.title.x = element_blank(),
       axis.text = element_blank(),
-      legend.spacing.x = unit(0.4, "lines"),
-      legend.text = element_text(margin = margin(r = 0.4, unit = "lines")),
-      legend.key = element_rect(color = "grey", size = 0.2))
+      panel.spacing.x = unit(2, "lines"))
   p2 <- ggplot(melt(weights, id = 1, measure = 2:4), aes(x = factor(id, levels = id_order),  y = value, fill = factor(variable, model_levels, model_labels))) +
     geom_bar(stat = "identity", color = "white", size = 0.01) +
     geom_hline(yintercept = 0.5, linetype = 2, color = "grey80", alpha = 0.8, size = 0.4) +
@@ -182,7 +155,6 @@ We used computational modeling to analyze the role of sample size in value judgm
     theme(axis.ticks = element_blank(), 
       axis.text.x=element_blank(),
       legend.position = "none",
-      legend.direction = "vertical",
       axis.line = element_blank(),
       axis.text.y = element_text(vjust = c(0,.5,.5,.5,1)),
       axis.title.x = element_text(margin = margin(t = 0.5, unit = "lines")),
@@ -192,50 +164,53 @@ We used computational modeling to analyze the role of sample size in value judgm
   p1 + p2 +plot_layout(nrow=2, heights=c(.2,.75))
 ```
 
-```{r, parameter}
-parameter <- parameter[weights[, c("id","winner")], on = "id"]
-# Mean parameter to display
-M_alpha_bvu <- parameter[winner=="BVU" & par=="rp", mean(val)]
-M_alpha_rf  <- parameter[winner=="RF" & par=="rp", mean(val)]
-M_thetag_bvu <- parameter[winner=="BVU" & par=="count_x", mean(val)]
-M_theta0_bvu <- parameter[winner=="BVU" & par=="count_0", mean(val)]
-M_delta_bvu <- parameter[winner=="BVU" & par=="delta", mean(val)]
-prior_p_gain = round(M_thetag_bvu / (M_theta0_bvu + M_thetag_bvu) * 100)
-# T-test of alpha parameter (power-utility exponent) called "rp" here
-bf = ttestBF(parameter[winner=="BVU" & par=="rp", val], parameter[winner=="RF" & par=="rp", val])
+```{r, study1_par}
+  parameter <- parameter[weights[, c("id","winner")], on = "id"]
+  # Mean parameter to display
+  M_alpha_bvu <- parameter[winner=="BVU" & par=="rp", mean(val)]
+  M_alpha_rf  <- parameter[winner=="RF" & par=="rp", mean(val)]
+  M_thetag_bvu <- parameter[winner=="BVU" & par=="count_x", mean(val)]
+  M_theta0_bvu <- parameter[winner=="BVU" & par=="count_0", mean(val)]
+  M_delta_bvu <- parameter[winner=="BVU" & par=="delta", mean(val)]
+  prior_p_gain = round(M_thetag_bvu / (M_theta0_bvu + M_thetag_bvu) * 100)
+  # T-test of alpha parameter (power-utility exponent) called "rp" here
+  bf = ttestBF(parameter[winner=="BVU" & par=="rp", val], parameter[winner=="RF" & par=="rp", val])
 ```
 
-The estimated parameter of the winning models, which Table \ref{tab:model_par} summarizes, reveal that the power utility exponent ($\alpha$) is almost identical for the participants using a Bayesian value updating strategy ($M_{\alpha}= `r M_alpha_bvu`$) and those using a relative frequency strategy ($M_{\alpha}=`r M_alpha_rf`$), `r papaja::apa_print(bf)$full_result`. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with $`r prior_p_gain`\%$ (gain prior $\theta_G = `r M_thetag_bvu`; zero-outcome prior \theta_0 = `r M_theta0_bvu`$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=`r M_delta_bvu`$; values $<$ 1 are conservative, 1 is optimal Bayesian, $>$ 1 are liberal); this is contrary to other findings indicate conservative Bayesian learners \citep{Edwards1967,Tauber2017}, but can be explained by that people learned faster because they were repeatedly exposed to the same set of gambles.
+The estimated parameter of the winning models, which Table \ref{tab:study1_parameter} summarizes, reveal that the power utility exponent ($\alpha$) is almost identical for the participants using a Bayesian value updating strategy ($M_{\alpha}= `r M_alpha_bvu`$) and those using a relative frequency strategy ($M_{\alpha}=`r M_alpha_rf`$), `r apa_print(bf)$full_result`. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with `r prior_p_gain`\% (gain prior $\theta_G = `r M_thetag_bvu`$; zero-outcome prior $\theta_0 = `r M_theta0_bvu`$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=`r M_delta_bvu`$; values $>$ 1 are liberal, 1 is optimal Bayesian, $<$ 1 is conservative learning); this contradicts previous results that found conservative learners \citep{Edwards1967,Tauber2017}, but the liberal learning in our task can be explained because participants repeatedly sampled from the same set of gambles.
 
-```{r, model_par}
-tab <- parameter[, val[grepl(tolower(winner), model)], by=.(winner,par)]
-tab[,
-   winner_n := paste0(winner, " (\\textit{n}$=$", .N, ")"),
-  by=winner]
-tab <- tab[,
-  .(M=mean(V1), SD=sd(V1)),
-  by = .(winner_n,par)]
-tab[, val := paste0(sprintf("%.2f", M), " (", sprintf("%.2f", SD), ")")]
-tab <- dcast(tab, winner_n ~ par, value.var = "val")
-papaja::apa_table(tab[, c("winner_n", "rp", "delta", "count_x","m", "sigma")]
-    , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
-    , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\mu$","$\\sigma$")
-    , align = c("l", rep("c", 5)),
-    , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model. Parameters denote: $\\alpha=$ power utility exponent, $\\theta_G$ gain prior, $\\mu=$ mean evaluation, $\\sigma$ standard deviation."
-    , escape = FALSE
-    )
+
+```{r, study1_parameter}
+  tab <- parameter[, val[grepl(tolower(winner), model)], by=.(winner,par)]
+  tab[,
+     winner_n := paste0(winner, " (\\textit{n}$=$", ..winners[winner], ")"),
+    by=winner]
+  tab <- tab[,
+    .(M=mean(V1), SD=sd(V1)),
+    by = .(winner_n,par)]
+  tab[, val := paste0(sprintf("%.2f", M), " (", sprintf("%.2f", SD), ")")]
+  tab <- dcast(tab, winner_n ~ par, value.var = "val")
+  papaja::apa_table(tab[c(2,3,1), c("winner_n", "rp", "delta", "count_x","m", "sigma")]
+      , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
+      , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\mu$","$\\sigma$")
+      , align = c("l", rep("c", 5)),
+      , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model. Parameters denote: $\\alpha=$ power utility exponent, $\\theta_G$ gain prior, $\\mu=$ mean evaluation, $\\sigma$ standard deviation."
+      , escape = FALSE
+      )
 ```
+
+
 \textit{Qualitative Model Fit.}
-\added[id==jj]{The qualitative fit between the models and the data can be examined by plotting observed evaluations against the predicted evaluations, where predictions stem from the respective participant's best-fitting model with optimized parameters. Figure \ref{fig:ind_fits1} shows that the models generally capture the data well, except in four cases, where even the winning model fails to resemble the data. For participants number 1, 19, 24, and 38, for whom the winning model is the Bayesian updating (BVU) model, even the Bayesian model must be rejected because it mis-fits the data qualitatively.}
+\added[id==jj]{The qualitative fit between the models and the data is shown in Figure \ref{fig:ind_fits1}, which plots best-fitting model predictions against observed evaluations. It shows that the models generally capture the data well, except in four cases, where even the winning model fails to resemble the data (participants number 1, 19, 24, and 38). For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.}
 
-```{r, ind_fits1, fig.width = 7, fig.height = 7 , fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r, ind_fits1, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 dummy_range <- dpred[, .(value = range(c(value,pred)), pred = range(c(value,pred)), winner = winner[1]), by = id]
 dpred <- dpred[, .SD[grepl(tolower(unique(winner)), model)], by=id]
 #dpred[, winnerf := factor(winner,  names(model_labels), unname(model_labels))]
 
 ggplot(dpred, aes(x = value, y = pred)) +
   geom_abline(linetype = 2, size = 0.4) +
-  geom_point(aes(fill = winner), shape=21, color = "black", alpha = 0.75, size = 1.7) +
+  geom_point(aes(fill = winner), shape=21, color = "black", alpha = 0.75, size = 1) +
   geom_blank(data = dummy_range) +
   facet_wrap(~winner+id, scales = "free", labeller = function(x) label_value(x, multi_line = FALSE), nrow = 5) +
   themejj(facet=TRUE, base_family = "Arial") +
@@ -249,71 +224,75 @@ ggplot(dpred, aes(x = value, y = pred)) +
 
 ```
 
-\added{The heterogeneity in strategies that resulted from the cognitive modeling helps interpreting the null finding---that sample size has no effect on evaluations---that we observed at the aggregate level (Table \ref{tab:means_study1}). The aggregate analysis fails to take the individual differences in strategy use into account. The distribution of winning model indicates that our sample is best described by a mixture of strategies, which the aggregate analyses could not pick up. Moreover, the aggregate analysis fails to account for the prior beliefs regarding gain probabilities. Depending on the prior belief, the Bayesian value updating (BVU) model predicts either a decrease or an increase in valuations with increasing sample size.}
+\added{The cognitive modeling resuls thus show that most participants used a Bayesian strategy, and some used a relative-frequency strategy. This strategy heterogeneity helps understanding the behavioral null finding---that sample size seemed to have no effect on valuations---that were observed at the aggregate level (Table \ref{tab:means_study1}). The aggregate analysis fails to take the individual differences in learning strategies into account, while participants are best described by a mixture of strategies. Moreover, the aggregate analysis also fails to account for differences in the prior beliefs about gain probabilities. Depending on the prior belief, the Bayesian value updating (BVU) model predicts either a decrease or an increase in valuations with increasing sample size. The next analysis will focus on these differences.}
 
-\emph{The effect of sample size given cognitive strategies.} Next, we qualitatively analyzed if sample size differentially affects the relative-frequency-type and Bayesian-type learners. We expected that sample size changes evaluations of the Bayesian learners depending on their priors, but that sample size does not change the evaluations of the frequency-type learners.
+\emph{The effect of sample size given cognitive strategies.} Next, we qualitatively analyzed if sample size differentially affects the relative-frequency-type and Bayesian-type learners. We expected that sample size leads to changes in the evaluations of the Bayesian learners depending on their priors, and that sample size does not affect the evaluations of the relative-frequency learners.
+\added[id=jj]{
+The Bayesian model predicts that sample size changes the evaluations depending on individual priors. Participants with a gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the evaluations of \$-bets as sample sizes increase, because participants overwrite their priors, learning that gains of \$-bets are less likely than zero-outcomes (see Table~\ref{table:Lotteries}). By contrast, participants with a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase their evaluations of p-bets as sample size increases, because they learn that p-bets are characterized by gains that are are more likely than zero-outcomes (Table~\ref{table:Lotteries}).
+}
 
-
-```{r, qual1, fig.width = 7, fig.cap = "Mean evaluation (standardized to 0 - 1) split by winning model and prior beliefs of the BVU model. \\textit{BVU}$=$Bayesian value updating model, \\textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. \\textit{\\$-bet}: low-probability high-outcome gambles, \\textit{p-bet}: high-probability low-outcome gambles. Sample sizes (xs, x, m, l), see Table \\ref{tab:Lotteries}. \\textit{n=16, 13, 6} denotes the number of participants best-described by the respective models."}
-dpred <- dpred[parameter[par=="count_x", c("id", "val")], on = "id"]
-dpred[winner=="BVU", priorx_cat := cut(val, c(0, 1, 2))]
-dpred[, priorx_cat := factor(priorx_cat, exclude = NULL, labels = c(" - loss prior (0,1]", " - gain prior (1,2]", ""))]
-dpred[, value_scaled := value / gamblex]
-
-dpredagg <- dpred[winner!="BASE", .(M = mean(value_scaled), SE = sd(value_scaled)/sqrt(.N)), by = .(gambletype, samplesizecat, priorx_cat, winner)]
-dpredagg[, samplesizecat := factor(samplesizecat, levels = c("xs","s","m","l"))]
-d_n <- dpred[winner != "BASE", .(N = length(unique(id)), M = mean(value_scaled)), by = .(winner, priorx_cat, gambletype, samplesizecat)]
-d_n <- d_n[(gambletype == "$-bet" & samplesizecat == "l" )| (gambletype == "p-bet" & samplesizecat == "l")]
-
-dpred[, relfreq_x := gamblep]
-dpred[, count_x := round(gamblep * samplesize)]
-dpred[, count_0 := samplesize - count_x]
+\added[id=jj]{
+Participants were classified based on the best-fitting model into relative-frequency learners, Bayesian learners with gain priors (parameter $\theta_G > 1$), and Bayesian learners with loss priors (parameter $\theta_G \leq 1$). Figure \ref{fig:qual1} shows how the three sub-groups' evaluations of p-bets and \$-bets change with sample size. The relative-frequency learners evaluated both p-bets and \$-bets relatively constantly across sample sizes, whereas the Bayesian learners increased their evaluations if they started with a loss prior and decreased their evaluations after starting with a gain prior, at least for p-bets (high-gain low-probability gambles). The Bayesian learners were relatively constant in their evaluations of \$-bets across sample sizes.
+}
 
 
-pd <- position_dodge(width = 0.1)
-ggplot(dpredagg, aes(samplesizecat, M, fill=winner)) +
-  geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = interaction(winner, priorx_cat)), width = 0.1, pos = pd, color = "grey") +
-  geom_line(aes(linetype = interaction(winner, priorx_cat, sep=""), group = interaction(winner, priorx_cat)), pos = pd) +
-  geom_point(aes(shape = interaction(winner, priorx_cat, sep="")), size = 2, pos = pd, fill = "white", color = "white") +
-  geom_point(aes(shape = interaction(winner, priorx_cat, sep="")), size = 1, pos = pd) +
-  geom_text(data = d_n, aes(label = paste("n =", N)), size = 2.5, nudge_y = 0.02, nudge_x = 0.5, fontface = 3) +
-  facet_wrap(~gambletype) +
-  scale_shape_manual("Winning Model", values = c(25,24,21)) +
-  scale_linetype_manual("Winning Model", values = c(1,1,3)) +
-  scale_fill_manual("Winning Model", values = model_colors) +
-  scale_x_discrete("Sample Size Category", expand = c(0.3,0)) +
-  ylab("Evaluation, Scaled to 0 - 1 (M +/-SE)") +
-  scale_y_continuous("Evaluation, Scaled to 0 - 1 (M +/-SE)", limits = c(0,1), expand = c(0,0)) +
-  guides(shape = guide_legend(override.aes = list(fill = model_colors[c("BVU","BVU","RF")])), fill = "none")
+```{r, qual1, fig.width = 9, fig.cap = "Mean evaluation (standardized to 0 - 1) by winning model and prior beliefs of the BVU model. \\textit{BVU}$=$Bayesian value updating model, \\textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. \\textit{\\$-bet}: low-probability high-outcome gambles, \\textit{p-bet}: high-probability low-outcome gambles. Sample sizes (xs, x, m, l), see Table \\ref{tab:Lotteries}. \\textit{n=16, 13, 6} denotes the number of participants best-described by the respective models."}
+  dpred <- dpred[parameter[par=="count_x", c("id", "val")], on = "id"]
+  dpred[winner=="BVU", priorx_cat := cut(val, c(0, 1, 2))]
+  dpred[, priorx_cat := factor(priorx_cat, exclude = NULL, labels = c(" - loss prior (0,1]", " - gain prior (1,2]", ""))]
+  dpred[, value_scaled := value / gamblex]
+
+  dpredagg <- dpred[winner!="BASE", .(M = mean(value_scaled), SE = sd(value_scaled)/sqrt(.N)), by = .(gambletype, samplesizecat, priorx_cat, winner)]
+  dpredagg[, samplesizecat := factor(samplesizecat, levels = c("xs","s","m","l"))]
+  d_n <- dpred[winner != "BASE", .(N = length(unique(id)), M = mean(value_scaled)), by = .(winner, priorx_cat, gambletype, samplesizecat)]
+  d_n <- d_n[(gambletype == "$-bet" & samplesizecat == "l" )| (gambletype == "p-bet" & samplesizecat == "l")]
+
+  dpred[, relfreq_x := gamblep]
+  dpred[, count_x := round(gamblep * samplesize)]
+  dpred[, count_0 := samplesize - count_x]
+
+
+  pd <- position_dodge(width = 0.1)
+  ggplot(dpredagg, aes(samplesizecat, M, fill=winner)) +
+    geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = interaction(winner, priorx_cat)), width = 0.1, pos = pd, color = "grey") +
+    geom_line(aes(linetype = interaction(winner, priorx_cat, sep=""), group = interaction(winner, priorx_cat)), pos = pd) +
+    geom_point(aes(shape = interaction(winner, priorx_cat, sep="")), size = 2, pos = pd, fill = "white", color = "white") +
+    geom_point(aes(shape = interaction(winner, priorx_cat, sep="")), size = 1, pos = pd) +
+    geom_text(data = d_n, aes(label = paste("n =", N)), size = 2.5, nudge_y = 0.02, nudge_x = 0.5, fontface = 3) +
+    facet_wrap(~gambletype) +
+    scale_shape_manual("Winning Model", values = c(25,24,21)) +
+    scale_linetype_manual("Winning Model", values = c(1,1,3)) +
+    scale_fill_manual("Winning Model", values = model_colors) +
+    scale_x_discrete("Sample Size Category", expand = c(0.3,0)) +
+    ylab("Evaluation, Scaled to 0 - 1 (M +/-SE)") +
+    scale_y_continuous("Evaluation, Scaled to 0 - 1 (M +/-SE)", limits = c(0,1), expand = c(0,0)) +
+    guides(shape = guide_legend(override.aes = list(fill = model_colors[c("BVU","BVU","RF")])), fill = "none") +
+    theme(aspect.ratio = 1.6)
 ```
 
 
 
 ```{r, trends}
-fit <- readRDS("study1_bayes_models_fit.rds")
-trends <- emtrends(fit, ~ priorx_cat | gambletype, var = "samplesizecat_num")
-trends <- as.data.table(trends)
-p_rf  <- unlist(trends[gambletype == "p-bet"][grepl("RF", priorx_cat), 3:5])
-p_loss <- unlist(trends[gambletype == "p-bet"][grepl("loss", priorx_cat), 3:5])
-p_gain <- unlist(trends[gambletype == "p-bet"][grepl("gain", priorx_cat), 3:5])
-d_rf  <- unlist(trends[gambletype == "$-bet"][grepl("RF", priorx_cat), 3:5])
-d_loss <- unlist(trends[gambletype == "$-bet"][grepl("loss", priorx_cat), 3:5])
-d_gain <- unlist(trends[gambletype == "$-bet"][grepl("gain", priorx_cat), 3:5])
+  fit <- readRDS("study1_bayes_models_fit.rds")
+  trends <- emtrends(fit, ~ priorx_cat | gambletype, var = "samplesizecat_num")
+  trends <- as.data.table(trends)
+  p_rf  <- unlist(trends[gambletype == "p-bet"][grepl("RF", priorx_cat), 3:5])
+  p_loss <- unlist(trends[gambletype == "p-bet"][grepl("loss", priorx_cat), 3:5])
+  p_gain <- unlist(trends[gambletype == "p-bet"][grepl("gain", priorx_cat), 3:5])
+  d_rf  <- unlist(trends[gambletype == "$-bet"][grepl("RF", priorx_cat), 3:5])
+  d_loss <- unlist(trends[gambletype == "$-bet"][grepl("loss", priorx_cat), 3:5])
+  d_gain <- unlist(trends[gambletype == "$-bet"][grepl("gain", priorx_cat), 3:5])
 ```
 
-\added[id=jj]{
-Our next analysis examines the interaction between the cognitive strategies and the number of samples that participants drew. Whereas the relative-frequency model holds that higher sample sizes should not affect the evaluation of the gambles, the Bayesian model predicts that sample size changes in the evaluations and that the changes depend on the prior beliefs and the environment. A gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the valuations as sample sizes increase, but only for \$-bets, where gains are in fact less likely (14 to 20\%) than zero-outcomes (Table~\ref{table:Lotteries}). By contrast, a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase the valuations with higher sample sizes for p-bets, where in fact gains are more likely (80 to 86\%) than zero-outcomes (Table~\ref{table:Lotteries}).
-}
 
 
-\added[id=jj]{
-Participants were classified based on the best-fitting model into relative-frequency learners, Bayesian learners with gain priors (parameter $\theta_G > 1$), and Bayesian learners with loss priors (parameter $\theta_G \leq 1$). Figure \ref{fig:qual1} shows the observed change in evaluations with sample size, separately for p-bets and \$-bets. The relative-frequency learners evaluated both p-bets and \$-bets relatively constantly across sample sizes, whereas the Bayesian learners increased their evaluations if they started with a loss prior and decreased their evaluations after starting with a gain prior, at least for p-bets (high-gain low-probability gambles). The Bayesian learners were relatively constant in their evaluations of \$-bets across sample sizes.
-}
+
+
 
 
 
 \added[id=jj]{
-A Bayesian generalized linear model of the (normalized) evaluations of gambles as a function of sample size, gamble type (p-bet, \$-bet), and best-fitting cognitive model with a by-participant random intercept confirmed the expectations. Participants that were classified as Bayesian with gain priors decreased their normalized evaluation of \$-bets by about 2\% as sample size increased, trend $`r d_gain[1]`$, 95\% HPD [$`r d_gain[2:3]`$] (where HPD $=$ highest probability density region). Bayesian participants with loss priors did not systematically change their \$-bet evaluations with sample size (trend $`r d_loss[1]`$, 95\% HPD $[`r d_loss[2:3]`]$), and neither did relative-frequency participants (trend $`r d_rf[1]`$, 95\% HPD $[`r d_rf[2:3]`]$), and neither did . Regarding p-bets, participants that were best-described by a Bayesian model with loss priors increased their evaluation by about 2\% with increasing sample size, as expected (trend $`r p_loss[1]`$, 95\% HPD $[`r p_loss[2:3]`]$); participants with gain priors decreased their p-bet evaluations with sample size (trend $`r p_gain[1]`$, 95\% HPD $[`r p_gain[2:3]`]$). Also as expected, the relative-frequency participants did not change their p-bet evaluations with sample size $`r p_rf[1]`$, 95\% HPD $[`r p_rf[2:3]`]$.
+A Bayesian generalized linear model of the (normalized) evaluations of gambles as a function of sample size, gamble type (p-bet, \$-bet), and best-fitting cognitive model with a by-participant random intercept confirmed the expectations. Participants that were classified as Bayesian with gain priors decreased their normalized evaluation of \$-bets by about 2\% as sample size increased, trend $`r d_gain[1]`$, 95\% HPD [$`r d_gain[2:3]`$] (where HPD $=$ highest probability density region). Bayesian participants with loss priors did not systematically change their \$-bet evaluations with sample size (trend $`r d_loss[1]`$, 95\% HPD $[`r d_loss[2:3]`]$), and neither did relative-frequency participants (trend $`r d_rf[1]`$, 95\% HPD $[`r d_rf[2:3]`]$). Regarding p-bets, participants that were best-described by a Bayesian model with loss priors increased their evaluation by about 2\% with increasing sample size, as expected (trend $`r p_loss[1]`$, 95\% HPD $[`r p_loss[2:3]`]$); participants with gain priors decreased their p-bet evaluations with sample size (trend $`r p_gain[1]`$, 95\% HPD $[`r p_gain[2:3]`]$). Also as expected, the relative-frequency participants did not change their p-bet evaluations with sample size $`r p_rf[1]`$, 95\% HPD $[`r p_rf[2:3]`]$.
 
 }
 
