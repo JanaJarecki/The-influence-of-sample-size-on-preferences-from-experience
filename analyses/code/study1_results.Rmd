@@ -199,20 +199,24 @@ The estimated parameter of the winning models, which Table \ref{tab:study1_param
       )
 ```
 
+```{r, ind_fits_cutoff}
+  dpred <- dpred[, .SD[grepl(tolower(unique(winner)), model)], by=id]
+  cutoff <- 0.4
+  m_cor <- dpred[, cor(pred, value), by = id][, mean(V1)]
+  ids_cutoff <- dpred[, cor(pred, value), by = id][V1 < cutoff]$id
+```
 
 \textit{Qualitative Model Fit.}
-\added[id==jj]{The qualitative fit between the models and the data is shown in Figure \ref{fig:ind_fits1}, which plots best-fitting model predictions against observed evaluations. It shows that the models generally capture the data well, except in four cases, where even the winning model fails to resemble the data (participants number 1, 19, 24, and 38). For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.}
+\added[id==jj]{The qualitative fit between the models and the data is shown in Figure \ref{fig:ind_fits1}, which plots best-fitting model predictions against observed evaluations. It shows that the models generally capture the data well (mean $r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data (participants number `r paste(ids_cutoff, sep = ", ")`, with $r\textsubscript{pred,obs} < `r cutoff`$). For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.}
 
-```{r, ind_fits1, fig.with = 9, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
-dummy_range <- dpred[, .(value = range(c(value,pred)), pred = range(c(value,pred)), winner = winner[1]), by = id]
-dpred <- dpred[, .SD[grepl(tolower(unique(winner)), model)], by=id]
-#dpred[, winnerf := factor(winner,  names(model_labels), unname(model_labels))]
-
+```{r, ind_fits1, fig.with = 12, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+dpred[, group := factor(paste0(winner, ", ", sprintf("%02.0f", as.numeric(id))))]
+dummy_range <- dpred[, .(value = range(c(value,pred)), pred = range(c(value,pred))), by = group]
 ggplot(dpred, aes(x = value, y = pred)) +
   geom_abline(linetype = 2, size = 0.4) +
   geom_point(aes(fill = winner), shape=21, color = "black", alpha = 0.75, size = 1) +
   geom_blank(data = dummy_range) +
-  facet_wrap(~winner+id, scales = "free", labeller = function(x) label_value(x, multi_line = FALSE), nrow = 5) +
+  facet_wrap(~group, scales = "free", nrow = 5, drop=TRUE, shrink=TRUE) +
   themejj(facet=TRUE, base_family = "Arial") +
   scale_x_continuous("Predicted Evaluations", breaks = pretty_breaks()) +
   scale_y_continuous("Observed Evaluations", breaks = pretty_breaks()) +
@@ -231,7 +235,7 @@ ggplot(dpred, aes(x = value, y = pred)) +
 The Bayesian model predicts that sample size changes the evaluations differently as a function of prior beliefs. Participants with a gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the evaluations of \$-bets as sample sizes increase, because participants overwrite their priors through sampling and learn that gains of \$-bets are less likely than zero-outcomes. By contrast, participants with a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase their evaluations of p-bets as sample size increases, because they learn that gains of p-bets are more likely than zero-outcomes (see the probabilities in Table~\ref{table:Lotteries}).
 }
 
-```{r, study1_bf}
+```{r, study1_bf, cache = TRUE}
 fit <- readRDS("study1_bayes_models_fit.rds")
 fit_noprior <- readRDS("study1_bayes_models_fit_noprior.rds") # model without the grouping (RF, BVU-gain, BVU-loss)
 BF01 <- brms::bayes_factor(fit, fit_noprior)
@@ -288,10 +292,10 @@ Based on the cognitive modeling results, participants were classified into three
   # d_gain <- unlist(trends[gambletype == "$-bet"][grepl("gain", priorx_cat), 3:5])
 ```
 
-<!-- 
- the mean ratings for \$-bets and p-bets separately for participants quantitatively and qualitatively best described by either the BVU \textcolor{blue}{split into two groups as described above} or the RF model. The figure shows that the mean valuations of Bayesian learners indeed differed from the mean valuations of frequentist learners: The mean valuations of Bayesian learners \textcolor{blue}{changed as a function of sample size for both \$-bets and p-bets. Depending on whether the model suggested an increase or a decrease in valuations, people's valuations increased or decreased.
-Yet, when we further statistically investigated this result only the increase in valuations of Bayesian learners for p-bets was reliable ($BF\textsubscript{10} > 1,000$, both $BF\textsubscript{10} < 1$ for \$-bets). Admittedly, the lack of statistical support for changes in valuations for Bayesian learners and \$-bets may have been the result of splitting Bayesian learners into two groups depending on whether the model predicts an increase or a decrease in valuations. For \$-bets, this procedure leads to a small \textit{N} (increasing = 8 and decreasing = 14) and hence very low statistical power. The mean valuations of frequentist learners did not show consistent variation (both gamble types $BF\textsubscript{10} < 1$).
-<!-- 
-  % Participants that were classified as Bayesian with gain priors decreased their normalized evaluation of \$-bets by about 2\% as sample size increased, trend $`r d_gain[1]`$, 95\% HPD [$`r d_gain[2:3]`$] (where HPD $=$ highest probability density region). Bayesian participants with loss priors did not systematically change their \$-bet evaluations with sample size (trend $`r d_loss[1]`$, 95\% HPD $[`r d_loss[2:3]`]$), and neither did relative-frequency participants (trend $`r d_rf[1]`$, 95\% HPD $[`r d_rf[2:3]`]$). Regarding p-bets, participants that were best-described by a Bayesian model with loss priors increased their evaluation by about 2\% with increasing sample size, as expected (trend $`r p_loss[1]`$, 95\% HPD $[`r p_loss[2:3]`]$); participants with gain priors decreased their p-bet evaluations with sample size (trend $`r p_gain[1]`$, 95\% HPD $[`r p_gain[2:3]`]$). Also as expected, the relative-frequency participants did not change their p-bet evaluations with sample size $`r p_rf[1]`$, 95\% HPD $[`r p_rf[2:3]`]$.} 
--->
+<!---
+  the mean ratings for \$-bets and p-bets separately for participants quantitatively and qualitatively best described by either the BVU \textcolor{blue}{split into two groups as described above} or the RF model. The figure shows that the mean valuations of Bayesian learners indeed differed from the mean valuations of frequentist learners: The mean valuations of Bayesian learners \textcolor{blue}{changed as a function of sample size for both \$-bets and p-bets. Depending on whether the model suggested an increase or a decrease in valuations, people's valuations increased or decreased.
+
+  Yet, when we further statistically investigated this result only the increase in valuations of Bayesian learners for p-bets was reliable ($BF\textsubscript{10} > 1,000$, both $BF\textsubscript{10} < 1$ for \$-bets). Admittedly, the lack of statistical support for changes in valuations for Bayesian learners and \$-bets may have been the result of splitting Bayesian learners into two groups depending on whether the model predicts an increase or a decrease in valuations. For \$-bets, this procedure leads to a small \textit{N} (increasing = 8 and decreasing = 14) and hence very low statistical power. The mean valuations of frequentist learners did not show consistent variation (both gamble types $BF\textsubscript{10} < 1$).
+
+   Participants that were classified as Bayesian with gain priors decreased their normalized evaluation of \$-bets by about 2\% as sample size increased, trend $`r # d_gain[1]`$, 95\% HPD [$`r # d_gain[2:3]`$] (where HPD $=$ highest probability density region). Bayesian participants with loss priors did not systematically change their \$-bet evaluations with sample size (trend $`r #d_loss[1]`$, 95\% HPD $[`r #d_loss[2:3]`]$), and neither did relative-frequency participants (trend $`r #d_rf[1]`$, 95\% HPD $[`r # d_rf[2:3]`]$). Regarding p-bets, participants that were best-described by a Bayesian model with loss priors increased their evaluation by about 2\% with increasing sample size, as expected (trend $`r #p_loss[1]`$, 95\% HPD $[`r #p_loss[2:3]`]$); participants with gain priors decreased their p-bet evaluations with sample size (trend $`r #p_gain[1]`$, 95\% HPD $[`r #p_gain[2:3]`]$). Also as expected, the relative-frequency participants did not change their p-bet evaluations with sample size $`r #p_rf[1]`$, 95\% HPD $[`r #p_rf[2:3]`]$.}
 -->
