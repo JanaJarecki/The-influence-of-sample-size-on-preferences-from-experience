@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.7)  2 OCT 2019 23:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.7)  3 OCT 2019 00:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1327,12 +1327,12 @@ Package natbib Warning: Citation `Lewandowsky2011' on page 1 undefined on input
 map/pdftex.map}
 
 ] [2]
-<../figures/study1_model_weights-1.pdf, id=68, 433.62pt x 325.215pt>
+<../figures/study1_model_weights-1.pdf, id=68, 469.755pt x 289.08pt>
 File: ../figures/study1_model_weights-1.pdf Graphic file (type pdf)
 <use ../figures/study1_model_weights-1.pdf>
 Package pdftex.def Info: ../figures/study1_model_weights-1.pdf  used on input l
 ine 189.
-(pdftex.def)             Requested size: 433.63878pt x 325.22908pt.
+(pdftex.def)             Requested size: 452.96669pt x 278.74872pt.
 
 Package natbib Warning: Citation `Edwards1967' on page 3 undefined on input lin
 e 208.
@@ -1359,24 +1359,24 @@ LaTeX Warning: Reference `table:Lotteries' on page 6 undefined on input line 25
 4.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 270.
+(Font)              <10> on input line 271.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 270.
+(Font)              <7> on input line 271.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 270.
+(Font)              <5> on input line 271.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 270.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 271.
 
 Package natbib Warning: Citation `SingmannForthcoming' on page 6 undefined on i
-nput line 270.
+nput line 271.
 
 <../figures/qual1-1.pdf, id=107, 469.755pt x 325.215pt>
 File: ../figures/qual1-1.pdf Graphic file (type pdf)
 <use ../figures/qual1-1.pdf>
-Package pdftex.def Info: ../figures/qual1-1.pdf  used on input line 274.
+Package pdftex.def Info: ../figures/qual1-1.pdf  used on input line 275.
 (pdftex.def)             Requested size: 452.96669pt x 313.59232pt.
 
-LaTeX Warning: Reference `tab:Lotteries' on page 6 undefined on input line 278.
+LaTeX Warning: Reference `tab:Lotteries' on page 6 undefined on input line 279.
 
 
 
@@ -1393,11 +1393,11 @@ Package natbib Warning: There were undefined citations.
 \tf@loc=\write8
 \openout8 = `study1_results.loc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 282.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 282.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 283.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 283.
 (./study1_results.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 282.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 282.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 283.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 283.
 Package rerunfilecheck Info: File `study1_results.out' has not changed.
 (rerunfilecheck)             Checksum: CCC1CB296AC16229771159DA32E2E3F5;910.
 
@@ -1407,7 +1407,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  24439 strings out of 494553
  437138 string characters out of 6175493
- 500168 words of memory out of 5000000
+ 500162 words of memory out of 5000000
  27603 multiletter control sequences out of 15000+600000
  73374 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1431,7 +1431,7 @@ s/type1/public/lm/lmr8.pfb><c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf
 inyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/Jana Jarecki/AppDa
 ta/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/Jana J
 arecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on study1_results.pdf (7 pages, 284494 bytes).
+Output written on study1_results.pdf (7 pages, 284835 bytes).
 PDF statistics:
  180 PDF objects out of 1000 (max. 8388607)
  132 compressed objects within 2 object streams

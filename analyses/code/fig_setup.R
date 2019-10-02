@@ -6,7 +6,7 @@ theme_set(themejj(base_family = "Arial"))
 
 model_levels <- c("bvu", "rf", "base")
 model_labels <- c(bvu="BVU", rf="RF", base="BASE")
-model_colors <- c(BAsE = "grey", BVU = "black", RF = "grey97")
+model_colors <- c(BASE = "grey", BVU = "black", RF = "grey97")
 
 order_evidence <- function(id, evidence) {
   evidence <- as.matrix(evidence)
