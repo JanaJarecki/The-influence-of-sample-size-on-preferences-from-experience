@@ -3,6 +3,14 @@ data/
 
 /data/
 
+/data/*.rds
+*.loc
+*.aux
+*.log
+*.out
+*.soc
+*.ttt
+*cache
 
 *.docx
 
