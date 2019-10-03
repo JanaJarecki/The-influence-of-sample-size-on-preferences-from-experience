@@ -12,7 +12,7 @@ opts_chunk$set(
     knitr.kable.NA = "",
     dev = "cairo_pdf",
     fig.align = "center",
-    fig.pos = "H")
+    fig.pos = "htb")
 
 knit_hooks$set(inline = function (x) {
     # Register an inline hook for printing numbers with 3 digits

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.7)  3 OCT 2019 00:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.7)  3 OCT 2019 01:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1327,63 +1327,88 @@ Package natbib Warning: Citation `Lewandowsky2011' on page 1 undefined on input
 map/pdftex.map}
 
 ] [2]
-<../figures/study1_model_weights-1.pdf, id=68, 469.755pt x 289.08pt>
+<../figures/study1_model_weights-1.pdf, id=80, 469.755pt x 216.81pt>
 File: ../figures/study1_model_weights-1.pdf Graphic file (type pdf)
 <use ../figures/study1_model_weights-1.pdf>
 Package pdftex.def Info: ../figures/study1_model_weights-1.pdf  used on input l
 ine 189.
-(pdftex.def)             Requested size: 452.96669pt x 278.74872pt.
+(pdftex.def)             Requested size: 452.96669pt x 209.06154pt.
 
 Package natbib Warning: Citation `Edwards1967' on page 3 undefined on input lin
-e 208.
+e 198.
 
 
 Package natbib Warning: Citation `Tauber2017' on page 3 undefined on input line
- 208.
+ 198.
 
 [3 <../figures/study1_model_weights-1.pdf>]
-<../figures/ind_fits1-1.pdf, id=85, 469.755pt x 433.62pt>
+<../figures/ind_fits1-1.pdf, id=97, 469.755pt x 433.62pt>
 File: ../figures/ind_fits1-1.pdf Graphic file (type pdf)
 <use ../figures/ind_fits1-1.pdf>
-Package pdftex.def Info: ../figures/ind_fits1-1.pdf  used on input line 238.
+Package pdftex.def Info: ../figures/ind_fits1-1.pdf  used on input line 226.
 (pdftex.def)             Requested size: 452.96669pt x 418.1231pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: Reference `table:Lotteries' on page 4 undefined on input line 24
+2.
 
 [4]
-Underfull \vbox (badness 2229) has occurred while \output is active []
+Underfull \vbox (badness 1472) has occurred while \output is active []
 
 [5 <../figures/ind_fits1-1.pdf>]
-
-LaTeX Warning: Reference `table:Lotteries' on page 6 undefined on input line 25
-4.
-
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 271.
+(Font)              <10> on input line 260.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 271.
+(Font)              <7> on input line 260.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 271.
+(Font)              <5> on input line 260.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 271.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 260.
 
 Package natbib Warning: Citation `SingmannForthcoming' on page 6 undefined on i
-nput line 271.
+nput line 260.
 
-<../figures/qual1-1.pdf, id=107, 469.755pt x 325.215pt>
+<../figures/qual1-1.pdf, id=119, 469.755pt x 325.215pt>
 File: ../figures/qual1-1.pdf Graphic file (type pdf)
 <use ../figures/qual1-1.pdf>
-Package pdftex.def Info: ../figures/qual1-1.pdf  used on input line 275.
+Package pdftex.def Info: ../figures/qual1-1.pdf  used on input line 264.
 (pdftex.def)             Requested size: 452.96669pt x 313.59232pt.
 
-LaTeX Warning: Reference `tab:Lotteries' on page 6 undefined on input line 279.
+LaTeX Warning: Reference `tab:Lotteries' on page 6 undefined on input line 268.
 
+
+[6]
+Overfull \hbox (728.02255pt too wide) in paragraph at lines 314--315
+\OT1/lmr/m/n/12 4\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 17\OML/lmm/m/it/12 ; \OT1/lm
+r/m/n/12 4\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 09\OML/lmm/m/it/12 ; \OT1/lmr/m/n/1
+2 4\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 18\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 4\OML
+/lmm/m/it/12 :\OT1/lmr/m/n/12 17\OML/lmm/m/it/12 forsamplesizessxslm; respectiv
+ely\OT1/lmr/m/n/12 ;$\T1/ptm/m/n/12 SD$\OML/lmm/m/it/12 s$\T1/ptm/m/n/12 =$\OT1
+/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 99\OML/lmm/m/it/12 ; \OT1/lmr/m/
+n/12 1\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 09\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 1\
+OML/lmm/m/it/12 :\OT1/lmr/m/n/12 02\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 1\OML/lmm
+/m/it/12 :\OT1/lmr/m/n/12 02\OML/lmm/m/it/12 ; respectively\OT1/lmr/m/n/12 )\OM
+L/lmm/m/it/12 :Alinearmodel[][][]oftheconfidenceratings; whichexcludedsamplesiz
+easpredictor; waspreferredoveramodelincludingsamplesize\OT1/lmr/m/n/12 ($\T1/pt
+m/m/n/12 BF$[]$ 
+ []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[6] AED endfloat: Processing end Figures and Tables [7 <../figures/qual1-1.pdf>
-]
+[7 <../figures/qual1-1.pdf>]
+
+LaTeX Warning: Reference `table:study1_means' on page 8 undefined on input line
+ 318.
+
+
+LaTeX Warning: Reference `table:meansStudy2' on page 8 undefined on input line 
+327.
+
+
+LaTeX Warning: Reference `table:meansStudy2' on page 8 undefined on input line 
+330.
+
+AED endfloat: Processing end Figures and Tables [8]
 
 Package natbib Warning: There were undefined citations.
 
@@ -1393,27 +1418,30 @@ Package natbib Warning: There were undefined citations.
 \tf@loc=\write8
 \openout8 = `study1_results.loc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 283.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 283.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 355.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 355.
 (./study1_results.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 283.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 283.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 355.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 355.
 Package rerunfilecheck Info: File `study1_results.out' has not changed.
-(rerunfilecheck)             Checksum: CCC1CB296AC16229771159DA32E2E3F5;910.
+(rerunfilecheck)             Checksum: D47AF2087F014FCFE2D07C7F639A2376;1537.
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 24439 strings out of 494553
- 437138 string characters out of 6175493
- 500162 words of memory out of 5000000
- 27603 multiletter control sequences out of 15000+600000
+ 24448 strings out of 494553
+ 437256 string characters out of 6175493
+ 500167 words of memory out of 5000000
+ 27607 multiletter control sequences out of 15000+600000
  73374 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 69i,15n,83p,1376b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
+ 69i,15n,83p,1444b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exi
 st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
+, replaced by a fixed one
 
 {c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
 -rm.enc}{c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvi
@@ -1431,10 +1459,10 @@ s/type1/public/lm/lmr8.pfb><c:/Users/Jana Jarecki/AppData/Roaming/TinyTeX/texmf
 inyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/Jana Jarecki/AppDa
 ta/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/Jana J
 arecki/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on study1_results.pdf (7 pages, 284835 bytes).
+Output written on study1_results.pdf (8 pages, 294995 bytes).
 PDF statistics:
- 180 PDF objects out of 1000 (max. 8388607)
- 132 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
- 156 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 200 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 180 words of extra memory for PDF output out of 10000 (max. 10000000)
 

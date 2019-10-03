@@ -5,7 +5,11 @@ library(data.table)
 library(BayesFactor)
 library(brms)
 
-d <- fread("../../data/processed/study1.csv",
+
+# Load data
+# study <- 1
+path <- sub("x", study, "../../data/processed/studyx.csv")
+d <- fread(path,
   select = c("id", "condition", "samplesizecat", "samplesize", "gambletype", "value", "gambleid"),
   colClasses = list(factor = c("id", "condition"), double = c("samplesize", "gambleid")))
 d[condition=="description", samplesizecat := "--"]
@@ -18,10 +22,10 @@ M <- d[, .(
   by = .(condition, gambleid, samplesizecat, samplesize)]
 M[, `D-E` := rep(M[condition == "description"], .N) - c(M[condition == "experience"], NA), by = .(gambleid)]
 
-get_bf10 <- function(g, s) {
-  fit <- brm(value ~ condition + (1|id), 
-            data = d[gambleid == g & samplesizecat %in% c(s, "--")])
-}
+# get_bf10 <- function(g, s) {
+#   fit <- brm(value ~ condition + (1|id), 
+#             data = d[gambleid == g & samplesizecat %in% c(s, "--")])
+# }
 
 get_bf10 <- function(g, s, niter = 1000) {
   bf10 <- anovaBF(

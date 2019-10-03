@@ -7,7 +7,9 @@ library(cogscimodels)
 
 
 # Load data
-d <- fread('../../data/processed/study1.csv', colClasses = list(character = "id"))
+# study <- 2
+path <- sub("x", study, "../../data/processed/studyx.csv")
+d <- fread(path, colClasses = list(character = "id"))
 
 # Data preprocessing
 # --------------------------------------------------------------------------
@@ -29,7 +31,7 @@ model_list <- list(bvu = BVU, baseline = Baseline, rf = RF)
 # Estimate mdoel parameters separately by=id
 modelfit <- d[, .(model=names(model_list), fit=lapply(model_list, do.call, args = list(d=.SD))), by=id]
 # Save resulting object
-saveRDS(modelfit, "study1_cognitive_smodels_fit.Rds")
+saveRDS(modelfit, sub("x", study, "studyx_cognitive_smodels_fit.rds"))
 
 # modelB <- function(ss, p, out, param, prior) {  
 #   a <- prior[1] + ss*p
