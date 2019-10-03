@@ -29,44 +29,44 @@ d[, gambletype := factor(gambletype, levels = c("p-bet", "$-bet"))]
 options(contrasts = c("contr.sum", "contr.poly"))
 
 # Fit full model
-fit <- brm(
+fit0 <- brm(
   formula = value_scaled ~ samplesizecat_num * priorx_cat * gambletype + (1 | id),
   data   = d,
   cores  = 3,
   save_all_pars = TRUE,
   iter = 5000)
-saveRDS(fit, sub("x", study, "studyx_bayes_models_fit.rds"))
+saveRDS(fit0, sub("x", study, "studyx_bayes_models_fit.rds"))
 
 # Fit model without priorx_cat
-null_fit = update(fit, formula = ~ samplesizecat_num * gambletype + (1 | id))  # Same but without the predictor model-and-prior
-saveRDS(null_fit, sub("x", study, "studyx_bayes_models_fit_noprior.rds"))
+null_fit0 <- update(fit0, formula = ~ samplesizecat_num * gambletype + (1 | id))  # Same but without the predictor model-and-prior
+saveRDS(null_fit0, sub("x", study, "studyx_bayes_models_fit_noprior.rds"))
 
 # Model confidence
 
 # Fit full model
-fit <- brm(
+fit1 <- brm(
   formula = confidence ~ samplesizecat + (1 | id),
   data   = d[winner=="bvu"],
   cores  = 3,
   iter = 5000,
   save_all_pars = TRUE)
-saveRDS(fit, sub("x", study,"studyx_bayes_models_fit_confidence.rds"))
+saveRDS(fit1, sub("x", study,"studyx_bayes_models_fit_confidence.rds"))
 
-# Fit model without priorx_cat
-null_fit = update(fit, formula = ~ .-samplesizecat + (1 | id))  # Same but without the sample size
-saveRDS(null_fit, sub("x", study, "studyx_bayes_models_fit0_confidence.rds"))
+# Fit model without sample size cat
+null_fit1 <- update(fit1, formula = ~ .-samplesizecat + (1 | id))  # Same but without the sample size
+saveRDS(null_fit1, sub("x", study, "studyx_bayes_models_fit0_confidence.rds"))
 
 
 # Fit full model
-fit <- brm(
+fit2 <- brm(
   formula = confidence ~ samplesizecat + (1 | id),
   data   = d[winner=="rf"],
   cores  = 4,
   iter = 5000,
   save_all_pars = TRUE,
   control = list(adapt_delta = 0.95))
-saveRDS(fit, "study1_bayes_models_fit_confidence_rf.rds")
+saveRDS(fit2, "study1_bayes_models_fit_confidence_rf.rds")
 
 # Fit model without priorx_cat
-null_fit = update(fit, formula = ~ .-samplesizecat + (1 | id))  # Same but without the sample size
-saveRDS(null_fit, "study1_bayes_models_fit0_confidence_rf.rds")
+null_fit2 = update(fit2, formula = ~ .-samplesizecat + (1 | id))  # Same but without the sample size
+saveRDS(null_fit2, "study1_bayes_models_fit0_confidence_rf.rds")

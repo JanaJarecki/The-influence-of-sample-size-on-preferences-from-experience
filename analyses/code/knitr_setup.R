@@ -18,7 +18,7 @@ knit_hooks$set(inline = function (x) {
     # Register an inline hook for printing numbers with 3 digits
     if (is.numeric(x)) {
       res <- ifelse(x == ceiling(x) & x == floor(x),
-        sprintf("%d", x),
+        sprintf("%.0f", x),
         ifelse(round(x,2) == 0 & round(x,3) != 0,
           sprintf("%1.3f", x),
           sprintf("%1.2f", x)
