@@ -122,47 +122,11 @@ The observed and predicted evaluations were normalized to a common range (range 
 \textit{Quantitative Model Fit.} The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described only `r winners["base"]` participants best. Figure \ref{fig:study1_model_weights} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).
 
 
+```{r echo=FALSE}
+  knitr::read_chunk("fig_cogn_model_fit.R")
+```
 ```{r, study1_model_weights, fig.height = 3, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
-  # Order of participant ids (x-axis) for the plot
-  id_order <- order_evidence(unique(weights$id), weights[, 2:4])
-  # Make the plots
-  p1 <- ggplot(weights, aes(x=1, fill=winner)) +
-    geom_bar(position = "stack") +
-    scale_fill_manual("Model",
-      values = model_colors,
-      labels = unname(model_labels[names(winners)]),
-      drop = FALSE,
-      guide = guide_legend(reverse = TRUE)) +
-    scale_y_continuous(expand = c(0,0.15)) +
-    xlim(0.5,1.5) +
-    xlab("Count")+
-    geom_text(stat = "count", aes(label = (..count..), color = winner), position = position_stack(vjust = 0.5), family = "Arial", size = 3.4) +
-    scale_color_manual(values = c("black", "black", "white")) +
-    coord_flip() +
-    guides(color = "none") +
-    theme(
-      axis.line = element_blank(),
-      axis.ticks = element_blank(),
-      axis.title.x = element_blank(),
-      axis.text = element_blank(),
-      panel.spacing.x = unit(2, "lines"))
-  p2 <- ggplot(melt(weights, id = 1, measure = 2:4), aes(x = factor(id, levels = id_order),  y = value, fill = factor(variable, model_levels, model_labels))) +
-    geom_bar(stat = "identity", color = "white", size = 0.01) +
-    geom_hline(yintercept = 0.5, linetype = 2, color = "grey80", alpha = 0.8, size = 0.4) +
-    scale_fill_manual("Model", values = model_colors) +
-    scale_y_continuous("Evidence Strength", expand  = c(0,0), labels = percent, breaks = c(0,0.5,1)) +
-    xlab(paste("Participant, N =", N)) +
-    guides(fill = guide_legend(override.aes = list(linetype = 0, size = 4.5))) +
-    theme(axis.ticks = element_blank(), 
-      axis.text.x=element_blank(),
-      legend.position = "none",
-      axis.line = element_blank(),
-      axis.text.y = element_text(vjust = c(0,.5,.5,.5,1)),
-      axis.title.x = element_text(margin = margin(t = 0.5, unit = "lines")),
-      legend.key.height = unit(1.2, "lines"),
-      legend.key = element_rect(fill = "white")) 
-  # Combine the plots
-  p1 + p2 +plot_layout(nrow=2, heights=c(.2,.75))
+  <<cogn_model_fit>>
 ```
 
 ```{r, study1_par}
@@ -211,23 +175,12 @@ The estimated parameter of the winning models, which Table \ref{tab:study1_param
 \textit{Qualitative Model Fit.}
 \added[id=jj]{The qualitative fit between the models and the data is shown in Figure \ref{fig:ind_fits1}, which plots the predictions of the best-fitting models against the observed evaluations. It shows that the models generally describe the data well (mean $r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants number `r paste(sort(sprintf("%02.0f", as.numeric(ids_cutoff))), collapse = ", ")`, with $r\textsubscript{pred,obs} < `r cutoff`$). For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. However, the quantitative results of the probability weighting model and the utility model, we favored a utility model without probability weighting.}}
 
-```{r, ind_fits1, fig.with = 6, fig.height = 6, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
-dpred[, group := factor(paste0(winner, ", ", sprintf("%02.0f", as.numeric(id))))]
-dummy_range <- dpred[, .(value = range(c(value,pred)), pred = range(c(value,pred))), by = group]
-ggplot(dpred, aes(x = value, y = pred)) +
-  geom_abline(linetype = 2, size = 0.4) +
-  geom_point(aes(fill = winner), shape=21, color = "black", alpha = 0.4, size = 1) +
-  geom_blank(data = dummy_range) +
-  facet_wrap(~group, scales = "free", nrow = 5, drop=TRUE, shrink=TRUE) +
-  themejj(facet=TRUE, base_family = "Arial") +
-  scale_x_continuous("Predicted Evaluations", breaks = pretty_breaks()) +
-  scale_y_continuous("Observed Evaluations", breaks = pretty_breaks()) +
-  scale_fill_manual("Winning Model", values = model_colors) +
-  theme(
-    axis.ticks = element_blank(),
-    aspect.ratio = 1,
-    strip.text = element_text(lineheight = unit(0.5, "lines")))
 
+```{r echo=FALSE}
+  knitr::read_chunk("fig_cogn_model_fit_qualitatively.R")
+```
+```{r, ind_fits1, fig.with = 6, fig.height = 6, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+<<cogn_model_fit_qualitatively>>
 ```
 
 \added[id=jj]{The cognitive modeling results thus show that most participants used a Bayesian strategy, and some used a relative-frequency strategy. This strategy heterogeneity helps understanding the behavioral null finding---that sample size seemed to have no effect on valuations---that were observed at the aggregate level (Table \ref{tab:means_study1}). The aggregate analysis fails to take the individual differences in learning strategies into account, while participants are best described by a mixture of strategies. Moreover, the aggregate analysis also fails to account for differences in the prior beliefs about gain probabilities. Depending on the prior belief, the Bayesian value updating (BVU) model predicts either a decrease or an increase in valuations with increasing sample size. The next analysis will focus on these differences.}
@@ -247,38 +200,11 @@ The Bayesian model predicts that sample size changes the evaluations differently
 Based on the cognitive modeling results, participants were classified into three learner types, relative-frequency learners, Bayesian learners with gain priors (prior $\theta_G > 1$), and Bayesian learners with loss priors (prior $\theta_G \leq 1$). Figure \ref{fig:qual1} shows how the learner types' evaluations of p-bets and \$-bets change with increasing sample size. The relative-frequency learner types evaluated both p-bets and \$-bets quite unaffected by sample sizes, whereas the Bayesian learner types changed their evaluations slightly with sample size in the predicted directions. Statistical analyses by means of a Bayesian generalized linear model\footnote{regressing the (normalized) evaluations on the predictors sample size, gamble type (p-bet, \$-bet), and type (BVU-gain-prior, BVU-loss-prior, RF) with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions \citep[for details, see][]{SingmannForthcoming}), however, showed no substantial support that including the learner type as predictor improves goodness of fit, $BF\textsubscript{01}=`r BF01`$, where 0 $=$ the model including learning type and 1 $=$ the model excluding learning type.
 }
 
+```{r echo=FALSE}
+  knitr::read_chunk("fig_effect_of_ss_by_model.R")
+```
 ```{r, qual1, fig.cap = "Mean evaluation (standardized to 0 - 1) by winning model and prior beliefs of the BVU model. \\textit{BVU}$=$Bayesian value updating model, \\textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. \\textit{\\$-bet}: low-probability high-outcome gambles, \\textit{p-bet}: high-probability low-outcome gambles. Sample sizes (xs, x, m, l), see Table \\ref{tab:Lotteries}. \\textit{n=16, 13, 6} denotes the number of participants best-described by the respective models."}
-  dpred <- dpred[parameter[par=="count_x", c("id", "val")], on = "id"]
-  dpred[winner=="BVU", priorx_cat := cut(val, c(0, 1, 2))]
-  dpred[, priorx_cat := factor(priorx_cat, exclude = NULL, labels = c(" - loss prior (0,1]", " - gain prior (1,2]", ""))]
-  dpred[, value_scaled := value / gamblex]
-
-  dpredagg <- dpred[winner!="BASE", .(M = mean(value_scaled), SE = sd(value_scaled)/sqrt(.N)), by = .(gambletype, samplesizecat, priorx_cat, winner)]
-  dpredagg[, samplesizecat := factor(samplesizecat, levels = c("xs","s","m","l"))]
-  d_n <- dpred[winner != "BASE", .(N = length(unique(id)), M = mean(value_scaled)), by = .(winner, priorx_cat, gambletype, samplesizecat)]
-  d_n <- d_n[(gambletype == "$-bet" & samplesizecat == "l" )| (gambletype == "p-bet" & samplesizecat == "l")]
-
-  dpred[, relfreq_x := gamblep]
-  dpred[, count_x := round(gamblep * samplesize)]
-  dpred[, count_0 := samplesize - count_x]
-
-
-  pd <- position_dodge(width = 0.1)
-  ggplot(dpredagg, aes(samplesizecat, M, fill=winner)) +
-    geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = interaction(winner, priorx_cat)), width = 0.1, pos = pd, color = "grey") +
-    geom_line(aes(linetype = interaction(winner, priorx_cat, sep=""), group = interaction(winner, priorx_cat)), pos = pd) +
-    geom_point(aes(shape = interaction(winner, priorx_cat, sep="")), size = 2, pos = pd, fill = "white", color = "white") +
-    geom_point(aes(shape = interaction(winner, priorx_cat, sep="")), size = 1, pos = pd) +
-    geom_text(data = d_n, aes(label = paste("n =", N)), size = 2.7, nudge_y = 0.02, nudge_x = 0.5, fontface = 3) +
-    facet_wrap(~gambletype) +
-    scale_shape_manual("Winning Model", values = c(25,24,21)) +
-    scale_linetype_manual("Winning Model", values = c(1,1,3)) +
-    scale_fill_manual("Winning Model", values = model_colors) +
-    scale_x_discrete("Sample Size Category", expand = c(0.3,0)) +
-    ylab("Evaluation, Scaled to 0 - 1 (M +/-SE)") +
-    scale_y_continuous("Evaluation, Scaled to 0 - 1 (M +/-SE)", limits = c(0,1), expand = c(0,0)) +
-    guides(shape = guide_legend(override.aes = list(fill = model_colors[c("BVU","BVU","RF")])), fill = "none") +
-    theme(aspect.ratio = 1.6)
+    <<effect_of_ss_by_model>>
 ```
 
 

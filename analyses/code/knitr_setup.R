@@ -24,8 +24,8 @@ knit_hooks$set(inline = function (x) {
           sprintf("%1.2f", x)
           )
       )
-      paste(res, collapse = ", ")
     } else {
-      x
+      res <- x
     }
+    return(paste(res, collapse = ", "))
   })
