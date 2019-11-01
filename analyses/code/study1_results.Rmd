@@ -258,6 +258,7 @@ BF10 <- bayes_factor(full, null)
 full <- readRDS("study1_bayes_models_fit_confidence_rf.rds")
 null <- readRDS("study1_bayes_models_fit0_confidence_rf.rds")
 BF10_rf <- bayes_factor(full, null)
+BF01 <- BF01$bf
 ```
 
 
