@@ -23,7 +23,7 @@ order_evidence <- function(id, evidence) {
     legend.position = "right",
     legend.direction = "vertical",
     legend.box.background = element_rect(size = 0.4, color = "black", fill = NA),
-    legend.margin = margin(rep(0.2,4), unit="lines"),
+    legend.margin = margin(rep(0.4,4), unit="lines"),
     legend.key.width = unit(1, "lines"),
     legend.box.margin = margin(rep(0.3,4), unit = "lines"),
     legend.spacing.x = unit(0.4, "lines"),

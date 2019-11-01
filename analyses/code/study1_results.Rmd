@@ -35,15 +35,16 @@ header-includes:
   library(brms)
   library(emmeans)  
   niter <- 1000 # Bayesian modeling iterations
+  study <- 1
 ```
 
 ```{r, load_data, cache=TRUE}
   source("tab2.R")
-  fits <- readRDS("study1_cognitive_models_fit.rds")
 ```
 
 ```{r, preprocess}
   d <- fread("../../data/processed/study1.csv", colClasses=list(character="id"))
+  fits <- readRDS("study1_cognitive_models_fit.rds")
   d <- d[condition=="experience"]
   parameter <- fits[, .(par = names(coef(fit[[1]])), val = coef(fit[[1]])), by = .(id, model)]
   gof <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), anova(fit[[1]], fit[[2]], fit[[3]])[, c("wAIC", "AIC", "BIC")])), by = id]
@@ -63,6 +64,11 @@ header-includes:
   dpred[, pred_scaled := pred]
   dpred[, pred := pred * gamblex]
   dpred <- dpred[weights[, c("id", "winner")], on = "id"]
+  dpred[, relfreq_x := gamblep]
+  dpred[, count_x := round(gamblep * samplesize)]
+  dpred[, count_0 := samplesize - count_x]
+  dpred <- dpred[tolower(winner) == model, ]
+  dpred <- dpred[parameter[par=="count_x", c("id", "val")], on = "id"]
 ```
 
 \subsection{Evaluations of Gambles by Condition and Sample Size}
@@ -125,7 +131,7 @@ The observed and predicted evaluations were normalized to a common range (range 
 ```{r echo=FALSE}
   knitr::read_chunk("fig_cogn_model_fit.R")
 ```
-```{r, study1_model_weights, fig.height = 3, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r, study1_model_weights, fig.height = 4, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
   <<cogn_model_fit>>
 ```
 

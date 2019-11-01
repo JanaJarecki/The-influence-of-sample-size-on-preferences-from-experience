@@ -125,7 +125,7 @@ Table \ref{tab:means_study2} displays participants' mean and median evaluations 
 ```{r echo=FALSE}
   knitr::read_chunk("fig_cogn_model_fit.R")
 ```
-```{r, study2_model_weights, echo=FALSE, fig.width = 5, fig.height = 3, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r, study2_model_weights, echo=FALSE, fig.height = 4, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
   source("fig_cogn_model_fit.R")
   <<cogn_model_fit>>
 ```

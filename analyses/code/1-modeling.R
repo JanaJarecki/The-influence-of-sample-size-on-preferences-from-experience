@@ -31,7 +31,7 @@ model_list <- list(bvu = BVU, baseline = Baseline, rf = RF)
 # Estimate mdoel parameters separately by=id
 modelfit <- d[, .(model=names(model_list), fit=lapply(model_list, do.call, args = list(d=.SD))), by=id]
 # Save resulting object
-saveRDS(modelfit, sub("x", study, "studyx_cognitive_smodels_fit.rds"))
+saveRDS(modelfit, sub("x", study, "studyx_cognitive_models_fit.rds"))
 
 # modelB <- function(ss, p, out, param, prior) {  
 #   a <- prior[1] + ss*p

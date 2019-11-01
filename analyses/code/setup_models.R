@@ -1,5 +1,7 @@
-# Setup for cognitive modeling
-# --------------------------------------------------------------------------
+# ==========================================================================
+# Setup: Cognitive models
+# ==========================================================================
+
 ## Options for parameter (par) fitting and likelihood function
 model_options <- list(
   lb = c(rp = 0, sigma = 0.0001), # par lower bound: alpha (rp) and sigma

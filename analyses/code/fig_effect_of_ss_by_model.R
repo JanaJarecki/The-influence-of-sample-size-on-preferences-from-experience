@@ -1,5 +1,8 @@
-## @knitr effect_of_ss_by_model
+# ==========================================================================
+# Figure: Influence of sample size on stand. valuations by cogn. model
+# ==========================================================================
 
+## @knitr effect_of_ss_by_model
 
 dpred[winner=="BVU", priorx_cat := cut(val, c(0, 1, 2))]
   dpred[, priorx_cat := factor(priorx_cat, exclude = NULL, labels = c(" - loss prior (0,1]", " - gain prior (1,2]", ""))]

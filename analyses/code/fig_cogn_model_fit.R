@@ -5,7 +5,7 @@
   wn <- names(winners)
   wn <- unique(c(wn, "base"))
   # Make the plots
-  p1 <- ggplot(weights, aes(x=1, fill=winner)) +
+  p1 <- ggplot(weights, aes(x=1, fill = factor(winner))) +
     geom_bar(position = "stack") +
     scale_fill_manual("Model",
       values = model_colors,
@@ -16,7 +16,9 @@
     xlim(0.5,1.5) +
     xlab("Count")+
     geom_text(stat = "count", aes(label = (..count..), color = winner), position = position_stack(vjust = 0.5), family = "Arial", size = 3.4) +
-    scale_color_manual(values = c("black", "black", "white")) +
+    scale_color_manual(
+      values = c(BASE="black", RF="black", BVU="white"),
+      drop = FALSE) +
     coord_flip() +
     guides(color = "none") +
     theme(
@@ -41,4 +43,4 @@
       legend.key.height = unit(1.2, "lines"),
       legend.key = element_rect(fill = "white")) 
   # Combine the plots
-  p1 + p2 +plot_layout(nrow=2, heights=c(.2,.75))
+  p1 + p2 +plot_layout(nrow=2, heights=c(.25,.75))

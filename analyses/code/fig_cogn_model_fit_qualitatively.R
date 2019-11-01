@@ -1,3 +1,8 @@
+# ==========================================================================
+# Figure: Quantitative fit of cogn. models
+#         BIC weights as bar plots
+# ==========================================================================
+
 ## @knitr cogn_model_fit_qualitatively
 
 
