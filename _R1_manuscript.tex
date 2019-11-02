@@ -1,16 +1,13 @@
 \documentclass[a4paper, man, natbib, floatsintext]{apa6} %jou, man, report, doc
-
 \usepackage{standalone}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
-\graphicspath {{analyses/code/}}
-\usepackage[colorinlistoftodos]{todonotes}
-
+\graphicspath{{analyses/code/}}
 \usepackage{multicol}
 \usepackage{multirow}
-\usepackage{booktabs} %booktabs package makes nice tables!
+\usepackage{booktabs}
 \usepackage{url}
 \usepackage{rotating}
 \usepackage[toc,page]{appendix}
@@ -22,68 +19,63 @@
 \usepackage{times}
 \usepackage{upgreek}
 \usepackage{setspace}
-\AtBeginEnvironment{tabular}{\onehalfspacing}
+%\AtBeginEnvironment{tabular}{\onehalfspacing}
 
-%% For the revision
+%% Revision:
+%% Use "final" option to remove all tracking markups
 \usepackage[]{changes}
 \definechangesauthor[name={JJ}, color=orange]{jj}
-%% Use "final" option to remove all tracking markups
-% \usepackage[final]{changes}
-
-%\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
-%\addbibresource{/Users/jhoffart/Documents/Dropbox/Basel/References/refJanine.bib}
-%\addbibresource{refJanine.bib}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{The influence of sample size on preferences from experience}
 \shorttitle{sample size and preference}
-
 \author{Janine Christin Hoffart\\Jana B. Jarecki\\J\"org Rieskamp\\Gilles Dutilh}
 \affiliation{University of Basel, Department of Psychology, Center for Economic Psychology}
-
 \leftheader{Hoffart, Jarecki, Rieskamp, Dutilh}
 
-\abstract{People often evaluate risky options in situations in which they need to learn from experience how likely the options' outcomes are. When people can actively sample information about outcomes and outcome probabilities to make decisions, they typically draw small samples. \added[id=jj]{We examine how the number of samples affects preferences for risky gambles in valuations from experience. In two studies, people drew samples of different sizes from risky gambles and indicated their selling prices for these gambles and their confidence in their selling-price estimation}. Remarkably, the results show that, on average, neither valuations nor confidence in the valuations changed substantially with sample size. However, \added[id=jj]{cognitive modeling of individual-level learning showed that most} participants could be classified as Bayesian learners with prior beliefs about \added[id=jj]{outcome probabilities}, and the minority adhered to a frequentist learning strategy. Valuations of Bayesian learners changed with sample size as predicted by Bayesian principles. In contrast, sample size did not influence valuations of frequentist learners. These results illustrate the variability in how people learn from sampled information and provide an explanation for why sample size often does not affect judgments. 
+\abstract{People often learn from experience about the distribution of outcomes and values of risky options. When people can actively sample information about outcomes and outcome probabilities to make decisions, they typically draw small samples. \added[id=jj]{We examine how the number of samples affects preferences for risky gambles in valuations from experience. In two studies, people drew samples of different sizes from risky gambles and indicated their selling prices for these gambles and their confidence in their selling-price estimation}. Remarkably, the results show that, on average, neither valuations nor confidence in the valuations changed substantially with sample size. However, \added[id=jj]{cognitive modeling of individual-level learning showed that most} participants could be classified as Bayesian learners with prior beliefs that low outcomes are more likely than high outcomes \added[id=jj]{outcome probabilities}, and the minority adhered to a frequentist learning strategy. Valuations of Bayesian learners changed with sample size as predicted by Bayesian principles. In contrast, sample size did not influence valuations of frequentist learners. These results illustrate the variability in how people learn from sampled information and provide an explanation for why sample size often does not affect judgments. 
 }
 
-
 \keywords{D--E gap, valuations from experience, \added[id=jj]{risky gambles}}
-\authornote{This research is supported by a grant (SNF \# 143854) from the Swiss National Science Foundation to the second and third author. We thank Anita Todd for editing the manuscript. 
+\authornote{This research is supported by a grant (SNSF \# 143854) from the Swiss National Science Foundation to the second and third author. We thank Anita Todd for editing the manuscript. 
 
 Correspondence concerning this article should be addressed to Janine Christin Hoffart, University of Basel, Department of Psychology, Missionsstrasse 62a, 4055 Basel, Switzerland.  E-mail: janine.hoffart@unibas.ch}
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+
 \maketitle
 
-In everyday life, people often form preferences on the basis of past experiences. The strengh of these preferences arguably depends on the amount of previous experience. Someone who has visited a restaurant for many years and has always had positive experiences likely has a stronger positive preference for this restaurant than someone who visited the restaurant only once and had a positive experience. Thus, even if the relative frequency of positive experiences is similar, the strength of preferences can differ depending on the amount of experience. We examined how people's preferences in an experience-based judgment situation under risk evolve as a function of growing experience. 
+In everyday life, people often form preferences on the basis of past experiences. The strength of these preferences arguably depends on the amount of previous experience. Someone who has visited a restaurant for many years and has always had positive experiences likely has a stronger positive preference for this restaurant than someone who visited the restaurant only once and had a positive experience. Thus, even if the relative frequency of positive experiences is similar, the strength of preferences can differ depending on the amount of experience. We examined how people's preferences in an experience-based judgment situation under risk evolve as a function of growing experience. 
 
 %In everyday life people often base their preferences on past experiences. How much experience people have made with an option arguably influences how strong people's opinion about this option is. Someone who had made 50 out of 50 good experiences with a restaurant probably has a stronger preference for this restaurant than someone who had made 1 out of 1 good experience with this restaurant although the relative frequency of good experiences is the same in both situations. Here, we study, how people's preferences (i.e. valuations) in an experience-based task evolve as a function of growing experience. 
 
-\section{The D--E Gap and Search Effort in Experience-Based Tasks}
-How people develop preferences on the basis of information that they accumulate over time has been studied with experience-based judgment and decision-making tasks \citep[e.g.,][]{Hertwig2004, Hau2008}. Experience-based tasks differ from description-based tasks in the way information is presented. In description-based risky choice tasks, people make judgments about gambles according to numerical, graphical, or text-based summaries of the gambles' outcome distributions. In experience-based tasks, on the other hand, people learn about the outcome distributions by repeatedly drawing samples from a gamble until they feel confident to make a judgment or decision. Past research suggests that people's decisions systematically differ between description- and experience-based tasks (the so-called decision-experience gap or D--E gap). When people make decisions from description, they choose as if they overweight rare events \citep{Kahneman1979}, but when they make similar decisions on the basis of experience, they choose as if they underweight rare events \citep{Hertwig2004}. 
+\section{Search Effort in Experience-Based Tasks and the Description-Experience Gap (D--E gap) and }
+\added[id=jj]{Search effort refers to the amount of samples that people draw in experience-based risky choice tasks. In experience-based tasks \citep[e.g.,][]{Hertwig2004, Hau2008}, people learn about the distribution of outcomes of gambles by repeatedly drawing samples from a gamble until they feel confident to make a judgment or decision. By contrast, in description-based tasks, people judge risky gambles from numerical, graphical, or textual summaries of the gambles' outcome distributions. Past research found that risk preferences differ between description- and experience- and description-based tasks (the decision-experience gap or D--E gap=. In decisions from description, people choose as if they overweight rare events \citep{Kahneman1979}, in decisions from experience, they choose as if they underweight rare events \citep{Hertwig2004}.}
 
-%\subsection{Sample size in experience--based tasks}
-The D--E gap has often been explained by limited search effort in experience-based tasks and the resulting \textit{sampling error}. Such sampling error occurs when the observed outcome sequence deviates from the objective outcome probabilities \citep{Hadar2009}. For instance, \cite{Hertwig2004} reported that participants drew a median of only 15 observations per decision. With such a low number, the skew of a two-outcome gamble's binomial sampling distribution implies that more people undersample than oversample a low-probability (rare) event. Indeed, averaged across trials, in Hertwig et al.'s study, the rare event was undersampled by $78\%$ of the participants. Other studies have reported similar sampling errors \citep[e.g.,][]{Hau2008,Rakow2008}. Explanations for why people often search insufficiently are manifold: Limited memory capacity may impede excessive information search, and extensive search may not be justified when opportunity costs are high \citep{Hau2008}. A slightly different explanation suggests that by relying on small sample sizes, people simplify their choices \citep{Hertwig2010}: Simulation studies have shown that when people compare two outcome distributions on the basis of sampling from them, small sample sizes amplify the differences between the observed means.
+The size of the sample that people draw (search effort) in experience-based tasks plays a key role in explaining the D--E gap, because smaller samples cause higher sampling error. Sampling error means that the observed outcome sequence deviates from the objective outcome probabilities \citep{Hadar2009}. Drawing larger samples diminishes the sampling error, but usually the samples drawn are not sufficient to allow inferences about the true distribution of a skewed gamble. Participants in \cite{Hertwig2004}, for instance, drew small samples (median of 15 samples per decision), and with this number of samples, the skew of a two-outcome gamble's binomial sampling distribution implies that more people undersample than oversample  low-probability outcomes (rare events). Indeed, averaged across trials, in Hertwig et al.'s study, the rare event was undersampled by $78\%$ of the participants. Other studies have reported similar sampling errors \citep[e.g.,][]{Hau2008,Rakow2008}. Explanations for why people often search insufficiently include limits of memory, opportunity costs \citep{Hau2008}, or adaptive choice simplification \citep{Hertwig2010}: Simulations have shown that small samples amplify the differences between the observed means of the outcome distributions of risky options.
 
-Given the finding that people often sample relatively small samples, researchers have tried to reduce or eliminate the sampling error caused by small samples. Attempts have involved encouraging participants to draw larger samples by increasing the incentives \citep{Hau2008}; showing fixed samples that represent the gambles' objective probability distributions \citep{Ungemach2009}; showing fixed---relatively large---numbers of random samples, as larger total samples naturally reduce sampling error \citep{Hau2008,Hau2010}; presenting gamble descriptions that match the outcome distribution that a ``partner'' participant had sampled \citep{Rakow2008}; and constraining statistical analysis to trials in which the total sample closely represents the gambles' underlying outcome distributions \citep[e.g.,][]{Camilleri2009, Camilleri2011a}. Typically, the goal of the attempt to eliminate sampling error was to allow for an unbiased comparison between decisions from description and decisions from experience. The results are mixed: In some studies, the authors found a diminished D--E gap \citep{Hau2008,Hau2010, Ungemach2009} or failed to find a D--E gap \citep{Gloeckner2012, Camilleri2009,Camilleri2011a,Rakow2008}. Yet, despite these mixed findings, the D--E gap is a robust phenomenon \citep[for a recent meta-analysis, see][]{Wulff2017}.
+\added[id=jj]{Previous work tried to eliminate sampling error in experienced-based risky choice in order to understand the D--E gap.} Attempts have involved encouraging participants to draw larger samples \citep{Hau2008}, showing samples that represent the gambles' true probability distributions \citep{Ungemach2009}, showing large numbers of random samples \citep{Hau2008,Hau2010}, describing gambles to match the outcome distribution sampled by other participants  \citep{Rakow2008}, and only analyzing trials in which the drawn sample approximates the gambles' true outcome distribution \citep[e.g.,][]{Camilleri2009, Camilleri2011a}. Sometimes the D--E gap diminished \citep{Hau2008,Hau2010, Ungemach2009} or vanished \citep{Gloeckner2012, Camilleri2009,Camilleri2011a,Rakow2008}, but despite these mixed findings, the D--E gap is a robust phenomenon \citep[for a recent meta-analysis, see][]{Wulff2017}. \added[id=jj]{Most of this research focused on sampling error which is merely a by-product of small sample sizes.}
 
-While the question of whether people process information from description differently from information from experience is of great importance, in the present work, we approached it only marginally. Instead, we examined how the valuations of risky prospects from experience are influenced by different sample sizes. To do so, we manipulated how many samples people could draw from the prospects' outcome distributions and measured people's preferences (i.e., selling prices).
+\added[id=jj]{In the present work we examine the role of sample size in experience-based preference formation. To do so, we manipulated how many samples people could draw from the prospects' outcome distributions (sample size) and measured people's preferences (i.e., selling prices). Aiming to isolate the effects of sample size on preferences, our design eliminated sampling error. Thus, we study  whether sample size influences preferences independently of sampling error.}
 
 
-%While the question whether people process information from description differently than information from experience is definitely interesting, here . Instead we will focus on how sample size influences how risky prospects are evaluated. To do so, we manipulate how many samples people can draw from the prospects' outcome distributions and study whether sample size influences preferences.
+%While the question whether people process information from description differently than information from experience is definitely interesting, here . Instead we will focus on how sample size influences how risky prospects are evaluated. To do so, we manipulate how many samples people can draw from the prospects' outcome distributions and study
 
 \section{How Does Sample Size Influence Preferences?}
-The question of how sample size influences judgments has interested psychologists for decades \citep[e.g.,][]{Tversky1971, Griffin1992}. We investigated how sample size influences preferences from experience, by contrasting two existing theories: \textit{the belief in the law of small numbers} \citep{Tversky1971} and \textit{Bayesian updating}. 
+The question of how sample size influences judgments has interested psychologists for decades \citep[e.g.,][]{Tversky1971, Griffin1992}. We investigated how sample size influences preferences from experience, contrasting two theories: \textit{the belief in the law of small numbers} \citep{Tversky1971} and \textit{Bayesian updating}. 
 
-\subsection{Belief in the Law of Small Numbers}
-\cite{Tversky1971} formulated the belief in the law of small numbers: an exaggerated belief about the likelihood of small sequences of random draws representing outcome distributions. % Evidence for this belief has 
-For instance, when people were asked to mentally produce a short sequence of random coin tosses, the produced sequences resembled a relative frequency of $.5$ more often than expected by chance \citep{Tversky1971}. \cite{Griffin1992} showed that people tend to neglect the role of sample size in their judgments. Participants in an experiment saw sequences of coin tosses and then estimated the probability that a coin was biased and expressed their confidence in their estimate. The researchers varied the total number of coin tosses (i.e., sample size) and---unbeknownst to the participants---used coins with different biases. \cite{Griffin1992} found that participants neglected sample size and based their estimates mostly on the observed relative frequency of head and tail outcomes. Surprisingly, participants expressed more confidence in their judgments when the number of coin tosses was small. Since these initial findings, several studies have confirmed that people are often less sensitive to sample size than normative models suggest in inferential judgment tasks \citep[e.g.,][]{Kutzner2016}, perceptual judgment tasks \citep[e.g.,][]{Kvam2016}, and also preferential tasks \citep[e.g.,][]{Powell2017}.
+The belief in the law of small numbers, which was formulated by \cite{Tversky1971}, is the belief that it is highly probable that a small sequences of random draws represents the true outcome distribution. When asked to mentally produce a short sequence of random coin tosses, people produced sequences with a relative frequency of heads and tails of $.50$ more often than statistically expected \citep{Tversky1971}. In \cite{Griffin1992}, participants ignored sample size in their judgments of coin biases after seeing sequences of coin tosses of different length, some of which were biased. Participants based their estimates of the probabilities associated with the coins mostly on the observed relative frequency of head and tail outcomes. Surprisingly, participants expressed higher confidence in their judgments when the number of coin tosses was small, \added[id=jj]{whereas from a statistical perspective, confidence should be lower for smaller samples.} Several studies have found that people's inferential \citep[e.g.,][]{Kutzner2016}, perceptual \citep[e.g.,][]{Kvam2016}, and preferential judgments \citep[e.g.,][]{Powell2017} are less sensitive to sample sizes than expected by normative models.
 
-\subsection{Bayesian Updating}
-In contrast to the psychological principle of the belief in the law of small numbers, Bayesian principles suggest that not only the relative frequency of outcomes but also sample size influences judgments. The Bayesian view offers a normative solution to how people deal with sample sizes. People can treat sample size as a measure of uncertainty, knowing that small samples can lead to a biased representation of the true outcome distribution and larger samples to a more veridical description of the true outcome distribution. Recent research has provided evidence that people indeed treat sample size as a measure of uncertainty, for instance, when they report preferences for consumer goods \citep{DeMartino2017} or make judgments about group differences \citep{Obrecht2010} or the performance of students \citep{Fiedler2002}.
+In contrast to the belief in the law of small numbers, Bayesian psychological principles suggest that not only the relative frequency of outcomes but also sample size influences judgments. The Bayesian view offers a normative solution to how people deal with sample sizes. People can treat sample size as a measure of uncertainty, knowing that small samples can lead to a biased representation of the true outcome distribution and larger samples to a more veridical description of the true outcome distribution, and there is some evidence that people treat sample size as a measure of uncertainty, for instance, when they report preferences for consumer goods \citep{DeMartino2017}, make judgments about group differences \citep{Obrecht2010}, or student performance \citep{Fiedler2002}.
 
 \subsection{Cognitive Models and Hypothesis}
-We tested whether individuals integrate samples by following Bayesian principles or by following the belief in the law of small numbers to study how individuals deal with changing sample sizes. For this purpose, we formalized two models that mathematically implement the two theories described above. 
+We tested whether individuals integrate samples by following Bayesian principles or by following the belief in the law of small numbers in the context of experience-based risky choice. For this purpose, we formalized two models that mathematically implement the two psychological principles described above. 
 
 
 To understand the models, it is crucial to recognize the following facts about our experimental methods. In our experiments, we asked participants to indicate their valuations (i.e., selling prices) of two-outcome gambles characterized by a gain and a zero-outcome. Participants sampled a \textit{predefined} number of times from one gamble's outcome distribution and  indicated their selling price for this gamble. Individual gambles were presented with different sample sizes. The sample sequences that people saw were always \textit{representative} of the gamble's true outcome distribution. Because the task involved two-outcome gambles with one zero-outcome, the following models were formalized to learn the probability of the nonzero gain outcome (extending the models for cases with different outcomes is possible).
@@ -123,8 +115,10 @@ Figures \ref{fig:sensi}b  and c illustrate how prior beliefs change as people ob
 Figure \ref{fig:sensi}a illustrates these prior beliefs.
 \begin{figure}[htbp] 
   \centering
-\includegraphics[width=1\linewidth, keepaspectratio]{sensi1.eps}
-  \caption{Every column describes how a specific prior belief (a) gets updated to a posterior belief (b and c). (a) Four different prior beliefs. The titles display the parameters of the beta distributions that created these prior beliefs. (b) Posterior beliefs after observing 5 (black) and 30 (gray) outcomes with a relative reward frequency of one reward per five outcomes (20\%). (c) Posterior beliefs after observing 5 (black) and 30 (gray) outcomes with a relative reward frequency of four rewards per five outcomes (80\%).}
+\includegraphics[width=1\linewidth, keepaspectratio]{fig1}
+  \caption{\textit{Illustration of the prior and posterior belief distributions in the Bayesian value updating given sample sizes} (a) Every column describes how a specific prior belief (a) Effects of a small (size 5) or large (size 30) sample size if the gamble has 20\% probability of a gain. Each row shows a different prior. (b) Effects of a small or large sample size if th gamble has 80\% probability of a gain.
+  
+  gets updated to a posterior belief (b and c). (a) Four different prior beliefs. The titles display the parameters of the beta distributions that created these prior beliefs. (b) Posterior beliefs after observing 5 (black) and 30 (gray) outcomes with a relative reward frequency of one reward per five outcomes (20\%). (c) Posterior beliefs after observing 5 (black) and 30 (gray) outcomes with a relative reward frequency of four rewards per five outcomes (80\%).}
   \label{fig:sensi}
 \end{figure}
 
