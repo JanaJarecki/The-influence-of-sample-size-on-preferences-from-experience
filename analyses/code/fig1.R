@@ -65,4 +65,4 @@ p_80 <- plot_belief_updating(0.8, N = N) +ggtitle("Bayesian model learning about
 
 p_02 + p_80 +plot_layout(nrow = 2) +plot_annotation(tag_levels = "a")
 
-ggsave("../figures/fig1.eps", width = 7, height = 5.5)
+ggsave("../figures/fig1.eps", width = 7, height = 5.5, device=cairo_ps)
