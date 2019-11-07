@@ -17,7 +17,7 @@ plot_belief_updating <- function(px, N = 10000) {
     paste0("Small sample (", x[1], "/5 ", "s)"),
     paste0("Large sample (", x[2], "/30 ", "s)"))
   priors <- list(Uniform = c(1,1), Gain = c(0.4,1.6), Loss = c(1.6,0.4))
-  prior_labels <- gsub("c\\(", "\nBeta ~ \\(", paste(c("Prior uniform", "Prior on low outcome", "Prior on high outcomes"), priors))
+  prior_labels <- gsub("c\\(", "\nBeta ~ \\(", paste(c("Prior uniform", "Prior on low outcomes", "Prior on high outcomes"), priors))
   
   d <- rbindlist(lapply(priors, function (p) data.table(
     id = 1:N,

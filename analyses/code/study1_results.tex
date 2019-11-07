@@ -80,7 +80,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{01 November, 2019}
+    \date{07 November, 2019}
 
 \usepackage{natbib} \usepackage{threeparttable} \usepackage{booktabs}
 \shorttitle{test} \usepackage{setspace}
@@ -90,18 +90,20 @@
 
 \begin{document}
 
-\subsection{Evaluations of Gambles by Condition and Sample Size}
+\subsubsection{Evaluations of gambles from different sample sizes}
 
-Table \ref{tab:means_study1} shows participants' evaluations of the
-gambles in the experience and description conditions. In the experience
-condition it seems that sample size has no influence on evaluations. In
-the best-fitting mixed regression model \(\mathrm{M}\textsubscript{0}\)
-sample size was a random effect, and gamble type---p-bet vs. \$-bet---a
-fixed effect, resulting in higher evaluations of the p-bets (gamble IDs
-1 to 3) compared to the \$-bets (IDs 4 to 6). This model outperformed a
-model with sample size as fixed effect (\(BF\textsubscript{01} = 409\)),
-and a model with a sample-size\(\times\)gamble-type interaction
-(\(BF\textsubscript{01} > 1,000\)). Although this suggests that sample
+Table \ref{tab:means_study1} summarizes participants' evaluations of the
+gambles and compares the experience and description condition. For
+instance, in the experience condition people evaluated gamble 4, across
+sample sizes xs, s, m, and l, by \(2.80, 2.91, 2.80, 2.95, 3.08\)
+(respectively). Overall, the different sample sizes had no systematic
+influence on participants' evaluations, which was confirmed by
+statistical modeling by analyses of variance (ANOVA). The evaluations
+are best predicted by a model that does not include sample size but a
+combination of gamble type and expected value with a by-participant
+random effect (Model 1), which outperformed a model including sample
+size (\(BF_{10}= 430\)) and a model including a sample-size-gamble-type
+interaction (\(BF_{10} > 1000\)). Although this suggests that sample
 size does not reliably influence the evaluations of gambles in a
 decision from experience paradigm, the cognitive modeling analyses will
 show a more nuanced picture.
@@ -115,40 +117,40 @@ show a more nuanced picture.
 
 \begin{tabular}{lccccrr}
 \toprule
-Condition & Sample size category & Effective sample size & \textit{Med} & \textit{M} & D--E & D--E:$BF\textsubscript{10}$\\
+Condition & Sample size category & Sample size & \textit{Med} & \textit{M} & D--E & D--E:$BF\textsubscript{10}$\\
 \midrule
 Gamble ID 1 &  &  &  &  &  & \\
-\ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 5\\
-\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 60\\
-\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 24\\
-\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 148\\
+\ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 4\\
+\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 64\\
+\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 23\\
+\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 144\\
 \ \ \ D & -- & -- & 4.00 & 4.60 & -- & --\\
 Gamble ID 2 &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 155\\
-\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 626\\
-\ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 4\\
+\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 142\\
+\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 725\\
+\ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 5\\
 \ \ \ E & l & 36 & 4.00 & 3.99 & -0.37 & 2\\
 \ \ \ D & -- & -- & 3.00 & 3.61 & -- & --\\
 Gamble ID 3 &  &  &  &  &  & \\
 \ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 4\\
-\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 872\\
+\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 882\\
 \ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 139\\
 \ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 16\\
 \ \ \ D & -- & -- & 5.00 & 6.57 & -- & --\\
 Gamble ID 4 &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 3.00 & 2.80 & 0.28 & >1000\\
 \ \ \ E & s & 10 & 3.20 & 2.91 & 0.16 & 3\\
-\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 55\\
+\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 63\\
 \ \ \ E & l & 30 & 3.00 & 2.95 & 0.13 & 1\\
 \ \ \ D & -- & -- & 3.20 & 3.08 & -- & --\\
 Gamble ID 5 &  &  &  &  &  & \\
 \ \ \ E & xs & 6 & 2.00 & 1.77 & 0.10 & 8\\
-\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 15\\
-\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 28\\
+\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 14\\
+\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 27\\
 \ \ \ E & l & 36 & 2.00 & 1.81 & 0.06 & 1\\
 \ \ \ D & -- & -- & 2.00 & 1.87 & -- & --\\
 Gamble ID 6 &  &  &  &  &  & \\
-\ \ \ E & xs & 7 & 4.00 & 3.46 & 0.18 & 3\\
+\ \ \ E & xs & 7 & 4.00 & 3.46 & 0.18 & 2\\
 \ \ \ E & s & 14 & 4.00 & 3.55 & 0.09 & 0\\
 \ \ \ E & m & 21 & 4.00 & 3.58 & 0.06 & 0\\
 \ \ \ E & l & 42 & 4.00 & 3.70 & -0.06 & 0\\
@@ -166,26 +168,25 @@ Gamble ID 6 &  &  &  &  &  & \\
 
 \end{table}
 
-\subsection{Cognitive modeling of experience-based evaluations}
+\subsubsection{Cognitive modeling of experience-based evaluations}
 
 We used computational modeling to analyze the role of sample size in
-value judgments more closely. We compared the performance of the
+value judgments more closely, comparing the performance of the
 \added[id=jj]{relative frequency} (RF) model and the
 \added[id=jj]{Bayesian value updating} (BVU) model.
-\added[id=jj]{The models were compared to a baseline model, which predicts a constant evaluation equal to the mean individual evaluation. Sensible models are expected to outperform this baseline model.}
+\added[id=jj]{The models were compared to a baseline model, which predicts a constant evaluation equal to the mean individual evaluation (sensible models are expected to outperform this baseline model).}
 
-\subsubsection{Modeling Procedure}
+\textit{Modeling Procedure} The observed and predicted evaluations were
+normalized to a common range between 0 and 1 (by division through the
+gain of the respective gamble). Maximum likelihood was used to estimate
+the free model parameters at the participant level, assuming that
+observations follow a truncated normal distribution around the model
+predictions (truncated between 0 and 1) with a constant standard
+deviation (\(\sigma\)), that was estimated as a free parameter
+(\(0 < \sigma \leq 1\)).
+\added[id=jj]{Therefore, the relative frequency model had two free parameter, the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$) and $\sigma$. The Bayesian value updating model had four free parameter the gain prior $\theta_G$ ($0 \leq \theta_G \leq 1$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$ with the prior on zero outcomes constrained to $\theta_0=2-\theta_G$. The baseline model had two free parameter, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. We compared the models by their evidence strength and BIC weights from the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
 
-The observed and predicted evaluations were normalized to a common range
-(range 0 - 1, by dividing values by the gain of the respective gamble).
-Maximum likelihood was used to estimate the free model parameters at the
-participant level, assuming observations follow a truncated normal
-distribution around the model predictions (truncated between 0 and 1)
-with a constant standard deviation (\(\sigma\)), that was estimated as a
-free parameter (\(0 < \sigma \leq 1\)).
-\added[id=jj]{Therefore, the relative frequency model had 2 free parameter, the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$) and $\sigma$. The Bayesian value updating model had 4 free parameter the gain prior $\theta_G$ ($0 \leq \theta_G \leq 1$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$; the loss prior was constrained $\theta_0=2-\theta_G$. The baseline model had 2 free parameter, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. We compared the models by their evidence strength and BIC weights on the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
-
-\subsubsection{Modeling Results}
+\textit{Modeling Results}
 \added[id=jj]{We will first outline the quantitative model fit, followed by the qualitative model fit, and lastly analyze the effects of sample size given the cognitive strategies.}
 
 \textit{Quantitative Model Fit.} The Bayesian value updating model
@@ -208,7 +209,7 @@ BIC\textsubscript{RF}\(= -110\), and BIC\textsubscript{BASE}\(= -17\)
 \end{figure}
 
 \added[id=jj]{
-The estimated parameter of the winning models, which Table \ref{tab:study1_parameter} summarizes, reveal that the power utility exponent ($\alpha$) is almost identical for the participants using a Bayesian value updating strategy ($M_{\alpha}= 1.43$) and those using a relative frequency strategy ($M_{\alpha}=1.60$), $M = -0.14$ 95\% HDI $[-0.69$, $0.39]$, $\mathrm{BF}_{\textrm{01}} = 3.26$. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with 46\% (gain prior $\theta_G = 0.92$; zero-outcome prior $\theta_0 = 1.08$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=1.36$; values $>$ 1 are liberal, 1 is optimal Bayesian, $<$ 1 is conservative learning); this contradicts previous results that found conservative learners \citep{Edwards1967,Tauber2017}, but the liberal learning in our task can be explained because participants repeatedly sampled from the same set of gambles.
+The estimated parameter of the winning models, which Table \ref{tab:study1_parameter} summarizes, reveal that the power utility exponent ($\alpha$) is almost identical for the participants using a Bayesian value updating strategy ($M_{\alpha}= 1.49$) and those using a relative frequency strategy ($M_{\alpha}=1.61$), $M = -0.08$ 95\% HDI $[-0.91$, $0.80]$, $\mathrm{BF}_{\textrm{01}} = 2.76$. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with 46\% (gain prior $\theta_G = 0.92$; zero-outcome prior $\theta_0 = 1.08$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=1.36$; values $>$ 1 are liberal, 1 is optimal Bayesian, $<$ 1 is conservative learning). Liberal learning was not observed in previous data which found conservative learning \citep{Edwards1967,Tauber2017}, but the liberal learning in our data can be explained by that participants repeatedly sampled from the same set of gambles.
 }
 
 \begin{table}[tbp]
@@ -224,7 +225,7 @@ Winning Model & $\alpha$ & $\delta$ & $\theta_G$ & $\mu$ & $\sigma$\\
 \midrule
 BVU (\textit{n}$=$30) & 1.49 (1.47) & 1.36 (2.12) & 0.92 (0.66) & -- & 0.13 (0.07)\\
 RF (\textit{n}$=$9) & 1.61 (0.58) & -- & -- & -- & 0.12 (0.02)\\
-BASE (\textit{n}$=$1) & -- & -- & -- & 0.47 (NA) & 0.30 (NA)\\
+BASE (\textit{n}$=$NA) & -- & -- & -- & 0.47 (NA) & 0.30 (NA)\\
 \bottomrule
 \addlinespace
 \end{tabular}
@@ -239,7 +240,7 @@ BASE (\textit{n}$=$1) & -- & -- & -- & 0.47 (NA) & 0.30 (NA)\\
 \end{table}
 
 \textit{Qualitative Model Fit.}
-\added[id=jj]{The qualitative fit between the models and the data is shown in Figure \ref{fig:ind_fits1}, which plots the predictions of the best-fitting models against the observed evaluations. It shows that the models generally describe the data well (mean $r\textsubscript{pred,obs} = NA$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants number 05, 19, 24, 38, with $r\textsubscript{pred,obs} < 0.40$). For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. However, the quantitative results of the probability weighting model and the utility model, we favored a utility model without probability weighting.}}
+\added[id=jj]{The qualitative fit between the models and the data is shown in Figure \ref{fig:ind_fits1}, which plots the predictions of the best-fitting models against the observed evaluations. It shows that the models generally describe the data well (mean $r\textsubscript{pred,obs} = 0.71$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants number 05, 19, 24, 38, with $r\textsubscript{pred,obs} < 0.40$). For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. However, the quantitative results of the probability weighting model and the utility model, we favored a utility model without probability weighting.}}
 
 \begin{figure}[htb]
 
@@ -261,7 +262,7 @@ evaluations of the relative-frequency learners. \added[id=jj]{
 The Bayesian model predicts that sample size changes the evaluations differently as a function of prior beliefs. Participants with a gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the evaluations of \$-bets as sample sizes increase, because participants overwrite their priors through sampling and learn that gains of \$-bets are less likely than zero-outcomes. By contrast, participants with a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase their evaluations of p-bets as sample size increases, because they learn that gains of p-bets are more likely than zero-outcomes (see the probabilities in Table~\ref{table:Lotteries}).
 }
 
-\textbackslash{}added{[}id=jj{]}\{ Based on the cognitive modeling
+\textbackslash{}added{[}id=jj{]}\{Based on the cognitive modeling
 results, participants were classified into three learner types,
 relative-frequency learners, Bayesian learners with gain priors (prior
 \(\theta_G > 1\)), and Bayesian learners with loss priors (prior
@@ -272,8 +273,7 @@ size. The relative-frequency learner types evaluated both p-bets and
 types changed their evaluations slightly with sample size in the
 predicted directions. Statistical analyses by means of a Bayesian
 generalized linear
-model\footnote{regressing the (normalized) evaluations on the predictors sample size, gamble type (p-bet, \$-bet), and type (BVU-gain-prior, BVU-loss-prior, RF) with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions \citep[for details, see][]{SingmannForthcoming}), however, showed no substantial support that including the learner type as predictor improves goodness of fit, $BF\textsubscript{01}=0.393419762088619, FALSE$, where 0 $=$ the model including learning type and 1 $=$ the model excluding learning type.
-}
+model\footnote{regressing the (normalized) evaluations on the predictors sample size, gamble type (p-bet, \$-bet), and type (BVU-gain-prior, BVU-loss-prior, RF) with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions \citep[for details, see][]{SingmannForthcoming}), however, showed no substantial support that including the learner type as predictor improves goodness of fit, $BF\textsubscript{01}=0.393419762088619, FALSE$, where 0 $=$ the model including learning type and 1 $=$ the model excluding learning type.}
 
 \begin{figure}[htb]
 
@@ -284,12 +284,11 @@ model\footnote{regressing the (normalized) evaluations on the predictors sample 
 \caption{Mean evaluation (standardized to 0 - 1) by winning model and prior beliefs of the BVU model. \textit{BVU}$=$Bayesian value updating model, \textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. \textit{\$-bet}: low-probability high-outcome gambles, \textit{p-bet}: high-probability low-outcome gambles. Sample sizes (xs, x, m, l), see Table \ref{tab:Lotteries}. \textit{n=16, 13, 6} denotes the number of participants best-described by the respective models.}\label{fig:qual1}
 \end{figure}
 
-\subsubsection{Effect of gamble type and sampling order}
-
-The mean and median evaluations of \$-bets were higher than for p-bets
-(Gamble IDs 1--3 versus 4--6, Table \ref{tab:means_study1}), despite the
-gambles having the same expected value. This finding is supported by
-comparing a linear Bayesian regression model of gamble evaluations
+\textit{Effect of gamble type and sampling order} The mean and median
+evaluations of \$-bets were higher than for p-bets (Gamble IDs 1--3
+versus 4--6, Table \ref{tab:means_study1}), despite the gambles having
+the same expected value. This finding is supported by comparing a linear
+Bayesian regression model of gamble evaluations
 \(\mathrm{M}\textsubscript{0}\)
 \added[id=jj]{that includes the expected value as random effect} with a
 model \(\mathrm{M}\textsubscript{1}\)
@@ -307,7 +306,7 @@ the first half of the observed samples as a fixed factor
 half of observed samples (\(BF\textsubscript{02} = 6.7\)). In summary,
 our analysis did not provide evidence for recency or primacy effects.
 
-\subsubsection{Confidence ratings}
+\textit{Confidence ratings}
 
 Participants' aggregated mean confidence ratings of their valuations
 from experience in the extra small, small, medium, and large sample-size
@@ -320,17 +319,15 @@ strongly preferred over \(\mathrm{M}\textsubscript{1}\), which in
 addition includes the sample-size category as a predictor
 (\(BF\textsubscript{01} = 737\)).
 
-\added[id=jj]{According to Bayesian value updating higher sample sizes should increase confidence. The relative frequency model predicts no influence of sample size on confidence. We analyzed the confidence ratings by best-fitting model (Bayesian-type learners and relative-frequency-type learners). The confidence of Bayesian learners did not change remarkably across sample sizes ($M=4.17, 4.09, 4.18, 4.17$ for sample sizes s, xs, l, m, respectively; $SD$s$=$ 0.99, 1.09, 1.02, 1.02, respectively). A linear model\footnote{with by-participant random intercept and the predictors effect-coded.} of the confidence ratings, which excluded sample size as predictor, was preferred over a model including sample size ($BF\textsubscript{excl,incl} = 3.01$).
-  Similarly, the confidence of relative-frequency-type learners did not show an effect of sample size on confidence ratings ($M = 4.14, 4.10, 4.07, 4.10$ for sample sizes xs, s, m, l, respectively; \textit{SD}s$=$ 1.17, 1.15, 1.08, 1.20, respectively; BF\textsubscript{excl,incl}$= 0$)}.
+\added[id=jj]{According to Bayesian value updating higher sample sizes should increase confidence. The relative frequency model predicts no influence of sample size on confidence. We analyzed the confidence ratings by best-fitting model (Bayesian-type learners and relative-frequency-type learners). The confidence of Bayesian learners did not change remarkably across sample sizes ($M=$ for sample sizes , respectively; $SD$s$=$ , respectively). A linear model\footnote{with by-participant random intercept and the predictors effect-coded.} of the confidence ratings, which excluded sample size as predictor, was preferred over a model including sample size ($BF\textsubscript{excl,incl} = 3.01$).
+  Similarly, the confidence of relative-frequency-type learners did not show an effect of sample size on confidence ratings ($M = $ for sample sizes , respectively; \textit{SD}s$=$ , respectively; BF\textsubscript{excl,incl}$= 0$)}.
 
-\subsubsection{Description versus experience}
-
-The above Table \ref{tab:means_study1} shows the mean and median
-valuations from description and the difference between the mean
-valuations in the experience and description conditions. Further, it
-provides the Bayes factors, quantifying the evidence in favor of a
-difference between valuations from experience and those from
-description.
+\textit{Description versus experience} The above Table
+\ref{tab:means_study1} shows the mean and median valuations from
+description and the difference between the mean valuations in the
+experience and description conditions. Further, it provides the Bayes
+factors, quantifying the evidence in favor of a difference between
+valuations from experience and those from description.
 
 Valuations made from description and experience differed for most of the
 gambles and sample sizes (see Table \ref{tab:means_study1}, rightmost

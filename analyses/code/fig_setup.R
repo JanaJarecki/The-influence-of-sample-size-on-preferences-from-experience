@@ -4,7 +4,7 @@ library(scales)
 library(patchwork)
 theme_set(themejj(base_family = "Arial"))
 
-model_levels <- c("bvu", "rf", "base")
+model_levels <- c("bvu", "rf", "baseline")
 model_labels <- c(bvu="BVU", rf="RF", base="BASE")
 model_colors <- c(BASE = "grey", BVU = "black", RF = "grey97")
 

@@ -4,17 +4,19 @@
 
 ## @knitr effect_of_ss_by_model
 
-dpred[winner=="BVU", priorx_cat := cut(val, c(0, 1, 2))]
-  dpred[, priorx_cat := factor(priorx_cat, exclude = NULL, labels = c(" - loss prior (0,1]", " - gain prior (1,2]", ""))]
+dpred[winner=="bvu", priorx_cat := cut(val, c(0, 1, 2))]
+dpred[, priorx_cat := factor(priorx_cat, exclude = NULL, labels = c(" - loss prior (0,1]", " - gain prior (1,2]", ""))]
   dpred[, value_scaled := value / gamblex]
-  dpredagg <- dpred[winner!="BASE", .(M = mean(value_scaled), SE = sd(value_scaled)/sqrt(.N)), by = .(gambletype, samplesizecat, priorx_cat, winner)]
+  dpredagg <- dpred[winner!="baseline", .(M = mean(value_scaled), SE = sd(value_scaled)/sqrt(.N)), by = .(gambletype, samplesizecat, priorx_cat, winner)]
   dpredagg[, samplesizecat := factor(samplesizecat, levels = c("xs","s","m","l"))]
-  d_n <- dpred[winner != "BASE", .(N = length(unique(id)), M = mean(value_scaled)), by = .(winner, priorx_cat, gambletype, samplesizecat)]
+  d_n <- dpred[winner != "baseline", .(N = length(unique(id)), M = mean(value_scaled)), by = .(winner, priorx_cat, gambletype, samplesizecat)]
   d_n <- d_n[(gambletype == "$-bet" & samplesizecat == "l" )| (gambletype == "p-bet" & samplesizecat == "l")]
   d_n[gambletype == "p-bet" & grepl("gain", priorx_cat), M := 0.55]
+dpredagg[, winner := factor(winner, model_levels, model_labels)]
+d_n[, winner := factor(winner, model_levels, model_labels)]
 
-  pd <- position_dodge(width = 0.1)
-  ggplot(dpredagg, aes(samplesizecat, M, fill=winner)) +
+pd <- position_dodge(width = 0.1)
+ggplot(dpredagg, aes(samplesizecat, M, fill=winner)) +
     geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = interaction(winner, priorx_cat)), width = 0.1, pos = pd, color = "grey") +
     geom_line(aes(linetype = interaction(winner, priorx_cat, sep=""), group = interaction(winner, priorx_cat)), pos = pd) +
     geom_point(aes(shape = interaction(winner, priorx_cat, sep="")), size = 2, pos = pd, fill = "white", color = "white") +

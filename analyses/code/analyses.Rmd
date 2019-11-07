@@ -19,7 +19,8 @@ Experiment c): Experiment, where people first see both outcomes and then give se
 #a <- read.csv2("/Users/jhoffart/Desktop/Arbeit/Study2_SS/SS_Analysis/all_data.csv")
 # Für Studie a ist "nur" dataframe aber keine Rohdaten vorhancen
 
-c <- read.csv2("../../data/processed/study1.csv")
+c <- fread("../../data/raw/study1.csv")
+load("../../data/raw/data_analysis_A.rdata")
 
 c <- c[,c(2,3,4,7,9,10,11,12,14,17,18,19,20,21)]
 
@@ -27,7 +28,7 @@ colnames(c) <- c("id", "block", "gt", "trial", "pid", "SS", "p", "gain", "rating
 
 c$p <- as.numeric(paste(c$p))
 c$gain <- as.numeric(paste(c$gain))
-c$rating <- as.numeric(paste(c$rating))
+c$rating <- as.numeric(gsub(",",".",paste(c$rating)))
 c$ev <- c$p *c$gain
 c$id = c$id -4
 c$id <- as.factor(c$id)
@@ -89,7 +90,7 @@ descriptives = ddply(de, .(gamble,gain,ev,s), summarize, median= round(median(ra
 for(i in unique(descriptives$gamble)){
   for(s in c("us", "s", "m", "l")){
     descriptives$"D-E"[ descriptives$gamble == i &  descriptives$s == s] =
-      round(descriptives$mean[descriptives$gamble == i &  descriptives$s == s] - descriptives$mean[ descriptives$gamble == i &  descriptives$s == "d"] ,2)
+      round(descriptives$mean[descriptives$gamble == i &  d?varescriptives$s == s] - descriptives$mean[ descriptives$gamble == i &  descriptives$s == "d"] ,2)
     bf10 = anovaBF(rating ~ gt + id, whichRandom = "id",data = de[de$gamble == i & de$s %in% c(s, "d"),], iterations = niter)
     descriptives$BF10[ descriptives$gamble == i &  descriptives$s == s] = round(extractBF(bf10, onlybf = T),2)
   }
@@ -103,6 +104,7 @@ kable(descriptives)
 
 
 ```{r influence of sample size}
+sd[, length(unique(id))]
 m1ss <- anovaBF(rating~id+evf+ptype*s, data = sd, whichRandom = c("id", "evf"), iterations = niter)
 m1ss <- recompute(m1ss, iterations = niter*3)
 

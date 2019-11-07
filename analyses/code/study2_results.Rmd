@@ -25,7 +25,7 @@ header-includes:
 ---
 
 ```{r, setup, echo=FALSE, warning=FALSE, message=FALSE, results="hide"}
-  source("knitr_setup.R")
+  source("setup_knitr.R")
   source("fig_setup.R")
   library(papaja)
   options(papaja.na_string = "--")
