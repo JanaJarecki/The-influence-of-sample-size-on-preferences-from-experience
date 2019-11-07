@@ -37,25 +37,39 @@ header-includes:
   niter <- 1000 # Bayesian modeling iterations
   study <- 1
 ```
-
-```{r, load_data, cache=TRUE}
-  source("tab2.R") # table called M
+```{r, run_analyses_scripts}
+  # Run all inferential statistical analyses  
+  source("2-statistical-analysis.R")
+  # Table comparing DfE and DfD choices
+  source("tab2.R")
 ```
 
-```{r, preprocess, cache=TRUE}
-  d <- fread("../../data/processed/study1.csv", colClasses=list(character="id"))
-  d <- d[condition=="experience"]
+```{r, load_data}
+  d <- fread(sub("x", study, "../../data/processed/studyx.csv"), colClasses=list(character = "id"))
+  # Read the cognitive model fitting results
   fits <- readRDS("study1_cognitive_models_fit.rds")
-  parameter <- fits[, .(par = names(coef(fit[[1]])), val = coef(fit[[1]])), by = .(id, model)]
+  # Only use the experience condition
+  d <- d[condition == "experience"]
+```
+
+```{r, preprocessing}
+  N <- d[, length(unique(id))]
+  # Goodness of model fit
   gof <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), anova(fit[[1]], fit[[2]], fit[[3]])[, c("wAIC", "AIC", "BIC")])), by = id]
-  weights <- gof[, c("id", "model", "wAIC")]
-  weights <- dcast(weights, id ~ model, value.var = "wAIC")
+  # Akaike weights
+  weights <- dcast(gof[, c("id", "model", "wAIC")], id ~ model, value.var = "wAIC")
   weights[, winner := names(.SD)[which.max(.SD)], by = id] # winning models
-  # Winners
+  # Winners of the model comparison by participant
   winners <- sort(table(weights$winner))
-  weights[, winner := factor(winner, names(winners), model_labels[names(winners)])]
-  N <- gof[, length(unique(id))]
-  # Prediction dat
+  weights[, winner := factor(winner, names(winners), model_labels[names(winners)])]  
+  # Parameter data
+  parameter <- fits[, .(par = names(coef(fit[[1]])), val = coef(fit[[1]])), by = .(id, model)]
+  parameter <- parameter[weights[, c("id","winner")], on = "id"]
+  parameter[, winner := tolower(winner)]
+  parameter[, model := ifelse(winner == "baseline", "base", winner)]
+  parameter <- parameter[winner == model]
+  
+  # Prediction data
   pred <- fits[, fit[[1]]$predict(), by=.(id, model)]
   pred[, t := 1:.N, by=.(id, model)]
   setnames(pred, "V1", "pred")
@@ -67,42 +81,18 @@ header-includes:
   dpred[, relfreq_x := gamblep]
   dpred[, count_x := round(gamblep * samplesize)]
   dpred[, count_0 := samplesize - count_x]
-  dpred[, winner := ifelse(tolower(winner)=="base", "baseline", tolower(winner))]
+  dpred[, model := ifelse(tolower(winner)=="baseline", "base", tolower(winner))]
+  dpred[, winner := tolower(winner)]
   dpred <- dpred[winner == model]
   dpred <- parameter[par=="count_x", c("id", "val")][dpred, on = "id"]
-  source("2-statistical-analysis.R")
 ```
 
 \subsubsection{Evaluations of gambles from different sample sizes}
 Table \ref{tab:means_study1} summarizes participants' evaluations of the gambles in the experience and description condition. For instance, in the experience condition, across sample sizes xs, s, m, and l, people assigned a value of $`r M[[4]][, M]`$ (respectively). Overall, the different sample sizes had no systematic influence on participants' evaluations, which was confirmed by comparing analyses of variance models (ANOVA), showing that evaluations are best predicted by a model that does not include sample size as predictor but a combination of gamble type and expected value with a by-participant random effect (Model 1), which outperformed a model including sample size ($BF_{10}= `r BF_fe_fess`$) and a model including a sample-size-gamble-type interaction ($BF_{10} `r BF_fe_int`$). Although this suggests that sample size does not reliably influence the evaluations of gambles in a decision from experience paradigm, the cognitive modeling analyses will show a more nuanced picture.
 
 
-<!--  $\mathrm{M}\textsubscript{0}$ sample size was a random effect, and gamble type---p-bet vs. \$-bet---a fixed effect, resulting in higher evaluations of the p-bets (gamble IDs 1 to 3 in Table \ref{tab:table:Lotteries}) compared to the \$-bets (IDs 4 to 6). This model outperformed a model with sample size as fixed effect ($BF\textsubscript{01} = 409$), and a model with a sample-size$\times$gamble-type interaction ($BF\textsubscript{01} > 1,000$). 
-
-
-
- -->
-<!-- 
-```{r, study1_evaluations, fig.cap = "Mean gamble evaluations of \\$-bets and p-bets in the experience condition across sample sizes and in the the description condition."}
-  dagg <- d[, .(M=mean(value), SD=sd(value)), by = .(samplesizecat, gambletype)]
-  ggplot(dagg, aes(samplesizecat)) +
-    geom_jitter(data=d, aes(y=value), alpha = 0.01) +
-    geom_violin(data=d, aes(y=value), color = "grey", fill = "grey", alpha = .4) +
-    geom_boxplot(data=d, aes(y=value), fill = NA, color = "white", width = 0.2, size = 1) +
-    geom_errorbar(aes(ymin = M-SD, ymax=M+SD), width = 0.1, size = 0.8) +
-    geom_point(aes(y=M), size = 3) +
-    facet_wrap(~gambletype) +
-    ylim(0,27) +
-    ylab("Evaluation (M +/- SD)") +
-    xlab("Sample Size") +
-    labs(caption = "Note: -- denotes description condition") +
-    geom_segment(aes(x = "xs", xend = "l", y = 27, yend = 27), color = "grey") +
-    geom_label(aes(y = 27, x = "s", label = " Experience"), hjust = 0.03, label.size = 0, size = 2.7, fontface = 3, vjust = 0.4) +
-    theme(aspect.ratio = 1)
-``` 
--->
-
 ```{r, means_study1}
+  # format the Bayes Factor such that BF > 1000 is displayed as > 1000
   M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
   apa_table(M
     , caption = "Valuations of Gambles in Study 1"
@@ -123,7 +113,6 @@ The observed and predicted evaluations were normalized to a common range between
 
 
 ```{r, study1_model_fit}
-  N <- nrow(weights)
   bic <- setNames(gof[, round(mean(BIC)), by=model]$V1, c("base", "rf", "bvu"))
 ```
 
@@ -136,15 +125,10 @@ The observed and predicted evaluations were normalized to a common range between
   knitr::read_chunk("fig_cogn_model_fit.R")
 ```
 ```{r, study1_model_weights, fig.height = 4, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
-  <<cogn_model_fit>>
+  #<<cogn_model_fit>>
 ```
 
 ```{r, study1_par}
-  parameter <- parameter[weights[, c("id","winner")], on = "id"]
-  parameter[, winner := tolower(winner)]
-  parameter[, winner := ifelse(winner == "base", "baseline", winner)]
-  parameter <- parameter[winner == model]
-  # Mean parameter to display
   M_alpha_bvu <- parameter[winner=="bvu" & par=="rp", mean(val)]
   M_alpha_rf  <- parameter[winner=="rf" & par=="rp", mean(val)]
   M_thetag_bvu <- parameter[winner=="bvu" & par=="count_x", mean(val)]
@@ -160,11 +144,10 @@ The estimated parameter of the winning models, which Table \ref{tab:study1_param
 }
 
 ```{r, study1_parameter}
-  tab <- copy(parameter[winner == model])
-  tab[,
+  parameter[,
      winner_n := paste0(factor(winner, levels = model_levels, labels = model_labels), " (\\textit{n}$=$", ..winners[winner], ")"),
     by=winner]
-  tab <- tab[, .(val = paste_meansd(val)), by = .(winner_n, par)]
+  tab <- parameter[, .(val = paste_meansd(val)), by = .(winner_n, par)]
   tab <- dcast(tab, winner_n ~ par, value.var = "val")
   papaja::apa_table(tab[c(2,3,1), c("winner_n", "rp", "delta", "count_x","m", "sigma")]
       , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
@@ -176,9 +159,8 @@ The estimated parameter of the winning models, which Table \ref{tab:study1_param
 ```
 
 ```{r, ind_fits_cutoff}
-  dpred <- dpred[, .SD[grepl(tolower(unique(winner)), model)], by=id]
   cutoff <- 0.4
-  m_cor <- dpred[, cor(pred, value), by = id][, mean(V1)]
+  m_cor <- dpred[model == winner, cor(pred, value), by = id][, mean(V1)]
   ids_cutoff <- dpred[, cor(pred, value), by = id][V1 < cutoff]$id
 ```
 
@@ -188,6 +170,7 @@ The estimated parameter of the winning models, which Table \ref{tab:study1_param
 
 ```{r echo=FALSE}
   knitr::read_chunk("fig_cogn_model_fit_qualitatively.R")
+  source("fig_cogn_model_fit_qualitatively.R")
 ```
 ```{r, ind_fits1, fig.with = 6, fig.height = 6, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 <<cogn_model_fit_qualitatively>>

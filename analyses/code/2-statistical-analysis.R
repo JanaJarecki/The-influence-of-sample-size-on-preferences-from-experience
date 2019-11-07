@@ -98,5 +98,6 @@ fit2 <- brm(
   file = "study1_bayes_models_fit_confidence_rf.rds")
 
 # Fit model without priorx_cat
-null_fit2 = update(fit2, formula = ~ .-samplesizecat + (1 | id),
+null_fit2 = update(fit2,
+  formula = ~ .-samplesizecat + (1 | id),
   file = "study1_bayes_models_fit0_confidence_rf.rds")  # Same but without the sample size
