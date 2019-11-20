@@ -354,7 +354,7 @@ We found that participants' confidence in their valuations was generally high  (
 
 
 \section{Study 2}
-In Study 1, participants knew the outcomes before drawing samples. This differs from typical studies on decisions from experience, in which people learn the value of the outcomes while sampling. To bring our method more in line with other studies, in Study 2 we changed the experimental method such that one outcome had to be learned during sampling.
+In Study 1, participants knew the outcomes before drawing samples. Knowing the outcomes differs from typical decisions from experience paradigms, in which people learn about the outcome values by sampling. To bring our method more in line with this paradigm, in Study 2 we changed the experimental method such that one outcome had to be learned during sampling.
 
 \subsection{Methods}
 The procedure an methods of Study~2 were similar to Study~1. The only difference consisted in that before participants started sampling, they were now only informed about gambles being two-outcome gambles and that one of the outcomes was zero. Unlike in Study 1, the gain amounts of the gambles were not displayed on screen before or during the sampling stage.
@@ -363,127 +363,8 @@ Forty people (38 women, 2 men) between 18 and 27 years old ($M = 21.1$ years, $S
 
 \subsection{Results}
 All analyses were conducted in the statistical programming environment R, models were fit as in the analyses in Study 1.
+
 \input{analyses/reports/results_study2}
-
-
-
-% \begin{ThreePartTable}
-% \begin{TableNotes}
-% \small
-% \item \textit{Note}. Median and mean valuations across participants. The heading $p$(gain) describes the probability $(p)$ with which a gain occurred and the gain amount in Swiss francs (gain). The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble. D--E describes the difference between mean valuations from description (D) and those from experience (E). Bayes factor BF\textsubscript{10} quantifies the evidence for a linear model ($\mathrm{M}\textsubscript{1}$) that predicts that valuations differ between description and experience over a linear model ($\mathrm{M}\textsubscript{0}$) that predicts no such difference. Both models contain participant as a random factor. EV = expected value; xs = extra small; s = small; m = medium; l = large. Gambles 1, 2, and 3 represent \$-bets and Gambles 4, 5, and 6 represent p-bets.
-% \end{TableNotes}
-% \footnotesize
-% \begin{longtable}{ccccccccc}
-% \caption{Valuations, Study 2}\label{table:meansStudy3}\\
-% \toprule
-% Gamble & Condition & Sample size & \(p\)(gain) &  EV& Median & Mean& D--E& $BF\textsubscript{10}$\\
-% \hline
-% \multirow{5}{*}{1} &\multirow{4}{*}{Experience} & 5 (xs)  & \multirow{5}{*}{1/5(16)}& \multirow{5}{*}{3.20}
-%  & 5.15 & 6.29 & 0.86&11.13\\
-% && 10 (s) &&& 5.00 & 6.39 & 0.96& 354.66\\
-% && 15 (m)&&&5.95 & 6.38 & 0.95&78.07\\
-% && 30 (l)&&& 6.00 & 6.53 & 1.10&171.43\\
-% & Description &&&&  4.00 & 5.43 && \\
-% \hline
-% \multirow{5}{*}{2} &\multirow{4}{*}{Experience} & 6 (xs)  & \multirow{5}{*}{1/6(12)}& \multirow{5}{*}{2.00}
-% & 4.00 & 4.55 & 0.24&0.26 \\
-% && 12 (s) &&&   4.00 & 4.72 & 0.41&1.25 \\
-% && 18 (m) &&&   5.00 & 4.88 & 0.57 &3.99\\
-% && 36 (l) &&&   4.95 & 4.78 & 0.47 &3.58\\
-% & Description &&&&   3.35 & 4.31 && \\
-% \hline
-% \multirow{5}{*}{3} &\multirow{4}{*}{Experience} & 7 (xs)  & \multirow{5}{*}{1/7(28)}&  \multirow{5}{*}{4.03}
-% & 8.95 & 10.66 & 1.40&5.80\\
-% && 14 (s) &&& 10.00 & 10.26 & 1.01&1.04\\
-% && 21 (m) &&&  9.70 & 10.37 & 1.12&1.67\\
-% && 42 (l) &&& 10.00 & 11.18 & 1.93&220.94\\
-% & Description&&&&  6.00 & 9.25  &&\\
-% \hline
-% \multirow{5}{*}{4} &\multirow{4}{*}{Experience} & 5 (xs)  & \multirow{5}{*}{4/5(4)}&  \multirow{5}{*}{3.20}
-% & 3.30 & 2.91 & -0.29&13.53\\
-% && 10 (s) &&& 3.20 & 2.94 & -0.26&25.50\\
-% && 15 (m) &&&3.20 & 3.02 & -0.18&1.74\\
-% && 30 (l) &&&3.20 & 3.09 & -0.11&0.42\\
-% & Description &&&&  3.50 & 3.20 && \\
-% \hline
-% \multirow{5}{*}{5} &\multirow{4}{*}{Experience} & 6 (xs)  & \multirow{5}{*}{5/6(2.4)} & \multirow{5}{*}{2.00}
-% & 2.00 & 1.82 & -0.10&1.32\\
-% && 12 (s) &&&  2.00 & 1.85 & -0.07&0.37\\
-% && 18 (m) &&&  2.00 & 1.85 & -0.07&0.34\\
-% && 36 (l) &&&  2.10 & 1.95 & 0.03&0.20\\
-% & Description &&&&   2.00 & 1.92 && \\
-% \hline
-% \multirow{5}{*}{6} &\multirow{4}{*}{Experience} & 7 (xs)  & \multirow{5}{*}{6/7(4.7)}& \multirow{5}{*}{4.03}
-% & 4.00 & 3.68 & -0.16&0.60\\
-% && 14 (s) &&&  4.10 & 3.78 & -0.06&0.17\\
-% && 21 (m) &&&  4.15 & 3.85 & 0.01&0.14\\
-% && 42 (l) &&&  4.20 & 3.90 & 0.06&0.18\\
-% & Description &&&&   4.10 & 3.84 && \\
-% \bottomrule
-% \insertTableNotes
-% \end{longtable}
-% \end{ThreePartTable}
-% %\end{table*}
-
-
-% %\begin{center} --- Insert Table \ref{table:meansStudy3} here ---- \end{center}
-
-% \subsubsection{Sample size}
-% Table \ref{table:meansStudy3} displays mean and median valuations per gamble and sample-size category. Similar to in Study 1, mean valuations did not differ much between sample sizes: Again, valuations were best predicted by the random factor expected value and the fixed factor gamble type (additional fixed factor sample size: $BF\textsubscript{01} = 285$; additional interaction between sample size and gamble type: $BF\textsubscript{01} > 1,000 $). 
-
-% \subsubsection{Modeling results}
-
-% \begin{figure}[htbp] 
-%   \centering
-% \includegraphics[width=.8\linewidth, keepaspectratio]{modelcomp_rs2.eps}
-%   \caption{Number of people who were best fit by each model. Evidence strength is indicated by shades of gray. Baseline = Baseline model; RF = relative frequency model; BVU = Bayesian value updating model \textcolor{blue}{ (with the best fitting priors in parentheses).} }
-%   \label{fig:modeling2}
-% \end{figure}
-
-% \textcolor{blue}{For the majority of participants (20 people, 50\% of all participants), the RF  model performed best. The behavior of 17 participants (42.5\%) was best described by the BVU model. Of these, 5 participants were best described with a uniform prior belief, 2 participants were best described with a bimodal prior belief, 3 participants were best described with a prior belief peaked over large gain probabilities (gain prior), and 7 participants were best described with a prior belief peaked over very low gain probabilities (loss prior). Again, if we included only the BVU model with the best fitting prior belief in the model comparison, the evidence is for 6 of the 17 participants very strong; for 2 of the 17 participants strong; for 7 of the 17 participants positive; and for only 2 of the 17 participants weak.  The baseline model was preferred for 3 participants (7.5\%). Generally, the results illustrate the psychological plausibility of both models, but the dominance of the RF model shows that most participants were not very sensitive to the sample sizes.} 
-
-
-% \begin{figure}[htbp] 
-%   \centering
-% \includegraphics[height = .8\textheight, keepaspectratio]{indqual2.eps}
-%   \caption{Individual valuations plotted against model predictions given the optimal parameter estimates for each individual. The headings reflect the model that best fit the data and produced the predictions. BVU = Bayesian value updating (with the best fitting priors in parentheses); RF = relative frequency.}
-%   \label{fig:ind.fits2}
-% \end{figure}
-
-% As in Study 1, we examined the data qualitatively. In Figure \ref{fig:ind.fits2}, participants' valuations are plotted against the predicted valuations of the best fitting model given the optimal parameter estimates for each individual. Again the predictions capture the data well. Figure \ref{fig:qual2} shows the mean valuations of the frequentist and Bayesian learners separately for \$-bets and p-bets. Again, the two groups differed. 
-% For \$-bets, valuations of frequentist learners seem on average to slightly increase with growing sample size. This observation contrasts with the model predictions yet is statistically not reliable ($BF\textsubscript{01} = 1.5$).  As expected, for p-bets, average valuations of frequentist learners remain stable ($BF\textsubscript{01} = 89$). For \$-bets, valuations of Bayesian learners change  with growing sample size. Yet, this effect is less pronounced than in Study 1 and for both groups statistically not reliable, which again may be related to the small number of participants falling into each group (increasing: $BF\textsubscript{01} = 33$, decreasing: $BF\textsubscript{01} = 59$). For p-bets, valuations of Bayesian learners with uniform, bimodal, and loss priors clearly increase as predicted by the BVU model ($BF\textsubscript{10} > 1,000$).
-% Valuations of Bayesian learners with gain priors do not vary systematically with sample size ($BF\textsubscript{01} = 7$). This observation needs to be examined with caution as only three participants fall into this group.
-
-% \begin{figure}[htbp] 
-%   \centering
-% \includegraphics[width=.8\linewidth, keepaspectratio]{groupqual2_stand.eps}
-%   \caption{\textcolor{blue}{Mean valuations (standardized per gamble between 0 and 1) of people who were best fit by the Bayesian value updating (BVU) model (black and dark gray) and the relative frequency (RF) model (light gray). Depending on whether the BVU model predicted an increase (black) or a decrease (dark gray) in valuations with growing sample size, separately for \$-bets and p-bets we split Bayesian learners into two groups (Increase and Decrease). $N$ describes on how many people's data the means are based. Error bars indicate the standard error of the mean. Sample sizes: xs = extra small; s = small; m = medium; l = large. }}
-%   \label{fig:qual2}
-% \end{figure}
-
-
-
-% \subsubsection{Effect of gamble type and sampling order}
-% In line with Study 1, the mean and median ratings in Table \ref{table:meansStudy3} show higher valuations for \$-bets (Gambles 1--3) than for p-bets (Gambles 4--6)  even if the gambles had the same expected value (BF\textsubscript{10} \textgreater 1,000). We did not find evidence for any recency or primacy effects. $\mathrm{M}\textsubscript{0}$, which predicts valuations as a function of the factor gamble (1--6), was slightly preferred over models that also include the mean of the first half of the observed samples ($\mathrm{M}\textsubscript{1}$) or the mean of the second half of the observed samples ($\mathrm{M}\textsubscript{2}$) as predictors ($BF\textsubscript{01} = 3.4$, $BF\textsubscript{02} = 1.9$). 
-
-% \subsubsection{Confidence ratings}
-% The mean confidence ratings in the extra small, small, medium, and large sample-size categories were xs = 4.01 ($SD = 1.23$); s = 4.09, ($SD = 1.14$); m = 4.04 ($SD = 1.19)$; and l = 4.16 ($SD = 1.19$). $\mathrm{M}\textsubscript{0}$, which predicts confidence rating as a function of just a random participant effect, was again preferred over a model that also includes sample-size category as predictor ($BF\textsubscript{01} = 11.2$). 
-
-% Considering only those data sets that were best described by the BVU model, mean confidence ratings descriptively increased as a function of  sample size (mean confidence ratings: xs = $3.87$, $SD = 1.27$; s = $3.91$, $SD = 1.15$; m = $3.93$, $SD = 1.13$; l = $4$, $SD = 1.24$). %xs = $3.84$, $SD = 1.31$; s = $3.95$, $SD = 1.16$; m = $4.02$, $SD = 1.13$; l = $4.1$, $SD = 1.28$).
-% However, this finding was not reliable as the simpler model that predicts no influence of sample size was still preferred over the model that predicts an effect of sample size ($BF\textsubscript{01} = 77$). Similar to in Study 1, the data sets that were quantitatively and qualitatively best described by the RF model did not show an effect of sample size (mean confidence ratings: xs = $4.05$, $SD = 1.19$; s = $4.17$, $SD = 1.1$; m = $4.06$, $SD = 1.22$; l = $4.19$, $SD = 1.14$; $BF\textsubscript{01} = 45$).
-
-
-% %xs = $4.04$, $SD = 1.19$; s = $4.14$, $SD = 1.09$; m = $4.02$, $SD = 1.21$; l = $4.13$, $SD = 1.13$; $BF\textsubscript{01} = 72$).
-% \subsubsection{Description versus experience}
-
-% Table \ref{table:meansStudy3} displays the mean and median valuations from experience and from description. It also shows the difference between the mean valuations in the experience and description conditions (column D--E, separately for different sample sizes). 
-
-% In line with Study 1, valuations made from experience and description differed. Participants valued experienced \$-bets higher than described \$-bets. In contrast, participants valued described p-bets higher than experienced p-bets. These observations are again in line with the assumption that the probabilities of rare events were overweighted in both conditions, and that this effect was more pronounced for valuations from experience.
-
-% Similar to in Study 1, the Bayes factors (rightmost column of Table \ref{table:meansStudy3}) generally suggest a difference between description and experience. However, the finding is, especially for p-bets, less pronounced than in Study 1. Again, the gap is in contrast to the classic D--E gap reported in the decision-making literature.
-
-% Participants' mean confidence in valuations from description was 3.99 ($SD = 1.12$). Only for large sample sizes were participants more confident about their valuations from experience than they were about valuations from description ($BF\textsubscript{10} = 53$). There is no evidence for this effect for extra small ($BF\textsubscript{10} = 0.1$), small ($BF\textsubscript{10} = 0.7$), or medium ($BF\textsubscript{10} = 0.1$) sample sizes.
-
 
 \subsection{Discussion of Study 2}
 Study 2 tested whether the results of Study 1 are generalizable to typical sampling paradigms where people have to learn the outcome values from experience. The results of Studies 1 and 2 are remarkably similar: Participants behaved as if they overweighted rare events, when making valuations from both experience and description. In line with Study 1, we found that people could be classified as Bayesian and frequentist learners.
