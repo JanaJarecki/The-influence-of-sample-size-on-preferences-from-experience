@@ -139,7 +139,10 @@ The estimated parameter of the best-fitting models, which Table \ref{tab:study1_
 ```
 
 \textit{Qualitative Model Fit.}
-The qualitative fit between the models and the data is shown in Figure \ref{fig:fig5}, which plots the predictions of the best-fitting models against the observed evaluations by participant. The models generally describe the data well \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$).} For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. However, the quantitative results of the probability weighting model and the utility model, we favored a utility model without probability weighting.}
+The qualitative fit between the models and the data is shown in Figure \ref{fig:fig5}, which plots the predictions of the best-fitting models against the observed evaluations by participant. The models generally describe the data well \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$).} For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. However, the quantitative results of the probability weighting model and the utility model, we # Convert wide df to long
+library(tidyr)
+gather(df, "var", "val", colsToGather)
+favored a utility model without probability weighting.}
 
 
 
