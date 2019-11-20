@@ -55,10 +55,10 @@ BF_value_prior <- bayes_factor(fit_value_prior, fit_value_noprior)$bf
 class(BF_value_prior) <- "BF"
 
 
-plot(fit_value_prior)
-hypothesis(fit_value_prior, "samplesizecat_num:priorx_cat1 > 0")
-hypothesis(fit_value_prior, "samplesizecat_num:priorx_cat2 < 0")
-hypothesis(fit_value_prior, "samplesizecat_num > 0")
+# plot(fit_value_prior)
+# hypothesis(fit_value_prior, "samplesizecat_num:priorx_cat1 > 0")
+# hypothesis(fit_value_prior, "samplesizecat_num:priorx_cat2 < 0")
+# hypothesis(fit_value_prior, "samplesizecat_num > 0")
 
 #
 # Analysis of confidenced
@@ -67,19 +67,12 @@ d[, conf_scaled := scale(confidence), by = id]
 d[is.na(conf_scaled), conf_scaled := 0]
 
 
-# Fit full model
-fit_value_prior <- brm(
-  formula = conf_scaled ~ samplesizecat_num * winner * gambletype + (1 | id),
-  data   = d,
-  cores  = 3,
-  save_all_pars = TRUE,
-  #iter = 5000,
-  file = "study12_bayes_models_fit_conf")
+## Bayes factor of full model against null
+bfFull = lmBF(conf_scaled ~ samplesizecat_num * winner * gambletype + id, data = d, whichRandom = "id")
 
-# Fit model without priorx_cat
-fit_value_noprior <- update(fit_value_prior,
-  save_all_pars = TRUE,
-  formula = ~ samplesizecat_num * gambletype + (1 | id),
-  file = "study12_bayes_models_fit_conf_noprior")
-BF_conf_prior <- bayes_factor(fit_value_prior, fit_value_noprior, maxiter = 6000)$bf
+## Bayes factor of main effects only against null
+bfNoWinner = lmBF(conf_scaled ~ samplesizecat_num  * gambletype + id, data = d, whichRandom = "id")
+
+## Compare the main-effects only model to the full model
+BF_conf_prior <- extractBF(bfNoWinner / bfFull, onlybf = TRUE)
 class(BF_conf_prior) <- "BF"

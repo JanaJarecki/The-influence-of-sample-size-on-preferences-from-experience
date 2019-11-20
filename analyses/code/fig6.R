@@ -38,7 +38,7 @@ plot_it <- function(x) {
         scale_y_continuous(paste(x, "(M +/-SE)"), expand = c(0,0)) +
         guides(fill = "none", linetype = "none") +
         theme(
-            aspect.ratio = 0.9,
+            #aspect.ratio = 0.9,
             legend.position = "right",
             legend.direction = "vertical") +
         labs(title = "Evaluations change with sample size as function of winning model and prior")
