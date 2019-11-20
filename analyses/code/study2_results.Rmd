@@ -76,25 +76,6 @@ header-includes:
 \subsection{Evaluations of Gambles by Condition and Sample Size}
 Table \ref{tab:means_study2} displays participants' mean and median evaluations per gamble in the experience and description conditions by sample-size. The results resemble the findings of Study 1, namely that larger sample sizes do not lead to systematic changes in mean evaluations. Evaluations were best predicted by a linear model including expected value as random factor and gamble type as fixed factor gamble (additional fixed factor sample size: $BF\textsubscript{01} = 285$; additional interaction between sample size and gamble type: $BF\textsubscript{01} > 1,000$).
 
-<!-- 
-```{r, study2_evaluations, fig.cap = "Mean gamble evaluations of \\$-bets and p-bets in the experience condition across sample sizes and in the the description condition."}
-  dagg <- d[, .(M=mean(value), SD=sd(value)), by = .(samplesizecat, gambletype)]
-  ggplot(dagg, aes(samplesizecat)) +
-    geom_jitter(data=d, aes(y=value), alpha = 0.01) +
-    geom_violin(data=d, aes(y=value), color = "grey", fill = "grey", alpha = .4) +
-    geom_boxplot(data=d, aes(y=value), fill = NA, color = "white", width = 0.2, size = 1) +
-    geom_errorbar(aes(ymin = M-SD, ymax=M+SD), width = 0.1, size = 0.8) +
-    geom_point(aes(y=M), size = 3) +
-    facet_wrap(~gambletype) +
-    ylim(0,27) +
-    ylab("Evaluation (M +/- SD)") +
-    xlab("Sample Size") +
-    labs(caption = "Note: -- denotes description condition") +
-    geom_segment(aes(x = "xs", xend = "l", y = 27, yend = 27), color = "grey") +
-    geom_label(aes(y = 27, x = "s", label = " Experience"), hjust = 0.03, label.size = 0, size = 2.7, fontface = 3, vjust = 0.4) +
-    theme(aspect.ratio = 1)
-``` 
--->
 
 ```{r, means_study2}
   M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
@@ -208,9 +189,6 @@ Given the cognitive modeling results, participants were classified as relative-f
   <<effect_of_ss_by_model>>
 ```
 
-
-
-
 \subsubsection{Effect of gamble type and sampling order}
 In line with Study 1, the mean and median ratings in Table \ref{tab:means_study2} show that \$-bets are evaluated higher than p-bets, although he gamble types had the same expected value (BF\textsubscript{10} \textgreater 1,000). Again, we did not find evidence for any recency or primacy effects. $\mathrm{M}\textsubscript{0}$, which predicts valuations as a function of the factor gamble (1--6), was slightly preferred over models that also include the mean of the first half of the observed samples ($\mathrm{M}\textsubscript{1}$) or the mean of the second half of the observed samples ($\mathrm{M}\textsubscript{2}$) as predictors ($BF\textsubscript{01} = 3.4$, $BF\textsubscript{02} = 1.9$). 
 
@@ -226,14 +204,7 @@ Participants' mean confidence ratings of their valuations from experience in the
 
 
 ```{r, confidence_stats, results="hide"}
-# full <- readRDS("study2_bayes_models_fit_confidence.rds")
-# null <- readRDS("study2_bayes_models_fit0_confidence.rds")
-# BF10 <- bayes_factor(full, null)
 BF10 <- 0.01
-
-# full <- readRDS("study2_bayes_models_fit_confidence_rf.rds")
-# null <- readRDS("study2_bayes_models_fit0_confidence_rf.rds")
-# BF10_rf <- bayes_factor(full, null)
 BF10_rf <- 1.43
 ```
 

@@ -1,0 +1,543 @@
+dd
+\documentclass[a4paper,man, natbib]{apa6} %jou, man, report, doc
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs} %booktabs package makes nice tables!
+\usepackage{url}
+\usepackage{rotating}
+\usepackage[toc,page]{appendix}
+\usepackage{color}
+\usepackage{subscript}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage{longtable}
+\usepackage{times}
+\usepackage{upgreek}
+%\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+%\addbibresource{/Users/jhoffart/Documents/Dropbox/Basel/References/refJanine.bib}
+%\addbibresource{refJanine.bib}
+
+
+\title{The influence of sample size on preferences from experience}
+\shorttitle{sample size and preference}
+
+\author{Janine Christin Hoffart\\J\"org Rieskamp\\Gilles Dutilh}
+\affiliation{University of Basel, Department of Psychology, Center for Economic Psychology}
+
+\leftheader{Hoffart, Rieskamp, Dutilh}
+
+\abstract{People often evaluate risky options in situations in which they need to learn from experience how likely certain outcomes are. When people can actively sample information about outcomes and outcome probabilities to make decisions, they typically draw small samples. To understand why people rely on small samples, we studied how the amount of information influences preferences for gambles. In two studies, people drew different numbers of samples from risky gambles and then indicated their selling prices for these gambles and their confidence in their judgments. Remarkably, the results show that averaged across people, neither valuations nor confidence in the valuations changed substantially with sample size. However, on an individual level approximately half of the participants could be classified as Bayesian learners and the other half as frequentist learners. Both valuations and confidence of Bayesian learners changed with sample size as predicted by Bayesian principles. In contrast, sample size did not influence valuations or confidence of frequentist learners. These results illustrate the variability in how people learn from sampled information and provide an explanation for why sample size often does not affect judgments. We also found a difference in valuations based on descriptive information versus valuations based on experienced outcomes. In both conditions, people behaved as if they overweighted rare events. } 
+
+
+\keywords{D--E gap, valuations from experience}
+\authornote{This research is supported by a grant (SNF \# 143854) from the Swiss National Science Foundation to the second and third author. The authors report no conflict of interest. We thank Anita Todd for editing the manuscript. 
+
+Correspondence concerning this article should be addressed to Janine Christin Hoffart. University of Basel, Department of Psychology, Missionsstrasse 62a, 4055 Basel, Switzerland.  E-mail: janine.hoffart@unibas.ch
+
+Wordcount: \textasciitilde 10'000 words}
+
+\begin{document}
+\maketitle
+In everyday life, people often form preferences on the basis of past experiences. How strong these preferences are arguably depends on the amount of previous experience. Someone who has visited a restaurant for many years and has always had positive experiences likely has a stronger positive preference for this restaurant than someone who visited the restaurant only once and had a positive experience. Thus, even if the relative frequency of positive experiences is similar, the strength of preferences can differ. We examined how people's preferences in an experience-based judgment situation evolve as a function of growing experience. 
+
+%In everyday life people often base their preferences on past experiences. How much experience people have made with an option arguably influences how strong people's opinion about this option is. Someone who had made 50 out of 50 good experiences with a restaurant probably has a stronger preference for this restaurant than someone who had made 1 out of 1 good experience with this restaurant although the relative frequency of good experiences is the same in both situations. Here, we study, how people's preferences (i.e. valuations) in an experience-based task evolve as a function of growing experience. 
+
+\section{The D--E Gap and Search Effort in Experience-Based Tasks}
+How people develop preferences based on information that they accumulate over time has been studied with experience-based judgment and decision-making tasks \citep[e.g.,][]{Hertwig2004, Hau2008}. %Recently, there has been developing growing interest in studying experience based tasks \citep[e.g.][]{Hertwig2004, Hau2008}. 
+Experience-based tasks differ from descriptive tasks in the way information is presented. In descriptive tasks, people make judgments about gambles based on numerical, graphical, or text-based summaries of the gambles' outcome distributions. In experience-based tasks, on the other hand, people learn about the outcome distributions by repeatedly drawing samples from them until they feel confident to make a judgment or decision. Interestingly, past research suggests that people's decisions systematically differ between description and experience (the so-called D--E gap): When people make decisions from description, they choose as if they overweight rare events \citep{Kahneman1979}. At the same time, when they make similar decisions based on experience, they choose as if they underweight rare events \citep{Hertwig2004}. 
+
+%\subsection{Sample size in experience--based tasks}
+The D--E gap has often been attributed to limited search effort in experience-based tasks and resulting \textit{sampling error}. Such sampling error occurs when the observed outcome sequence deviates from the objective outcome probabilities \citep{Hadar2009}. For instance, \cite{Hertwig2004} reported that participants drew a median of only 15 observations per decision. With such a low number, the skew of a gamble's binomial sampling distribution implies that more people undersample than oversample a rare event. Indeed, averaged across trials, in Hertwig et al.'s 2004 study, the rare event was undersampled by $78\%$ of the participants. Other studies have reported similar sampling errors \citep[e.g.,][]{Hau2008,Rakow2008}. 
+
+Since the initial finding that people often sample insufficiently, researchers have tried to reduce or eliminate sampling error. Attempts have involved encouraging participants to draw larger samples by increasing the incentives \citep{Hau2008}; showing fixed samples that represent the gambles' objective probability distributions \citep{Ungemach2009}; showing fixed---relatively large---numbers of random samples, as larger total samples naturally reduce sampling error \citep{Hau2008,Hau2010}; presenting gamble descriptions that match the outcome distribution that a ``partner'' participant had sampled \citep{Rakow2008}; and constraining statistical analysis to trials in which the total sample closely represented the gambles' underlying outcome distributions \citep[e.g.,][]{Camilleri2009, Camilleri2011a}. Typically, the goal of the attempt to eliminate sampling error was to allow for an unbiased comparison between decisions from description and decisions from experience. The results are mixed: In some studies, the authors found a diminished D--E gap \citep{Hau2008,Hau2010, Ungemach2009} or failed to find a D--E gap \citep{Gloeckner2012, Camilleri2009,Camilleri2011a,Rakow2008}. 
+
+While the question of whether people process information from description differently from information from experience is of great importance, in the present work, we approached it only marginally. Instead, we examined how valuations of risky prospects from experience are influenced by different sample sizes. To do so, we manipulated how many samples people could draw from the prospects' outcome distributions and measured people's preferences (i.e., selling prices).
+
+
+%While the question whether people process information from description differently than information from experience is definitely interesting, here . Instead we will focus on how sample size influences how risky prospects are evaluated. To do so, we manipulate how many samples people can draw from the prospects' outcome distributions and study whether sample size influences preferences.
+
+\section{How Does Sample Size Influence Preferences?}
+The question of how sample size influences judgments has interested psychologists for decades \citep[e.g.,][]{Tversky1971, Griffin1992}. We investigated how sample size influences preferences from experience, by contrasting two existing theories: \textit{the belief in the law of small numbers} \citep{Tversky1971} and \textit{Bayesian updating}. 
+
+\subsection{Belief in the Law of Small Numbers}
+\cite{Tversky1971} formulated the belief in the law of small numbers: an exaggerated belief about the likelihood of small sequences of random draws representing outcome distributions. % Evidence for this belief has 
+For instance, when people were asked to mentally produce a short sequence of random coin tosses, the produced sequences resembled a relative frequency of $.5$ more often than expected by chance \citep{Tversky1971}. \cite{Griffin1992} showed that people tend to neglect the role of sample size in their judgments. They showed participants sequences of coin tosses using coins with different biases. Then, participants estimated the probability that a coin was biased and expressed their confidence in their estimate. Interestingly, \cite{Griffin1992} varied the total number of coin tosses (i.e., sample size). They found that participants neglected sample size and based their estimates mostly on the observed relative frequency of head and tail outcomes. Surprisingly, participants expressed more confidence in their judgments when the number of coin tosses was small. Since these initial findings, several studies have confirmed that people are often less sensitive to sample size than normative models suggest \citep[e.g.,][]{Obrecht2007,Kutzner2016}. 
+
+\subsection{Bayesian Updating}
+%A second view on the role of sample size builds on Bayesian principles. Many Bayesian learning models have been applied successfully to a range of tasks in cognitive psychology. 
+In contrast to the psychological principle of the belief in the law of small numbers, Bayesian principles suggest that sample size influences judgments. %provide a fundamentally different view of how sample size influences judgments. The basic mechanism of Bayesian learning assumes that people have a prior belief about how the world is structured. This prior belief gets updated continuously as new information comes in. The more new information is observed, the more strongly the prior belief is adjusted. Humans as well as animals have been shown to approximate Bayesian learning for instance in conditioning \citep[e.g.][]{Courville2006Bayesian}, concept- and word-learning \citep[e.g.][]{Tenenbaum2006, Xu2007word}, and object perception \citep{Kersten2004}.
+The Bayesian view offers a normative solution to how people deal with sample sizes. People can treat sample size as a measure of uncertainty, knowing that small samples can lead to a biased representation of the true outcome distribution and larger samples to a more veridical description of the true outcome distribution. Recent research has provided evidence that people indeed treat sample size as a measure of uncertainty, for instance, when they report preferences for consumer goods \citep{DeMartino2017} or make judgments about group differences \citep{Obrecht2010} or the performance of students \citep{Fiedler2002}.
+%This implies that larger samples lead to valuations that represent the true subjective values of outcome distributions more closely than smaller samples. Consequently, sample size influences valuations.
+
+\subsection{Cognitive Models and Hypothesis}
+To investigate how people deal with accumulating evidence, we tested whether they integrate samples by following Bayesian principles or by following the belief in the law of small numbers. For this purpose, we formalized two models that mathematically implement the two theories described above. 
+
+%In this study, we aim to understand how people deal with accumulating evidence by testing whether people integrate sample based uncertainty when they form preferences as suggested by Bayesian updating or whether they do not as suggested by the belief in the law of small numbers. For this purpose, we will formalize two models that implement the two theories described above mathematically. 
+
+To understand the models, it is crucial to recognize the following facts about our experimental methods. In our experiments, we asked participants to indicate their valuations (i.e., selling prices) of two-outcome gambles where one of the outcomes was always zero. People were able to sample a \textit{predefined} number of outcomes from the gamble's outcome distribution and then indicated their selling price for this gamble. Because there were only two outcomes, of which one was always zero, the following models were defined by estimating the probability of the nonzero gain outcome. Note that extensions of the models for more general cases with several outcomes are possible. Importantly, the sample sequences that people saw were always representative of the gamble's outcome distribution. Individual gambles were presented with different sample sizes. 
+
+Both models that we propose are expected utility models. According to expected utility theory, people's preferences about risky options can be represented by subjective utility functions. The subjective value of a risky option is defined as the sum of the subjective values of the outcomes weighted by the outcome probabilities. If outcome probabilities are not provided, as in experience-based tasks, they can be replaced by the decision makers' beliefs. Crucially, the two models that we propose differ with regard to how people develop beliefs about the outcome probabilities.
+
+%\subsection{Valuations from experience}
+%Valuations of risky prospects have been studied in the laboratory by measuring people's selling prices for gambles. Given that experience plays an important role in daily life, it is remarkable that most laboratory studies have focused on valuations from description \citep[with the recent exceptions of][]{Ashby2014, Golan2014, Pachur2012}. Experience--based tasks assess preference most often measured by letting them choose between options. Thus, typically people indicate their ``relative'' preference for choice options. ``Absolute'' preference can be assessed by asking participants to value one single option at a time. In this study, we will -- in line with other recent papers \citep[e.g.,][]{Ashby2014, Golan2014, Pachur2012} -- focus on valuations rather than choices because we aim to measure people's strength of preference. We explore how preferences develop over the course of sampling. Therefore, we need a fine grained tool that allows to detect subtle differences in preferences. Valuations provide such a tool: A slight change in preference might not influence the choices people make (option A is still preferred over option B), but can be detected when we ask for valuations of option A and B separately (larger distance between valuations of option A and B).
+
+\subsubsection{Relative frequency model}
+
+The relative frequency (RF) model formalizes how people who believe in the law of small numbers deal with sample sizes. 
+%The relative frequency model (RF) formalizes the hypothesis that people's valuations depend only on the observed relative frequencies of outcomes and the subjective outcome values.
+It suggests that people simply calculate the relative frequency of all observed samples when forming a belief about the gain probability to make a valuation of the gamble. 
+
+%The expected utility (RF) model assumes that people treat the samples they draw as if they were a comprehensive representation of the gamble. To form a probability belief, participants calculate the mean frequency of their observed samples.
+
+Formally, the belief ${B}_{RF}$ about the gain probability after $t$ observations is given by ${B}_{RF, t}  =  \frac{1}{t} \times \sum\limits_{t=1}^t f(t)$, where $f(t)$ is a sign function that equals $1$ when the observed outcome is a gain and zero otherwise. In our experiments, we presented gambles with two outcomes, one a gain and the other zero. Thus, we can formulate the valuation after sample $t$ ($V_{RF, t}$) as $V_{RF, t} = \sqrt[\alpha]{{B}_{RF, t} \times u({g})}$, where $u(g)$ describes the subjective utility of the gain defined as $u(g) = g^{\alpha}$. The RF model predicts that sample size in itself does not influence valuations.
+
+Following \cite{Griffin1992}, we also asked participants for their confidence in their valuations. We tested whether people would be more confident about their responses when the sample size was small, as found by \cite{Griffin1992}. 
+
+\subsubsection{Bayesian value updating model}
+The Bayesian value updating (BVU) model implements a Bayesian view of how people deal with uncertainty as they gain new information about risky options. The model assumes that people update probability beliefs by following Bayesian principles. %Participants start with an initial \textit{prior} belief that both outcomes occur with equal probability. By sampling, participants gain new information about the true outcome probabilities. They can use this gained information to adjust their prior belief about the probability. This is a sequential process: The larger the sample participants draw, the closer their probability belief will correspond to the objective probabilities of outcomes. Similar to the RF model, the BVU model postulates that for their final valuation of a gamble, people multiply their current belief about the probabilities of the outcomes with their subjective value of the outcomes.
+For the two-outcome gambles, we formulated the BVU model as follows: A person's belief about the gain probability after sampling $t$ outcomes is represented by a beta distribution, ${B}_{BVU, t} \sim Beta(a,b)$. Before sampling ($t = 0$), the model assumes that participants judge the two outcomes as equally probable, ${B}_{BVU, t} \sim Beta(1,1)$. As people sample, they update their initial belief about the gain probability by adding a value of 1 to the \textit{a} parameter when observing a gain and by adding a value of 1 to the \textit{b} parameter when observing a zero. The belief at time $t$ about the probability of a gain is simplified as the mean of this distribution at that moment: ${B}_{BVU, t} = \frac{a_{t}}{a_{t} + b_{t}}$. Similar to the formulation of the RF model, the valuation is then formulated as $V_{BVU, t} = \sqrt[\alpha]{{B}_{BVU, t} \times u({g})}$.
+
+The BVU model predicts that sample size influences valuations. This is because as sample size increases, the beta-distributed belief shifts from the average 50\% in the direction of the true underlying probability of the gain. The model predicts that valuations decrease as a function of sample size when the true gain probability is smaller than 50\% and increase as a function of sample size when the true gain probability is larger than 50\%. Furthermore, the probability belief gets increasingly peaked around the true probability of the gain as sample size grows. Therefore, the model also predicts that confidence in valuations increases with increasing sample size. %We also test this prediction by assessing confidence ratings.
+
+\section{Study 1}
+We defined two main goals and one subordinate goal for the experimental method of Studies 1 and 2. First, we aimed to measure people's strength of preference. Therefore, we prompted participants to value single gambles. This approach is in line with recent studies \citep[e.g.,][]{Ashby2014, Golan2014, Pachur2012} and offers the advantage of measuring preference more precisely than with choices. This is important, as detecting subtle differences in strength of preference requires fine-grained measurement scales. Second, we aimed to lay bare the precise effects of sample size. Therefore, we presented each gamble with various sample sizes. To allow for an unbiased comparison of different sample sizes, we eliminated sampling error by presenting representative samples. However, the order of individual samples within a sequence was random.
+
+As as third, subordinate goal we sought to clearly compare valuations from experience with valuations from description. Therefore, we added a block where people made valuations from description. However, as our main goals involved studying how preferences change as a function of sample size, we refrained from manipulating the order of the experience and description blocks. Instead, all people made valuations first from experience and afterward in a separate block from description. 
+
+In Study 1, we examined how people form valuations from experience when they know the possible outcomes before they start sampling. In a situation where the outcomes are known, learning is simplified because participants only need to learn the outcome probabilities from experience. 
+
+\subsection{Method}
+\subsubsection{Participants}
+Forty people (31 women, 9 men) from the participant pool of the University of Basel between 18 and 40 years old ($M = 23.41$ years, $SD = 4.86$) participated in the study. Participants could choose between a show-up fee of 10 CHF (approximately \$11.10 at the time of the experiment) or course credit. Additionally, each participant received a bonus payment that depended on the outcome of a randomly selected trial ($M = \$6.38$, $SD = \$7.62$).
+
+\subsubsection{Materials}
+Participants repeatedly valued six different gambles that all consisted of two outcomes, a gain and a zero. Some gambles provided a small gain with high probability \citep[p-bet gamble type, notation following ][]{Lichtenstein1971} ; other gambles provided a high gain with low probability \citep[\$-bet gamble type, notation following ][]{Lichtenstein1971}. Table \ref{table:Lotteries} gives an overview of the gambles. There were three pairs of gambles that were matched with regard to their expected value. Each pair consisted of one p-bet and one \$-bet gamble. This implies that the gambles showed a relationship between probabilities and returns: High gains were less likely than small gains. There was, however, no perfect linear relationship between gain amount and probability; for example, a gain of 2.40 CHF (Gamble 5) was less likely than a higher gain of 4.70 CHF (Gamble 6). In the experience condition, the gambles were represented with four categories of sample size: extra small (xs = 5, 6, or 7), small (s = xs $\times$ 2), medium (m = xs $\times$ 3), and large (l = xs $\times$ 6). These sample sizes allowed us to represent rare events of 20\% (1/5), roughly 17\% (1/6), and roughly 14\% (1/7).  
+
+\begin{center} --- Insert Table \ref{table:Lotteries} here ---- \end{center}
+
+
+For illustration of the different sample sizes, consider Gamble 1 in Table~\ref{table:Lotteries}. It is a \$-bet that offers a gain of 16 with a probability of 1/5 (20\%). The different sample-size categories for this gamble are xs (5 observations, one gain), s (10 observations, two gains), m (15 observations, three gains), and l (30 observations, six gains). 
+
+Participants valued each gamble three times in each sample-size category. To avoid memory effects between trials, we included 18 distraction trials consisting of six distraction gambles. These gambles had the same outcomes as the gambles in Table~\ref{table:Lotteries} except that the gains of \$-bets occurred with a probability of 75\% and the gains of p-bets with a probability of 25\%. These distraction gambles were presented with sample sizes of 4, 8, and 16. Since their only purpose was to avoid memory effects, we did not analyze these trials.
+The presentation order of all trials was fully randomized.
+
+
+Furthermore, participants valued each gamble three times in the descriptive condition. In this condition, participants got a description of the outcomes and the probability with which the outcomes occurred. The probabilities were rounded to one decimal place, for example, 1/5 = 20\%, 1/6 = 16.7\%, 1/7 = 14.3\%. Again, presentation order of all trials was fully randomized.
+
+
+%The presentation order of all gambles (including distraction trials) and sample sizes was randomized. 
+\subsubsection{Procedure}
+Upon arrive at the laboratory, participants read printed instructions about the task and gave informed consent. Then, they completed a questionnaire that ensured their understanding of the instructions. They valued gambles first from experience and afterward from description.
+In the experience phase, participants learned about a gamble's outcome distribution by repeatedly sampling outcomes. Prior to and throughout each trial, participants saw the possible outcomes displayed above a virtual urn. Gains were always displayed as a black ``marble,'' a solid black circle in which the gain amount was written in numerals. The zero outcome was presented as a white marble, a solid white circle in which the numeral 0 was written. Participants knew that in each trial, they had to sample a predefined number of marbles. They did not know the precise number, which changed from trial to trial. The order of trials and the sequence of black and white marbles within a trial was randomized for individual participants. Participants pressed the space bar to see a marble, which was then revealed for 250 ms. After participants had drawn all outcomes in a trial, they were prompted for (1) their valuation of the gamble and (2) their confidence in their valuation on a 7-point Likert scale, ranging from 0 (\textit{very unconfident}) to 6 (\textit{very confident}).
+
+To measure valuations, we elicited selling prices by following the Becker--DeGroot--Marschak (BDM) method \citep{Becker1964}. For each gamble, participants stated their selling prices. The selling price was defined as the lowest amount of money for which they would give up the right to gamble. Prices were allowed to range between 0.00 CHF and the current gain in Swiss francs, with possible increments of 0.10 CHF. A BDM auction was incentivized as follows: The selling price that a participant entered was compared to a random value drawn from all possible selling prices in the trial. If this random number was larger than the stated selling price, the participant ``sold'' the gamble and received a monetary amount that equaled the random number. If the random number was equal to or smaller than the selling price, the participant got to gamble. For the BDM, the optimal strategy was always to report the true selling price\textsuperscript{1}. %\footnote{\label{logic.BDM} }
+Detailed instructions as well as an example of the BDM auction were presented to explain the auction's mechanism. We used a short questionnaire to ensure that all participants had understood how the auction worked.
+
+\subsection{Results}
+
+For all analyses we used the software R \citep{R2014}. For the linear model comparisons, we used the BayesFactor package \citep{BayesFactor}. We based our inferences on the Bayes factor ($BF\textsubscript{ij}$), which quantifies how much more or less likely the data are under Model i ($M\textsubscript{i}$) than Model j ($M\textsubscript{j}$). A Bayes factor of 1 ($BF\textsubscript{ij} = 1$) means that the data do not discriminate between the two models $M\textsubscript{i}$ and $M\textsubscript{j}$. A Bayes factor of 5 (i.e., $BF\textsubscript{ij} = 5$) means that the data are 5 times more likely under $M\textsubscript{i}$ than under $M\textsubscript{j}$. A Bayes factor of $1/5$ ($BF\textsubscript{ij} = 1/5$) means that the data are 5 times more likely under $M\textsubscript{j}$ (note that $BF\textsubscript{ji} = 1/BF\textsubscript{ij}$). 
+In all analyses below, we included participant as a random factor if not mentioned otherwise.
+
+
+
+\subsubsection{Sample size}
+Table \ref{table:meansStudy2} displays the mean and median valuations from experience, that is, the monetary amount elicited with the BDM method, separately for each gamble and each sample-size category. The data suggest that sample size does not affect valuations from experience consistently. A model comparison supports this indication. Model $M\textsubscript{0}$, which predicts valuations from experience as a function of the random factor expected value and the fixed factor gamble type (p-bet vs. \$-bet), is preferred over a model that takes into account sample size as an additional fixed factor ($BF\textsubscript{01} = 428$) and a model that additionally takes into account the interaction between sample size and gamble type ($BF\textsubscript{01} > 1,000$). 
+
+
+\begin{center} --- Insert Table \ref{table:meansStudy2} here ---- \end{center}
+
+
+%\end{table*}
+
+
+
+
+% der Unterschied zw. experience and description wird aber bei den meisten gambles mit einem grossen sample geringer. Könnte man noch erwähnen, müsste man nicht auf sig. testen, wäre aber auch möglich
+
+\subsubsection{Modeling procedure}
+To study the role of sample size more closely, we examined how well the RF model and the BVU model modeled participants' valuations in the experience-based condition. To test the psychological plausibility of both models, we also compared them to a baseline model. This baseline model predicts random responses, where each response between zero and the gain amount is equally likely. 
+
+Before estimation, we rescaled both the observed and the model-predicted valuations by dividing them by the possible gain of the gamble in a trial. Consequently, all data points lay in the interval between 0 and 1. All models were estimated by applying maximum likelihood methods to participants' individual data. To compute the likelihood, we assumed that observed valuations followed a truncated normal distribution around the model's predicted valuation with a standard deviation that was estimated as a free parameter for each participant. Thus, the RF and BVU models, but not the baseline model, were equipped with one additional free standard deviation parameter. We searched for the set of parameter values that minimized the deviance, defined as the negative log likelihood of the data given the model and its parameter values. To identify the best model parameters, we used a brute-force grid-search approach. We searched the parameter space for the utility parameter $\upalpha$ between $0$ and $3$ in steps of $0.025$ and for the standard deviation of the truncated normal distribution between $0.00001$ and $0.3$ in steps of $0.01$. We compared the models based on Bayesian model weights that we computed from the Bayesian information criterion (\citealp{Kass1995, Lewandowsky2011}).
+
+\subsubsection{Modeling results}
+\begin{figure}[htbp] 
+  \centering
+\includegraphics[width=.8\linewidth, keepaspectratio]{modelcomp1.eps}
+  \caption{Number of people who were best fit by each model. Evidence strength is indicated by shades of gray. Baseline = Baseline model; BVU = Bayesian value updating model; RF = relative frequency model.}
+  \label{fig:modeling1}
+\end{figure}
+Figure \ref{fig:modeling1} displays the relative evidence for each of the models. It shows for how many participants ($x$ axis) each model is favored and how strong this evidence is (grayscale). The data of 19 participants (47.5\%) were best described by the BVU model. Evidence for individual participants is predominantly very strong or strong. For 18 participants (45\%), the RF model performed best. The data of three participants (7.5\%) were fit best by the baseline model.
+
+Next, we explored the data using the results of the quantitative model comparison. For this purpose, we plotted individual valuations against the predictions made by the best fitting model separately for every participant given the optimal parameter estimates for that participant. This plot gives an indication of whether the models qualitatively capture data patterns. Figure \ref{fig:ind.fits1} shows that the models generally capture the data well. However, inspecting the figure reveals that in some cases, even the better fitting model does not capture the data patterns well. More precisely, this holds for four participants (marked with an x in Figure \ref{fig:ind.fits1}). For these participants the model is rejected because of the lack of qualitative fit.%aber in der figure steht immer RFbzw. BVU für 40??
+
+The fact that similar numbers of participants were best described by the BVU model (Bayesian learners) and the RF model (frequentist learners) can explain the lack of an average effect of  sample size on the valuations that we observed in the previous analysis. This is because only Bayesian learners are expected to attend to sample size. 
+
+Therefore, we next qualitatively investigated how the valuations of frequentist and Bayesian learners differ. We expected an effect of sample size only for Bayesian and not for frequentist learners. As explained previously, the BVU model predicts that valuations decrease as a function of sample size for \$-bets and increase for p-bets. Figure \ref{fig:qual1} shows the mean ratings for \$-bets and p-bets separately for people quantitatively and qualitatively best described by either the BVU or the RF model. The figure shows that the mean valuations of Bayesian learners indeed differed from the mean valuations of frequentist learners: The mean valuations of Bayesian learners slightly decreased as a function of sample size for \$-bets and increased as a function of sample size for p-bets. The effect appears to be more pronounced for p-bets than for \$-bets. The mean valuations of frequentist learners did not show consistent variation.
+
+\begin{figure}[htbp] 
+  \centering
+\includegraphics[width=.9\linewidth, height = .9\textheight, keepaspectratio]{modelcomp1_qual.eps}%{ind_fits_study1.eps}
+    \caption{Individual valuations plotted against model predictions given the optimal parameter estimates for each individual. The titles reflect the model that best fitted the data and produced the predictions. BVU = Bayesian value updating; RF = relative frequency.}
+  \label{fig:ind.fits1}
+\end{figure}
+
+
+
+\begin{figure}[htbp] 
+  \centering
+\includegraphics[width=.8\linewidth, keepaspectratio]{qual_study1.eps}
+  \caption{Mean valuations of participants who were best described by the Bayesian value updating (BVU) model (black) and the relative frequency (RF) model (gray).
+   Error bars indicate the standard error of the mean. Sample sizes: xs = extra small; s = small; m = medium; l = large.}
+  \label{fig:qual1}
+\end{figure}
+
+\subsubsection{Effect of gamble type and sampling order}
+The mean and median ratings in Table \ref{table:meansStudy2} show that valuations for \$-bets (Gambles 1--3) were higher than for p-bets (Gambles 4--6), even if the gambles had the same expected value. This finding is supported by comparing model $M\textsubscript{0}$, which assumes that gamble valuation can be predicted as a function of the random factor expected value, and model $M\textsubscript{1}$, which makes the additional assumption that valuations differ between p-bets and \$-bets ($BF\textsubscript{10} > 1,000$).
+
+To test also for recency or primacy effects, we compared how well the first half and the second half of the sample sequence in each trial predicts valuations. A linear model $M\textsubscript{0}$ that predicts valuations as a function of the random factor gamble (1--6) outperforms model $M\textsubscript{1}$, which also includes the mean of the first half of the observed samples as a fixed factor ($BF\textsubscript{01} = 16.6$) and model $M\textsubscript{2}$, which includes the mean of the second half of observed samples ($BF\textsubscript{02} = 6.7$). In summary, our analysis did not provide evidence for recency or primacy effects.
+
+\subsubsection{Confidence ratings}
+Participants' mean confidence ratings of their valuations from experience in the extra small, small, medium, and large sample-size categories were xs = $4.11$ ($SD = 1.10$); s = $4.15$ ($SD = 1.04$); m = $4.14$ ($SD = 1.03$); and l = $4.16$ ($SD = 1.06$). Sample size did not influence participants' confidence systematically: $M\textsubscript{0}$, which predicts confidence rating as a function of a random participant effect, was strongly preferred over $M\textsubscript{1}$, which in addition includes the sample-size category as a predictor ($BF\textsubscript{01} = 737$).
+
+Because only the BVU model predicts increasing confidence ratings as a function of sample size, we repeated the previous analysis separately for Bayesian and frequentist learners. Interestingly, the analysis of those participants who were quantitatively and qualitatively best described by the BVU model revealed a small effect of sample size (mean confidence ratings: xs = $3.92$, $SD = 1.05$; s = $4.1$, $SD = 0.94$; m = $4.08$, $SD = 0.95$; l = $4.14$, $SD = 0.97$; $BF\textsubscript{10} = 3.6$). The analysis of those participants who were quantitatively and qualitatively best described by the RF model did not show an effect of sample size on confidence ratings (mean confidence ratings: xs = $4.33$, $SD = 1.22$; s = $4.28$, $SD = 1.16$; m = $4.26$, $SD = 1.14$; l = $4.21$, $SD = 1.21$; $BF\textsubscript{10} = .1$).
+
+
+
+\subsubsection{Description versus experience}
+Table \ref{table:meansStudy2} displays the mean and median valuations from description. It also shows the difference between the mean valuations in the experience and descriptive conditions (column D--E, separately for different sample sizes). Further, it provides the Bayes factors, quantifying the evidence in favor of a difference between valuations from experience and those from description.
+
+%\begin{center} --- Insert Table \ref{table:meansStudy2} here ---- \end{center}
+
+Valuations made from description and experience differed for most of the gambles and sample sizes (see Table \ref{table:meansStudy2}, rightmost column). In particular, participants attached a higher value to experienced than to described \$-bets (Gambles 1--3) but attached a higher value to described than to experienced p-bets (Gambles 4--6). Thus, we found a D--E gap that is the opposite of the classic D--E gap observed in choice paradigms. In our study, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when people made valuations from experience.
+
+We also compared participants' confidence ratings of valuations from experience in each sample-size category to those from description ($M = 4.04$, $SD = 1.08$). Separately for each sample-size category, we compared $M\textsubscript{0}$, which predicts confidence as a function of random participant effects, with $M\textsubscript{1}$, which takes condition as an additional fixed factor into account. The analyses suggest that participants were slightly more confident about their ratings from experience than from description for small ($BF\textsubscript{10} = 2.5$), medium ($BF\textsubscript{10} = 1.3$), and large ($BF\textsubscript{10} = 4.8$) sample sizes. For the extra small sample sizes ($BF\textsubscript{10} = 0.3$), confidence judgments did not differ. 
+
+
+\subsection{Discussion of Study 1}
+
+Study 1 shows that the size of the sample overall did not have an effect on valuations from experience. However, our quantitative model comparison shows that roughly half of the participants were best described by a BVU model that assumes that people treat sample size as a measure of uncertainty. The data of the other half of participants were best described by the RF model that disregards sample size. These results explain why we failed to find an effect of sample size across the whole data set. 
+
+Qualitatively, the valuations of people best described by the RF model differed from those of people best described by the BVU model. Figure \ref{fig:qual1} illustrates the trend that valuations of people best described by the BVU model changed as a function of sample size. Especially for p-bets, valuations increased as sample size grew. % The BVU model assumes that people start sampling with the prior belief that all gain probabilities are equally likely. Through sampling, people update their probability belief. The more samples people observe, the more their gain-probability gets shifted from 50\% towards the true gain probability which implies with sample size increasing valuations for p-bets and decreasing valuations for \$-bets. 
+For participants best described by the RF model, valuations appear not to have varied systematically with sample size. 
+
+Valuations also differed when made from description versus experience. Interestingly, this difference is the opposite of the classic D--E gap that has been reported in choice paradigms: We found evidence that people behaved as if they overweighted rare events when making valuations from description \textit{and} experience. Notably, this overweighting of rare events was even stronger for the experience condition. Importantly, people assigned higher valuations to \$-bets (i.e., gambles that provide a high reward with low probability) than p-bets (i.e., gambles that provide a small reward with low probability) even when both gambles had similar expected values. This finding is in line with recent research that suggested people overweight extreme outcomes in experience-based tasks \citep{Ludvig2017}.
+
+We found that participants' confidence in their valuations was generally high ($M = 4.12$, $SD = 1.06$ on a scale of 0 to 6). Importantly, only when we restricted the analysis to participants who were best described as Bayesian learners did we find that confidence increased with sample size as predicted by Bayesian models. We did not find an effect of sample size for participants who were best described by the RF model. If there was any trend, it seemed that confidence decreased with growing sample size, in line with \cite{Griffin1992}. Further, we found evidence that people were more confident in their valuations from experience than from description. 
+
+
+\section{Study 2}
+In Study 1, participants knew the outcomes before they started sampling. This is different from typical studies on decisions from experience, in which people have to learn the value of the outcomes during the sampling process. Therefore, in Study 2, we changed our experimental method such that the outcomes were learned from sampling.
+\subsection{Method and Results}
+Before participants started sampling, they knew only that each gamble consisted of two outcomes, of which one was zero and the other a gain. In contrast to Study 1, the precise gain amounts were not displayed above the virtual urn before or during the sampling stage. In all other aspects, Study 2 was identical to Study 1. 
+
+Forty people (38 women, 2 men) between 18 and 27 years old ($M = 21.1$ years, $SD = 2.05$) from the subject pool of the University of Basel participated. We followed the incentive scheme of Study 1. On average, participants earned a bonus of 7.16 CHF ($SD = 6.91$). For the data analysis, we compared the same statistical models as described in Study 1.
+\begin{center} --- Insert Table \ref{table:meansStudy3} here ---- \end{center}
+
+
+
+\subsubsection{Sample size}
+Table \ref{table:meansStudy3} displays mean and median valuations per gamble and sample-size category. Similar to in Study 1, mean valuations did not differ much between sample sizes: Again, valuations were best predicted by the random factor expected value and the fixed factor gamble type (additional fixed factor sample size: $BF\textsubscript{01} = 285$; additional interaction between sample size and gamble type: $BF\textsubscript{01} > 1,000 $). 
+
+\subsubsection{Modeling results}
+
+\begin{figure}[htbp] 
+  \centering
+\includegraphics[width=.8\linewidth, keepaspectratio]{modelcomp2.eps}
+  \caption{Number of people who were best fit by each model. Evidence strength is indicated by shades of gray. Baseline = Baseline model; BVU = Bayesian value updating model; RF = relative frequency model.}
+  \label{fig:modeling2}
+\end{figure}
+
+The behavior of 13 participants (32.5\%) was best described by the BVU model. % Evidence for individual participants is predominantly very strong or strong. 
+However, for the majority of participants (24 people, 60\% of all participants), the RF  model performed best. The baseline model was preferred for three participants (7.5\%). Generally, the results illustrate the psychological plausibility of both models, but the dominance of the RF model shows that most participants were not very sensitive to the sample sizes.  
+
+\begin{figure}[htbp] 
+  \centering
+\includegraphics[width=.9\linewidth,height = .9\textheight, keepaspectratio]{modelcomp2_qual.eps}%{ind_fits_study2.eps}
+  \caption{Individual valuations plotted against model predictions given the optimal parameter estimates for each individual. The titles reflect the model that best fitted the data and produced the predictions. BVU = Bayesian value updating; RF = relative frequency.}
+  \label{fig:ind.fits2}
+\end{figure}
+
+As in Study 1, we examined the data qualitatively. In Figure \ref{fig:ind.fits2}, participants' valuations are plotted against the predicted valuations of the best fitting model given the optimal parameter estimates for each individual. Again the predictions capture the data well. %However, in one case (Subject 14), we found a negative correlation between valuations and model predictions. If we exclude this person, we find that 24 participants are best described as Frequentist learners and 12 participants as Bayesian learners. 
+
+Figure \ref{fig:qual2} shows the mean valuations of the frequentist and Bayesian learners separately for \$-bets and p-bets. Again, the two groups differed. As predicted by the BVU model, the valuations of Bayesian learners changed as a function of sample size. Especially for p-bets, valuations increased with sample size. 
+\begin{figure}[htbp] 
+  \centering
+\includegraphics[width=.8\linewidth, keepaspectratio]{qual_study2.eps}
+  \caption{Mean valuations of people who were best fit by the Bayseian value updating (BVU) model (black) and the relative frequency (RF) model (gray). Sample sizes: xs = extra small; s = small; m = medium; l = large. Error bars indicate the standard error of the mean. 
+  }
+  \label{fig:qual2}
+\end{figure}
+
+
+
+\subsubsection{Effect of gamble type and sampling order}
+In line with Study 1, the mean and median ratings in Table \ref{table:meansStudy3} show higher valuations for \$-bets (Gambles 1--3) than for p-bets (Gambles 4--6)  even if the gambles had the same expected value (BF\textsubscript{10} \textgreater 1,000). We did not find evidence for any recency or primacy effects. $M\textsubscript{0}$, which predicts valuations as a function of the factor gamble (1--6), was slightly preferred over models that also include the mean of the first half of the observed samples ($M\textsubscript{1}$) or the mean of the second half of the observed samples ($M\textsubscript{2}$) as predictors ($BF\textsubscript{01} = 3.4$, $BF\textsubscript{02} = 1.9$). 
+
+\subsubsection{Confidence ratings}
+The mean confidence ratings in the extra small, small, medium, and large sample-size categories were xs = 4.01 ($SD = 1.23$); s = 4.09, ($SD = 1.14$); m = 4.04 ($SD = 1.19)$; and l = 4.16 ($SD = 1.19$). $M\textsubscript{0}$, which predicts confidence rating as a function of just a random participant effect, was again preferred over a model that also includes sample-size category as predictor ($BF\textsubscript{01} = 11.2$). 
+
+Considering only those data sets that were best described by the BVU model, confidence ratings increased as a function of  sample size (mean confidence ratings: xs = $3.84$, $SD = 1.32$; s = $3.95$, $SD = 1.16$; m = $4.02$, $SD = 1.13$; l = $4.1$, $SD = 1.28$). However, the simpler model that predicts no influence of sample size was still slightly preferred over the model that predicts an effect of sample size ($BF\textsubscript{01} = 1.3$). Similar to in Study 1, the data sets that were quantitatively and qualitatively best described by the RF model did not show an effect of sample size (mean confidence ratings: xs = $4.04$, $SD = 1.19$; s = $4.14$, $SD = 1.09$; m = $4.02$, $SD = 1.21$; l = $4.13$, $SD = 1.13$; $BF\textsubscript{01} = 72$).
+\subsubsection{Description versus experience}
+
+Table \ref{table:meansStudy3} displays the mean and median valuations from experience and from description. It also shows the difference between the mean valuations in the experience and descriptive conditions (column D--E, separately for different sample sizes). 
+
+In line with Study 1, valuations made from experience and description differed. Participants valued experienced \$-bets higher than described \$-bets. In contrast, participants valued described p-bets higher than experienced p-bets. These observations are again in line with the assumption that the probabilities of rare events were overweighted in both conditions, and that this effect was more pronounced for valuations from experience.
+
+Similar to in Study 1, the Bayes factors (rightmost column of Table \ref{table:meansStudy3}) generally suggest a difference between description and experience. However, the finding is, especially for p-bets, less pronounced than in Study 1. Again, the gap is in contrast to the classic D--E gap reported in the decision-making literature.
+
+Participants' mean confidence from description was 3.99 ($SD = 1.12$). Only for large sample sizes were participants more confident about their valuations from experience than they were about valuations from description ($BF\textsubscript{10} = 53$). There is no evidence for this effect for extra small ($BF\textsubscript{10} = 0.1$), small ($BF\textsubscript{10} = 0.7$), or medium ($BF\textsubscript{10} = 0.1$) sample sizes.
+\subsection{Discussion of Study 2}
+Study 2 tested whether the results of Study 1 are generalizable to typical sampling paradigms where people have to learn the outcome values from experience. The results of Studies 1 and 2 are remarkably similar: Participants behaved as if they overweighted rare events, when making valuations from both experience and description. In line with Study 1, we found that people could be classified as Bayesian and frequentist learners.
+
+\section{General Discussion}
+We studied how sample sizes influence people's valuations of risky gambles in two studies. Whereas in Study 1 the possible gain amount was known before people started sampling, in Study 2 the gain amount had to be learned through sampling. The main goal of these studies was to investigate how people form preferences from experience by comparing gamble valuations after having observed different numbers of outcomes, that is, after encountering different sample sizes. Further, we studied how valuations differ when based on description versus experience. 
+
+%In both Studies, participants behaved as if they overweight rare events from description \textit{and} experience. Behavior in line with overweighting of rare events was even stronger for valuations from experience than for valuations from description: An effect that contrasts with the D--E gap that was described in the choice literature \citep{Hertwig2004}. 
+
+\subsection{Belief in the Law of Small Numbers Versus Bayesian Updating}
+Across participants, Studies 1 and 2 showed that the number of samples people drew did not influence their valuations of gambles from experience. People's confidence in valuations was also constant across sample sizes. 
+
+It has been previously shown that people believe in the representativeness of short sequences of outcomes \citep{Griffin1992, Tversky1971}. The RF model that uses relative frequencies of observed outcomes as probability estimates captures this logic. Accordingly, people attend  only to the relative frequency of outcomes when they form gamble valuations and neglect the size of the samples. The model best described the behavior of 40\% of the participants in Study 1 and 60\% of the participants in Study 2, which suggests that a substantial proportion of people believe in the law of small numbers. This finding helps explain why people often do not sample much in experience-based tasks: If people believe that a short sequence of outcomes represents a prospect's outcome distribution comprehensively, they do not need to sample much, as they believe that sampling more will not yield new information. 
+
+However, not all participants were best described by the RF model: 42.5\% of the participants in Study 1 and 30\% of the participants in Study 2 were classified as Bayesian learners. Such people treat sample size as information about the uncertainty that the sample sequence entails. As sample size grows, people's prior beliefs about the outcome probabilities have a decreasing impact and valuations of gambles change accordingly. 
+
+Generally, the classification of people into two different subgroups suggests that people use different strategies when they update information from experience. 
+This classification is supported by people's confidence judgments: When we analyzed confidence judgments separately for people who were classified as believers in the law of small numbers and Bayesian learners, we found that only Bayesian learners were more confident about their judgments for larger than for smaller samples. 
+
+
+% Indeed, when we plotted the mean valuations of participants best described by each model, we see that the data qualitatively differ (compare Figure \ref{fig:qual1} and \ref{fig:qual2}). While valuations of people best fit by the Bayesian model change as a function of sample size, valuations of people best fit by the RF model do not change systematically. 
+The question arises of why some people behave according to Bayesian principles and others do not. Future research should focus on examining what factors influence whether people behave according to Bayesian principles. One possible candidate that mediates what strategy people use is numerical literacy. Previous research has, for instance, shown that numerical literacy correlates with performance in Bayesian reasoning tasks \citep{Brase2017}. 
+
+%\subsubsection{Risk--Return hypothesis}
+%Although we found an effect of sample size on the valuations made by Bayesian learners, this effect is relatively small. As an explanation for this finding, we want to outline the risk-return hypothesis. In Study 1, people knew the gain amount at the beginning of each trial. In Study 2, people learned this gain amount relatively quickly through sampling. For parsimony, we have modeled people's prior belief about the gain probabilities as being uniformly distributed between zero and one. However, we want to hypothesize that knowing the gain amount elicits a more informed prior belief about the probability. Indeed, recent research shows that under uncertainty, people's beliefs about gain probabilities are informed by the gain amount: Large gains are believed to be less likely than small gains when no other information about a gamble than the gain amount is given \citep{Pleskac2014, Hoffart2016RR}  %Jörg: cite out other papers as submitted or in preperation. 
+
+%This risk-return hypothesis entails the idea that experience-based tasks may sit on a continuum between a situation of "pure" risk and one of "total" uncertainty \citep{Busemeyer1985, Rakow2010}. The term pure risk relates to the situation that a decision maker faces when she has a full description of the outcomes and related probabilities. The term total uncertainty relates to the situation that a decision maker faces when she neither knows the possible outcomes nor the related probabilities. In principle, the uncertainty that is present when learning about a gamble from experience could be eliminated by sampling indefinitely. Yet, sampling is costly: Whereas in experimental situations sampling is limited mostly by time constraints and fatigue, in real life, sampling a lot is often simply impossible and can be very costly. Given that sampling is costly, it is very plausible that people exploit every source of information that is available in the environment to reduce search. One such source of information is the risk--return relationship that is naturally present in many environments \citep{Fama1973, Markowitz1952,  Pleskac2014, Sunden1998}. 
+
+%If in our studies people indeed used gain amounts as predictors of the probability and integrate this information with their samples, we expect to only see a small effect of sample size on gamble valuations. This is because in our experimental design large gains were indeed less likely than small gains. Thus, it corresponded to the risk--return pattern that people might presuppose. If people start with prior probability beliefs that correspond more closely to the real outcome probabilities, new incoming information does not shift probability beliefs as dramatically as when the prior beliefs are uniformly distributed.
+
+%The risk--return hypothesis might shed light on a question that has puzzled researchers for a long time: Why do participants in experience based paradigms sample so little? An answer to this might simply be that sampling more does not change beliefs much. In fact, the belief that participants have about the correlation of risk and return, combined with a few samples of a gamble already offers enough evidence for a stable estimate of the gamble's value. Unfortunately, our data do not allow to test a model that incorporates such a risk--return belief. Future research should formalize and test this risk--return hypothesis.
+
+
+\subsection{Description Versus Experience in Choice and Valuation}
+In risky choice tasks, people have been found to behave as if they overweight rare events from description and underweight rare events from experience. In our valuation tasks participants behaved as if they overweighted rare events from both description and experience. Thus, our findings are not in line with the classic D--E gap.
+
+Here, it is noteworthy that in contrast to experience-based choice tasks, in our valuation task, participants only had to focus on one gamble in each trial. This task structure differs from two-gamble choice tasks. This difference in structure might elicit different cognitive processes. Indeed, \cite{Lichtenstein1971} showed that people's preferences based on description can be reversed when elicited by value judgments rather than choices: Someone who chooses Gamble A over Gamble B might still assign a higher value to Gamble B than to Gamble A. One of the first explorations of preference reversals in valuations from experience was done by \cite{Golan2014}. They reported a difference between valuations from description and valuations from experience. Yet, this difference pointed in a direction opposite to our findings: Participants overweighted rare events more strongly when doing so from description than from experience. There is, however, a crucial difference between our experimental design and the experimental design of \cite{Golan2014}. We presented representative sample sequences, whereas they allowed participants to draw as many samples as they wished. As we argued in the Introduction, in free-sampling paradigms, the experienced relative frequencies of outcomes do not necessarily match the underlying probability. Such sampling error might have contributed to the difference in the results. 
+Alternatively, the difference could reflect that information is processed differently in free- and forced-sampling paradigms. For instance, people may pay more attention to a sampled outcome that resulted from a voluntary sampling decision than to a sampled outcome that resulted from a forced sampling decision.
+
+\subsubsection{Buying versus selling prices}
+In our experiments, we assessed preferences by asking people for selling prices for gambles. %We are aware that selling and buying prices can be different. 
+The endowment effect describes that people attach higher value to goods when they sell them than when they buy them \citep{Thaler1980}. \cite{Pachur2012} demonstrated this endowment effect in an experience-based task. It would be interesting to replicate our experiments with buying instead of selling prices and more rigorously compare the results with buying and selling prices from description. However, this was beyond the scope of the present study. Here, our main focus was to investigate whether preferences are influenced by sample sizes. This question can be answered independently of response format. Irrespective of whether people are asked for selling prices or buying prices or make repeated choices, the Bayesian model predicts an effect of sample size on valuations. 
+
+
+
+\subsubsection{Confidence from description and experience}
+People were more confident with their gamble valuations from experience than from description. This finding is remarkable given that from a normative perspective one could argue that people feel more confident when making valuations from description than when making valuations from experience. This is because valuations from description do not entail any uncertainty about the outcome distributions, whereas valuations from experience may entail such uncertainty.
+
+Our findings do support research by \cite{Bradbury2014}. They reported that people who made investment decisions in the laboratory felt better informed and were more confident about their decisions from experience than those from description.
+Potentially, people perceive and process experienced information differently than described information \citep{Kahneman2009}: 
+While information that is described is more abstract, experienced information has direct salience or impact. When people draw a sample, they not only observe the outcome but also experience emotional reactions resulting from that observation. Thus, people do not only learn plain facts about the outcome distribution; they also gain a more vivid understanding of this distribution. This more concrete understanding of the gamble can help people access their preferences and thus creates higher confidence in valuations.
+
+%Kahnemann (2009): In fact, people are poor forecasters of their future emotions and future tastes—they need help in this task—and I believe that one of the responsibilities offinancial advisors should be to pro-vide that help.
+
+\subsection{Conclusion}
+In this study, we investigated how people form  preferences from experience. Our results offer a new perspective on the finding that people sample very little when forming preferences from experience: A substantial proportion of people appear to believe in the law of small numbers; that is, their valuations do not change as a function of sample size. 
+%People who believe that larger samples entail as much information as smaller samples  This finding can be explained by people's belief in the law of small numbers, for which, however, large individual differences exist. 
+
+
+%We compared two cognitive models; one captures the idea of the belief in small numbers and the other of Bayesian learning. Interestingly, our model comparison identified two subgroups: Bayesian learners who take sample size into account and Frequentist learners who give little importance to sample sizes. 
+
+
+\bibliography{refJanine}
+\newpage
+\section{Footnotes}
+\textsuperscript{1}To understand this logic, consider the following example: A person has a true selling price for a given gamble of \$3. If this person sets her selling price too low (e.g., \$2) and the randomly generated number is \$2.10, she sells her gamble for a lower price than her true selling price. If, however, she sets her selling price too high (e.g., \$5) and the randomly generated number is \$4, she keeps and plays her gamble, although she actually would have preferred to receive the \$4.
+
+\newpage
+\begin{ThreePartTable}
+%\renewcommand{\arraystretch}{1}
+%\centering
+\begin{TableNotes}
+\small
+\item \textit{Note}.  Sample size denotes the total number of observations with which the gambles were described in the experience condition. The heading $p$(gain) describes the probability $(p)$ with which a gain occurred and the gain amount in Swiss francs (gain). The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble. EV = expected value; xs = extra small; s = small; m = medium; l = large.
+\end{TableNotes}
+\footnotesize
+\begin{longtable}{ccccccccc}
+\caption{Gambles Used in Studies 1 and 2}\label{table:Lotteries}\\
+\toprule
+Gamble &Gamble type & Sample-size category & Sample size & \(p\)(gain) & EV\\
+\midrule
+\multirow{4}{*}{1} &\multirow{4}{*}{\$-bet} & xs & 5 & \multirow{4}{*}{1/5(16.00)} & \multirow{4}{*}{3.2}\\
+& &s & 10 \\
+& &m &  15\\
+& &l &  30\\
+\midrule
+\multirow{4}{*}{2}  & \multirow{4}{*}{\$-bet} & xs & 6 & \multirow{4}{*}{1/6(12.00)}& \multirow{4}{*}{2}\\
+& & s & 12 \\
+& &m &  18\\
+& &l &  36\\
+\midrule
+\multirow{4}{*}{3} & \multirow{4}{*}{\$-bet} & xs & 7 & \multirow{4}{*}{1/7(28)} & \multirow{4}{*}{4.00}\\
+&& s & 14 \\
+& &m &  21\\
+& &l &  42\\
+\midrule
+\multirow{4}{*}{4} &\multirow{4}{*}{p-bet} &  xs & 5 & \multirow{4}{*}{4/5(4.00)}& \multirow{4}{*}{3.2}\\
+& &s & 10 \\
+&& m &  15\\
+& &l &  30\\
+\midrule
+\multirow{4}{*}{5} & \multirow{4}{*}{p-bet} & xs & 6 & \multirow{4}{*}{5/6(2.40)}& \multirow{4}{*}{2}\\
+& &s & 12 \\
+& &m &  18\\
+&& l &  36\\
+\midrule
+\multirow{4}{*}{6} & \multirow{4}{*}{p-bet} & xs\  & 7 & \multirow{4}{*}{6/7(4.70)}& \multirow{4}{*}{4.03}\\
+& &s & 14 \\
+& &m &  21\\
+& &l &  42\\
+\bottomrule
+\insertTableNotes
+\end{longtable}
+\end{ThreePartTable}
+
+
+
+\newpage
+
+
+\begin{ThreePartTable}
+\begin{TableNotes}
+\small
+\item \textit{Note}. Median and mean valuations across participants. The heading $p$(gain) describes the probability $(p)$ with which a gain occurred and the gain amount in Swiss francs (gain). The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble. D--E describes the difference between mean valuations from description (D) and those from experience (E). Bayes factor $BF\textsubscript{10}$ quantifies the evidence for a linear model ($M\textsubscript{1}$) that predicts that valuations differ between description and experience over a linear model ($M\textsubscript{0}$) that predicts no such difference. Both models contain participant as a random factor. EV = expected value; xs = extra small; s = small; m = medium; l = large. Gambles 1, 2, and 3 represent \$-bets and Gambles 4, 5, and 6 represent p-bets.
+\end{TableNotes}
+\footnotesize
+\begin{longtable}{ccccccccr}
+\caption{Valuations, Study 1}\label{table:meansStudy2}\\
+\toprule
+Gamble & Condition & Sample size & \(p\)(gain) & EV& Median & Mean& D--E & $BF\textsubscript{10}$\\
+\midrule
+\multirow{5}{*}{1} &\multirow{4}{*}{E} & 5 (xs)  & \multirow{5}{*}{1/5(16.00)}& \multirow{5}{*}{3.20}
+ & 5.00 & 5.16 & 0.56 & 4.4\\
+&& 10 (s) &&& 4.55 & 5.30& 0.70&64.9 \\
+&& 15 (m)&&&5.00 & 5.34 & 0.74&24.1\\
+&& 30 (l)&&& 5.00 & 5.29& 0.69&147.1\\
+& D &&&&  4.00 & 4.60 && \\
+\midrule
+\multirow{5}{*}{2} &\multirow{4}{*}{E} & 6 (xs)  & \multirow{5}{*}{1/6(12.00)}&  \multirow{5}{*}{2.00}
+& 4.00 & 4.33 & 0.72 &132.2\\
+&& 12 (s) &&&   4.00 & 4.31 & 0.70&625.9 \\
+&& 18 (m) &&&   4.00 & 4.04 & 0.43&4.5 \\
+&& 36 (l) &&&   4.00 & 3.99 & 0.38 &1.8\\
+& D &&&&   3.00 & 3.61 && \\
+\midrule
+\multirow{5}{*}{3} &\multirow{4}{*}{E} & 7 (xs)  & \multirow{5}{*}{1/7(28.00)}& \multirow{5}{*}{4.00}
+& 6.00 & 7.56 & 0.99&4.3\\
+&& 14 (s) &&& 6.70 & 8.40 & 1.83&905.2\\
+&& 21 (m) &&&  6.20 & 7.92 & 1.35&142\\
+&& 42 (l) &&& 6.00 & 7.68 & 1.11&16\\
+& D&&&&  5.00 & 6.57  &&\\
+\midrule
+\multirow{5}{*}{4} &\multirow{4}{*}{E} & 5 (xs)  & \multirow{5}{*}{4/5(4.00)}& \multirow{5}{*}{3.20}
+& 3.00 & 2.80 & -0.28&5,765.5\\
+&& 10 (s) &&& 3.20 & 2.92 & -0.16&3.2\\
+&& 15 (m) &&&3.00 & 2.80 & -0.28&57.4\\
+&& 30 (l) &&&3.00 & 2.95& -0.13&1.4\\
+& D &&&&  3.20 & 3.08 & &\\
+\midrule
+\multirow{5}{*}{5} &\multirow{4}{*}{E} & 6 (xs)  & \multirow{5}{*}{5/6(2.40)}&  \multirow{5}{*}{2.00} 
+& 2.00 & 1.77 & -0.10&8\\
+&& 12 (s) &&&  2.00 & 1.75 & -0.12&14.6\\
+&& 18 (m) &&&  2.00 & 1.73 & -0.14&28.3\\
+&& 36 (l) &&&  2.00 & 1.81 & 0.06&0.7\\
+& D &&&&   2.00 & 1.87 && \\
+\midrule
+\multirow{5}{*}{6} &\multirow{4}{*}{E} & 7 (xs)  & \multirow{5}{*}{6/7(4.70)}& \multirow{5}{*}{4.03}
+& 4.00 & 3.46 & -0.18&2.7\\
+&& 14 (s) &&&  4.00 & 3.55 & -0.09&0.3\\
+&& 21 (m) &&&  4.00 & 3.58 & -0.06&0.2\\
+&& 42 (l) &&&  4.00 & 3.70 & 0.06&0.2\\
+& D &&&&   4.00 & 3.64 & &\\
+\bottomrule
+\insertTableNotes
+\end{longtable}
+\end{ThreePartTable}
+
+
+\newpage
+
+\begin{ThreePartTable}
+\begin{TableNotes}
+\small
+\item \textit{Note}. Median and mean valuations across participants. The heading $p$(gain) describes the probability $(p)$ with which a gain occurred and the gain amount in Swiss francs (gain). The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble. D--E describes the difference between mean valuations from  and experience (E). Bayes factor BF\textsubscript{10} quantifies the evidence for a linear model ($M\textsubscript{1}$) that predicts that valuations differ between description and experience over a linear model ($M\textsubscript{0}$) that predicts no such difference. Both models contain participant as a random factor. EV = expected value; xs = extra small; s = small; m = medium; l = large. Gambles 1, 2, and 3 represent \$-bets and Gambles 4, 5, and 6 represent p-bets.
+\end{TableNotes}
+\footnotesize
+\begin{longtable}{ccccccccr}
+\caption{Valuations, Study 2}\label{table:meansStudy3}\\
+\toprule
+Gamble & Condition & Sample size & \(p\)(gain) &  EV& Median & Mean& D--E& $BF\textsubscript{10}$\\
+\hline
+\multirow{5}{*}{1} &\multirow{4}{*}{Experience} & 5 (xs)  & \multirow{5}{*}{1/5(16)}& \multirow{5}{*}{3.20}
+ & 5.15 & 6.29 & 0.86&11.1\\
+&& 10 (s) &&& 5.00 & 6.39 & 0.96& 354.7\\
+&& 15 (m)&&&5.95 & 6.38 & 0.95&78.1\\
+&& 30 (l)&&& 6.00 & 6.53 & 1.10&171.4\\
+& Description &&&&  4.00 & 5.43 && \\
+\hline
+\multirow{5}{*}{2} &\multirow{4}{*}{Experience} & 6 (xs)  & \multirow{5}{*}{1/6(12)}& \multirow{5}{*}{2.00}
+& 4.00 & 4.55 & 0.24&0.3 \\
+&& 12 (s) &&&   4.00 & 4.72 & 0.41&1.2 \\
+&& 18 (m) &&&   5.00 & 4.88 & 0.57 &4\\
+&& 36 (l) &&&   4.95 & 4.78 & 0.47 &3.6\\
+& Description &&&&   3.35 & 4.31 && \\
+\hline
+\multirow{5}{*}{3} &\multirow{4}{*}{Experience} & 7 (xs)  & \multirow{5}{*}{1/7(28)}&  \multirow{5}{*}{4.00}
+& 8.95 & 10.66 & 1.40&5.8\\
+&& 14 (s) &&& 10.00 & 10.26 & 1.01&1\\
+&& 21 (m) &&&  9.70 & 10.37 & 1.12&1.7\\
+&& 42 (l) &&& 10.00 & 11.18 & 1.93&220.9\\
+& Description&&&&  6.00 & 9.25  &&\\
+\hline
+\multirow{5}{*}{4} &\multirow{4}{*}{Experience} & 5 (xs)  & \multirow{5}{*}{4/5(4)}&  \multirow{5}{*}{3.20}
+& 3.30 & 2.91 & -0.29&13.5\\
+&& 10 (s) &&& 3.20 & 2.94 & -0.26&25.5\\
+&& 15 (m) &&&3.20 & 3.02 & -0.18&1.7\\
+&& 30 (l) &&&3.20 & 3.09 & -0.11&0.4\\
+& Description &&&&  3.50 & 3.20 && \\
+\hline
+\multirow{5}{*}{5} &\multirow{4}{*}{Experience} & 6 (xs)  & \multirow{5}{*}{5/6(2.4)} & \multirow{5}{*}{2.00}
+& 2.00 & 1.82 & -0.10&1.3\\
+&& 12 (s) &&&  2.00 & 1.85 & -0.07&0.4\\
+&& 18 (m) &&&  2.00 & 1.85 & -0.07&0.3\\
+&& 36 (l) &&&  2.10 & 1.95 & 0.03&0.2\\
+& Description &&&&   2.00 & 1.92 && \\
+\hline
+\multirow{5}{*}{6} &\multirow{4}{*}{Experience} & 7 (xs)  & \multirow{5}{*}{6/7(4.7)}& \multirow{5}{*}{4.03}
+& 4.00 & 3.68 & -0.16&0.6\\
+&& 14 (s) &&&  4.10 & 3.78 & -0.06&0.2\\
+&& 21 (m) &&&  4.15 & 3.85 & 0.01&0.1\\
+&& 42 (l) &&&  4.20 & 3.90 & 0.06&0.2\\
+& Description &&&&   4.10 & 3.84 && \\
+\bottomrule
+\insertTableNotes
+\end{longtable}
+\end{ThreePartTable}
+%\end{table*}
+
+
+
+
+\end{document}
+
+
+% Please see the package documentation for more information
+% on the APA6 document class:
+%
+% http://www.ctan.org/pkg/apa6
+%

@@ -45,6 +45,6 @@ M[, samplesizecat := factor(samplesizecat, levels = c("xs", "s","m","l","--"))]
 M <- M[order(gambleid, samplesizecat)]
 setcolorder(M, c(2,1,3:8))
 
-M[, gambleid := paste0(gambleid, rep(c(" ($-bet)", " (p-bet)"), each = 15))]
+M[, gambleid := paste0(gambleid, rep(c(" (\\$-bet)", " (p-bet)"), each = 15))]
 M <- split(M, by = "gambleid", keep.by = F)
 names(M) <- paste("Gamble ID", names(M))

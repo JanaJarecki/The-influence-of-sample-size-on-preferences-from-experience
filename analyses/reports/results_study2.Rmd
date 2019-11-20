@@ -1,0 +1,160 @@
+---
+title: ""
+author: "Jana B. Jarecki"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  pdf_document:
+    keep_tex: yes
+documentclass: "apa6"
+classoption:
+  a4paper,
+  man,
+  floatsintext
+header-includes:
+  \usepackage{natbib}
+  \usepackage{threeparttable}
+  \usepackage{booktabs}
+  \shorttitle{test}
+  \usepackage{setspace}
+  \AtBeginEnvironment{tabular}{\singlespacing}
+  \usepackage{times}
+  \usepackage{changes}
+  \definechangesauthor[name={JJ}, color=orange]{jj}
+  \usepackage{upgreek}
+  \AtBeginDocument{\let\maketitle\relax}
+---
+
+```{r setupknitr, include=0, cache=0}
+# Run the setup in a separate chunk at the very beginning
+ # Do not cache this chunk where you load libraries and set options
+ # because the code has side effects
+  source("setup_knitr.R")
+```
+
+```{r setupR, include=0, cache=0}
+  source("./code/setup_fig.R")
+  library(papaja); library(cogscimodels); library(data.table); library(BayesFactor); library(brms)
+  options(papaja.na_string = "--")
+  niter <- 1000
+  study <- 2
+```
+
+```{r, load_data, cache=1, include=0}
+  # Read the data
+  d <- fread(sub("x", study, "../data/processed/studyx.csv"))
+  N <- length(unique(d$id))
+  # Read the cognitive model fitting results
+  fits <- readRDS(sub("x", study, "./code/studyx_cognitive_models_fit.rds")) 
+```
+
+```{r, run_analyses_scripts, cache=0, include=0}
+# Table comparing DfE and DfD choices
+  source("./code/tab2.R", chdir = TRUE)
+  # Run all inferential statistical analyses  
+  source("./code/1-statistical-analysis.R", chdir = TRUE)
+  # Run the cognitive modeling analysis
+  source("./code/3-modeling-analysis.R")
+```
+
+\subsubsection{Evaluations of gambles and sample sizes}
+Analysis of the mean evaluations by sample size gives a similar picture in Study~2 and Study~1 (Table \ref{tab:means_study1}). Larger sample sizes did not lead to systematic changes in evaluations of gambles; an ANOVA with the predictors gamble type and gamble expected value outperformed one with the added predictors sample size ($BF_{01}= `r BF_fe_fess`$) and a sample-size-gamble-type interaction ($BF_{02} `r BF_fe_int`$; models with by-participant random effects). Replicating Study~1, there was a higher value assigned to \$-bet gambles  ($`r d[gambletype == "$-bet", paste_msd(value, label=TRUE)]`$) compared to the p-bet gambles ($`r d[gambletype == "p-bet", paste_msd(value, label=TRUE)]`$), $BF `r BF_gambletype`$ in favor of an ANOVA with criterion evaluations and predictor gamble type  over an ANOVA without the predictor gamble type (both models include by-participant and by-expected-value random effects). These results corroborate the aggregate findings of Study 1.
+
+\textit{Description versus experience}
+Valuations made from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). Evaluations of \$-bets from experience were higher than than those from description, but evaluations of p-bets were lower from experience than from description This D--E gap that is different from the classic D--E gap observed in choice paradigms: participants valued gambles as if they overweight rare events from description \textit{and} experience. This effect was even stronger when people made valuations from experience. Regarding confidence, the observed confidence of valuations from experience from description ($M = 4.04$, $SD = 1.08$). Separately for each sample-size category, we compared $\mathrm{M}\textsubscript{0}$, which predicts confidence as a function of random participant effects, with $\mathrm{M}\textsubscript{1}$, which takes condition as an additional fixed factor into account. The analyses suggest that participants were slightly more confident about their ratings from experience than from description for small ($BF\textsubscript{10} = 2.5$), medium ($BF\textsubscript{10} = 1.3$), and large ($BF\textsubscript{10} = 4.8$) sample sizes. For the extra small sample sizes ($BF\textsubscript{10} = 0.3$), confidence judgments did not differ. 
+
+
+```{r, means_study1}
+  # format the Bayes Factor such that BF > 1000 is displayed as > 1000
+  M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
+  apa_table(M
+    , caption = "Valuations of Gambles in Study 1"
+    , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Med}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
+    , align = c('l', rep('c', 4), 'r', 'r')
+    , digits = c(0,0,0,2,2,2,0)
+    , note = '\\textit{M} = mean, \\textit{Med} = median, D--E = difference between mean description-based valuations and experience-based valuations, $BF\\textsubscript{10}$ = Bayes Factor quantifying the evidence for a linear model $\\mathrm{M}\\textsubscript{1}$ predicting that valuations differ between description and experience over a linear model $\\mathrm{M}\\textsubscript{0}$ predicting no such differences; both models models contain a by-participant random effect. Gambles IDs 1, 2, and 3 are \\$-bets; Gamble IDs 4, 5, and 6 are p-bets.'
+    , escape = FALSE
+    )
+```
+
+
+\subsubsection{Cognitive modeling}
+The modeling procedure followed Study 1.
+
+```{r, study1_model_fit}
+  bic <- setNames(gof[, round(mean(BIC)), by=model]$V1, c("base", "rf", "bvu"))
+```
+
+\textit{Quantitative Model Fit.}
+More than half of the participants were best-described by the Bayesian value updating model Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%). The evidence strength of the models is shown in Figure \ref{fig:fig2}. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).
+
+
+
+
+```{r, echo=FALSE, cache=FALSE}
+  knitr::read_chunk("./code/fig2.R")
+```
+
+```{r fig2, fig.asp=0.6, cache=FALSE, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```
+
+```{r study1_par}
+  M_alpha_bvu <- parameter[winner=="bvu" & par=="rp", mean(val)]
+  M_alpha_rf  <- parameter[winner=="rf" & par=="rp", mean(val)]
+  M_thetag_bvu <- parameter[winner=="bvu" & par=="count_x", mean(val)]
+  M_theta0_bvu <- parameter[winner=="bvu" & par=="count_0", mean(val)]
+  M_delta_bvu <- parameter[winner=="bvu" & par=="delta", mean(val)]
+  prior_p_gain = round(M_thetag_bvu / (M_theta0_bvu + M_thetag_bvu) * 100)
+  # T-test of alpha parameter (power-utility exponent) called "rp" here
+  bf = ttestBF(parameter[winner=="bvu" & par=="rp", val], parameter[winner=="rf" & par=="rp", val])
+```
+
+\added[id=jj]{
+The fitted model parameters (\ref{tab:study1_parameter}) reveal that the power utility exponent did not differ markedly between the participants that were described by the Bayesian value updating strategy ($M_{\alpha}= `r M_alpha_bvu`$) and those described by a relative frequency strategy ($M_{\alpha}=`r M_alpha_rf`$), $\Delta$ `r apa_print(bf)$full_result`. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with `r prior_p_gain`\% (gain prior $\theta_G = `r M_thetag_bvu`$; zero-outcome prior $\theta_0 = `r M_theta0_bvu`$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=`r M_delta_bvu`$).
+}
+
+```{r, study1_parameter}
+  parameter[,
+     winner_n := paste0(factor(winner, levels = model_levels, labels = model_labels), " (\\textit{n}$=$", ..winners[winner], ")"),
+    by=winner]
+  tab <- dcast(parameter, winner_n ~ par, paste_msd, value.var = "val")
+  papaja::apa_table(tab[c(2,3,1), c("winner_n", "rp", "delta", "count_x","m", "sigma")]
+      , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
+      , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\mu$","$\\sigma$")
+      , align = c("l", rep("c", 5)),
+      , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model. Parameters denote: $\\alpha=$ power utility exponent, $\\theta_G$ gain prior, $\\mu=$ mean evaluation, $\\sigma$ standard deviation."
+      , escape = FALSE
+      )
+```
+
+```{r}
+  cutoff <- 0.4
+  m_cor <- d[condition == "experience", cor(pred, value), by = id][, mean(V1)]
+  ids_cutoff <- d[condition == "experience", cor(pred, value), by = id][V1 < cutoff]$id
+```
+
+\textit{Qualitative Model Fit.}
+Figure \ref{fig:fig5} plots the qualitative model fit (best-fitting model predictions against observed evaluations by participant). As in Study 1, the data are generally well-described \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$)} where the model must be rejected because of qualitative mis-fit.
+
+
+```{r, echo=FALSE, cache=FALSE}
+  knitr::read_chunk("./code/fig5.R")
+```
+```{r fig5, out.width = "\\textwidth", fig.width = 8, cache=FALSE, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```
+
+
+
+\emph{The effect of sample size given cognitive strategies.} Next, we qualitatively analyzed if sample size differentially affects the relative-frequency-type and Bayesian-type learners. We expected that sample size leads to changes in the evaluations of the Bayesian learners depending on their priors, and that sample size does not affect the evaluations of the relative-frequency learners.
+
+\added[id=jj]{
+The Bayesian model predicts that the evaluations are influenced by both sample size and prior beliefs. Participants with a gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the evaluations of \$-bets as sample sizes increase, because participants learn that gains of \$-bets are less likely than zero-outcomes. By contrast, participants with a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase their evaluations of p-bets as sample size increases, because they learn that gains of p-bets are more likely than zero-outcomes.
+}
+
+\added[id=jj] {
+  The cognitive modeling results show slightly greater strategy heterogeneity in Study 2 compared to Study 1 with a higher prevalence of the relative frequency strategy in Study 2. The higher prevalence of the relative frequency strategy in Study 2 can be explained by that the relative frequency strategy can be considered a cognitively simpler strategy and the fact that in Study 2 the outcomes were withheld from participants made learning in this design more demanding.
+}
+
+```{r}
+  MSD <- d[condition == "experience",
+  .(M=mean(confidence), SD=sd(confidence)), by = .(winner, samplesizecat)]
+```
