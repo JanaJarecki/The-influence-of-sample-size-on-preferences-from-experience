@@ -216,9 +216,31 @@ BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
 The fitted model parameters (\ref{tab:study1_parameter}) reveal that the power utility exponent did not differ markedly between the participants that were described by the Bayesian value updating strategy ($M_{\alpha}= 2.19$) and those described by a relative frequency strategy ($M_{\alpha}=2.15$), $\Delta$ $M = 0.04$ 95\% HDI $[-1.13$, $1.19]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with 45\% (gain prior $\theta_G = 0.91$; zero-outcome prior $\theta_0 = 1.09$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=2.27$).
 }
 
-\begin{verbatim}
-Error in `[.data.table`(tab, c(2, 1), c("winner_n", "rp", "delta", "count_x", : column(s) not found: m
-\end{verbatim}
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:study1_parameter}Parameter Estimates of Winning Models, \textit{M (SD)}}
+
+\begin{tabular}{lcccc}
+\toprule
+Winning Model & $\alpha$ & $\delta$ & $\theta_G$ & $\sigma$\\
+\midrule
+BVU (\textit{n}$=$23) & 2.19 (2.35) & 2.27 (3.39) & 0.91 (0.79) & 0.23 (0.22)\\
+RF (\textit{n}$=$17) & 2.15 (1.45) & -- & -- & 0.15 (0.04)\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model. Parameters denote: $\alpha=$ power utility exponent, $\theta_G$ gain prior, $\sigma$ standard deviation.}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
 
 \textit{Qualitative Model Fit.} Figure \ref{fig:fig5} plots the
 qualitative model fit (best-fitting model predictions against observed
@@ -233,23 +255,8 @@ where the model must be rejected because of qualitative mis-fit.
 
 }
 
-\caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model.}\label{fig:fig5}
+\caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model.}\label{fig:fig5}
 \end{figure}
-
-\emph{The effect of sample size given cognitive strategies.} Next, we
-qualitatively analyzed if sample size differentially affects the
-relative-frequency-type and Bayesian-type learners. We expected that
-sample size leads to changes in the evaluations of the Bayesian learners
-depending on their priors, and that sample size does not affect the
-evaluations of the relative-frequency learners.
-
-\added[id=jj]{
-The Bayesian model predicts that the evaluations are influenced by both sample size and prior beliefs. Participants with a gain prior---initially believing that gains are more likely than zero-outcomes---should decrease the evaluations of \$-bets as sample sizes increase, because participants learn that gains of \$-bets are less likely than zero-outcomes. By contrast, participants with a zero-outcome prior---initially believing that zero-outcomes are more likely than gains---should increase their evaluations of p-bets as sample size increases, because they learn that gains of p-bets are more likely than zero-outcomes.
-}
-
-\added[id=jj] {
-  The cognitive modeling results show slightly greater strategy heterogeneity in Study 2 compared to Study 1 with a higher prevalence of the relative frequency strategy in Study 2. The higher prevalence of the relative frequency strategy in Study 2 can be explained by that the relative frequency strategy can be considered a cognitively simpler strategy and the fact that in Study 2 the outcomes were withheld from participants made learning in this design more demanding.
-}
 
 
 \end{document}

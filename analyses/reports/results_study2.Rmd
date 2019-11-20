@@ -48,7 +48,7 @@ header-includes:
 ```
 
 ```{r, run_analyses_scripts, cache=0, include=0}
-# Table comparing DfE and DfD choices
+  # Table comparing DfE and DfD choices
   source("./code/tab2.R", chdir = TRUE)
   # Run all inferential statistical analyses  
   source("./code/1-statistical-analysis.R", chdir = TRUE)
@@ -117,11 +117,11 @@ The fitted model parameters (\ref{tab:study1_parameter}) reveal that the power u
      winner_n := paste0(factor(winner, levels = model_levels, labels = model_labels), " (\\textit{n}$=$", ..winners[winner], ")"),
     by=winner]
   tab <- dcast(parameter, winner_n ~ par, paste_msd, value.var = "val")
-  papaja::apa_table(tab[c(2,1), c("winner_n", "rp", "delta", "count_x","m", "sigma")]
+  papaja::apa_table(tab[c(1,2), c("winner_n", "rp", "delta", "count_x", "sigma")]
       , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
-      , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\mu$","$\\sigma$")
+      , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\sigma$")
       , align = c("l", rep("c", 5)),
-      , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model. Parameters denote: $\\alpha=$ power utility exponent, $\\theta_G$ gain prior, $\\mu=$ mean evaluation, $\\sigma$ standard deviation."
+      , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model. Parameters denote: $\\alpha=$ power utility exponent, $\\theta_G$ gain prior, $\\sigma$ standard deviation."
       , escape = FALSE
       )
 ```
@@ -139,5 +139,5 @@ Figure \ref{fig:fig5} plots the qualitative model fit (best-fitting model predic
 ```{r, echo=FALSE, cache=FALSE}
   knitr::read_chunk("./code/fig5.R")
 ```
-```{r fig5, out.width = "\\textwidth", fig.width = 8, cache=FALSE, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r fig5, out.width = "\\textwidth", fig.width = 9, cache=FALSE, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
 ```
