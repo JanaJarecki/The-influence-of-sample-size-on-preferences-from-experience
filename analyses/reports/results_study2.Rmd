@@ -109,7 +109,7 @@ More than half of the participants were best-described by the Bayesian value upd
 ```
 
 \added[id=jj]{
-The fitted model parameters (\ref{tab:study1_parameter}) reveal that the power utility exponent did not differ markedly between the participants that were described by the Bayesian value updating strategy ($M_{\alpha}= `r M_alpha_bvu`$) and those described by a relative frequency strategy ($M_{\alpha}=`r M_alpha_rf`$), $\Delta$ `r apa_print(bf)$full_result`. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with `r prior_p_gain`\% (gain prior $\theta_G = `r M_thetag_bvu`$; zero-outcome prior $\theta_0 = `r M_theta0_bvu`$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=`r M_delta_bvu`$).
+The fitted model parameters (Table \ref{tab:study1_parameter}) reveal that the power utility exponent did not differ markedly between the participants that were described by the Bayesian value updating strategy ($M_{\alpha}= `r M_alpha_bvu`$) and those described by a relative frequency strategy ($M_{\alpha}=`r M_alpha_rf`$), $\Delta$ `r apa_print(bf)$full_result`. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with `r prior_p_gain`\% (gain prior $\theta_G = `r M_thetag_bvu`$; zero-outcome prior $\theta_0 = `r M_theta0_bvu`$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=`r M_delta_bvu`$).
 }
 
 ```{r, study1_parameter}
@@ -139,5 +139,5 @@ Figure \ref{fig:fig5} plots the qualitative model fit (best-fitting model predic
 ```{r, echo=FALSE, cache=FALSE}
   knitr::read_chunk("./code/fig5.R")
 ```
-```{r fig5, out.width = "\\textwidth", fig.width = 9, cache=FALSE, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
+```{r fig5, cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
 ```

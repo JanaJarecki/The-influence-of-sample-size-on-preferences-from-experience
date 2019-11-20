@@ -149,7 +149,7 @@ The qualitative fit between the models and the data is shown in Figure \ref{fig:
 ```{r, echo=FALSE, cache=FALSE}
   knitr::read_chunk("./code/fig5.R")
 ```
-```{r fig5, out.width = "\\textwidth", fig.width = 10, cache=FALSE, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r fig5, out.width="\\textwidth", cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 ```
 
 \added[id=jj]{
