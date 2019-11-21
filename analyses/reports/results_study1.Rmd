@@ -36,7 +36,7 @@ header-includes:
   study <- 1
 ```
 
-```{r, load_data, cache=1, include=0}
+```{r, load_data, cache=0, include=0}
   # Read the data
   d <- fread(sub("x", study, "../data/processed/studyx.csv"))
   N <- length(unique(d$id))
@@ -59,10 +59,12 @@ Table \ref{tab:means_study1} summarizes the evaluations of the gambles by format
 
 The evaluations in the experience condition were not driven by primacy or recency: neither the outcomes that participants sampled in the first half of the sampling phase nor those sampled during the second half of said phase predict the observed evaluations. A linear model of the evaluations with the predictor gamble type ($\mathrm{M}\textsubscript{0}$) outperformed a model with the additional predictor mean of the first half of samples ($BF\textsubscript{01} = 16.6$) and a model with the additional predictor mean of the second half of samples ($BF\textsubscript{02} = 6.7$)
 
+```{r}
+  dd <- d[, paste_msd(value, label = T), by = .(condition, gambletype)]
+```
 
-\textit{Description versus experience}
-That valuations from description and experience differed for most of the gambles and sample sizes (see Table \ref{tab:means_study1}, rightmost column). Participants evaluted experience-based \$-bets higher than described \$-bets, but evaluated experience-based p-bets lower than described p-bets.
-ö. In particular, participants  (Gambles 4--6). Thus, we found a D--E gap that is the opposite of the classic D--E gap observed in choice paradigms. In our study, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when people made valuations from experience.
+\textit{Description versus experience.}
+That valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($`r dd$V1[1]`$) compared to description ($`r dd$V1[3]`$). By contrast p-bets were evaluated lower from experience compared ($`r dd$V1[2]`$) to description ($`r dd$V1[4]`$). Thus, we found a D--E gap that is the opposite of the classic D--E gap observed in choice paradigms. In our study, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when people made valuations from experience.
 
 
 ```{r, means_study1}
@@ -78,7 +80,7 @@ That valuations from description and experience differed for most of the gambles
     )
 ```
 
-Although at the aggregate level, sample size does not influence the evaluations of gambles in our decision from experience paradigm, the cognitive modeling analyses will show a more nuanced picture.
+At the aggregate level, sample size seems to not influence the evaluations of gambles in our decision from experience paradigm, but the subsequent cognitive modeling analyses will show a more nuanced picture.
 
 \subsubsection{Cognitive modeling}
 We used computational modeling to analyze the role of sample size in value judgments more closely, comparing the performance of the \added[id=jj]{relative frequency} (RF) model and the \added[id=jj]{Bayesian value updating} (BVU) model. \added[id=jj]{The models were compared to a baseline model, which predicts a constant evaluation equal to the mean individual evaluation (sensible models are expected to outperform this baseline model).}

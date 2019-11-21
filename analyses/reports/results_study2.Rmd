@@ -85,7 +85,7 @@ The modeling procedure followed Study 1.
 ```
 
 \textit{Quantitative Model Fit.}
-More than half of the participants were best-described by the Bayesian value updating model Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%). The evidence strength of the models is shown in Figure \ref{fig:fig2}. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).
+More than half of the participants were best-described by the Bayesian value updating model Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%). The evidence strength of the models is shown in Figure \ref{fig:fig2_2}. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).
 
 
 
@@ -94,7 +94,7 @@ More than half of the participants were best-described by the Bayesian value upd
   knitr::read_chunk("./code/fig2.R")
 ```
 
-```{r fig2, fig.asp=0.6, cache=FALSE, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r fig2_2, fig.asp=0.6, cache=FALSE, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
 ```
 
 ```{r study1_par}
@@ -133,11 +133,11 @@ The fitted model parameters (Table \ref{tab:study1_parameter}) reveal that the p
 ```
 
 \textit{Qualitative Model Fit.}
-Figure \ref{fig:fig5} plots the qualitative model fit (best-fitting model predictions against observed evaluations by participant). As in Study 1, the data are generally well-described \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$)} where the model must be rejected because of qualitative mis-fit.
+Figure \ref{fig:fig5_2} plots the qualitative model fit (best-fitting model predictions against observed evaluations by participant). As in Study 1, the data are generally well-described \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$)} where the model must be rejected because of qualitative mis-fit.
 
 
 ```{r, echo=FALSE, cache=FALSE}
   knitr::read_chunk("./code/fig5.R")
 ```
-```{r fig5, cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
+```{r fig5_2, cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
 ```
