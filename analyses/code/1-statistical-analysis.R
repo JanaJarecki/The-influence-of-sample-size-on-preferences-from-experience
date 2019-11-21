@@ -5,17 +5,31 @@
 library(data.table)   # fast data processing
 library(brms)         # bayesian analyses
 library(cogscimodels) # handling cognitive models
+library(BayesFactor)
 
 # Load fitted cognitive models and participant data
 #study <- 2
 fits <- readRDS(sub("x", study, "studyx_cognitive_models_fit.rds"))
-d <- fread(sub("x", study, "../../data/processed/studyx.csv"), colClasses=list(character="id"))
+d <- fread(sub("x", study, "../../data/processed/studyx.csv"))
+# Make factors for anovas
+d[, c("id", "gambletype", "samplesizecat", "condition") := .(factor(id), factor(gambletype), factor(samplesizecat, levels = c("xs", "s", "m", "l", "--")), factor(condition))]
+
+#
+# Influence of gambletype x condition
+# --------------------------------------------------------------------------
+aovFull <- anovaBF(value ~ condition * gambletype + id, whichRandom = "id", data=d)
+BF_cond_gambletype <- extractBF(aovFull[4]/aovFull[3], onlybf = TRUE)
+class(BF_cond_gambletype) <- "BF"
+# Store evaluations by condition for descriptive results
+dd <- d[, paste_msd(value, label = T), by = .(condition, gambletype)]
+
+
+# Only use experience condition from now on
 d <- d[condition=="experience"] # only use experience condition
 
 #
 # Influence of sample size on evaluations
 # --------------------------------------------------------------------------
-d[, c("id", "gambletype", "samplesizecat") := .(factor(id), factor(gambletype), factor(samplesizecat, levels = c("xs", "s", "m", "l", "--")))]
 d[, ev := round(gamblex * gamblep, 3)]
 d[, evf := factor(ev)]
 # Fit the model and obtain Bfs

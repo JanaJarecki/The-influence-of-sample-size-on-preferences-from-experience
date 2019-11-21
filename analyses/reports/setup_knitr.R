@@ -23,8 +23,8 @@ format_bf <- function(x) {
   x <- ifelse(x < 1/1000, "< 1/1000",
       ifelse(x > 1000, "> 1000", 
         ifelse(x >= 1/10 & x <= 10,
-          sprintf("%1.2f", x),
-          sprintf("%1.0f", x)
+          paste("=", sprintf("%1.2f", x)),
+          paste("=", sprintf("%1.0f", x))
           )
         )
       )
