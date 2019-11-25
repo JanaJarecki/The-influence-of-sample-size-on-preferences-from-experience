@@ -94,7 +94,7 @@ Slightly more than half of the participants were described best by the Bayesian 
   knitr::read_chunk("./code/fig2.R")
 ```
 
-```{r fig2_2, fig.asp=0.6, cache=FALSE, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r fig2, fig.asp=0.6, cache=FALSE, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
 ```
 
 ```{r study1_par}
