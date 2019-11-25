@@ -25,9 +25,6 @@ header-includes:
 ---
 
 ```{r setupknitr, include=0, cache=0}
-# Run the setup in a separate chunk at the very beginning
- # Do not cache this chunk where you load libraries and set options
- # because the code has side effects
   source("setup_knitr.R")
 ```
 

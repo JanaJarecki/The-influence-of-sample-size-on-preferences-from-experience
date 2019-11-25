@@ -61,7 +61,7 @@ The evaluations in the experience condition were not driven by primacy or recenc
 
 
 \textit{Description versus experience.}
-Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($`r dd$V1[1]`$) compared to description ($`r dd$V1[3]`$). By contrast p-bets were evaluated lower from experience compared ($`r dd$V1[2]`$) to description ($`r dd$V1[4]`$), $BF `r BF_cond_gambletype`$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In our study, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when people made valuations from experience.
+Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($`r dd$V1[1]`$) compared to description ($`r dd$V1[3]`$). By contrast p-bets were evaluated lower from experience ($`r dd$V1[2]`$) compared to description ($`r dd$V1[4]`$), $BF `r BF_cond_gambletype`$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In our study, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when people made valuations from experience.
 
 
 ```{r, means_study1}
