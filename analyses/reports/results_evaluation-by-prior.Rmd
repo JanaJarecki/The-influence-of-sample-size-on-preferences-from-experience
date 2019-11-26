@@ -36,14 +36,14 @@ header-includes:
 ```
 
 \textit{Predictions about gamble valuations.}
-\added[id=jj]{Figure \ref{fig:fig6}a shows that, as predicted, among the Bayesian participants, those with zero-outcome priors increased their evaluations of p-bets, those with gain priors decreased their evaluations of \$-bets, and RF-type participants remained relatively stable across sample sizes. Statistical analyses by means of a Bayesian generalized linear model\footnote{regressing the (normalized, within-person z-standardized) evaluations on the predictors sample size, gamble type, and learner class (BVU-gain-prior, BVU-loss-prior, RF) with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions.} favored a regression with the best-fitting cognitive model as predictor over a regression without the predictor cognitive model, $BF\textsubscript{01} `r BF_value_prior`$.
+\added[id=jj]{Figure \ref{fig:fig6}a shows that, as predicted, among the Bayesian participants, those with zero-outcome priors increased their evaluations of p-bets, those with gain priors decreased their evaluations of \$-bets, and RF-type participants remained relatively stable across sample sizes. Statistical analyses by means of a Bayesian generalized linear model}\footnote{regressing the (normalized, within-person z-standardized) evaluations on the predictors sample size, gamble type, and learner class (BVU-gain-prior, BVU-loss-prior, RF) with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions.} \added[id=jj]{favored a regression with the best-fitting cognitive model as predictor over a regression without the predictor cognitive model, $BF\textsubscript{01} `r BF_value_prior`$.
 }
 
-```{r, echo=FALSE, cache=FALSE}
+```{r, echo=0, cache=0, fig.height = 5, fig.width = 4}
   knitr::read_chunk("./code/fig6.R")
 ```
 
-```{r fig6, cache=FALSE, fig.cap = "Mean evaluations by gamble type and best-fitting cognitive model and prior beliefs of the BVU model. \\textit{BVU}$=$Bayesian value updating model, \\textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. Sample size categories see Table \\ref{tab:Lotteries}. \\textit{n} denotes the number of participants (of 80) that fall into the best-fitting model class. Evaluations are scaled to 0-1 and z-standardized at the individual level."}
+```{r fig6, cache=FALSE, fig.cap = "Mean evaluations by gamble type and best-fitting cognitive model and prior beliefs of the BVU model. \\textit{BVU}$=$Bayesian value updating model, \\textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. Sample size categories see Table \\ref{table:Lotteries}. \\textit{n} denotes the number of participants (of 80) that fall into the best-fitting model class. Evaluations are scaled to 0-1 and z-standardized at the individual level."}
 ```
 
 \textit{Predictions about confidence.}
