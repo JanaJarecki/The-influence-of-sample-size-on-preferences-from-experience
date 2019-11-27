@@ -80,7 +80,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{26 November, 2019}
+    \date{27 November, 2019}
 
 \usepackage{natbib} \usepackage{threeparttable} \usepackage{booktabs}
 \shorttitle{test} \usepackage{setspace}
@@ -100,7 +100,7 @@ evaluated gamble 4 with an average of \(2.80, 2.91, 2.80, 2.95, 3.08\)
 sample sizes, which a model comparison among analyses of variance
 (ANOVA) of the judgments confirmed: an ANOVA with the predictors gamble
 type and gamble expected value (Model 0) outperformed models with the
-additional predictors sample size (\(BF_{01} = 417\)) and a sample-size
+additional predictors sample size (\(BF_{01} = 409\)) and a sample-size
 x gamble-type interaction (\(BF_{02} > 1000\), all models had
 by-participant random effects). The \$-bet gambles were evaluated higher
 (\(M=5.78, SD=3.94\)) than the p-bet gambles (\(M=2.74, SD=1.09\)),
@@ -148,32 +148,32 @@ Condition & Sample size category & Sample size & \textit{Med} & \textit{M} & D--
 \midrule
 Gamble ID 1 (\$-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 4\\
-\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 62\\
-\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 24\\
-\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 145\\
+\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 90\\
+\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 26\\
+\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 144\\
 \ \ \ D & -- & -- & 4.00 & 4.60 & -- & --\\
 Gamble ID 2 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 132\\
-\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 611\\
+\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 133\\
+\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 684\\
 \ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 4\\
 \ \ \ E & l & 36 & 4.00 & 3.99 & -0.37 & 2\\
 \ \ \ D & -- & -- & 3.00 & 3.61 & -- & --\\
 Gamble ID 3 (\$-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 4\\
-\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 864\\
-\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 142\\
+\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 895\\
+\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 153\\
 \ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 16\\
 \ \ \ D & -- & -- & 5.00 & 6.57 & -- & --\\
 Gamble ID 4 (p-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 3.00 & 2.80 & 0.28 & >1000\\
 \ \ \ E & s & 10 & 3.20 & 2.91 & 0.16 & 3\\
-\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 66\\
+\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 55\\
 \ \ \ E & l & 30 & 3.00 & 2.95 & 0.13 & 1\\
 \ \ \ D & -- & -- & 3.20 & 3.08 & -- & --\\
 Gamble ID 5 (p-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 6 & 2.00 & 1.77 & 0.10 & 8\\
 \ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 14\\
-\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 27\\
+\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 28\\
 \ \ \ E & l & 36 & 2.00 & 1.81 & 0.06 & 1\\
 \ \ \ D & -- & -- & 2.00 & 1.87 & -- & --\\
 Gamble ID 6 (p-bet) &  &  &  &  &  & \\
@@ -215,20 +215,14 @@ participant level, assuming that observations follow a truncated normal
 distribution around the model predictions (truncation between 0 and 1)
 with a constant standard deviation (\(\sigma\)), that was estimated by
 participant (\(0 < \sigma \leq 1\)).
-\added[id=jj]{Therefore, the relative frequency model has two free parameters, $\sigma$ and the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$). The Bayesian value updating model has four free parameters, the gain prior $\theta_G$ ($0 \leq \theta_G \leq 2$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$, with the prior on zero outcomes constrained to $\theta_0=2-\theta_G$. The baseline model had two free parameters, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. Models were compared based on evidence strength and BIC weights from the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
+\added[id=jj]{Therefore, the relative frequency model had two free parameters, namely $\sigma$ and the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$). The Bayesian value updating model had four free parameters, the gain prior $\theta_G$ ($0 \leq \theta_G \leq 2$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$, with the prior on zero outcomes constrained to $\theta_0=2-\theta_G$. The baseline model had two free parameters, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. Models were compared based on evidence strength and BIC weights from the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
 
 We will first outline the quantitative model fit, followed by the
 qualitative model fit, and lastly analyze the effects of sample size
 given the cognitive strategies.
 
-\textit{Quantitative Model Fit.} The Bayesian value updating model
-described the majority of the participants best (30 of 40; 75\%). The
-relative frequency model described 9 participants best (22\%); the
-baseline model described only 1 participants best. Figure \ref{fig:fig2}
-shows the evidence strength for the models by participant. The models'
-mean Bayesian information criterion across all participants equaled
-BIC\textsubscript{BVU}\(= -124\), BIC\textsubscript{RF}\(= -110\), and
-BIC\textsubscript{BASE}\(= -17\) (lower values indicate better fit).
+\textit{Quantitative Model Fit.}
+\added[id=jj]{The Bayesian value updating model described the majority of the participants best (30 of 40; 75\%). The relative frequency model described 9 participants best (22\%); the baseline model described 1 participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= -124$, BIC\textsubscript{RF}$= -110$, and BIC\textsubscript{BASE}$= -17$ (lower values indicate better fit).}
 
 \begin{figure}[htb]
 
@@ -240,7 +234,7 @@ BIC\textsubscript{BASE}\(= -17\) (lower values indicate better fit).
 \end{figure}
 
 \added[id=jj]{
-The estimated parameter of the best-fitting models, which Table \ref{tab:study1_parameter} summarizes, reveal that the power utility exponent ($\alpha$) did not differ for the participants that were described by a Bayesian value updating strategy ($M_{\alpha}= 1.49$) and those using a relative frequency strategy ($M_{\alpha}=1.61$), $\Delta$ $M = -0.09$ 95\% HDI $[-0.94$, $0.78]$, $\mathrm{BF}_{\textrm{01}} = 2.76$. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with 46\% (gain prior $\theta_G = 0.92$; zero-outcome prior $\theta_0 = 1.08$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=1.36$; values $>$ 1 are liberal, 1 is optimal Bayesian, $<$ 1 is conservative learning). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. The liberal learning in our data can be explained by that participants repeatedly sampled from the same set of gambles.
+The estimated parameter of the best-fitting models, which Table \ref{tab:study1_parameter} summarizes, reveal that the power utility exponent ($\alpha$) did not differ for the participants that were described by a Bayesian value updating strategy ($M_{\alpha}= 1.49$) and those using a relative frequency strategy ($M_{\alpha}=1.61$), $\Delta$ $M = -0.09$ 95\% HDI $[-0.96$, $0.78]$, $\mathrm{BF}_{\textrm{01}} = 2.76$. Participants using the Bayesian strategy had, on average, a prior belief that gains occur with 46\% (gain prior $\theta_G = 0.92$; zero-outcome prior $\theta_0 = 1.08$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=1.36$; values $>$ 1 are liberal, 1 is optimal Bayesian, $<$ 1 is conservative learning). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. The liberal learning in our data can be explained by that participants repeatedly sampled from the same set of gambles.
 }
 
 \begin{table}[tbp]

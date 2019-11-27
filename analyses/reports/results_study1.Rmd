@@ -83,7 +83,7 @@ At the aggregate level, sample size seems to not influence the evaluations of ga
 We used computational modeling to analyze the role of sample size in value judgments more closely, comparing the performance of the \added[id=jj]{relative frequency} (RF) model and the \added[id=jj]{Bayesian value updating} (BVU) model. \added[id=jj]{The models were compared to a baseline model, which predicts a constant evaluation equal to the mean individual evaluation (sensible models are expected to outperform this baseline model).}
 
 \textit{Modeling Procedure.} 
-To fit the model parameters, the observed and predicted evaluations were normalized to a common range between 0 and 1 (by division through the gain of the presented gamble). Maximum likelihood was used to estimate the free model parameters at the participant level, assuming that observations follow a truncated normal distribution around the model predictions (truncation between 0 and 1) with a constant standard deviation ($\sigma$), that was estimated by participant ($0 < \sigma \leq 1$). \added[id=jj]{Therefore, the relative frequency model has two free parameters, $\sigma$ and the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$). The Bayesian value updating model has four free parameters, the gain prior $\theta_G$ ($0 \leq \theta_G \leq 2$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$, with the prior on zero outcomes constrained to $\theta_0=2-\theta_G$. The baseline model had two free parameters, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. Models were compared based on evidence strength and BIC weights from the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
+To fit the model parameters, the observed and predicted evaluations were normalized to a common range between 0 and 1 (by division through the gain of the presented gamble). Maximum likelihood was used to estimate the free model parameters at the participant level, assuming that observations follow a truncated normal distribution around the model predictions (truncation between 0 and 1) with a constant standard deviation ($\sigma$), that was estimated by participant ($0 < \sigma \leq 1$). \added[id=jj]{Therefore, the relative frequency model had two free parameters, namely $\sigma$ and the power utility exponent $\alpha$ ($0 \leq \alpha \leq 20$). The Bayesian value updating model had four free parameters, the gain prior $\theta_G$ ($0 \leq \theta_G \leq 2$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\alpha$ and $\sigma$, with the prior on zero outcomes constrained to $\theta_0=2-\theta_G$. The baseline model had two free parameters, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. Models were compared based on evidence strength and BIC weights from the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
 
 
 
@@ -94,7 +94,7 @@ To fit the model parameters, the observed and predicted evaluations were normali
 We will first outline the quantitative model fit, followed by the qualitative model fit, and lastly analyze the effects of sample size given the cognitive strategies.
 
 \textit{Quantitative Model Fit.}
-The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described only `r winners["base"]` participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).
+\added[id=jj]{The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described `r winners["base"]` participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).}
 
 
 ```{r, echo=FALSE, cache=FALSE}
@@ -144,11 +144,14 @@ The estimated parameter of the best-fitting models, which Table \ref{tab:study1_
 The qualitative fit between the models and the data is shown in Figure \ref{fig:fig5}, which plots the predictions of the best-fitting models against the observed evaluations by participant. The models generally describe the data well \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$).} For these cases, for whom the winning model is the Bayesian updating model, the model must be rejected because of qualitative mis-fit.\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. However, the quantitative results of the probability weighting model and the utility model, we favored a utility model without probability weighting.}
 
 
+```{r include = 0}
+knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7)
+```
 
-```{r, echo=FALSE, cache=FALSE}
+```{r, echo=0, cache=0}
   knitr::read_chunk("./code/fig5.R")
 ```
-```{r fig5, out.width="\\textwidth", cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r fig5, cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 ```
 
 \added[id=jj]{

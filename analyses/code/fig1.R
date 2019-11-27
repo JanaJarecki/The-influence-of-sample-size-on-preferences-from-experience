@@ -2,7 +2,7 @@
 # Fig 1
 # ==========================================================================
 # Change the working directory to the location of THIS file
-source("fig_setup.R")
+source("setup_fig.R")
 library(cogscimodels) #devtools::install_github("janajarcki/cogscimodels")
 library(tidybayes)
 library(data.table)

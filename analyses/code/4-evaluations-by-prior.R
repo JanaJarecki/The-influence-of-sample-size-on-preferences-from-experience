@@ -4,6 +4,7 @@
 # ==========================================================================
 require(data.table)
 require(brms)
+require(BayesFactor)
 options(contrasts = c("contr.sum", "contr.poly"))
 
 # Load data of both studies
@@ -68,11 +69,18 @@ d[is.na(conf_scaled), conf_scaled := 0]
 
 
 ## Bayes factor of full model against null
-bfFull = lmBF(conf_scaled ~ samplesizecat_num * winner * gambletype + id, data = d, whichRandom = "id")
+bfFull = generalTestBF(
+  formula = conf_scaled ~ samplesizecat_num * winner * gambletype + id,
+  data = d,
+  whichRandom = "id",
+  neverExclude="id")
+bfFull
 
-## Bayes factor of main effects only against null
-bfNoWinner = lmBF(conf_scaled ~ samplesizecat_num  * gambletype + id, data = d, whichRandom = "id")
 
 ## Compare the main-effects only model to the full model
-BF_conf_prior <- extractBF(bfNoWinner / bfFull, onlybf = TRUE)
-class(BF_conf_prior) <- "BF"
+BF_conf_full_gtype <- extractBF(bfFull / bfGambletype, onlybf = TRUE)
+class(BF_conf_full_gtype) <- "BF"
+BF_conf_full_winner <- extractBF(bfFull / bfWinner, onlybf = TRUE)
+class(BF_conf_full_winner) <- "BF"
+extractBF(bfWinner, onlybf = TRUE)
+
