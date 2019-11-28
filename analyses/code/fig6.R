@@ -15,13 +15,13 @@ plot_it <- function(x) {
     if (x == "Evaluation") {
         dpredagg <- dpredagg[, .(M = mean(value), SE = sd(value)/sqrt(.N)),
             by = .(gambletype, samplesizecat, priorx_cat, winner, variable)]
-        dpredagg[, gambletype := factor(gambletype, levels = c("p-bet", "$-bet"), labels = c("p-bet\n(high probability, low gain)", "$-bet\n(low probability, high gain)"))]
     } else {
         dpredagg <- dpredagg[, .(M = mean(value), SE = sd(value)/sqrt(.N)),
-            by = .(samplesizecat, winner, variable)]
+            by = .(gambletype, samplesizecat, winner, variable)]
     }
     dpredagg[, samplesizecat := factor(samplesizecat, levels = c("xs","s","m","l"))]
     dpredagg[, winner := factor(winner, model_levels, model_labels)]
+    dpredagg[, gambletype := factor(gambletype, levels = c("p-bet", "$-bet"), labels = c("p-bet\n(high probability, low gain)", "$-bet\n(low probability, high gain)"))]
     
     p <- ggplot(dpredagg[variable == x], aes(samplesizecat, M)) +
         facet_wrap(~ winner, scales = "free_y") +
@@ -44,9 +44,9 @@ plot_it <- function(x) {
         geom_point(aes(shape=gambletype, color=priorx_cat), size = 1.5, position = pd, fill = "white")
     }
     if (x == "Confidence") {
-        p <- p + geom_errorbar(aes(ymin = M-SE, ymax = M+SE), width = 0.1, position = pd, color = "grey") +
-        geom_line(aes(group=0), pos = pd, alpha = 0.5) +
-        geom_point(size = 1.5, position = pd, fill = "white")
+        p <- p + geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = gambletype), width = 0.1, position = pd, color = "grey") +
+        geom_line(aes(group=gambletype), pos = pd, alpha = 0.5) +
+        geom_point(aes(shape = gambletype), size = 1.5, position = pd, fill = "white")
     }
     return(p)
 }
