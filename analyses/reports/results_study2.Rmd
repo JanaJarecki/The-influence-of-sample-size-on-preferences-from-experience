@@ -94,7 +94,7 @@ Slightly more than half of the participants were described best by the Bayesian 
   knitr::read_chunk("./code/fig2.R")
 ```
 
-```{r fig2_2, ref.label="fig2", fig.asp=0.6, cache=0, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r fig2_2, ref.label="fig2", fig.asp=0.6, cache=0, fig.cap = "Study 2: Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
 ```
 
 ```{r par_study2}
@@ -118,7 +118,7 @@ The fitted model parameters (Table \ref{tab:parameter_study2}) reveal that, simi
     by=winner]
   tab <- dcast(parameter, winner_n ~ par, paste_msd, value.var = "val")
   papaja::apa_table(tab[c(1,2), c("winner_n", "rp", "delta", "count_x", "sigma")]
-      , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
+      , caption = "Study 2: Parameter Estimates of Winning Models, \\textit{M (SD)}"
       , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\sigma$")
       , align = c("l", rep("c", 5)),
       , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model. Parameters denote: $\\alpha=$ power utility exponent, $\\theta_G$ gain prior, $\\sigma$ standard deviation."
@@ -136,11 +136,11 @@ The fitted model parameters (Table \ref{tab:parameter_study2}) reveal that, simi
 Figure \ref{fig:fig5_2} plots the qualitative model fit (best-fitting model predictions against observed evaluations by participant). As in Study 1, the data are generally well-described by the models \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$)} where the model must be rejected because of qualitative mis-fit.
 
 ```{r include = 0}
-knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7)
+knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7, fig.pos = 'H')
 ```
 
 ```{r, echo=0, cache=0}
   knitr::read_chunk("./code/fig5.R")
 ```
-```{r fig5_2, ref.label="fig5", cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
+```{r fig5_2, ref.label="fig5", cache=0, fig.cap = "Study 2: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
 ```

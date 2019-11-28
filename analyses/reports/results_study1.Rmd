@@ -101,7 +101,7 @@ We will first outline the quantitative model fit, followed by the qualitative mo
   knitr::read_chunk("./code/fig2.R")
 ```
 
-```{r fig2, fig.asp=0.6, cache=FALSE, fig.cap = "Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r fig2, fig.asp=0.6, cache=FALSE, fig.cap = "Study 1: Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
 ```
 
 
@@ -126,7 +126,7 @@ The estimated parameter of the best-fitting models, which Table \ref{tab:study1_
     by=winner]
   tab <- dcast(parameter, winner_n ~ par, paste_msd, value.var = "val")
   papaja::apa_table(tab[c(2,3,1), c("winner_n", "rp", "delta", "count_x","m", "sigma")]
-      , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
+      , caption = "Study 1: Parameter Estimates of Winning Models, \\textit{M (SD)}"
       , col.names = c("Winning Model","$\\alpha$", "$\\delta$", "$\\theta_G$","$\\mu$","$\\sigma$")
       , align = c("l", rep("c", 5)),
       , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model. Parameters denote: $\\alpha=$ power utility exponent, $\\theta_G$ gain prior, $\\mu=$ mean evaluation, $\\sigma$ standard deviation."
@@ -151,7 +151,7 @@ knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7)
 ```{r, echo=0, cache=0}
   knitr::read_chunk("./code/fig5.R")
 ```
-```{r fig5, cache=0, fig.cap = "Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r fig5, cache=0, fig.cap = "Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 ```
 
 \added[id=jj]{

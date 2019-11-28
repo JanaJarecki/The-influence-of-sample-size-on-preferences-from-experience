@@ -37,7 +37,7 @@ header-includes:
 \added[id=jj]{Figure \ref{fig:fig6}a shows that, descriptively, among the Bayesian participants, those with zero-outcome priors only slightly increased their evaluations of p-bets, those with gain priors slightly decreased their evaluations of \$-bets, and RF-type participants remained relatively stable across sample sizes, as predicted. However, statistical analyses by means of a Bayesian mixed-effects model}\footnote{Regressing the (normalized, within-person z-standardized) evaluations on the predictors sample size category (coded as 1,2,3,4), gamble type, and learner class (BVU-gain-prior, BVU-loss-prior, RF) and interactions of the predictors, with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions.} \added[id=jj]{revealed that the data failed to strongly support a model with sample size as predictor ($M_0$) over a model without sample size $BF\textsubscript{01} `r BF_value_prior`$.
 }
 
-```{r, echo=0, cache=0, fig.height = 5, fig.width = 4}
+```{r, echo=0, cache=0, fig.height = 5, fig.width = 4, fig.pos = "H"}
   knitr::read_chunk("./code/fig6.R")
 ```
 
