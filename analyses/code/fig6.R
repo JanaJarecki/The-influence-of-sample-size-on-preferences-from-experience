@@ -3,33 +3,32 @@
 # ==========================================================================
 ## ---- fig6 ----
 # source("4-evaluations-by-prior.R", chdir = TRUE)
-d[winner=="bvu", priorx_cat := cut(val, c(0, 1, 2))]
-d[winner!="bvu", priorx_cat := NA]
-d[, priorx_cat := factor(priorx_cat, exclude = NULL, labels = c("Zero-outcome prior", "Gain prior", "None"))]
+# source("setup_fig.R")
+
 # Melt
-dpredagg <- melt(d[condition == "experience"], c("id", "gambletype", "samplesizecat", "priorx_cat", "winner"), c("value_scaled", "conf_scaled"))
+dpredagg <- melt(d[condition == "experience"], c("id", "type", "ss", "prior", "model"), c("value_scaled", "conf_scaled"))
 dpredagg[, variable := factor(variable, levels = c("value_scaled", "conf_scaled"), labels = c("Evaluation", "Confidence"))]
-dpredagg <- dpredagg[winner != "base"]
+dpredagg <- dpredagg[model != "base"]
 
 plot_it <- function(x) {
     if (x == "Evaluation") {
         dpredagg <- dpredagg[, .(M = mean(value), SE = sd(value)/sqrt(.N)),
-            by = .(gambletype, samplesizecat, priorx_cat, winner, variable)]
+            by = .(type, ss, prior, model, variable)]
     } else {
         dpredagg <- dpredagg[, .(M = mean(value), SE = sd(value)/sqrt(.N)),
-            by = .(gambletype, samplesizecat, winner, variable)]
+            by = .(type, ss, model, variable)]
     }
-    dpredagg[, samplesizecat := factor(samplesizecat, levels = c("xs","s","m","l"))]
-    dpredagg[, winner := factor(winner, model_levels, model_labels)]
-    dpredagg[, gambletype := factor(gambletype, levels = c("p-bet", "$-bet"), labels = c("p-bet\n(high probability, low gain)", "$-bet\n(low probability, high gain)"))]
+    #dpredagg[, ss := factor(ss, levels = c("xs","s","m","l"))]
+    dpredagg[, model := factor(model, model_levels, model_labels)]
+    dpredagg[, type := factor(type, levels = c("p-bet", "$-bet"), labels = c("p-bet\n(high probability, low gain)", "$-bet\n(low probability, high gain)"))]
     
-    p <- ggplot(dpredagg[variable == x], aes(samplesizecat, M)) +
-        facet_wrap(~ winner, scales = "free_y") +
+    p <- ggplot(dpredagg[variable == x], aes(ss, M)) +
+        facet_wrap(~ model, scales = "free_y") +
         scale_shape_manual("Gamble Type", values = c(19,21)) +
         scale_linetype_manual("Winning Model", values = c(1,2,3)) +
         scale_fill_manual("Winning Model", values = model_colors) +
         scale_color_manual("Prior", values = c("darkblue", "lightblue", "brown")) +
-        scale_x_discrete("Sample Size Category", expand = c(0.3,0)) +
+        scale_x_discrete("Sample Size", expand = c(0.3,0)) +
         ylab("Evaluation (M +/-SE)") +
         scale_y_continuous(paste(x, "(M +/-SE)"), expand = c(0,0)) +
         guides(fill = "none", linetype = "none") +
@@ -39,14 +38,14 @@ plot_it <- function(x) {
         labs(title = "Evaluations change with sample size as function of winning model and prior")
 
     if (x == "Evaluation") {
-        p <- p + geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = interaction(gambletype, priorx_cat)), width = 0.1, position = pd, color = "grey") +
-        geom_line(aes(color = priorx_cat, group = interaction(gambletype, priorx_cat)), pos = pd, alpha = 0.5) +
-        geom_point(aes(shape=gambletype, color=priorx_cat), size = 1.5, position = pd, fill = "white")
+        p <- p + geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = interaction(type, prior)), width = 0.1, position = pd, color = "grey") +
+        geom_line(aes(color = prior, group = interaction(type, prior)), pos = pd, alpha = 0.5) +
+        geom_point(aes(shape = type, color = prior), size = 1.5, position = pd, fill = "white")
     }
     if (x == "Confidence") {
-        p <- p + geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = gambletype), width = 0.1, position = pd, color = "grey") +
-        geom_line(aes(group=gambletype), pos = pd, alpha = 0.5) +
-        geom_point(aes(shape = gambletype), size = 1.5, position = pd, fill = "white")
+        p <- p + geom_errorbar(aes(ymin = M-SE, ymax = M+SE, group = type), width = 0.1, position = pd, color = "grey") +
+        geom_line(aes(group = type), pos = pd, alpha = 0.5) +
+        geom_point(aes(shape = type), size = 1.5, position = pd, fill = "white")
     }
     return(p)
 }

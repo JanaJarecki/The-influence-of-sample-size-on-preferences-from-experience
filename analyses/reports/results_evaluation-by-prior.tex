@@ -80,7 +80,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{28 November, 2019}
+    \date{02 Dezember, 2019}
 
 \usepackage{natbib} \usepackage{threeparttable} \usepackage{booktabs}
 \shorttitle{test} \usepackage{setspace}
@@ -90,9 +90,16 @@
 
 \begin{document}
 
-\added[id=jj]{Figure \ref{fig:fig6}a shows that, descriptively, among the Bayesian participants, those with zero-outcome priors only slightly increased their evaluations of p-bets, those with gain priors slightly decreased their evaluations of \$-bets, and RF-type participants remained relatively stable across sample sizes, as predicted. However, statistical analyses by means of a Bayesian mixed-effects model}\footnote{Regressing the (normalized, within-person z-standardized) evaluations on the predictors sample size category (coded as 1,2,3,4), gamble type, and learner class (BVU-gain-prior, BVU-loss-prior, RF) and interactions of the predictors, with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions.}
-\added[id=jj]{revealed that the data failed to strongly support a model with sample size as predictor ($M_0$) over a model without sample size $BF\textsubscript{01} = 2.71$.
-}
+To test these hypotheses, participants were classified as
+relative-frequency learners (\(n=25\)), Bayesians with gain priors
+\(\theta_G > 1\) (\(n=14\)), and Bayesians with zero-outcome priors
+\(\theta_G \leq 1\) (\(n=32\)), based on the individually best-fitting
+cognitive model. Participants were excluded if neither the BVU nor the
+RF model described them qualitatively or quantitatively (\(n=9\)).
+
+\added[id=jj]{Figure \ref{fig:fig6}a shows that, as predicted, among the Bayesian participants, those with zero-outcome priors only increased their evaluations of p-bets, those with gain priors decreased their evaluations of \$-bets, and that RF-type participants remained relatively stable across sample sizes. Statistical analyses by means of a Bayesian mixed-effects model}\footnote{Regressing the (normalized, within-person z-standardized) evaluations on the predictors sample size category (coded as 1,2,3,4), gamble type, and learner class (BVU-gain-prior, BVU-loss-prior, RF) and interactions of the predictors, with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions.}
+\added[id=jj]{
+supports a model that includes interactions between sample size and learner classification and between gamble type and learner classification ($M_1$) over a model without the first interaction term ($BF\textsubscript{10} = 12$) and over a model without a the second interaction term  ($BF\textsubscript{20} > 1000$). With weakly informative priors, the modal posterior regression coefficient estimates for sample size for Bayesian learners with zero-outcome priors given p-bets was positive, $b_\textsubscript{BVU,zero,p-bet}$ $=0.14$ (89\% HDI $0.11, 0.18$), and for Bayesians with gain priors given \$-bets the estimate was negative, $b_\textsubscript{BVU,gain,\$-bet}$ $=-0.01$ (89\% HDI $-0.09, 0.00$), as hypothesized. Contrary to the hypotheses, however, for RF-type participants the estimated regression coefficients were not zero but \$-bets $b_\textsubscript{RF,\$-bet}$ $=0.05$ (89\% HDI $0.04, 0.12$) and for p-bets $b_\textsubscript{RF,p-bet}$ $=-0.00$ (89\% HDI $-0.08, -0.00$).}
 
 \begin{figure}[htb]
 
@@ -104,7 +111,7 @@
 \end{figure}
 
 \textit{Predictions about confidence.}
-\added[id=jj]{Regarding uncertainty about beliefs, the Bayesian model predicts that the uncertainty about beliefs reduces with more evidence. Thus in Bayesian learners, confidence should increase with growing sample size. The relative frequency model makes no predictions about confidence. To test this, we classified participants into Bayesian and relative-frequency learners based on the best-fitting model. Mean confidence ratings of Bayesian-type learners, z-standardized within participants, increased only slightly from the extra small sample size ($M=-0.06, SD=1.00$), to the small sample size ($M=-0.00, SD=0.94$), medium sample size ($M=-0.01, SD=0.98$), and large sample size ($M=0.07, SD=1.01$, Figure \ref{fig:fig6}b), but statistical analyses showed that a linear regression model\footnote{Regressing the (within-person z-standardized) confidence ratings on the predictors sample size category (coded as 1,2,3,4), gamble type, and winning model (BVU, RF), and interactions of the predictors, with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions.} ($M_0$) that includes the sample size as predictor fitted the data worse than an intercept-only model ($BF_{01}< 1/1000$).}
+\added[id=jj]{Regarding uncertainty about beliefs, the Bayesian model predicts that the uncertainty about beliefs reduces with more evidence. Thus in Bayesian learners, confidence should increase with growing sample size. The relative frequency model makes no predictions about confidence. To test this, we classified participants into Bayesian and relative-frequency learners based on the best-fitting model. Mean confidence ratings of Bayesian-type learners, z-standardized within participants, increased only slightly from the extra small sample size ($M=-0.07, SD=1.00$), to the small sample size ($M=0.01, SD=0.91$), medium sample size ($M=-0.01, SD=1.00$), and large sample size ($M=0.07, SD=1.00$, Figure \ref{fig:fig6}b), but statistical analyses showed that a linear regression model\footnote{Regressing the (within-person z-standardized) confidence ratings on the predictors sample size category (coded as 1,2,3,4), gamble type, and winning model (BVU, RF), and interactions of the predictors, with a by-participant random intercept; categorical predictors were effects-coded to facilitate interpretation of interactions.} ($M_1$) that includes the sample size as predictor fitted the data worse than an intercept-only model ($BF_{01}> 1000$).}
 
 
 \end{document}

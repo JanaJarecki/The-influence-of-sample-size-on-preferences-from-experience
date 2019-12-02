@@ -661,7 +661,7 @@ bfRF = anovaBF(rating ~  id+s, whichRandom = "id", data = conf[conf$block %in% "
 ```
 
 
-Because only the BVU model predicts increasing confidence ratings as a function of sample size, we repeated the previous analysis separately for Bayesian and frequentist learners. Interestingly, the analysis of those participants who were quantitatively and qualitatively best described by the BVU model revealed a small effect of sample size. (Means: see tabke above,  BF10 = `r as.character(round(extractBF(bfBVU, onlybf = T),2))`). The analysis of those participants who were quantitatively and qualitatively best described by the RF model did not show an effect of sample size on confidence ratings (Means: see tabke above,  BF10 = `r as.character(round(extractBF(bfRF, onlybf = T),2))`).
+Because only the BVU model predicts increasing confidence ratings as a function of sample size, we repeated the previous analysis separately for Bayesian and frequentist learners. Interestingly, the analysis of those participants who were quantitatively and qualitatively best described by the BVU model revealed a small effect of sample size. (Means: see table above,  BF10 = `r as.character(round(extractBF(bfBVU, onlybf = T),2))`). The analysis of those participants who were quantitatively and qualitatively best described by the RF model did not show an effect of sample size on confidence ratings (Means: see tabke above,  BF10 = `r as.character(round(extractBF(bfRF, onlybf = T),2))`).
 
 
 
