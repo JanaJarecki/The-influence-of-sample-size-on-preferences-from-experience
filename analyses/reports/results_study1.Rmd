@@ -60,7 +60,7 @@ Table \ref{tab:means_study1} summarizes the evaluations of the gambles by format
 The valuations in the experience condition were not driven by primacy or recency: neither the outcomes that participants sampled in the first half of the sampling phase nor those sampled during the second half of the sampling phase predict the observed valuations. A linear model of the evaluations with the predictor gamble type ($\mathrm{M}\textsubscript{0}$) outperformed a model with the additional predictor mean of the first half of samples ($BF\textsubscript{01} = 16.6$) and a model with the additional predictor mean of the second half of samples ($BF\textsubscript{02} = 6.7$).
 
 
-\textit{Description versus experience.}
+\added[id=jj]{\textit{Description versus experience.}}
 Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($`r dd$V1[1]`$) compared to description ($`r dd$V1[3]`$). By contrast p-bets were evaluated lower on the basis of experience ($`r dd$V1[2]`$) compared to description ($`r dd$V1[4]`$), $BF `r BF_cond_gambletype`$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In Study 1, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when participants made valuations from experience.
 
 

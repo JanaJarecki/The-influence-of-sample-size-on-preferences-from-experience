@@ -59,8 +59,8 @@ header-includes:
 \subsubsection{Valuation of gambles across sample sizes}
 The average valuations of the gambles given the sample sizes in Study 2 resemble those in Study 1 (Table \ref{tab:means_study2}). Larger sample sizes did not lead to systematic changes in evaluations of gambles; an ANOVA with the predictors gamble type and gamble expected value ($M_0$) outperformed one with the added predictor sample size ($BF_{01} `r BF_fe_fess`$) and a sample size x gamble type interaction ($BF_{02} `r BF_fe_int`$; models with by-participant random effects). \added[id=jj]{Unlike in Study 1 there was no substantial difference between the evaluation of \$-bet gambles  ($`r d[gambletype == "$-bet", paste_msd(value, label=TRUE)]`$) and p-bet gambles ($`r d[gambletype == "p-bet", paste_msd(value, label=TRUE)]`$); the data equally supported a model including gamble type as predictor ($M_0$) and one without gamble type as predictor, $BF_{01} `r 1/BF_gambletype`$ (both models include by-participant and by-expected-value random effects and use the valuations as the dependent variable).}
 
-\textit{Description versus experience.}
-The valuations from description differed from the valuations from experience for most of the gambles and sample sizes (Table \ref{tab:means_study2}, rightmost column). However, the finding is, especially for
+
+\added[id=jj]{\textit{Description versus experience.}}The valuations from description differed from the valuations from experience for most of the gambles and sample sizes (Table \ref{tab:means_study2}, rightmost column). However, the finding is, especially for
 p-bets, less pronounced than in Study 1. Unlike in Study 1, the \$-bets were evaluated similar from experience ($`r dd$V1[1]`$) and description ($`r dd$V1[3]`$), and the p-bets were evaluated similarly from experience ($`r dd$V1[2]`$) and description ($`r dd$V1[4]`$), the data did neither support an ANOVA with gamble-type x condition interaction ($M_0$) nor a main-effects model, $BF_{01} `r BF_cond_gambletype`$.
 
 ```{r, means_study2}
