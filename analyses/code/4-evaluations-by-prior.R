@@ -2,8 +2,8 @@
 # Judgments by prior and sample size
 # Pooled across both studies
 # ==========================================================================
-# require(data.table)
-# require(BayesFactor)
+require(data.table)
+require(BayesFactor)
 
 # Options: set sum contrasts
 #          to ease interpretastion of higher-order interactions

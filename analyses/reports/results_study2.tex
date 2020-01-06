@@ -80,7 +80,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{27 November, 2019}
+    \date{06 Januar, 2020}
 
 \usepackage{natbib} \usepackage{threeparttable} \usepackage{booktabs}
 \shorttitle{test} \usepackage{setspace}
@@ -90,14 +90,23 @@
 
 \begin{document}
 
-\subsubsection{Evaluations of gambles across sample sizes}
+\subsubsection{Valuation of gambles across sample sizes}
 
+<<<<<<< Updated upstream
 The average evaluations of the gambles with different sample sizes in
 Study 2 resemble those in Study 1 (Table \ref{tab:means_study2}). Larger
 sample sizes did not lead to systematic changes in evaluations of
 gambles; an ANOVA with the predictors gamble type and gamble expected
 value (\(M_0\)) outperformed one with the added predictor sample size
 (\(BF_{01} = 380\)) and a sample-size-gamble-type interaction
+=======
+The average valuations of the gambles given the sample sizes in Study 2
+resemble those in Study 1 (Table \ref{tab:means_study2}). Larger sample
+sizes did not lead to systematic changes in evaluations of gambles; an
+ANOVA with the predictors gamble type and gamble expected value
+(\(M_0\)) outperformed one with the added predictor sample size
+(\(BF_{01} = 380\)) and a sample size x gamble type interaction
+>>>>>>> Stashed changes
 (\(BF_{02} > 1000\); models with by-participant random effects).
 \added[id=jj]{Unlike in Study 1 there was no substantial difference between the evaluation of \$-bet gambles  ($M=4.69, SD=3.10$) and p-bet gambles ($M=5.25, SD=4.94$); the data equally supported a model including gamble type as predictor ($M_0$) and one without gamble type as predictor, $BF_{01} = 1.44$ (both models include by-participant and by-expected-value random effects and use the valuations as the dependent variable).}
 
@@ -174,9 +183,21 @@ Gamble ID 6 (p-bet) &  &  &  &  &  & \\
 
 \subsubsection{Cognitive modeling}
 
+<<<<<<< Updated upstream
 To gain a better insight of the cognitive process underlying the evaluations of the gambles we estimated the cognitive models following the same procedure as in Study 1.
 
 \textit{Quantitative Model Fit.} The Bayesian value updating model described slightly more than half of the participants best (23 of 40; 57\%). The relative frequency model described 17 participants best (42\%). The evidence strength of the models is shown in Figure \ref{fig:fig2_2}. The models' mean Bayesian information criterion across
+=======
+To gain a better insight into how sample size affects the evaluations of
+the gambles we estimated the cognitive models following the same
+procedure as in Study 1.
+
+\textit{Quantitative Model Fit.} The Bayesian value updating model
+described slightly more than half of the participants best (23 of 40;
+57\%). The relative frequency model described 17 participants best
+(42\%). The evidence strength of the models is shown in Figure
+\ref{fig:fig2_2}. The models' mean Bayesian information criterion across
+>>>>>>> Stashed changes
 all participants equaled BIC\textsubscript{BVU}\(= -96\),
 BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
 (lower values indicate better fit).
@@ -187,23 +208,26 @@ BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
 
 }
 
-\caption{Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:fig2_2}
+\caption{Study 2: Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:fig2_2}
 \end{figure}
 
+<<<<<<< Updated upstream
 \added[id=jj]{
 The estimated parameters of the models (Table \ref{tab:parameter_study2}) reveal that, similar to Study 1, the power utility exponent did not differ greatly between the participants that were described by the Bayesian value updating model ($M_{\alpha}= 2.19$) or by a relative frequency model ($M_{\alpha}=2.15$), $\Delta$ $M = 0.02$ 95\% HDI $[-1.12$, $1.18]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. Participants best described by the Bayesian model had, on average, a prior belief that positive outcomes occur with 45\% (positive outcome prior $\theta_G = 0.91$; zero-outcome prior $\theta_0 = 1.09$). Also, their estimated learning rate $\delta$ was anti-conservative ($M_{\delta}=2.27$).
 }
 
+=======
+>>>>>>> Stashed changes
 \begin{table}[tbp]
 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:parameter_study2}Parameter Estimates of Winning Models, \textit{M (SD)}}
+\caption{\label{tab:parameter_study2}Study 2: Parameter Estimates of Winning Models, \textit{M (SD)}}
 
 \begin{tabular}{lcccc}
 \toprule
-Winning Model & $\alpha$ & $\delta$ & $\theta_G$ & $\sigma$\\
+Winning Model & $\tau$ & $\delta$ & $\alpha_0$ & $\sigma$\\
 \midrule
 BVU (\textit{n}$=$23) & 2.19 (2.35) & 2.27 (3.39) & 0.91 (0.79) & 0.23 (0.22)\\
 RF (\textit{n}$=$17) & 2.15 (1.45) & -- & -- & 0.15 (0.04)\\
@@ -212,13 +236,17 @@ RF (\textit{n}$=$17) & 2.15 (1.45) & -- & -- & 0.15 (0.04)\\
 \end{tabular}
 
 \begin{tablenotes}[para]
-\normalsize{\textit{Note.} \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model. Parameters denote: $\alpha=$ power utility exponent, $\theta_G$ gain prior, $\sigma$ standard deviation.}
+\normalsize{\textit{Note.} \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model. Parameters denote: $\tau=$ power utility exponent, $\alpha_0$ gain prior, $\sigma$ standard deviation.}
 \end{tablenotes}
 
 \end{threeparttable}
 \end{center}
 
 \end{table}
+
+\added[id=jj]{
+The estimated parameters of the models (Table \ref{tab:parameter_study2}) reveal that, similar to Study 1, the power utility exponent did not differ greatly between the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= 2.19$) and those best described by the relative frequency model ($M_{\alpha}=2.15$), $\Delta$ $M = 0.02$ 95\% HDI $[-1.12$, $1.18]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. The prior belief about the probability of a positive outcome, for participants that were best described the BVU model, was $B = 0.45$ (resulting from $\alpha = 0.91$ and $\beta_0 = 1.09$) and the associated learning rate $\delta$ was $M_{\delta}=2.27$, indicating faster belief updating compared to an optimal Bayesian model.
+}
 
 \textit{Qualitative Model Fit.} Figure \ref{fig:fig5_2} plots the
 qualitative model fit (best-fitting model predictions against observed
@@ -233,7 +261,7 @@ where the model must be rejected because of qualitative mis-fit.
 
 }
 
-\caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model.}\label{fig:fig5_2}
+\caption{Study 2: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model.}\label{fig:fig5_2}
 \end{figure}
 
 

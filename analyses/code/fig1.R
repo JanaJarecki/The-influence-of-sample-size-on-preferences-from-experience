@@ -60,8 +60,8 @@ plot_belief_updating <- function(px, N = 10000) {
 }
 
 N <- 50000
-p_02 <- plot_belief_updating(0.2, N = N) +ggtitle("Bayesian model learning about Pr(gain) = 20%")
-p_80 <- plot_belief_updating(0.8, N = N) +ggtitle("Bayesian model learning about Pr(gain) = 80%") +theme(legend.position = "none")
+p_02 <- plot_belief_updating(0.2, N = N) +ggtitle("Bayesian (BVU) model predictions of Pr(gain) = 20%")
+p_80 <- plot_belief_updating(0.8, N = N) +ggtitle("Bayesian (BVU) model predictions of Pr(gain) = 80%") +theme(legend.position = "none")
 
 p_02 + p_80 +plot_layout(nrow = 2) +plot_annotation(tag_levels = "a")
 

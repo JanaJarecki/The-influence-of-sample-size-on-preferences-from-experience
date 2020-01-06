@@ -40,13 +40,13 @@ p2 <- ggplot(melt(weights, id = 1, measure = 2:4), aes(x = factor(id, levels = i
     guides(fill = guide_legend(override.aes = list(linetype = 0, size = 4.5))) +
     theme(axis.ticks = element_blank(), 
       axis.text.x=element_blank(),
-      legend.position = "none",
+      legend.position = "right",
       axis.line = element_blank(),
       axis.text.y = element_text(vjust = c(0,.5,.5,.5,1)),
       axis.title.x = element_text(margin = margin(t = 0.5, unit = "lines")),
       legend.key.height = unit(1.2, "lines"),
       legend.key = element_rect(fill = "white")) 
 
-
+plot(p2)
 # Combine the plots
-plot(p1 + p2 +plot_layout(nrow=2, heights=c(.25,.75)))
+#plot(p1 + p2 +plot_layout(nrow=2, heights=c(.25,.75)))
