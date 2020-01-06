@@ -48,7 +48,7 @@ To test these hypotheses, Participants were classified as relative-frequency lea
   knitr::read_chunk("./code/fig6.R")
 ```
 
-```{r fig6, cache=FALSE, fig.cap = "Mean evaluations by gamble type and best-fitting cognitive model and prior beliefs of the BVU model. \\textit{BVU}$=$Bayesian value updating model, \\textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. Sample size categories see Table \\ref{table:Lotteries}. Evaluations are scaled to 0-1 and z-standardized at the individual level."}
+```{r fig6, cache=0, fig.height = 6, fig.cap = "Mean evaluations by gamble type and best-fitting cognitive model and prior beliefs of the BVU model. \\textit{BVU}$=$Bayesian value updating model, \\textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. Sample size categories see Table \\ref{table:Lotteries}. Evaluations are scaled to 0-1 and z-standardized at the individual level."}
 ```
 
 \textit{Predictions about confidence.}
