@@ -20,7 +20,7 @@ plot_it <- function(x) {
         dpredagg <- dpredagg[, .(M = mean(value), SE = sd(value)/sqrt(.N)),
             by = .(type, ss, model, variable)]
     }
-    #dpredagg[, ss := factor(ss, levels = c("xs","s","m","l"))]
+    dpredagg[, ss := factor(ss, labels = c("xs","s","m","l"))]
     dpredagg[, model := factor(model, model_levels, model_labels)]
     dpredagg[, type := factor(type, levels = c("p-bet", "$-bet"), labels = c("p-bet\n(high pr., low gain)", "$-bet\n(low pr., high gain)"))]
     
