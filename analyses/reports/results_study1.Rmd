@@ -153,7 +153,7 @@ knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7)
   knitr::read_chunk("./code/fig5.R")
 ```
 
-```{r fig5, cache=0, fig.cap = "Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant) Darker color indicates overlapping points. \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r fig5, cache=0, fig.cap = "Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). Darker color indicates overlapping points. \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 ```
 
 \added[id=jj]{
