@@ -85,16 +85,16 @@ To gain a better insight into how sample size affects the evaluations of the gam
 ```
 
 \textit{Quantitative Model Fit.}
-The Bayesian value updating model described slightly more than half of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%). The evidence strength of the models is shown in Figure \ref{fig:fig2_2}. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).
+The Bayesian value updating model described slightly more than half of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%). The evidence strength of the models is shown in Figure \ref{fig:fig4}. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).
 
 
 
 
-```{r, fig2, echo=0, cache=0}
+```{r fig4, echo=0, cache=0}
   knitr::read_chunk("./code/fig2.R")
 ```
 
-```{r fig2_2, ref.label="fig2", fig.asp=0.6, cache=0, fig.cap = "Study 2: Evidence for the models for individual participants. Darker color indicate overlapping points. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r fig4, ref.label="fig4", fig.asp=0.6, cache=0, fig.cap = "Study 2: Evidence for the models for individual participants. Darker color indicate overlapping points. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
 ```
 
 ```{r par_study2}
@@ -127,7 +127,6 @@ The estimated parameters of the models (Table \ref{tab:parameter_study2}) reveal
 }
 
 
-
 ```{r}
   cutoff <- 0.4
   m_cor <- d[condition == "experience", cor(pred, value), by = id][, mean(V1)]
@@ -135,14 +134,14 @@ The estimated parameters of the models (Table \ref{tab:parameter_study2}) reveal
 ```
 
 \textit{Qualitative Model Fit.}
-Figure \ref{fig:fig5_2} plots the qualitative model fit (best-fitting model predictions against observed evaluations by participant). As in Study 1, the data are generally well-described by the models \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$)} where the model must be rejected because of qualitative mis-fit.
+Figure \ref{fig:fig5} plots the qualitative model fit (best-fitting model predictions against observed evaluations by participant). As in Study 1, the data are generally well-described by the models \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$)} where the model must be rejected because of qualitative mis-fit.
 
 ```{r include = 0}
 knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7)
 ```
 
-```{r, echo=0, cache=0}
-  knitr::read_chunk("./code/fig5.R")
+```{r fig5, echo=0, cache=0}
+  knitr::read_chunk("./code/fig3.R")
 ```
-```{r fig5_2, ref.label="fig5", cache=0, fig.cap = "Study 2: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). Darker color indicate overlapping points. \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
+```{r fig5, ref.label="fig5", cache=0, fig.cap = "Study 2: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). Darker color indicate overlapping points. \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model."}
 ```
