@@ -94,7 +94,7 @@ The Bayesian value updating model described slightly more than half of the parti
   knitr::read_chunk("./code/fig2.R")
 ```
 
-```{r fig2_2, ref.label="fig2", fig.asp=0.6, cache=0, fig.cap = "Study 2: Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r fig2_2, ref.label="fig2", fig.asp=0.6, cache=0, fig.cap = "Study 2: Evidence for the models for individual participants. Darker color indicate overlapping points. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
 ```
 
 ```{r par_study2}

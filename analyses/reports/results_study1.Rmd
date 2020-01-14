@@ -118,7 +118,7 @@ We will first outline the quantitative model fit, followed by the qualitative mo
 ```
 
 \added[id=jj]{
-The estimated parameters of the best-fitting models are shown in Table \ref{tab:study1_parameter}. The power utility exponent ($\tau$) did not differ substantially for the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= `r M_alpha_bvu`$) and those best described by a relative frequency model ($M_{\tau}=`r M_alpha_rf`$), $\Delta$ `r apa_print(bf)$full_result`. The prior beliefs about the probability of gains was $`r prior_p_gain`$ (model parameters $\alpha_0 = `r M_thetag_bvu`$, $\beta_0 = `r M_theta0_bvu`$) for the participants best described by the BVU model. The learning rate of the mean participant that was best described by the BVU model was $M_{\delta}=`r M_delta_bvu`$ (a model with values $>$ 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, $<$ 1 is conservative compared to optimal Bayesian). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. This fast learning in our task can be explained by that participants repeatedly sampled from the same set of gambles.
+The estimated parameters of the best-fitting models are shown in Table \ref{tab:study1_parameter}. The power utility exponent ($\tau$) did not differ substantially for the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= `r M_alpha_bvu`$) and those best described by a relative frequency model ($M_{\tau}=`r M_alpha_rf`$), $\Delta$ `r apa_print(bf)$full_result`. The prior beliefs about the probability of gains was $`r prior_p_gain`$ (resulting from estimated prior parameters $\alpha_0 = `r M_thetag_bvu`$, $\beta_0 = `r M_theta0_bvu`$) for the participants best described by the BVU model. The learning rate of the mean participant that was best described by the BVU model was $M_{\delta}=`r M_delta_bvu`$ (a model with values $>$ 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, $<$ 1 is conservative compared to optimal Bayesian). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. This fast learning in our task can be explained by that participants repeatedly sampled from the same set of gambles.
 }
 
 ```{r, study1_parameter}
@@ -142,7 +142,7 @@ The estimated parameters of the best-fitting models are shown in Table \ref{tab:
 ```
 
 \textit{Qualitative Model Fit.}
-The qualitative fit between the models and the data is shown in Figure \ref{fig:fig5}, which plots the predictions of the best-fitting models against the observed evaluations by participant. The models generally describe the data well \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$).}\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. However, the quantitative results of the probability weighting model and the utility model, we favored a utility model without probability weighting.}
+The qualitative fit between the models and the data is shown in Figure \ref{fig:fig5}, which plots the predictions of the best-fitting models against the observed evaluations by participant. The models generally describe the data well \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$).}\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting.}
 
 
 ```{r include = 0}
@@ -153,7 +153,7 @@ knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7)
   knitr::read_chunk("./code/fig5.R")
 ```
 
-```{r fig5, cache=0, fig.cap = "Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r fig5, cache=0, fig.cap = "Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant) Darker color indicates overlapping points. \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 ```
 
 \added[id=jj]{
