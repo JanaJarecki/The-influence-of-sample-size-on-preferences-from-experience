@@ -98,11 +98,11 @@ We will first outline the quantitative model fit, followed by the qualitative mo
 \added[id=jj]{The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described `r winners["base"]` participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).}
 
 
-```{r, echo=FALSE, cache=FALSE}
+```{r fig_modelfit, echo=0, cache=0}
   knitr::read_chunk("./code/fig2.R")
 ```
 
-```{r fig2, fig.asp=0.6, cache=FALSE, fig.cap = "Study 1: Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
+```{r fig2, ref.label="fig_modelfit", fig.asp=0.6, cache=0, fig.cap = "Study 1: Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
 ```
 
 
@@ -142,18 +142,18 @@ The estimated parameters of the best-fitting models are shown in Table \ref{tab:
 ```
 
 \textit{Qualitative Model Fit.}
-The qualitative fit between the models and the data is shown in Figure \ref{fig:fig5}, which plots the predictions of the best-fitting models against the observed evaluations by participant. The models generally describe the data well \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$).}\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting.}
+The qualitative fit between the models and the data is shown in Figure \ref{fig:fig3}, which plots the predictions of the best-fitting models against the observed evaluations by participant. The models generally describe the data well \added[id=jj]{($M r\textsubscript{pred,obs} = `r m_cor`$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants `r sort(ids_cutoff)`, with $r\textsubscript{pred,obs} < `r cutoff`$).}\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting.}
 
 
-```{r include = 0}
+```{r, include=0}
 knitr::opts_chunk$set(out.width = "\\textwidth", fig.height = 9, fig.width = 7)
 ```
 
-```{r, echo=0, cache=0}
+```{r fig_dots, echo=0, cache=0}
   knitr::read_chunk("./code/fig3.R")
 ```
 
-```{r fig3, cache=0, fig.cap = "Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). Darker color indicates overlapping points. \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
+```{r fig3, ref.label = "fig_dots", cache=0, fig.cap = "Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). Darker color indicates overlapping points. \\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, \\textit{BASE}$=$baseline model."}
 ```
 
 \added[id=jj]{

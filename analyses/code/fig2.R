@@ -1,8 +1,7 @@
 # ==========================================================================
 # Figure displaying the individual model fits
 # ==========================================================================
-## ---- fig4 ----
-
+# ---- fig_modelfit ----
 # Order of participant ids (x-axis) for the plot
 id_order <- order_evidence(unique(weights$id), weights[, 2:4])
 wn <- names(winners)

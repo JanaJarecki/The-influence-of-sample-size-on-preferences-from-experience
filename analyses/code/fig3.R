@@ -2,7 +2,7 @@
 # Figure: Qualitative fit of cogn. models
 #         BIC weights as bar plots
 # ==========================================================================
-## ---- fig5 ----
+# ---- fig_dots ----
 
 d[, group := factor(paste0(factor(winner, levels = model_levels, labels = model_labels), ", ", id))]
 dummy_range <- d[, .(value = range(c(value,pred)), pred = range(c(value,pred))), by = group]
