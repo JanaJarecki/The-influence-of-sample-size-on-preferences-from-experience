@@ -1,9 +1,11 @@
 # ==========================================================================
-# Fig 1
+# File: fig1.R
+# Author: Jana B. Jarecki
+# Bayesian Updating Illustration Figure
 # ==========================================================================
 # Change the working directory to the location of THIS file
 source("setup_fig.R")
-library(cogscimodels) #devtools::install_github("janajarcki/cogscimodels")
+library(cognitivemodels) #devtools::install_github("janajarcki/cogscimodels")
 library(tidybayes)
 library(data.table)
 

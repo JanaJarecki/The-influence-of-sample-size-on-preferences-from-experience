@@ -19,7 +19,8 @@ header-includes:
   \AtBeginEnvironment{tabular}{\singlespacing}
   \usepackage{times}
   \usepackage{changes}
-  \definechangesauthor[name={JJ}, color=orange]{jj}
+  \definechangesauthor[name={JJ}, color=black]{jj}
+  \definechangesauthor[name={JJ}, color=blue]{jj2}
   \usepackage{upgreek}
   \AtBeginDocument{\let\maketitle\relax}
 ---
@@ -30,18 +31,17 @@ header-includes:
 
 ```{r setupR, include=0, cache=0}
   source("./code/setup_fig.R")
-  library(papaja); library(cogscimodels); library(data.table); library(BayesFactor); library(brms)
+  library(papaja); library(data.table); library(BayesFactor); library(brms)
   options(papaja.na_string = "--")
   niter <- 1000
   study <- 1
 ```
 
 ```{r, load_data, cache=0, include=0}
-  # Read the data
+  # Read the data and cognitive model fits
   d <- fread(sub("x", study, "../data/processed/studyx.csv"))
   N <- length(unique(d$id))
-  # Read the cognitive model fitting results
-  fits <- readRDS(sub("x", study, "./code/studyx_cognitive_models_fit.rds"))  
+  fits <- readRDS(sub("x", study, "./modelfits/studyx_cognitive_models_fit.rds"))  
 ```
 
 ```{r, run_analyses_scripts, cache=0, include=0}
@@ -50,7 +50,7 @@ header-includes:
   # Run all inferential statistical analyses  
   source("./code/1-statistical-analysis.R", chdir = TRUE)
   # Run the cognitive modeling analysis
-  source("./code/3-modeling-analysis.R")
+  source("./code/3-modeling-analysis.R", chdir = TRUE)
 ```
 
 \subsubsection{Evaluations of gambles and sample sizes}
@@ -95,15 +95,15 @@ To estimate the models, the observed and predicted evaluations were normalized t
 We will first outline the quantitative model fit, followed by the qualitative model fit, and lastly analyze the effects of sample size given the cognitive strategies.
 
 \textit{Quantitative Model Fit.}
-\added[id=jj]{The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described `r winners["base"]` participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit).}
+The Bayesian value updating model described the majority of the participants best (`r winners["bvu"]` of `r N`; `r round(winners["bvu"]/N*100)`\%). The relative frequency model described `r winners["rf"]` participants best (`r round(winners["rf"]/N*100)`\%); the baseline model described `r winners["base"]` participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= `r bic["bvu"]`$, BIC\textsubscript{RF}$= `r bic["rf"]`$, and BIC\textsubscript{BASE}$= `r bic["base"]`$ (lower values indicate better fit). \added[id=jj2]{The main result remains unchanged when fixing the learning rate parameter in the Bayesian model to $\delta = 1$}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described `r winners_d1["bvud1"]` of `r N` or `r round(winners_d1["bvud1"]/N*100)`\% best; and the relative frequency model described `r winners_d1["rf"]` participants best (`r round(winners_d1["rf"]/N*100)`\%); the baseline model described `r winners_d1["base"]` participants best.}}
 
 
 ```{r fig_modelfit, echo=0, cache=0}
   knitr::read_chunk("./code/fig2.R")
 ```
-
+<!-- 
 ```{r fig2, ref.label="fig_modelfit", fig.asp=0.6, cache=0, fig.cap = "Study 1: Evidence for the models for individual participants. \\textit{RF}$=$ relative frequency model, \\textit{BVU}$=$ Bayesian value updating model, \\textit{BASE}$=$ Baseline model."}
-```
+``` -->
 
 
 ```{r study1_par}
@@ -118,7 +118,7 @@ We will first outline the quantitative model fit, followed by the qualitative mo
 ```
 
 \added[id=jj]{
-The estimated parameters of the best-fitting models are shown in Table \ref{tab:study1_parameter}. The power utility exponent ($\tau$) did not differ substantially for the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= `r M_alpha_bvu`$) and those best described by a relative frequency model ($M_{\tau}=`r M_alpha_rf`$), $\Delta$ `r apa_print(bf)$full_result`. The prior beliefs about the probability of gains was $`r prior_p_gain`$ (resulting from estimated prior parameters $\alpha_0 = `r M_thetag_bvu`$, $\beta_0 = `r M_theta0_bvu`$) for the participants best described by the BVU model. The learning rate of the mean participant that was best described by the BVU model was $M_{\delta}=`r M_delta_bvu`$ (a model with values $>$ 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, $<$ 1 is conservative compared to optimal Bayesian). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. This fast learning in our task can be explained by that participants repeatedly sampled from the same set of gambles.
+The estimated parameters of the best-fitting models are shown in Table \ref{tab:study1_parameter}. The power utility exponent ($\tau$) did not differ substantially for the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= `r M_alpha_bvu`$) and those best described by a relative frequency model ($M_{\tau}=`r M_alpha_rf`$), $\Delta$ `r apa_print(bf)$full_result`. The prior beliefs about the probability of gains was $`r prior_p_gain`$ (resulting from estimated prior parameters $\alpha_0 = `r M_thetag_bvu`$, $\beta_0 = `r M_theta0_bvu`$) for the participants best described by the BVU model. The learning rate of the mean participant that was best described by the BVU model was $M_{\delta}=`r M_delta_bvu`$ (a model with values $>$ 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, $<$ 1 is conservative compared to optimal Bayesian). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. This fast learning in our task \added[id=jj2]{could be explained} by that participants repeatedly sampled from the same set of gambles.
 }
 
 ```{r, study1_parameter}

@@ -4,12 +4,11 @@
 # ==========================================================================
 library(data.table)   # fast data processing
 library(brms)         # bayesian analyses
-library(cogscimodels) # handling cognitive models
 library(BayesFactor)
 
 # Load fitted cognitive models and participant data
 #study <- 2
-fits <- readRDS(sub("x", study, "studyx_cognitive_models_fit.rds"))
+fits <- readRDS(sub("x", study, "../modelfits/studyx_cognitive_models_fit.rds"))
 d <- fread(sub("x", study, "../../data/processed/studyx.csv"))
 # Make factors for anovas
 d[, c("id", "gambletype", "samplesizecat", "condition") := .(factor(id), factor(gambletype), factor(samplesizecat, levels = c("xs", "s", "m", "l", "--")), factor(condition))]
@@ -28,8 +27,7 @@ dd <- d[, paste_msd(value, label = T), by = .(condition, gambletype)]
 d <- d[condition=="experience"] # only use experience condition
 
 #
-# Influence of sample size on evaluations
-# --------------------------------------------------------------------------
+# Influence of sample size on evaluations ----------------------------------
 d[, ev := round(gamblex * gamblep, 3)]
 d[, evf := factor(ev)]
 # Fit the model and obtain Bfs
@@ -40,8 +38,7 @@ BF_fe_int <- extractBF(aovfit[1]/aovfit[4], onlybf = TRUE)
 class(BF_fe_fess) <- class(BF_fe_int) <- "BF"
 
 #
-# Influence of gamble type
-# --------------------------------------------------------------------------
+# Influence of gamble type ------------------------------------------------
 aovfit <- anovaBF(value ~ id + evf + gambletype, data = d, whichRandom = c("id"), iterations = niter)
 aovfit <- recompute(aovfit, iterations = 3 * niter)
 BF_gambletype <- extractBF(aovfit[3]/aovfit[2], onlybf = TRUE)
@@ -57,6 +54,7 @@ BF_conf = as.character(round(1/extractBF(aovfit, onlybf = T),2))
 
 
 # Get best-fitting model and model parameters
+fits <- fits[model != "bvud1"]
 prior <- fits[model=="bvu", .(prior = coef(fit[[1]])["count_x"]), by = id]
 d <- d[prior, on = "id"]
 weights <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), weight = anova(fit[[1]], fit[[2]], fit[[3]])[, c("wAIC")])), by = id][, .(winner = model[which.max(weight)]), by = id]

@@ -1,9 +1,10 @@
 library(knitr)
-
+print(getwd())
 opts_knit$set(
-    base.dir = "C://Users//Jana Jarecki//Dropbox//01-Projects//SAM (w J. Hoffart, G. Duthil, etc)//analyses//figures", # absolute directory under which the plots are generated
+    base.dir = sub("/reports", "/figures", getwd()), # absolute directory under which the plots are generated
     root.dir = normalizePath("../")
    )
+cat("\n\n changing knitr$base.dir to ....\n  > ", sub("/reports", "/figures", getwd()), "\n\n")
 opts_chunk$set(
   warning = FALSE
   ,error = TRUE

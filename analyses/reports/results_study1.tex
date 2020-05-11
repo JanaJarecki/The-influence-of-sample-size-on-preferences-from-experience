@@ -1,33 +1,46 @@
-\documentclass[a4paper, man, floatsintext]{apa6}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  a4paper, man, floatsintext]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdfauthor={Jana B. Jarecki},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{graphicx,grffile}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdfauthor={Jana B. Jarecki},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -36,57 +49,18 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{natbib} \usepackage{threeparttable} \usepackage{booktabs} \shorttitle{test} \usepackage{setspace} \AtBeginEnvironment{tabular}{\singlespacing} \usepackage{times} \usepackage{changes} \definechangesauthor[name={JJ}, color=black]{jj} \definechangesauthor[name={JJ}, color=blue]{jj2} \usepackage{upgreek} \AtBeginDocument{\let\maketitle\relax}
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{}
-    \pretitle{\vspace{\droptitle}}
-  \posttitle{}
-    \author{Jana B. Jarecki}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{15 Januar, 2020}
-
-\usepackage{natbib} \usepackage{threeparttable} \usepackage{booktabs}
-\shorttitle{test} \usepackage{setspace}
-\AtBeginEnvironment{tabular}{\singlespacing} \usepackage{times}
-\usepackage{changes} \definechangesauthor[name={JJ}, color=orange]{jj}
-\usepackage{upgreek} \AtBeginDocument{\let\maketitle\relax}
+\author{Jana B. Jarecki}
+\date{11 Mai, 2020}
 
 \begin{document}
 
@@ -100,11 +74,11 @@ evaluated gamble 4 with an average of \(2.80, 2.91, 2.80, 2.95, 3.08\)
 sample sizes; a statistical model comparison among analyses of variance
 (ANOVA) confirmed this, an ANOVA of the valuations with the predictors
 gamble type and gamble expected value (Model 0) outperformed models with
-the additional predictors sample size (\(BF_{01} = 392\)) and a
+the additional predictors sample size (\(BF_{01} = 442\)) and a
 sample-size x gamble-type interaction (\(BF_{02} > 1000\), all models
 had by-participant random effects). Although the \$-bets and p-bets had
 the same expected values, the \$-bet gambles were evaluated higher
-(\(M=5.78, SD=3.94\)) than the p-bet gambles (\(M=2.74, SD=1.09\)),
+(\(M=5.61, SD=3.86\)) than the p-bet gambles (\(M=2.76, SD=1.07\)),
 \(BF > 1000\) in favor of an ANOVA that predicts valuations as a
 function of gamble type over an ANOVA without the predictor gamble type
 (both models include by-participant and by-expected-value random
@@ -137,32 +111,32 @@ Condition & Sample size category & Sample size & \textit{Med} & \textit{M} & D--
 \midrule
 Gamble ID 1 (\$-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 4\\
-\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 65\\
+\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 64\\
 \ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 24\\
-\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 146\\
+\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 324\\
 \ \ \ D & -- & -- & 4.00 & 4.60 & -- & --\\
 Gamble ID 2 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 135\\
-\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 629\\
+\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 136\\
+\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 628\\
 \ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 4\\
 \ \ \ E & l & 36 & 4.00 & 3.99 & -0.37 & 2\\
 \ \ \ D & -- & -- & 3.00 & 3.61 & -- & --\\
 Gamble ID 3 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 4\\
-\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & >1000\\
-\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 144\\
-\ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 16\\
+\ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 5\\
+\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 999\\
+\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 138\\
+\ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 15\\
 \ \ \ D & -- & -- & 5.00 & 6.57 & -- & --\\
 Gamble ID 4 (p-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 3.00 & 2.80 & 0.28 & >1000\\
 \ \ \ E & s & 10 & 3.20 & 2.91 & 0.16 & 3\\
-\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 56\\
+\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 58\\
 \ \ \ E & l & 30 & 3.00 & 2.95 & 0.13 & 1\\
 \ \ \ D & -- & -- & 3.20 & 3.08 & -- & --\\
 Gamble ID 5 (p-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 6 & 2.00 & 1.77 & 0.10 & 8\\
-\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 14\\
-\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 30\\
+\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 16\\
+\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 27\\
 \ \ \ E & l & 36 & 2.00 & 1.81 & 0.06 & 1\\
 \ \ \ D & -- & -- & 2.00 & 1.87 & -- & --\\
 Gamble ID 6 (p-bet) &  &  &  &  &  & \\
@@ -213,8 +187,17 @@ We will first outline the quantitative model fit, followed by the
 qualitative model fit, and lastly analyze the effects of sample size
 given the cognitive strategies.
 
-\textit{Quantitative Model Fit.}
-\added[id=jj]{The Bayesian value updating model described the majority of the participants best (30 of 40; 75\%). The relative frequency model described 9 participants best (22\%); the baseline model described 1 participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}$= -124$, BIC\textsubscript{RF}$= -110$, and BIC\textsubscript{BASE}$= -17$ (lower values indicate better fit).}
+\textit{Quantitative Model Fit.} The Bayesian value updating model
+described the majority of the participants best (31 of 40; 78\%). The
+relative frequency model described 9 participants best (22\%); the
+baseline model described NA participants best. Figure \ref{fig:fig2}
+shows the evidence strength for the models by participant. The models'
+mean Bayesian information criterion across all participants equaled
+BIC\textsubscript{BVU}\(= -107\), BIC\textsubscript{RF}\(= -101\), and
+BIC\textsubscript{BASE}\(= 25\) (lower values indicate better fit).
+\added[id = jj2]{The main result remains unchanged when fixing the learning rate parameter in the Bayesian model to $\delta = 1$}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($delta=1$) described the 27 of 40 or 68\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 0 participants best.}}
+
+\textless!--
 
 \begin{figure}[htb]
 
@@ -226,41 +209,18 @@ given the cognitive strategies.
 \end{figure}
 
 \added[id=jj]{
-The estimated parameters of the best-fitting models are shown in Table \ref{tab:study1_parameter}. The power utility exponent ($\tau$) did not differ substantially for the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= 1.49$) and those best described by a relative frequency model ($M_{\tau}=1.61$), $\Delta$ $M = -0.08$ 95\% HDI $[-0.90$, $0.81]$, $\mathrm{BF}_{\textrm{01}} = 2.76$. The prior beliefs about the probability of gains was $0.46$ (resulting from estimated prior parameters $\alpha_0 = 0.92$, $\beta_0 = 1.08$) for the participants best described by the BVU model. The learning rate of the mean participant that was best described by the BVU model was $M_{\delta}=1.36$ (a model with values $>$ 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, $<$ 1 is conservative compared to optimal Bayesian). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. This fast learning in our task can be explained by that participants repeatedly sampled from the same set of gambles.
+The estimated parameters of the best-fitting models are shown in Table \ref{tab:study1_parameter}. The power utility exponent ($\tau$) did not differ substantially for the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= 1.44$) and those best described by a relative frequency model ($M_{\tau}=1.61$), $\Delta$ $M = -0.12$ 95\% HDI $[-0.96$, $0.78]$, $\mathrm{BF}_{\textrm{01}} = 2.72$. The prior beliefs about the probability of gains was $0.46$ (resulting from estimated prior parameters $\alpha_0 = 0.92$, $\beta_0 = 1.08$) for the participants best described by the BVU model. The learning rate of the mean participant that was best described by the BVU model was $M_{\delta}=1.35$ (a model with values $>$ 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, $<$ 1 is conservative compared to optimal Bayesian). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. This fast learning in our task \added[id=jj2]{could be explained} by that participants repeatedly sampled from the same set of gambles.
 }
 
-\begin{table}[tbp]
-
-\begin{center}
-\begin{threeparttable}
-
-\caption{\label{tab:study1_parameter}Study 1: Parameter Estimates of Winning Models, \textit{M (SD)}}
-
-\begin{tabular}{lccccc}
-\toprule
-Winning Model & $\alpha$ & $\delta$ & $\theta_G$ & $\mu$ & $\sigma$\\
-\midrule
-BVU (\textit{n}$=$30) & 1.49 (1.47) & 1.36 (2.12) & 0.92 (0.66) & -- & 0.13 (0.07)\\
-RF (\textit{n}$=$9) & 1.61 (0.58) & -- & -- & -- & 0.12 (0.02)\\
-BASE (\textit{n}$=$1) & -- & -- & -- & 0.47 (NA) & 0.30 (NA)\\
-\bottomrule
-\addlinespace
-\end{tabular}
-
-\begin{tablenotes}[para]
-\normalsize{\textit{Note.} \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model. Parameters denote: $\tau =$ power utility exponent, $\alpha_0$ gain prior, $\mu=$ mean evaluation, $\sigma$ standard deviation.}
-\end{tablenotes}
-
-\end{threeparttable}
-\end{center}
-
-\end{table}
+\begin{verbatim}
+Error in `[.data.table`(tab, c(2, 3, 1), c("winner_n", "rp", "delta", : column(s) not found: m
+\end{verbatim}
 
 \textit{Qualitative Model Fit.} The qualitative fit between the models
 and the data is shown in Figure \ref{fig:fig3}, which plots the
 predictions of the best-fitting models against the observed evaluations
 by participant. The models generally describe the data well
-\added[id=jj]{($M r\textsubscript{pred,obs} = 0.71$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants s05, s19, s24, s38, with $r\textsubscript{pred,obs} < 0.40$).}\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting. Thus, the results suggest that in the paradigm that we studied people's perception of the probabilities of outcomes are relative accurate and best described by a linear probability function.}
+\added[id=jj]{($M r\textsubscript{pred,obs} = 0.68$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants s05, s07, s19, s24, s38, with $r\textsubscript{pred,obs} < 0.40$).}\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting. Thus, the results suggest that in the paradigm that we studied people's perception of the probabilities of outcomes are relative accurate and best described by a linear probability function.}
 
 \begin{figure}[htb]
 
@@ -274,6 +234,5 @@ by participant. The models generally describe the data well
 \added[id=jj]{
 The cognitive modeling results thus show that most participants were best described by a Bayesian strategy, and a minority by a relative-frequency strategy. This strategy heterogeneity helps understanding the behavioral null finding---that sample size seemed to have no effect on valuations---that were observed at the aggregate level (Table \ref{tab:means_study1}). The statistical aggregate analysis fails to take the individual differences in learning strategies into account, while participants are best described by a mixture of strategies. Moreover, the aggregate statistical analysis without the cognitive modeling also fails to account for differences in the prior beliefs about gain probabilities.
 }
-
 
 \end{document}

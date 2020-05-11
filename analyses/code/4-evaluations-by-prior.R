@@ -15,10 +15,9 @@ d <- rbind(
   fread("../../data/processed/study2.csv"))
 # Load and merge model fits of both studies
 fits <- rbind(
-  readRDS("study1_cognitive_models_fit.rds"),
-  readRDS("study2_cognitive_models_fit.rds"))
+  readRDS("../modelfits/study1_cognitive_models_fit.rds"),
+  readRDS("../modelfits/study2_cognitive_models_fit.rds"))
 fits <- dcast(fits, id ~ model, value.var = "fit")
-setnames(fits, "baseline", "base")
 
 # Goodness of model fit
 weights <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), anova(base[[1]], bvu[[1]], rf[[1]])[, c("wAIC"), drop=FALSE])), by = id]

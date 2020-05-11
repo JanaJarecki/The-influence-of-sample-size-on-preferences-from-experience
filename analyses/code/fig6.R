@@ -1,6 +1,8 @@
 # ==========================================================================
 # Figure: Influence of sample size on stand. valuations by cogn. model
 # ==========================================================================
+
+
 ## ---- fig6 ----
 # source("4-evaluations-by-prior.R", chdir = TRUE)
 # source("setup_fig.R")
