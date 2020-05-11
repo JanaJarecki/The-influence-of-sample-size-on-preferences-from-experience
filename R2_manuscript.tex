@@ -24,8 +24,8 @@
 %% Revision:
 %% Use "final" option to remove all tracking markups
 \usepackage[dvipsnames]{xcolor}
-\usepackage[final,authormarkup=none]{changes} %[final,authormarkup=none]
-\definechangesauthor[name={JJ}, color=blue]{jj}
+\usepackage[authormarkup=jj2]{changes} %[final,authormarkup=none]
+\definechangesauthor[name={jj2}, color=blue]{jj2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{The influence of sample size on preferences from experience}
 \shorttitle{sample size and preference}
@@ -166,7 +166,8 @@ To understand this logic, consider the following example: A person has a true se
 
 \subsection{Discussion of Study 1}
 
-Study 1 shows that the size of the sample overall did not have an effect on valuations from experience. \added[id=jj]{Cognitive modeling revealed that the majority of participants were best described by a model following Bayesian principles which treats sample size as a measure of uncertainty \citep{Hoffart2019ReachingRatings}. However, a minority of participants were best modelled with a relative frequency strategy that disregards sample size.} Valuations also differed when made from description versus experience. Interestingly, this difference is the opposite of the classic D--E gap that has been reported in choice paradigms: We found evidence that people behaved as if they overweighted rare events when making valuations from description \textit{and} experience. Notably, this overweighting of rare events was even stronger for the experience condition. Importantly, people assigned higher valuations to \$-bets (i.e., gambles that provide a high reward with low probability) than p-bets (i.e., gambles that provide a small reward with low probability) even although both gambles had similar expected values. This finding is in line with recent research that suggested people overweight extreme outcomes in experience-based tasks \citep{Ludvig2017}.
+Study 1 shows that the size of the sample overall did not have an effect on valuations from experience. \added[id=jj]{Cognitive modeling revealed that the majority of participants were best described by a model following Bayesian principles which treats sample size as a measure of uncertainty \citep{Hoffart2019ReachingRatings}. However, a minority of participants were best modelled with a relative frequency strategy that disregards sample size.} Valuations also differed when made from description versus experience. Interestingly, this difference is the opposite of the classic D--E gap that has been reported in choice paradigms: We found evidence that people behaved as if they overweighted rare events when making valuations from description \textit{and} experience. Notably, this overweighting of rare events was even stronger for the experience condition. Importantly, people assigned higher valuations to \$-bets (i.e., gambles that provide a high reward with low probability) than p-bets (i.e., gambles that provide a small reward with low probability) even although both gambles had similar expected values. This finding is in line with recent research that suggested people can overweight extreme outcomes in experience-based tasks \citep{Ludvig2017} \added[jj2]{
+and with research suggesting that when participants need not focus on learning the outcome values but learn only the probabilities during sampling, people tend to overweight rare events \citep{Hotaling2019}}.
 
 \section{Study 2}
 In Study 1 participants knew the possible outcomes before drawing outcomes, which differs from typical decisions from experience paradigms, in which people learn about the outcome values by sampling. To bring our method more in line with the \replaced[id=jj]{standard decision from experience paradigm}{this}, in Study 2 we changed the experimental method such that one outcome had to be learned during sampling.
@@ -184,7 +185,7 @@ As before, the analyses were conducted in the software R, models were estimated 
 \clearpage
 
 \subsection{Discussion of Study 2}
-Study 2 tested whether the results of Study 1  generalize to typical sampling paradigms where people learn the outcome values from experience. The results of Studies 1 and 2 are very similar: participants mean evaluations were not influenced by sample size systematically, and in line with Study 1, we found that a substantial proportion of people could be classified as Bayesian learners. In Study 2, however, a greater proportion of participants was described by a \added[id=jj]{potentially cognitively simpler} relative-frequency-based cognitive model.
+Study 2 tested whether the results of Study 1  generalize to typical sampling paradigms where people learn the outcome values from experience. The results of Studies 1 and 2 are very similar: participants mean evaluations were not influenced by sample size systematically, and in line with Study 1, we found that a substantial proportion of people could be classified as Bayesian learners. In Study 2, however, a greater proportion of participants was described by a potentially cognitively simpler relative-frequency-based cognitive model.
 
 \clearpage %forces figures and tables to be printed HERE
 
