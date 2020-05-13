@@ -60,7 +60,7 @@
 \usepackage{natbib} \usepackage{threeparttable} \usepackage{booktabs} \shorttitle{test} \usepackage{setspace} \AtBeginEnvironment{tabular}{\singlespacing} \usepackage{times} \usepackage{changes} \definechangesauthor[name={JJ}, color=black]{jj} \definechangesauthor[name={JJ}, color=blue]{jj2} \usepackage{upgreek} \AtBeginDocument{\let\maketitle\relax}
 
 \author{Jana B. Jarecki}
-\date{11 Mai, 2020}
+\date{13 Mai, 2020}
 
 \begin{document}
 
@@ -74,7 +74,7 @@ evaluated gamble 4 with an average of \(2.80, 2.91, 2.80, 2.95, 3.08\)
 sample sizes; a statistical model comparison among analyses of variance
 (ANOVA) confirmed this, an ANOVA of the valuations with the predictors
 gamble type and gamble expected value (Model 0) outperformed models with
-the additional predictors sample size (\(BF_{01} = 442\)) and a
+the additional predictors sample size (\(BF_{01} = 409\)) and a
 sample-size x gamble-type interaction (\(BF_{02} > 1000\), all models
 had by-participant random effects). Although the \$-bets and p-bets had
 the same expected values, the \$-bet gambles were evaluated higher
@@ -111,32 +111,32 @@ Condition & Sample size category & Sample size & \textit{Med} & \textit{M} & D--
 \midrule
 Gamble ID 1 (\$-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 4\\
-\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 64\\
-\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 24\\
-\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 324\\
+\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 63\\
+\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 25\\
+\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 151\\
 \ \ \ D & -- & -- & 4.00 & 4.60 & -- & --\\
 Gamble ID 2 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 136\\
-\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 628\\
+\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 132\\
+\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 642\\
 \ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 4\\
 \ \ \ E & l & 36 & 4.00 & 3.99 & -0.37 & 2\\
 \ \ \ D & -- & -- & 3.00 & 3.61 & -- & --\\
 Gamble ID 3 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 5\\
-\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 999\\
-\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 138\\
-\ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 15\\
+\ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 4\\
+\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 897\\
+\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 143\\
+\ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 16\\
 \ \ \ D & -- & -- & 5.00 & 6.57 & -- & --\\
 Gamble ID 4 (p-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 5 & 3.00 & 2.80 & 0.28 & >1000\\
 \ \ \ E & s & 10 & 3.20 & 2.91 & 0.16 & 3\\
-\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 58\\
+\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 61\\
 \ \ \ E & l & 30 & 3.00 & 2.95 & 0.13 & 1\\
 \ \ \ D & -- & -- & 3.20 & 3.08 & -- & --\\
 Gamble ID 5 (p-bet) &  &  &  &  &  & \\
 \ \ \ E & xs & 6 & 2.00 & 1.77 & 0.10 & 8\\
-\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 16\\
-\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 27\\
+\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 15\\
+\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 28\\
 \ \ \ E & l & 36 & 2.00 & 1.81 & 0.06 & 1\\
 \ \ \ D & -- & -- & 2.00 & 1.87 & -- & --\\
 Gamble ID 6 (p-bet) &  &  &  &  &  & \\
@@ -195,9 +195,7 @@ shows the evidence strength for the models by participant. The models'
 mean Bayesian information criterion across all participants equaled
 BIC\textsubscript{BVU}\(= -107\), BIC\textsubscript{RF}\(= -101\), and
 BIC\textsubscript{BASE}\(= 25\) (lower values indicate better fit).
-\added[id = jj2]{The main result remains unchanged when fixing the learning rate parameter in the Bayesian model to $\delta = 1$}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($delta=1$) described the 27 of 40 or 68\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 0 participants best.}}
-
-\textless!--
+\added[id=jj2]{Even when restricting the learning rate $\delta$ to 1 in the Bayesian model, the Bayesian model outperforms the relative frequency model.}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described 27 of 40 or 68\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 0 participants best.}}
 
 \begin{figure}[htb]
 
@@ -208,9 +206,24 @@ BIC\textsubscript{BASE}\(= 25\) (lower values indicate better fit).
 \caption{Study 1: Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:fig2}
 \end{figure}
 
-\added[id=jj]{
-The estimated parameters of the best-fitting models are shown in Table \ref{tab:study1_parameter}. The power utility exponent ($\tau$) did not differ substantially for the participants that were best described by the Bayesian value updating (BVU) model ($M_{\tau}= 1.44$) and those best described by a relative frequency model ($M_{\tau}=1.61$), $\Delta$ $M = -0.12$ 95\% HDI $[-0.96$, $0.78]$, $\mathrm{BF}_{\textrm{01}} = 2.72$. The prior beliefs about the probability of gains was $0.46$ (resulting from estimated prior parameters $\alpha_0 = 0.92$, $\beta_0 = 1.08$) for the participants best described by the BVU model. The learning rate of the mean participant that was best described by the BVU model was $M_{\delta}=1.35$ (a model with values $>$ 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, $<$ 1 is conservative compared to optimal Bayesian). The liberal learning rate is unusual given that previous work has found conservative learning \citep{Edwards1967,Tauber2017}. This fast learning in our task \added[id=jj2]{could be explained} by that participants repeatedly sampled from the same set of gambles.
-}
+The estimated parameters of the best-fitting models are shown in Table
+\ref{tab:study1_parameter}. The power utility exponent (\(\tau\)) did
+not differ substantially for the participants that were best described
+by the Bayesian value updating (BVU) model (\(M_{\tau}= 1.44\)) and
+those best described by a relative frequency model (\(M_{\tau}=1.61\)),
+\(\Delta\) \(M = -0.11\) 95\% HDI \([-1.01\), \(0.73]\),
+\(\mathrm{BF}_{\textrm{01}} = 2.72\). The prior beliefs about the
+probability of gains was \(0.46\) (resulting from estimated prior
+parameters \(\alpha_0 = 0.92\), \(\beta_0 = 1.08\)) for the participants
+best described by the BVU model. The learning rate of the mean
+participant that was best described by the BVU model was
+\(M_{\delta}=1.35\) (a model with values \(>\) 1 revises its priors
+faster than optimal Bayesian, 1 is optimal Bayesian, \(<\) 1 is
+conservative compared to optimal Bayesian). The liberal learning rate is
+unusual given that previous work has found conservative learning
+\citep{Edwards1967,Tauber2017}. This fast learning in our task
+\added[id=jj2]{could be explained} by that participants repeatedly
+sampled from the same set of gambles.
 
 \begin{verbatim}
 Error in `[.data.table`(tab, c(2, 3, 1), c("winner_n", "rp", "delta", : column(s) not found: m
@@ -220,7 +233,10 @@ Error in `[.data.table`(tab, c(2, 3, 1), c("winner_n", "rp", "delta", : column(s
 and the data is shown in Figure \ref{fig:fig3}, which plots the
 predictions of the best-fitting models against the observed evaluations
 by participant. The models generally describe the data well
-\added[id=jj]{($M r\textsubscript{pred,obs} = 0.68$), except in four cases, where even the winning model fails to resemble the data qualitatively (participants s05, s07, s19, s24, s38, with $r\textsubscript{pred,obs} < 0.40$).}\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting. Thus, the results suggest that in the paradigm that we studied people's perception of the probabilities of outcomes are relative accurate and best described by a linear probability function.}
+(\added[id=jj2]{mean Pearson's} \(r\textsubscript{pred,obs} = 0.68\)),
+except in four cases, where even the winning model fails to resemble the
+data qualitatively (participants s05, s07, s19, s24, s38, with
+\(r\textsubscript{pred,obs} < 0.40\)).\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting. Thus, the results suggest that in the paradigm that we studied people's perception of the probabilities of outcomes are relative accurate and best described by a linear probability function.}
 
 \begin{figure}[htb]
 
