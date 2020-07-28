@@ -5,12 +5,12 @@
 # ---- fig_dots ----
 
 d[, group := factor(paste0(factor(winner, levels = model_levels, labels = model_labels), ", ", id))]
-dummy_range <- d[, .(value = range(c(value,pred)), pred = range(c(value,pred))), by = group]
-ggplot(d, aes(x = value, y = pred)) +
+dummy_range <- d[condition != "description", .(value = range(c(value,pred)), pred = range(c(value,pred))), by = group]
+ggplot(d[condition != "description"], aes(x = value, y = pred)) +
   geom_abline(linetype = 2, size = 0.4) +
   geom_point(aes(fill = factor(winner, levels = model_levels, labels = model_labels)), shape=21, color = "black", alpha = 0.4, size = 1) +
   geom_blank(data = dummy_range) +
-  facet_wrap(~group, scales = "free", nrow = 5, drop=TRUE, shrink=TRUE) +
+  facet_wrap(~group, scales = "free", nrow = 5, drop=F, shrink=FALSE) +
   themejj(facet=TRUE, base_family = "Arial") +
   scale_x_continuous("Predicted Evaluations", breaks = pretty_breaks()) +
   scale_y_continuous("Observed Evaluations", breaks = pretty_breaks()) +
@@ -19,3 +19,4 @@ ggplot(d, aes(x = value, y = pred)) +
     axis.ticks = element_blank(),
     aspect.ratio = 1,
     strip.text = element_text(lineheight = unit(0.5, "lines")))
+  

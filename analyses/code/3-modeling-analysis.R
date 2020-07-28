@@ -17,13 +17,16 @@ fits <- readRDS(sub("x", study, "../modelfits/studyx_cognitive_models_fit.rds"))
 ## ---- gof ----
 # Goodness of model fit -----------------------------------------------------
 fits <- dcast(fits, id ~ model, value.var = "fit")
-gof <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), anova(base[[1]], bvu[[1]], rf[[1]])[, c("wAIC", "AIC", "BIC")])), by = id]
+aic <- fits[, lapply(.SD, function(x) AIC(x[[1]])), .SDcols =  c("base", "bvu", "rf"), by = id]
+mean_aic <- unlist(aic[, lapply(.SD, mean), .SDcols = -1])
+ll <- fits[, lapply(.SD, function(x) logLik(x[[1]])), .SDcols =  c("base", "bvu", "rf"), by = id]
+unlist(ll[, lapply(.SD, function(x) mean(-2*x)), .SDcols = -1])
 
 # AIC-weights
-weights <- dcast(gof, id ~ model, value.var = "wAIC")
-# winning model
-weights[, winner := names(.SD)[which.max(.SD)], by = id] # winning models
-# Winners of the model comparison by participant
+weights <- copy(aic)
+weights[, c("bvu", "rf", "base") := as.list(cognitiveutils::akaike_weight(c(bvu, rf, base))), by = id]
+weights[, winner := names(.SD)[which.max(.SD)], by = id]
+weights[, winner := factor(winner, levels = c("bvu", "rf", "base"))]
 winners <- sort(table(weights$winner))
 
 # Model parameter -------------------------------------------------------------
@@ -38,7 +41,6 @@ setnames(pred, "V1", "pred_scaled")
 d[condition == "experience", pred_scaled := ..pred[, pred_scaled]]
 d <- weights[, c("id", "winner")][d, on = "id"]
 d[, pred := pred_scaled * gamblex]
-
 d[, samplesizecat := factor(samplesizecat, levels = c("xs", "s", "m", "l", "--"), ordered = TRUE)]
 
 r_conf_bym <- d[condition == "experience", cor(as.numeric(samplesizecat), confidence, method = "kendall"), by = .(id, winner)][, dcast(.SD, 1 ~ winner, paste_msd, label = TRUE)]
@@ -52,15 +54,12 @@ d[condition == "experience",
     SD = sd(confidence)), by = .(winner, samplesizecat)]
 
 
-
-
 # Analysis of the Bayesian model with delta = 1 -------------------------------
-gof_d1 <- fits[, as.data.table(cbind(model=c("base", "rf","bvud1"), anova(base[[1]], rf[[1]], bvud1[[1]])[, c("wAIC", "AIC", "BIC")])), by = id]
+aic_d1 <- fits[, lapply(.SD, function(x) AIC(x[[1]])), .SDcols =  c("base", "bvud1", "rf"), by = id]
 
 # AIC-weights
-weights_d1 <- dcast(gof_d1, id ~ model, value.var = "wAIC")
-# winning model
+weights_d1 <- copy(aic_d1)
+weights_d1[, c("bvud1", "rf", "base") := as.list(cognitiveutils::akaike_weight(c(bvud1, rf, base))), by = id]
 weights_d1[, winner := names(.SD)[which.max(.SD)], by = id] # winning models
-# Winners of the model comparison by participant
-weights_d1$winner <- factor(weights_d1$winner, levels = unique(gof_d1$model))
+weights_d1$winner <- factor(weights_d1$winner, levels = c("bvud1", "rf", "base"))
 winners_d1 <- sort(table(weights_d1$winner))

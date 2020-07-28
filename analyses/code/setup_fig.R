@@ -6,7 +6,7 @@ theme_set(themejj(base_family = "Arial"))
 
 model_levels <- c("bvu", "rf", "base")
 model_labels <- c(bvu="BVU", rf="RF", base="BASE")
-model_colors <- c(BASE = "#C9CCD1", BVU = "#252629", RF = "#6F7680")
+model_colors <- c(BASE = "#f3f3f3", BVU = "#252629", RF = "#afb2b7")
 model_colors_compl <- c(BASE = "#252629", BVU = "white", RF = "#252629")
 
 order_evidence <- function(id, evidence) {

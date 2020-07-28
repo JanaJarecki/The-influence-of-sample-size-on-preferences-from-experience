@@ -2,7 +2,7 @@
 # Setup: Cognitive models
 # Author: Jana B. Jarecki
 # ==========================================================================
-library(cognitivemodels) # v0.0.4 of the package
+# library(cognitivemodels) # from github
 
 ## Options for parameter estimation
 model_options <- list(
@@ -24,8 +24,8 @@ model_options <- list(
 # Baseline: baseline model
 
 # RF
-RF <- function(d, fix = list(rn = NA)) {
-  M <- cognitivemodel(data = d) +
+RF <- function(dt, fix = list(rn = NA)) {
+  M <- cognitivemodel(data = dt) +
     utility_pow_c(value_scaled ~ gamblex, fix = fix) +
     function(pred, data, par) {
       # re-transform the data onto the original scale
@@ -35,15 +35,15 @@ RF <- function(d, fix = list(rn = NA)) {
       y <- replace(y, y > data$gamblex, data$gamblex[y > data$gamblex])
       y / data$gamblex
     }
-  fit(M, options = model_options)
+  fit(M, options = c(model_options))
   return(M)
 }
 
 # BVU Model
-BVU<- function(d, fix_bayes = list()) {
-  M <- cognitivemodel(data = d) +
+BVU <- function(dt, fix_bayes = list()) {
+  M <- cognitivemodel(data = dt) +
     bayes_beta(~ count_x + count_0, format = "count", fix = fix_bayes) +
-    utility_pow_c(value_scaled ~ gamblex, fix = list(rn = NA)) + # fix negative parameter to not exist
+    utility_pow_c(value_scaled ~ gamblex, fix = list(rn = NA)) +
     function(pred, data, par) {
       # re-transform the data
       y <- data$pr_c * pred
@@ -56,11 +56,12 @@ BVU<- function(d, fix_bayes = list()) {
 }
 
 # BVU Model with delta = 1 (Bayesian delta)
-BVU_d1 <- function(d, fix_bayes = list()) {
-  BVU(d, fix_bayes = list(delta = NA))
+BVU_d1 <- function(dt) {
+  BVU(dt = dt, fix_bayes = list(delta = NA))
 }
 
 # Baseline Model
-Baseline <- function(d) {
-  baseline_mean_c(value_scaled ~ ., data = d)
+Baseline <- function(dt) {
+  model_options$lb <- model_options$lb["sigma"]
+  baseline_mean_c(value_scaled ~ ., data = dt, options = model_options)
 }
