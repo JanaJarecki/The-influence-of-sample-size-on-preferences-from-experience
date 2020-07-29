@@ -4,12 +4,14 @@ author: "Jana B. Jarecki"
 date: "`r Sys.Date()`"
 output:
   github_document:
+    css: css.css
   # html_document:
-  #   toc: true
+  #   toc: false
   #   toc_depth: 4
   #   toc_float: true
   #   code_folding: "hide"
-  #   self_contained: true
+  #   self_contained: false
+  #   css: css.css
 link-citations: yes
 always_allow_html: true
 ---
@@ -27,7 +29,8 @@ This document contains codebooks explaining the variables and labels of the  dat
     echo = FALSE,
     fig.margin = TRUE,
     fig.height = 1.4,
-    fig.width = 3
+    fig.width = 3,
+    echo=FALSE
   )
   pander::panderOptions("table.split.table", Inf)
   ggplot2::theme_set(ggthemes::theme_tufte(base_family = "sans", ticks = FALSE))
@@ -46,11 +49,11 @@ This document contains codebooks explaining the variables and labels of the  dat
         "@type" = "Organization",
         name = "University of Basel, Switzerland")
         ),
-    spatialCoverage = "online",
-    temporalCoverage = "Dec 2018 - Jan 2019",
-    measurementTechnique = "Incentivized online choice task",
+    spatialCoverage = "NA",
+    temporalCoverage = "NA",
+    measurementTechnique = "Experimental data with human participants, within-subjects design",
     funder = "Center for Economic Psychology, University of Basel",
-    keywords = c("online study", "risky choice", "risky gamble", "risk-sensitive foraging", "risk sensitivity", "risk sensitive foraging", "energy budget rule", "decisions under quota", "psychology", "Prolific Academic", "cognition", "cognitive modeling")
+    keywords = c("online study", "risky choice", "risky gamble", "decisions from experience", "psychology", "cognition", "cognitive modeling", "heuristics", "bayesian cognitive model")
     )
 
   # Function that defines how to print the codebook, only change
@@ -67,14 +70,27 @@ This document contains codebooks explaining the variables and labels of the  dat
 
 # Codebook
 ```{r codebook}
-  choices <- data.table::fread("../processed/study1.csv")
+  study1 <- data.table::fread("../processed/study1.csv")
 
-  # variables_explained <- list(
-  #   id = "Participant id, after excluding participants",
-  #   phase = "Phase of the experiment",
+  fa <- c("condition", "gambleid", "samplesizecat", "gambletype")
+  study1[, c(fa) := lapply(.SD, factor), .SDcols = fa]
+  data.table::setcolorder(study1, c("id", "condition", "trial", "gambleid", "gamblex", "gamblep", "gambletype", "samplesizecat", "samplesize"))
+
+  variables_explained <- list(
+    id = "Participant identifier",
+    condition = "Within-subjects condition",
   #   block = "Block number in a phase: 1 in familiarization, 7 in five-trial phase, 1 in one-shot phase.",
   #   round = "Round number, consecutive number, independent of block or phase.",
-  #   trial = "Trial number in a round",
+     trial = "Trial number for each participant",
+     gamblep = "Probability of the risky gamble stimulus",
+     gamblex = "Outcome of the risky gamble stimulus",
+     value = "Respondents' evaluation response",
+     gambleid = "Identifier of the gamble",
+     gambletype = "Type of gamble",
+     samplesize = "Number of samples the participant drew. Is NA if condition is 'description'",
+     confidence = "Respondents self-reported confidence",
+     samplesizecat = "Level of sample size. Is '--' if condition is 'description'"
+
   #   state = "Number of points accumulated until this trial",
   #   budget = "Point requirement in this round",
   #   stimulus0 = "Describes the first option (risky gamble) in this round in xpy notation: firstOutcome_prFirst_secondOutcome",
@@ -93,21 +109,21 @@ This document contains codebooks explaining the variables and labels of the  dat
   #   gneezy_potter = "One-shot choice (asked once after the choice phase): Which part of the 100 pennys do you wish to invest in the lottery? With probability 67% the lottery pays zero. You earn the amount that you did not invest. With probability 33% the lottery pays 2.5X. You earn +2.5 x X plus the amount that you did not invest.",
   #   layout_featurecolor = "Which feature is shown in which color in this round. The colors are dark grey (RGB #D9D9D9, grey85) or light grey (RGB #737373, gray45)",
   #   layout_stimulusposition_01 = "In which order stimulus0 and stimulus 1 are shown in this round (left or right on screen)"
-  #   )
-  # var_label(choices) <- variables_explained
+  )
+  var_label(study1) <- variables_explained
 
-  # val_labels(choices$choice_1isHighVar) <- c(
+  # val_labels(study1$choice_1isHighVar) <- c(
   #   "Low-variance option" = 0,
   #   "High-variance option"  = 1)
-  # val_labels(choices$success) <- c(
+  # val_labels(study1$success) <- c(
   #   "No" = 0,
   #   "Yes"  = 1)
 
-  # metadata(demographics) <- meta_info
-  # metadata(choices)$description <- "Choice data from the risk-sensitive choice experiment (Jarecki & Rieskamp)"
+  metadata(study1) <- meta_info
+  metadata(study1)$description <- "Choice data from the decision from experience experiment by Hoffart, Jarecki, Duthil & Rieskamp"
    
 
-  codebook(choices,
+  codebook(study1,
     detailed_variables = FALSE,
     detailed_scales = FALSE,
     missingness_report = FALSE,
