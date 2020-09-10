@@ -53,7 +53,7 @@ names(M) <- paste("Gamble ID", names(M))
 M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
 
 tab2 <- apa_table(M
-    , caption = "Valuations of Gambles in Study 1"
+    , caption = "Valuations of Gambles in Study 1{table:means_study1}"
     , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Med}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
     , align = c('l', rep('c', 4), 'r', 'r')
     , digits = c(0,0,0,2,2,2,0)
