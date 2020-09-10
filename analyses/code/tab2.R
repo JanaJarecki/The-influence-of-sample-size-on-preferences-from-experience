@@ -47,7 +47,7 @@ names(M) <- paste("Gamble ID", names(M))
 # Make Table ------------------------------------------------------------------
 # format the Bayes Factor such that BF > 1000 is displayed as > 1000
 M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
-apa_table(M
+tab2 <- apa_table(M
     , caption = "Valuations of Gambles in Study 1"
     , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Med}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
     , align = c('l', rep('c', 4), 'r', 'r')
@@ -59,5 +59,5 @@ apa_table(M
 
 # Append results for Rtex manuscript ------------------------------------------
 R <- readRDS("../../manuscript/results4tex1.rds")
-R$tab2 <- M
+R$tab2 <- tab2
 saveRDS(R, file = "../../manuscript/results4tex1.rds", version = 2)
