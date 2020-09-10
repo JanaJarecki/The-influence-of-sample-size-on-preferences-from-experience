@@ -50,7 +50,7 @@ Correspondence concerning this article should be addressed to Janine Christin Ho
 \begin{document}
 
 %% results rtex setup -------------------------------------%
-<<setup, echo=FALSE>>=
+<<setup, echo=FALSE, results = "hide">>=
 knit_hooks$set(document = function(x) {
   sub('\\usepackage[]{color}',
 '\\usepackage[usenames,dvipsnames]{color}', x, fixed = TRUE)
@@ -58,8 +58,7 @@ knit_hooks$set(document = function(x) {
 options(digits = 3)
 opts_chunk$set(fig.path="../analyses/figures/")
 opts_chunk$set(fig.pos = 'H', echo=FALSE)
-source(setup_knitr.R)
-
+source("setup_knitr.R")
 R1 <- readRDS("results4tex1.rds")
 @
 
