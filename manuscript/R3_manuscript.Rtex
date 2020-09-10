@@ -49,7 +49,7 @@ Correspondence concerning this article should be addressed to Janine Christin Ho
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-%% latex setup -------------------------------------%
+%% results rtex setup -------------------------------------%
 <<setup, echo=FALSE>>=
 knit_hooks$set(document = function(x) {
   sub('\\usepackage[]{color}',
@@ -136,6 +136,11 @@ Forty people (31 women, 9 men) from the participant pool of the University of Ba
 \added[id=jj]{The design was a within-subject design, participants evaluated two-outcome gambles from experience and from description. Six gambles with either a gain or a zero outcome were created by crossing two gamble types (\textit{\$-bet}, \textit{p-bet}) with three expected values (2.00, 3.20, 4.00), see Table \ref{table:Lotteries}. Three gambles offered a high gain with low probability (\$-bet), and three offered a small gain with high probability (p-bet, notation following \citealp{Lichtenstein1971}). In the experience-based valuation each gamble was crossed with four sample sizes: extra small, small, medium, large (xs, s, m, l), listed in Table \ref{table:Lotteries}. As shown in Table~ \ref{table:Lotteries} the extra small sample size (xs) consisted of a sample size of 5, 6, or 7 outcomes, which allowed us to represent rare events of 1/5, 1/6, and 1/7 (20\%,  17\%, 14\%, respectively). The small sample size equaled xs $\times$ 2, the medium sample size equaled xs $\times$ 3, and the large sample size equaled xs $\times$ 6. Participants saw each gamble with each of the four sample sizes three times in fully randomized order (each gamble was seen 12 times).}
 
 To avoid memory effects between trials, 18 filler trials were shown\footnote{Filler trials involved six gambles with outcomes identical to Table~\ref{table:Lotteries}, but probabilities changed to 75\% (\$-bets) and 25\% (p-bets). The filler gambles' sample sizes were 4, 8, and 16.} Filler trials were excluded from analyses, because they only aimed at minimizing memory-effects.
+
+
+<<table1>>=
+R1[[tab]
+@
 
 \begin{table}[bth]
 \begin{center}
