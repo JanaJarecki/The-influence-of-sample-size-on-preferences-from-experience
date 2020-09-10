@@ -3,6 +3,7 @@
 # Author: Jana Jarecki
 # ==========================================================================
 pacman::p_load(data.table, BayesFactor, brms)
+pacman::p_load_gh("crsh/papaja@devel")
 # Set working directory to this file location
 
 # Load data
@@ -47,6 +48,8 @@ names(M) <- paste("Gamble ID", names(M))
 # Make Table ------------------------------------------------------------------
 # format the Bayes Factor such that BF > 1000 is displayed as > 1000
 M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
+
+options(papaja.na_string = "--")
 tab2 <- apa_table(M
     , caption = "Valuations of Gambles in Study 1"
     , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Med}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
