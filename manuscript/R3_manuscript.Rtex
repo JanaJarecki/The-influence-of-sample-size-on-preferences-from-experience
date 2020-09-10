@@ -138,8 +138,7 @@ To avoid memory effects between trials, 18 filler trials were shown\footnote{Fil
 
 
 <<table1>>=
-
-R1[["tab1"]]
+R1$tab1
 
 @
 
@@ -161,7 +160,7 @@ The analyses were conducted in statistical software R 4.0.2 (2020-06-22) \citep{
 
 \subsubsection{Evaluations of gambles and sample sizes}
 
-Table \ref{tab:means_study1} summarizes the evaluations of the gambles
+Table \ref{table:means_study1} summarizes the evaluations of the gambles
 by format (description vs.~experience) and sample size (xs, s, m, l).
 For instance, across sample sizes xs, s, m, and l, the participants
 evaluated gamble 4 with an average of \(2.80, 2.91, 2.80, 2.95, 3.08\)
@@ -190,79 +189,21 @@ additional predictor mean of the first half of samples
 predictor mean of the second half of samples
 (\(BF\textsubscript{02} = 6.7\)).
 
-\textit{Description versus experience.
-Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($M=5.78, SD=3.94$) compared to description ($M=4.93, SD=3.45$). By contrast p-bets were evaluated lower on the basis of experience ($M=2.74, SD=1.09$) compared to description ($M=2.86, SD=0.98$), $BF > 1000$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In Study 1, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when participants made valuations from experience.}
-
+\textit{Description versus experience.}
 <<table2>>=
 
 R1$tab2
 
 @
 
-
-\begin{table}[tbp]
-
-\begin{center}
-\begin{threeparttable}
-
-\caption{\label{tab:means_study1}Valuations of Gambles in Study 1}
-
-\begin{tabular}{lccccrr}
-\toprule
-Condition & Sample size category & Sample size & \textit{Med} & \textit{M} & D--E & D--E:$BF\textsubscript{10}$\\
-\midrule
-Gamble ID 1 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 4\\
-\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 65\\
-\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 23\\
-\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 143\\
-\ \ \ D & -- & -- & 4.00 & 4.60 & -- & --\\
-Gamble ID 2 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 129\\
-\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 631\\
-\ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 5\\
-\ \ \ E & l & 36 & 4.00 & 3.99 & -0.37 & 2\\
-\ \ \ D & -- & -- & 3.00 & 3.61 & -- & --\\
-Gamble ID 3 (\$-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 4\\
-\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 878\\
-\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 137\\
-\ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 16\\
-\ \ \ D & -- & -- & 5.00 & 6.57 & -- & --\\
-Gamble ID 4 (p-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 5 & 3.00 & 2.80 & 0.28 & >1000\\
-\ \ \ E & s & 10 & 3.20 & 2.91 & 0.16 & 3\\
-\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 55\\
-\ \ \ E & l & 30 & 3.00 & 2.95 & 0.13 & 1\\
-\ \ \ D & -- & -- & 3.20 & 3.08 & -- & --\\
-Gamble ID 5 (p-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 2.00 & 1.77 & 0.10 & 8\\
-\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 14\\
-\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 31\\
-\ \ \ E & l & 36 & 2.00 & 1.81 & 0.06 & 1\\
-\ \ \ D & -- & -- & 2.00 & 1.87 & -- & --\\
-Gamble ID 6 (p-bet) &  &  &  &  &  & \\
-\ \ \ E & xs & 7 & 4.00 & 3.46 & 0.18 & 3\\
-\ \ \ E & s & 14 & 4.00 & 3.55 & 0.09 & 0\\
-\ \ \ E & m & 21 & 4.00 & 3.58 & 0.06 & 0\\
-\ \ \ E & l & 42 & 4.00 & 3.70 & -0.06 & 0\\
-\ \ \ D & -- & -- & 4.00 & 3.64 & -- & --\\
-\bottomrule
-\addlinespace
-\end{tabular}
-
-\begin{tablenotes}[para]
-\normalsize{\textit{Note.} \textit{M} = mean, \textit{Med} = median, D--E = difference between mean description-based valuations and experience-based valuations, $BF\textsubscript{10}$ = Bayes Factor quantifying the evidence for a linear model $\mathrm{M}\textsubscript{1}$ predicting that valuations differ between description and experience over a linear model $\mathrm{M}\textsubscript{0}$ predicting no such differences; both models models contain a by-participant random effect. Gambles IDs 1, 2, and 3 are \$-bets; Gamble IDs 4, 5, and 6 are p-bets.}
-\end{tablenotes}
-
-\end{threeparttable}
-\end{center}
-
-\end{table}
+Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($M=5.78, SD=3.94$) compared to description ($M=4.93, SD=3.45$). By contrast p-bets were evaluated lower on the basis of experience ($M=2.74, SD=1.09$) compared to description ($M=2.86, SD=0.98$), $BF > 1000$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In Study 1, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when participants made valuations from experience.
 
 At the aggregate level, sample size seems to not influence the
 evaluations of gambles in our decision from experience paradigm, but the
 subsequent cognitive modeling analyses will show a more nuanced picture.
+
+
+
 
 \subsubsection{Cognitive modeling}
 
