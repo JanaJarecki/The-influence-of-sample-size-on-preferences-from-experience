@@ -1,6 +1,10 @@
 data/*
 !data/codebooks/
 
+# These files are too big
+study1_cognitive_models.rds
+study2_cognitive_models.rds
+
 *.loc
 *.aux
 *.log
