@@ -193,6 +193,13 @@ predictor mean of the second half of samples
 \textit{Description versus experience.
 Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($M=5.78, SD=3.94$) compared to description ($M=4.93, SD=3.45$). By contrast p-bets were evaluated lower on the basis of experience ($M=2.74, SD=1.09$) compared to description ($M=2.86, SD=0.98$), $BF > 1000$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In Study 1, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when participants made valuations from experience.}
 
+<<table2>>=
+
+R1[["tab2"]]
+
+@
+
+
 \begin{table}[tbp]
 
 \begin{center}
