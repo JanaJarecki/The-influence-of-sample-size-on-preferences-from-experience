@@ -160,7 +160,7 @@ The analyses were conducted in statistical software R 4.0.2 (2020-06-22) \citep{
 
 \subsubsection{Evaluations of gambles and sample sizes}
 
-Table \ref{tab:means_study1} summarizes the evaluations of the gambles
+Table \ref{table:means_study1} summarizes the evaluations of the gambles
 by format (description vs.~experience) and sample size (xs, s, m, l).
 For instance, across sample sizes xs, s, m, and l, the participants
 evaluated gamble 4 with an average of \(2.80, 2.91, 2.80, 2.95, 3.08\)
