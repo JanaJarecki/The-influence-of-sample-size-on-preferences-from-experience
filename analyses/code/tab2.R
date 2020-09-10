@@ -54,7 +54,7 @@ M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7
 
 tab2 <- apa_table(M
     , caption = "Valuations of Gambles in Study 1{table:means_study1}"
-    , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Med}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
+    , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Mdn}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
     , align = c('l', rep('c', 4), 'r', 'r')
     , digits = c(0,0,0,2,2,2,0)
     , note = '\\textit{M} = mean, \\textit{Mdn} = median, D--E = difference between mean description-based valuations and experience-based valuations, $BF\\textsubscript{10}$ = Bayes Factor quantifying the evidence for a linear model $\\mathrm{M}\\textsubscript{1}$ predicting that valuations differ between description and experience over a linear model $\\mathrm{M}\\textsubscript{0}$ predicting no such differences; both models models contain a by-participant random effect. Gambles IDs 1, 2, and 3 are \\$-bets; Gamble IDs 4, 5, and 6 are p-bets.'
