@@ -2,9 +2,7 @@
 # Statistical Analyses
 # Author: Jana B. Jarecki
 # ==========================================================================
-library(data.table)   # fast data processing
-library(brms)         # bayesian analyses
-library(BayesFactor)
+pacman::p_load(data.table, brms, BayesFactor, update = TRUE)
 
 # Load fitted cognitive models and participant data
 #study <- 2
