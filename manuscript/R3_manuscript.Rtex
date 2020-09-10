@@ -49,7 +49,25 @@ Correspondence concerning this article should be addressed to Janine Christin Ho
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
+%% latex setup -------------------------------------%
+<<setup, echo=FALSE>>=
+knit_hooks$set(document = function(x) {
+  sub('\\usepackage[]{color}',
+'\\usepackage[usenames,dvipsnames]{color}', x, fixed = TRUE)
+})
+options(digits = 3)
+opts_chunk$set(fig.path="../analyses/figures/")
+opts_chunk$set(fig.pos = 'H', echo=FALSE)
+source(setup_knitr.R)
+
+R1 <- readRDS("results4tex1.rds")
+@
+
 \maketitle
+
+
+
+
 
 In everyday life, people often form preferences on the basis of past experiences. The strength of these preferences arguably depends on the amount of previous experience. Someone who has visited a restaurant for many years and has always had positive experiences likely has a stronger positive preference for this restaurant than someone who visited the restaurant only once and had a positive experience. Thus, even if the relative frequency of positive experiences is similar, the strength of preferences can differ depending on the amount of experience. We examined how people's preferences in an experience-based judgment situation under risk evolve as a function of growing experience. 
 
@@ -156,9 +174,221 @@ To understand this logic, consider the following example: A person has a true se
 } \added[id=jj]{Detailed instructions as well as an example of the BDM auction were presented to the participants to explain the auction's mechanism. We used a short questionnaire to ensure that all participants had understood how the auction worked.}
 
 \subsection{Results}
-The analyses were conducted in statistical software R v3.6.3 (2020-02-29) \citep{R} using the BayesFactor package v0.9.12 \citep{BayesFactor} and the cognitivemodels package v0.0.4 \citep{Jarecki2020}; inferences were based on the Bayes factor ($BF\textsubscript{ij}$).\footnote{Bayes factors quantify how much more or less likely the data are under Model i ($\mathrm{M}\textsubscript{i}$) than Model j ($\mathrm{M}\textsubscript{j}$). A Bayes factor of 1 ($BF\textsubscript{ij} = 1$) means that the data do not discriminate between the two models $\mathrm{M}\textsubscript{i}$ and $\mathrm{M}\textsubscript{j}$. A Bayes factor of 5 (i.e., $BF\textsubscript{ij} = 5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{i}$ than under $\mathrm{M}\textsubscript{j}$. A Bayes factor of $1/5$ ($BF\textsubscript{ij} = 1/5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{j}$ (note that $BF\textsubscript{ji} = 1/BF\textsubscript{ij}$).} 
+The analyses were conducted in statistical software R 4.0.2 (2020-06-22) \citep{R} using the BayesFactor package v0.9.12 \citep{BayesFactor} and the cognitivemodels package v0.0.10 \citep{Jarecki2020}; inferences were based on the Bayes factor ($BF\textsubscript{ij}$).\footnote{Bayes factors quantify how much more or less likely the data are under Model i ($\mathrm{M}\textsubscript{i}$) than Model j ($\mathrm{M}\textsubscript{j}$). A Bayes factor of 1 ($BF\textsubscript{ij} = 1$) means that the data do not discriminate between the two models $\mathrm{M}\textsubscript{i}$ and $\mathrm{M}\textsubscript{j}$. A Bayes factor of 5 (i.e., $BF\textsubscript{ij} = 5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{i}$ than under $\mathrm{M}\textsubscript{j}$. A Bayes factor of $1/5$ ($BF\textsubscript{ij} = 1/5$) means that the data are 5 times more likely under $\mathrm{M}\textsubscript{j}$ (note that $BF\textsubscript{ji} = 1/BF\textsubscript{ij}$).} 
 %
-\input{analyses/reports/results_study1}
+%\input{analyses/reports/results_study1}
+
+
+\subsubsection{Evaluations of gambles and sample sizes}
+
+Table \ref{tab:means_study1} summarizes the evaluations of the gambles
+by format (description vs.~experience) and sample size (xs, s, m, l).
+For instance, across sample sizes xs, s, m, and l, the participants
+evaluated gamble 4 with an average of \(2.80, 2.91, 2.80, 2.95, 3.08\)
+(respectively). Across gambles, the evaluations were not influenced by
+sample sizes; a statistical model comparison among analyses of variance
+(ANOVA) confirmed this, an ANOVA of the valuations with the predictors
+gamble type and gamble expected value (Model 0) outperformed models with
+the additional predictors sample size (\(BF_{01} = 438\)) and with a
+sample-size x gamble-type interaction (\(BF_{02} > 1000\), all models
+had by-participant random effects). Although the \$-bets and p-bets had
+the same expected values, the \$-bet gambles with their higher outcome magnitudes and lower probabilities were evaluated higher
+(\(M=5.61, SD=3.86\)) than the p-bet gambles (\(M=2.76, SD=1.07\)) with their lower outcome magnitudes and higher probabilities,
+\(BF > 1000\) in favor of an ANOVA that predicts valuations as a
+function of gamble type over an ANOVA without the predictor gamble type
+(both models include by-participant and by-expected-value random
+effects).
+
+The valuations in the experience condition were not driven by primacy or
+recency: neither the outcomes that participants sampled in the first
+half of the sampling phase nor those sampled during the second half of
+the sampling phase predict the observed valuations. A linear model of
+the evaluations with the predictor gamble type
+(\(\mathrm{M}\textsubscript{0}\)) outperformed a model with the
+additional predictor mean of the first half of samples
+(\(BF\textsubscript{01} = 16.6\)) and a model with the additional
+predictor mean of the second half of samples
+(\(BF\textsubscript{02} = 6.7\)).
+
+\textit{Description versus experience.
+Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($M=5.78, SD=3.94$) compared to description ($M=4.93, SD=3.45$). By contrast p-bets were evaluated lower on the basis of experience ($M=2.74, SD=1.09$) compared to description ($M=2.86, SD=0.98$), $BF > 1000$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In Study 1, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when participants made valuations from experience.}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:means_study1}Valuations of Gambles in Study 1}
+
+\begin{tabular}{lccccrr}
+\toprule
+Condition & Sample size category & Sample size & \textit{Med} & \textit{M} & D--E & D--E:$BF\textsubscript{10}$\\
+\midrule
+Gamble ID 1 (\$-bet) &  &  &  &  &  & \\
+\ \ \ E & xs & 5 & 5.00 & 5.16 & -0.56 & 4\\
+\ \ \ E & s & 10 & 4.55 & 5.30 & -0.70 & 65\\
+\ \ \ E & m & 15 & 5.00 & 5.34 & -0.74 & 23\\
+\ \ \ E & l & 30 & 5.00 & 5.29 & -0.69 & 143\\
+\ \ \ D & -- & -- & 4.00 & 4.60 & -- & --\\
+Gamble ID 2 (\$-bet) &  &  &  &  &  & \\
+\ \ \ E & xs & 6 & 4.00 & 4.33 & -0.71 & 129\\
+\ \ \ E & s & 12 & 4.00 & 4.31 & -0.69 & 631\\
+\ \ \ E & m & 18 & 4.00 & 4.04 & -0.43 & 5\\
+\ \ \ E & l & 36 & 4.00 & 3.99 & -0.37 & 2\\
+\ \ \ D & -- & -- & 3.00 & 3.61 & -- & --\\
+Gamble ID 3 (\$-bet) &  &  &  &  &  & \\
+\ \ \ E & xs & 7 & 6.00 & 7.56 & -0.99 & 4\\
+\ \ \ E & s & 14 & 6.70 & 8.40 & -1.83 & 878\\
+\ \ \ E & m & 21 & 6.20 & 7.92 & -1.35 & 137\\
+\ \ \ E & l & 42 & 6.00 & 7.68 & -1.11 & 16\\
+\ \ \ D & -- & -- & 5.00 & 6.57 & -- & --\\
+Gamble ID 4 (p-bet) &  &  &  &  &  & \\
+\ \ \ E & xs & 5 & 3.00 & 2.80 & 0.28 & >1000\\
+\ \ \ E & s & 10 & 3.20 & 2.91 & 0.16 & 3\\
+\ \ \ E & m & 15 & 3.00 & 2.80 & 0.28 & 55\\
+\ \ \ E & l & 30 & 3.00 & 2.95 & 0.13 & 1\\
+\ \ \ D & -- & -- & 3.20 & 3.08 & -- & --\\
+Gamble ID 5 (p-bet) &  &  &  &  &  & \\
+\ \ \ E & xs & 6 & 2.00 & 1.77 & 0.10 & 8\\
+\ \ \ E & s & 12 & 2.00 & 1.75 & 0.12 & 14\\
+\ \ \ E & m & 18 & 2.00 & 1.73 & 0.14 & 31\\
+\ \ \ E & l & 36 & 2.00 & 1.81 & 0.06 & 1\\
+\ \ \ D & -- & -- & 2.00 & 1.87 & -- & --\\
+Gamble ID 6 (p-bet) &  &  &  &  &  & \\
+\ \ \ E & xs & 7 & 4.00 & 3.46 & 0.18 & 3\\
+\ \ \ E & s & 14 & 4.00 & 3.55 & 0.09 & 0\\
+\ \ \ E & m & 21 & 4.00 & 3.58 & 0.06 & 0\\
+\ \ \ E & l & 42 & 4.00 & 3.70 & -0.06 & 0\\
+\ \ \ D & -- & -- & 4.00 & 3.64 & -- & --\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} \textit{M} = mean, \textit{Med} = median, D--E = difference between mean description-based valuations and experience-based valuations, $BF\textsubscript{10}$ = Bayes Factor quantifying the evidence for a linear model $\mathrm{M}\textsubscript{1}$ predicting that valuations differ between description and experience over a linear model $\mathrm{M}\textsubscript{0}$ predicting no such differences; both models models contain a by-participant random effect. Gambles IDs 1, 2, and 3 are \$-bets; Gamble IDs 4, 5, and 6 are p-bets.}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+At the aggregate level, sample size seems to not influence the
+evaluations of gambles in our decision from experience paradigm, but the
+subsequent cognitive modeling analyses will show a more nuanced picture.
+
+\subsubsection{Cognitive modeling}
+
+By modeling participant's valuations with the two models we proposed, it
+is possible to examine the effect of sample size on value judgments. We
+tested how good the \added[id=jj]{relative frequency} (RF) model and the
+\added[id=jj]{Bayesian value updating} (BVU) model represent
+participants' value judgments of gambles. To check the psychological
+plausibility of both models we also checked if both models outperform a
+baseline model, which predicts a constant evaluation equal to the mean
+individual evaluation.
+
+\textit{Modeling Procedure.} To estimate the models, the observed and
+predicted evaluations were normalized to a common range between 0 and 1
+(by division through the gain of the presented gamble). Maximum
+likelihood was used to estimate the parameters of the models at the
+participant level, assuming that observations follow a truncated normal
+distribution around the model predictions (truncation between 0 and 1)
+with a constant standard deviation (\(\sigma\)), that was estimated by
+participant (\(0 < \sigma \leq 1\)).
+\added[id=jj]{Therefore, the relative frequency model had two free parameters, namely $\sigma$ and the power utility exponent $\tau$ ($0 \leq \tau \leq 20$). The Bayesian value updating model had four free parameters, the prior belief parameter for gain outcomes $\alpha_0$ ($0 \leq \alpha_0 \leq 2$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\tau$ and $\sigma$, with the prior on zero outcomes constrained to $\beta_0 = 2-\alpha_0$. The baseline model had two free parameters, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. Models were compared based on evidence strength and BIC weights from the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
+
+We will first outline the quantitative model fit, followed by the
+qualitative model fit, and lastly analyze the effects of sample size
+given the cognitive strategies.
+
+\textit{Quantitative Model Fit.} The Bayesian value updating model
+described the majority of the participants best (30 of 40; 75\%). The
+relative frequency model described 9 participants best (22\%); the
+baseline model described 1 participants best. Figure \ref{fig:fig2}
+shows the evidence strength for the models by participant. The models'
+mean Bayesian information criterion across all participants equaled
+BIC\textsubscript{BVU}\(= -107\), BIC\textsubscript{RF}\(= -101\), and
+BIC\textsubscript{BASE}\(= 13\) (lower values indicate better fit).
+\added[id=jj2]{Even when restricting the learning rate $\delta$ to 1 in the Bayesian model, the Bayesian model outperforms the relative frequency model.}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described 26 of 40 or 65\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 1 participants best.}}
+
+\begin{figure}[htb]
+
+{\centering \includegraphics[width=.9\linewidth]{../figures/fig2-1} 
+
+}
+
+\caption{Study 1: Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:fig2}
+\end{figure}
+
+The estimated parameters of the best-fitting models are shown in Table
+\ref{tab:study1_parameter}. The power utility exponent (\(\tau\)) did
+not differ substantially for the participants that were best described
+by the Bayesian value updating (BVU) model (\(M_{\tau}= 1.49\)) and
+those best described by a relative frequency model (\(M_{\tau}=1.61\)),
+\(\Delta\) \(M = -0.08\) 95\% HDI \([-0.97\), \(0.79]\),
+\(\mathrm{BF}_{\textrm{01}} = 2.76\). The prior beliefs about the
+probability of gains was \(0.46\) (resulting from estimated prior
+parameters \(\alpha_0 = 0.92\), \(\beta_0 = 1.08\)) for the participants
+best described by the BVU model. The learning rate of the mean
+participant that was best described by the BVU model was
+\(M_{\delta}=1.36\) (a model with values \(>\) 1 revises its priors
+faster than optimal Bayesian, 1 is optimal Bayesian, \(<\) 1 is
+conservative compared to optimal Bayesian). The liberal learning rate is
+unusual given that previous work has found conservative learning
+\citep{Edwards1967,Tauber2017}. This fast learning in our task
+\added[id=jj2]{could be explained} by that participants repeatedly
+sampled from the same set of gambles.
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:study1_parameter}Study 1: Parameter Estimates of Winning Models, \textit{M (SD)}}
+
+\begin{tabular}{lccccc}
+\toprule
+Winning Model & $\alpha$ & $\delta$ & $\theta_G$ & $\mu$ & $\sigma$\\
+\midrule
+BVU (\textit{n}$=$30) & 1.49 (1.47) & 1.36 (2.12) & 0.92 (0.66) & -- & 0.13 (0.07)\\
+RF (\textit{n}$=$9) & 1.61 (0.58) & -- & -- & -- & 0.12 (0.02)\\
+BASE (\textit{n}$=$1) & -- & -- & -- & 0.47 (NA) & 0.30 (NA)\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model. Parameters denote: $\tau =$ power utility exponent, $\alpha_0$ gain prior, $\mu=$ mean evaluation, $\sigma$ standard deviation.}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\textit{Qualitative Model Fit.} The qualitative fit between the models
+and the data is shown in Figure \ref{fig:fig3}, which plots the
+predictions of the best-fitting models against the observed evaluations
+by participant. The models generally describe the data well
+(\added[id=jj2]{mean Pearson's} \(r\textsubscript{pred,obs} = 0.71\)),
+except in four cases, where even the winning model fails to resemble the
+data qualitatively (participants s05, s19, s24, s38, with
+\(r\textsubscript{pred,obs} < 0.40\)).\footnote{As robustness check we repeated the model comparison with subjective probability weighting, using Prelec’s \citeyear{Prelec1998} single parameter weighting function. This weighting function incorporates non-linearities in the perception of probabilities. The quantitative results of the probability weighting model and the utility model favored a utility model without probability weighting. Thus, the results suggest that in the paradigm that we studied people's perception of the probabilities of outcomes are relative accurate and best described by a linear probability function.}
+
+\begin{figure}[htb]
+
+{\centering \includegraphics[width=\textwidth]{../figures/fig3-1} 
+
+}
+
+\caption{Study 1: Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). Darker color indicates overlapping points. \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model.}\label{fig:fig3}
+\end{figure}
+
+\added[id=jj]{
+The cognitive modeling results thus show that most participants were best described by a Bayesian strategy, and a minority by a relative-frequency strategy. This strategy heterogeneity helps understanding the behavioral null finding---that sample size seemed to have no effect on valuations---that were observed at the aggregate level (Table \ref{tab:means_study1}). The statistical aggregate analysis fails to take the individual differences in learning strategies into account, while participants are best described by a mixture of strategies. Moreover, the aggregate statistical analysis without the cognitive modeling also fails to account for differences in the prior beliefs about gain probabilities.
+}
+
 \clearpage
 %
 \subsection{Discussion of Study 1}
