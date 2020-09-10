@@ -139,7 +139,9 @@ To avoid memory effects between trials, 18 filler trials were shown\footnote{Fil
 
 
 <<table1>>=
-R1[[tab]
+
+R1[["tab1"]]
+
 @
 
 \begin{table}[bth]
