@@ -143,33 +143,6 @@ R1[["tab1"]]
 
 @
 
-
-\begin{table}[bth]
-\begin{center}
-\begin{threeparttable}
-\caption{Gambles and Sample Sizes Used in Studies 1 and 2\label{table:Lotteries}}
-\begin{tabular}{llccccccc}
-\toprule
- &  &  &  &  & \multicolumn{4}{c}{Sample Size} \\
-\cmidrule(r){6-9}
-Gamble ID & Type & X & Pr & EV & xs & s & m & l\\
-\midrule
-1 & \$-bet & 16.00 & 0.20 & 3.20 & 5 & 10 & 15 & 30\\
-2 & \$-bet & 12.00 & 0.17 & 2.00 & 6 & 12 & 18 & 36\\
-3 & \$-bet & 28.00 & 0.14 & 4.00 & 7 & 14 & 21 & 42\\
-4 & p-bet & 4.00 & 0.80 & 3.20 & 5 & 10 & 15 & 30\\
-5 & p-bet & 2.40 & 0.83 & 2.00 & 6 & 12 & 18 & 36\\
-6 & p-bet & 4.70 & 0.86 & 4.03 & 7 & 14 & 21 & 42\\
-\bottomrule
-\addlinespace
-\end{tabular}
-\begin{tablenotes}[para]
-\normalsize{\textit{Note.} \textit{X} = gain in Swiss Fr., \textit{Pr} = probability of gain, \textit{EV} = expected value, \textit{Sample Size} = total number of observations in the experience condition categorized as \textit{xs} = extra small, \textit{s} = small, \textit{m} = medium, \textit{l} = large. The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble, namely 1/5, 1/6, 1/7, 4/5, 5/6, and 6/7 for gamble IDs 1 through 6, respectively.}
-\end{tablenotes}
-\end{threeparttable}
-\end{center}
-\end{table}
-
 After the experience block, participants saw each gamble three times in a description format. In this block, participants received a description of the gamble's outcome and the associated probability; probabilities were rounded to one decimal place (1/5 = 20\%, 1/6 = 16.7\%, 1/7 = 14.3\%). Again, presentation order of all trials was fully randomized.
 
 
