@@ -3,7 +3,6 @@
 #         BIC weights as bar plots
 # ==========================================================================
 # ---- fig_dots ----
-
 d[, group := factor(paste0(factor(winner, levels = model_levels, labels = model_labels), ", ", id))]
 dummy_range <- d[condition != "description", .(value = range(c(value,pred)), pred = range(c(value,pred))), by = group]
 ggplot(d[condition != "description"], aes(x = value, y = pred)) +
@@ -11,7 +10,7 @@ ggplot(d[condition != "description"], aes(x = value, y = pred)) +
   geom_point(aes(fill = factor(winner, levels = model_levels, labels = model_labels)), shape=21, color = "black", alpha = 0.4, size = 1) +
   geom_blank(data = dummy_range) +
   facet_wrap(~group, scales = "free", nrow = 5, drop=F, shrink=FALSE) +
-  themejj(facet=TRUE, base_family = "Arial") +
+  themejj(facet=TRUE) +
   scale_x_continuous("Predicted Evaluations", breaks = pretty_breaks()) +
   scale_y_continuous("Observed Evaluations", breaks = pretty_breaks()) +
   scale_fill_manual("Winning Model", values = model_colors) +

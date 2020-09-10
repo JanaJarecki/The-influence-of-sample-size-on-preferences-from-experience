@@ -1,0 +1,22 @@
+<<init, echo=FALSE>>=
+knit_hooks$set(document = function(x) {
+  sub('\\usepackage[]{color}',
+'\\usepackage[usenames,dvipsnames]{color}', x, fixed = TRUE)
+})
+opts_chunk$set(fig.path="../analyses/figures/")
+opts_chunk$set(fig.pos = 'H')
+@
+
+
+<<example_table, echo=FALSE>>=
+df = data.frame(x.1 = rnorm(100),
+    x.2 = rnorm(100),
+    x.3 = sample(c(T,F), 100, replace=T))
+
+df$y = 2 * df$x.1 + 3 * df$x.2 + df$x.3 + rnorm(100)
+    
+kable(head(df), format="latex")
+@
+
+The mean is $\Sexpr{mean(df$y)}$.
+
