@@ -242,9 +242,14 @@ BIC\textsubscript{BASE}\(= 13\) (lower values indicate better fit).
 
 \begin{figure}[htb]
 
-{\centering \includegraphics[width=.9\linewidth]{../figures/fig2-1} 
+<<model_comparison, , fig.height=5, echo=F>>=
 
-}
+R1$fig_modelcomparison
+
+@
+
+
+{\centering \includegraphics[width=.9\linewidth]{../figures/fig2-1}}
 
 \caption{Study 1: Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:fig2}
 \end{figure}
