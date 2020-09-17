@@ -48,7 +48,7 @@ ggsave("../figures/fig2-1.pdf", fig, w = 7, h = 3)
 source("utilities.R")
 fit <- fit[weights[, c("id", "winner")], on = .NATURAL]
 parameter <- fit[model==winner][, .(par=names(coef(V2[[1]])), val=coef(V2[[1]])), by=.(id, winner)]
-parameter[par == "rp", par := "alpha"] # rename parameter
+parameter[par %in% c("rp", "alpha"), par := "tau"]
 source("tab_pars.R")
 R$tab_pars <- tab
 
@@ -56,7 +56,7 @@ R$tab_pars <- tab
 setkey(parameter, winner) # allows faster subsetting
 R$par$rf  <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
 R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
-R$par$BF <- papaja::apa_print(ttestBF(parameter["bvu"][par=="alpha", val], parameter["rf"][par=="alpha", val]))$full_result
+R$par$BF <- papaja::apa_print(ttestBF(parameter["bvu"][par=="tau", val], parameter["rf"][par=="tau", val]))$full_result
 saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
 
 
