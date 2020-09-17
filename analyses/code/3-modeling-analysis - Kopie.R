@@ -33,6 +33,7 @@ weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
 R <- readRDS("../../manuscript/results1.rds")
 R$aic <- aic[, mean(gof), by = model][, setNames(V1, model)]
 R$bic <- bic[, mean(gof), by = model][, setNames(V1, model)]
+R$winners <- winners
 saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
 
 # plot
