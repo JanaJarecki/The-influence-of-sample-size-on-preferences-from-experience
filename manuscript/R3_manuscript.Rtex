@@ -263,6 +263,11 @@ unusual given that previous work has found conservative learning
 \added[id=jj2]{could be explained} by that participants repeatedly
 sampled from the same set of gambles.
 
+<<table_par>>=
+R1$tab_pars
+
+@
+
 \begin{table}[tbp]
 
 \begin{center}
