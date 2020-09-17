@@ -2,7 +2,7 @@
 # Analyze the results of the cogonitive model fiting
 # ==========================================================================
 pacman::p_load(data.table, purrr, modelr)
-pacman::p_load_gh("janajarecki/cognitivemodels@development")
+pacman::p_load_gh("janajarecki/cognitivemodels@development", "janajarecki/cognitiveutils")
 source("setup_models.R")
 
 
@@ -13,29 +13,38 @@ fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 fit <- melt(fit, id = c("id", "cvfold"), var = "model", val = "cv")
 
 
+par <- modelfit[,
+  .(par=names(coef(fit[[1]])), value=coef(fit[[1]])),
+  by=.(id,model)]
+par[par=="rp", par := "alpha"]
+par <- dcast(par, model ~ par, value.var = "value", fun.aggregate = mean)
+par[]
+BIC = modelfit[, .(BIC = BIC(fit[[1]]), LL = logLik(fit[[1]])), by = .(id,model)]
+par[BIC[, .(BIC=mean(BIC), LL = mean(LL)), by=model]][order(BIC)]
+
+
 ## ---- gof ----
 # Goodness of model fit -----------------------------------------------------
-rmse <- fit[, as.list(summary(map2_dbl(cv[[1]], cvfold[[1]]$test, rmse))), by = .(model, id)]
+models <- c("bvu", "rf", "base")
+# BIC
+bic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::BIC(x$logLik()))), by = .(id, model)]
 
-rmse[model != "bvu_d1", model[which.min(Median)], by = id][, table(V1)]
-rmse[model != "bvu_d1", model[which.min(Mean)], by = id][, table(V1)]
-rmse[, mean(Median), by = variable]
+# AIC
+aic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)]
 
-
-ll <- fit[, as.list(summary(map2_dbl(cv[[1]], cvfold[[1]]$test, logLik))), by = .(model, id)]
-ll[model != "bvu_d1", model[which.max(Median)], by = id][, table(V1)]
-
-# Evidence-weights from rmse
-ll[model != "bvu_d1", w := cognitiveutils::akaike_weight(Median, "log"), by = id]
-weights <- dcast(ll[model != "bvu_d1"], id ~ model, value.var = "w")
-
-# Evidence-weights from rmse
-rmse[model != "bvu_d1", w := 1 - (Mean-min(Mean)) / sum(Mean-min(Mean)), by = id]
-weights <- dcast(rmse[model != "bvu_d1"], id ~ model, value.var = "w")
-weights[, winner := names(.SD)[which.max(.SD)], by = id]
-weights[, winner := factor(winner, levels = c("bvu", "rf", "base"))]
+# AICweights
+aicw <- aic[, .(model, w = akaike_weight(gof)), by = id]
+weights <- dcast(aicw, id ~ model, value.var = "w")
+weights[, winner := factor(which.max(.SD), 1:3, names(.SD)), by = id]
 winners <- sort(table(weights$winner))
+weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
 source("fig2.R")
+# save to results object
+R <- readRDS("../../manuscript/results1.rds")
+R$fig_modelcomparison <- fig
+R$aic <- aic[, mean(gof), by = model][, setNames(V1, model)]
+R$bic <- bic[, mean(gof), by = model][, setNames(V1, model)]
+saveRDS(R, file = "../../manuscript/results1.rds")
 
 
 # Model parameter -------------------------------------------------------------
@@ -65,6 +74,15 @@ d[condition == "experience",
 
 
 # Analysis of the Bayesian model with delta = 1 -------------------------------
+  # Evidence-weights from log likelihood
+ll[, w := cognitiveutils::akaike_weight(Median, "log"), by = id]
+weights_d1 <- dcast(ll, id ~ model, value.var = "w")
+weights_d1[, winner := names(.SD)[which.max(.SD)], by = id]
+winners_d1 <- sort(table(weights_d1$winner))
+
+
+
+
 aic_d1 <- fits[, lapply(.SD, function(x) AIC(x[[1]])), .SDcols =  c("base", "bvud1", "rf"), by = id]
 
 # AIC-weights
