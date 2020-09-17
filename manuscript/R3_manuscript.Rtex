@@ -264,33 +264,6 @@ R1$tab_pars
 
 @
 
-\begin{table}[tbp]
-
-\begin{center}
-\begin{threeparttable}
-
-\caption{\label{tab:study1_parameter}Study 1: Parameter Estimates of Winning Models, \textit{M (SD)}}
-
-\begin{tabular}{lccccc}
-\toprule
-Winning Model & $\alpha$ & $\delta$ & $\theta_G$ & $\mu$ & $\sigma$\\
-\midrule
-BVU (\textit{n}$=$30) & 1.49 (1.47) & 1.36 (2.12) & 0.92 (0.66) & -- & 0.13 (0.07)\\
-RF (\textit{n}$=$9) & 1.61 (0.58) & -- & -- & -- & 0.12 (0.02)\\
-BASE (\textit{n}$=$1) & -- & -- & -- & 0.47 (NA) & 0.30 (NA)\\
-\bottomrule
-\addlinespace
-\end{tabular}
-
-\begin{tablenotes}[para]
-\normalsize{\textit{Note.} \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model. Parameters denote: $\tau =$ power utility exponent, $\alpha_0$ gain prior, $\mu=$ mean evaluation, $\sigma$ standard deviation.}
-\end{tablenotes}
-
-\end{threeparttable}
-\end{center}
-
-\end{table}
-
 \textit{Qualitative Model Fit.} The qualitative fit between the models
 and the data is shown in Figure \ref{fig:fig3}, which plots the
 predictions of the best-fitting models against the observed evaluations
@@ -321,7 +294,7 @@ Study 1 shows that the size of the sample overall did not have an effect on valu
 and with research suggesting that when participants need not focus on learning the outcome values but learn only the probabilities during sampling, people tend to overweight rare events \citep{Hotaling2019}}.
 
 \section{Study 2}
-In Study 1 participants knew the possible outcomes before drawing outcomes, which differs from typical decisions from experience paradigms, in which people learn about the outcome values by sampling. To bring our method more in line with the \replaced[id=jj]{standard decision from experience paradigm}{this}, in Study 2 we changed the experimental method such that one outcome had to be learned during sampling.
+In Study 1 participants knew the possible outcomes before drawing outcomes, which differs from typical decisions from experience paradigms, in which people learn about the outcome values by sampling. To bring our method more in line with the standard decision from experience paradigm}{this}, in Study 2 we changed the experimental method such that one outcome had to be learned during sampling.
 
 \subsection{Methods}
 The procedure an methods of Study~2 were similar to Study~1. The only difference consisted in that before participants started sampling, they were now only informed about gambles being two-outcome gambles and that one of the outcomes was zero. Unlike in Study 1, the gain amounts of the gambles were not displayed on screen before or during the sampling stage.
