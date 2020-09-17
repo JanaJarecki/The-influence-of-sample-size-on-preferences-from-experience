@@ -56,7 +56,7 @@ R$tab_pars <- tab
 setkey(parameter, winner) # allows faster subsetting
 R$par$rf  <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
 R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
-R$par$BF <- extractBF(ttestBF(parameter["bvu"][par=="alpha", val], parameter["rf"][par=="alpha", val]))$bf
+R$par$BF <- papaja::apa_print(ttestBF(parameter["bvu"][par=="alpha", val], parameter["rf"][par=="alpha", val]))$full_result
 saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
 
 
