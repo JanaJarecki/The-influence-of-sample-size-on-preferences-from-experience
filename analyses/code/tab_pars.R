@@ -1,5 +1,6 @@
+options(papaja.na_string = "--")
 tab <- dcast(parameter, winner ~ par, fun.aggregate=paste_msd, value.var="val")
-tab[, winner_n := paste0(winner, " (\\textit{n}$=$", ..winners[winner], ")"),
+tab[, winner_n := paste0(toupper(winner), " (\\textit{n}$=$", ..winners[winner], ")"),
 by=winner]
 tab <- papaja::apa_table(tab[names(sort(-winners)), c("winner_n", "alpha", "delta", "count_x","sigma")]
       , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
