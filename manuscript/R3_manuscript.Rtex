@@ -246,12 +246,9 @@ AIC\textsubscript{BASE}\(= \Sexpr{R1$aic["base"]}\)
 
 The estimated parameters of the best-fitting models are shown in Table
 \ref{tab:study1_parameter}. The power utility exponent (\(\tau\)) did
-not differ substantially for the participants that were best described
-by the Bayesian value updating (BVU) model
-(\(M_{\tau}= \Sexpr{R1$par$bvu["sigma"]}\)) and those best described by a relative frequency model
-(\(M_{\tau}=\Sexpr{R1$par$rf["bvu"]-R1$par$rf["sigma"]}\)),
-\(\Delta\) \(M = \Sexpr{R1$par$rf["sigma"]}\) 95\% HDI \([-0.97\), \(0.79]\),
-\(\mathrm{BF}_{\textrm{01}} = 2.76\). The prior beliefs about the
+not differ substantially between the participants that were best described
+by the Bayesian value updating (BVU) model (\(M_{\tau}= \Sexpr{R1$par$bvu["sigma"]}\)) and those best described by a relative frequency model (\(M_{\alpha}=\Sexpr{R1$par$rf["sigma"]}\)),
+\(\Delta\) \Sexpr{R1$par$BF}. The prior beliefs about the
 probability of gains was \(0.46\) (resulting from estimated prior
 parameters \(\alpha_0 = 0.92\), \(\beta_0 = 1.08\)) for the participants
 best described by the BVU model. The learning rate of the mean
