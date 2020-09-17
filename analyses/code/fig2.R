@@ -22,5 +22,4 @@ fig <- ggplot(melt(weights, id = "id", measure = m), aes(x = factor(id, levels =
       axis.title.x = element_text(margin = margin(t = 0.5, unit = "lines")),
       legend.key.height = unit(1.2, "lines"),
       legend.key = element_rect(fill = "white"))
-
 plot(fig)

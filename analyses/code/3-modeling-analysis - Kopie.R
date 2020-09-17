@@ -10,17 +10,6 @@ source("setup_models.R")
 # Load data -----------------------------------------------------------------
 study <- 1
 fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
-fit <- melt(fit, id = c("id", "cvfold"), var = "model", val = "cv")
-
-
-par <- modelfit[,
-  .(par=names(coef(fit[[1]])), value=coef(fit[[1]])),
-  by=.(id,model)]
-par[par=="rp", par := "alpha"]
-par <- dcast(par, model ~ par, value.var = "value", fun.aggregate = mean)
-par[]
-BIC = modelfit[, .(BIC = BIC(fit[[1]]), LL = logLik(fit[[1]])), by = .(id,model)]
-par[BIC[, .(BIC=mean(BIC), LL = mean(LL)), by=model]][order(BIC)]
 
 
 ## ---- gof ----
@@ -38,15 +27,21 @@ weights <- dcast(aicw, id ~ model, value.var = "w")
 weights[, winner := factor(which.max(.SD), 1:3, names(.SD)), by = id]
 winners <- sort(table(weights$winner))
 weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
-source("fig2.R")
+
 # save to results object
 R <- readRDS("../../manuscript/results1.rds")
-R$fig_modelcomparison <- fig
 R$aic <- aic[, mean(gof), by = model][, setNames(V1, model)]
 R$bic <- bic[, mean(gof), by = model][, setNames(V1, model)]
 saveRDS(R, file = "../../manuscript/results1.rds", version = 2)
 
+# plot
+source("fig2.R")
+ggsave("../figures/fig2-1.pdf", fig, w = 7, h = 3)
 
+
+
+
+## ---- par ----
 # Model parameter -------------------------------------------------------------
 fits <- fits[weights[, c("id", "winner")], on = .NATURAL]
 fits[, fit_winner := .SD[, which(names(.SD) == winner), with = FALSE], by = .(id, winner)]
@@ -91,3 +86,15 @@ weights_d1[, c("bvud1", "rf", "base") := as.list(cognitiveutils::akaike_weight(c
 weights_d1[, winner := names(.SD)[which.max(.SD)], by = id] # winning models
 weights_d1$winner <- factor(weights_d1$winner, levels = c("bvud1", "rf", "base"))
 winners_d1 <- sort(table(weights_d1$winner))
+
+
+# Parameter for appendix
+
+par <- modelfit[,
+  .(par=names(coef(fit[[1]])), value=coef(fit[[1]])),
+  by=.(id,model)]
+par[par=="rp", par := "alpha"]
+par <- dcast(par, model ~ par, value.var = "value", fun.aggregate = mean)
+par[]
+BIC = modelfit[, .(BIC = BIC(fit[[1]]), LL = logLik(fit[[1]])), by = .(id,model)]
+par[BIC[, .(BIC=mean(BIC), LL = mean(LL)), by=model]][order(BIC)]
