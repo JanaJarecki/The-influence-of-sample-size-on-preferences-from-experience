@@ -241,14 +241,6 @@ BIC\textsubscript{BASE}\(= 13\) (lower values indicate better fit).
 \added[id=jj2]{Even when restricting the learning rate $\delta$ to 1 in the Bayesian model, the Bayesian model outperforms the relative frequency model.}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described 26 of 40 or 65\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 1 participants best.}}
 
 \begin{figure}[htb]
-
-<<model_comparison, , fig.height=5, echo=F>>=
-
-R1$fig_modelcomparison
-
-@
-
-
 {\centering \includegraphics[width=.9\linewidth]{../figures/fig2-1}}
 
 \caption{Study 1: Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:fig2}
