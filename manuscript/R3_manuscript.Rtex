@@ -224,7 +224,7 @@ participant level, assuming that observations follow a truncated normal
 distribution around the model predictions (truncation between 0 and 1)
 with a constant standard deviation (\(\sigma\)), that was estimated by
 participant (\(0 < \sigma \leq 1\)).
-\added[id=jj]{Therefore, the relative frequency model had two free parameters, namely $\sigma$ and the power utility exponent $\tau$ ($0 \leq \tau \leq 20$). The Bayesian value updating model had four free parameters, the prior belief parameter for gain outcomes $\alpha_0$ ($0 \leq \alpha_0 \leq 2$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\tau$ and $\sigma$, with the prior on zero outcomes constrained to $\beta_0 = 2-\alpha_0$. The baseline model had two free parameters, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. Models were compared based on evidence strength and BIC weights from the Bayesian information criterion (BIC) \cite[evidence in favor of a model compared to the individually best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
+\added[id=jj]{Therefore, the relative frequency model had two free parameters, namely $\sigma$ and the power utility exponent $\tau$ ($0 \leq \tau \leq 20$). The Bayesian value updating model had four free parameters, the prior belief parameter for gain outcomes $\alpha_0$ ($0 \leq \alpha_0 \leq 2$), the learning rate $\delta$ ($0 \leq \delta \leq 10$), $\tau$ and $\sigma$, with the prior on zero outcomes constrained to $\beta_0 = 2-\alpha_0$. The baseline model had two free parameters, the mean evaluation $\mu$ and $\sigma$. We estimated the parameters using an augmented Lagrange multiplier method \citep[Rsolnp package, version 1.16]{Ghalanos2015}. Models were compared based on evidence strength and \added[jj2]{AIC} weights from the Akaike information criterion (AIC) \cite[evidence in favor of a model compared to the best-fitting model][]{Kass1995, Lewandowsky2011}. Higher weights indicate stronger evidence for a model.}
 
 We will first outline the quantitative model fit, followed by the
 qualitative model fit, and lastly analyze the effects of sample size
@@ -241,7 +241,7 @@ BIC\textsubscript{BASE}\(= 13\) (lower values indicate better fit).
 \added[id=jj2]{Even when restricting the learning rate $\delta$ to 1 in the Bayesian model, the Bayesian model outperforms the relative frequency model.}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described 26 of 40 or 65\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 1 participants best.}}
 
 \begin{figure}[htb]
-{\centering \includegraphics[width=.9\linewidth]{../figures/fig2-1}}
+{\centering \includegraphics[width=.8\linewidth]{../figures/fig2-1}}
 
 \caption{Study 1: Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:fig2}
 \end{figure}
