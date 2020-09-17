@@ -1,7 +1,7 @@
 # ==========================================================================
 # Analyze the results of the cogonitive model fiting
 # ==========================================================================
-pacman::p_load(data.table, purrr, modelr)
+pacman::p_load(data.table, purrr, modelr, BayesFactor)
 pacman::p_load_gh("janajarecki/cognitivemodels@development",
   "janajarecki/cognitiveutils")
 source("setup_models.R")
@@ -29,12 +29,12 @@ weights[, winner := factor(which.max(.SD), 1:3, names(.SD)), by = id]
 winners <- sort(table(weights$winner))
 weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
 
+
 # save to results object
 R <- readRDS("../../manuscript/results1.rds")
 R$aic <- aic[, mean(gof), by = model][, setNames(V1, model)]
 R$bic <- bic[, mean(gof), by = model][, setNames(V1, model)]
 R$winners <- winners
-saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
 
 # plot
 source("fig2.R")
@@ -45,10 +45,22 @@ ggsave("../figures/fig2-1.pdf", fig, w = 7, h = 3)
 
 ## ---- par ----
 # Model parameter -------------------------------------------------------------
-fits <- fits[weights[, c("id", "winner")], on = .NATURAL]
-fits[, fit_winner := .SD[, which(names(.SD) == winner), with = FALSE], by = .(id, winner)]
-parameter <- fits[, .(par = names(coef(fit_winner[[1]])), val = coef(fit_winner[[1]])), by = .(id, winner)]
-dcast(parameter, winner ~ par, fun.aggregate = paste_msd)
+source("utilities.R")
+fit <- fit[weights[, c("id", "winner")], on = .NATURAL]
+parameter <- fit[model==winner][, .(par=names(coef(V2[[1]])), val=coef(V2[[1]])), by=.(id, winner)]
+parameter[par == "rp", par := "alpha"] # rename parameter
+source("tab_pars.R")
+R$tab_pars <- tab
+
+# save to results object
+setkey(parameter, winner) # allows faster subsetting
+R$par$rf  <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
+R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
+R$par$BF <- extractBF(ttestBF(parameter["bvu"][par=="alpha", val], parameter["rf"][par=="alpha", val]))$bf
+saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
+
+
+
 
 
 # Prediction data
