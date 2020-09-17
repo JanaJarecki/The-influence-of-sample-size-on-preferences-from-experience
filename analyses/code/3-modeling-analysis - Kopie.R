@@ -38,7 +38,7 @@ R$winners <- winners
 
 # plot
 source("fig2.R")
-ggsave("../figures/fig2-1.pdf", fig, w = 7, h = 3)
+ggsave(sub("X", study, "../figures/fig2-X.pdf"), fig, w = 7, h = 3)
 
 
 
@@ -57,14 +57,29 @@ setkey(parameter, winner) # allows faster subsetting
 R$par$rf  <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
 R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
 R$par$BF <- papaja::apa_print(ttestBF(parameter["bvu"][par=="tau", val], parameter["rf"][par=="tau", val]))$full_result
+
+
+## ---- qualitative ----
+# Qualitative model fit ------------------------------------------------------
+# Prediction data
+pred <- fit[model==winner][, .(pred = predict(V2[[1]]), obs = unlist(V2[[1]]$res)), by = .(id,winner)]
+d <- fread(sub("X", study, "../../data/processed/studyX.csv"))
+d <- d[condition == "experience"]
+pred[, c("pred", "obs") := .(pred * d$gamblex, obs * d$gamblex)]
+source("fig3.R")
+ggsave(sub("X", study, "../figures/fig3-X.pdf"), fig, w = 7, h = 7)
+
+# assign
+r_pred.obs <- pred[, cor(pred,obs), by = .(id,winner)]
+R$qual_cor <- r_pred.obs[, mean(V1)]
+R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", toupper(winner), ")", collapse = " and ")]
+R$fig_qual <- fig
 saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
 
 
 
 
 
-# Prediction data
-pred <- fits[, fit_winner[[1]]$predict(), by = id]
 setnames(pred, "V1", "pred_scaled")
 d[condition == "experience", pred_scaled := ..pred[, pred_scaled]]
 d <- weights[, c("id", "winner")][d, on = "id"]
