@@ -2,7 +2,8 @@
 # Analyze the results of the cogonitive model fiting
 # ==========================================================================
 pacman::p_load(data.table, purrr, modelr)
-pacman::p_load_gh("janajarecki/cognitivemodels@development", "janajarecki/cognitiveutils")
+pacman::p_load_gh("janajarecki/cognitivemodels@development",
+  "janajarecki/cognitiveutils")
 source("setup_models.R")
 
 
@@ -32,7 +33,7 @@ weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
 R <- readRDS("../../manuscript/results1.rds")
 R$aic <- aic[, mean(gof), by = model][, setNames(V1, model)]
 R$bic <- bic[, mean(gof), by = model][, setNames(V1, model)]
-saveRDS(R, file = "../../manuscript/results1.rds", version = 2)
+saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
 
 # plot
 source("fig2.R")
