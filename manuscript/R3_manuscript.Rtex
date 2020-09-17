@@ -230,14 +230,9 @@ We will first outline the quantitative model fit, followed by the
 qualitative model fit, and lastly analyze the effects of sample size
 given the cognitive strategies.
 
-\textit{Quantitative Model Fit.} The Bayesian value updating model
-described the majority of the participants best (30 of 40; 75\%). The
-relative frequency model described 9 participants best (22\%); the
-baseline model described 1 participants best. Figure \ref{fig:fig2}
-shows the evidence strength for the models by participant. The models'
-mean Bayesian information criterion across all participants equaled
-BIC\textsubscript{BVU}\(=\expr{R$bic["bvu"]}\), BIC\textsubscript{RF}\(= \expr{R$bic["rf"]}\), and BIC\textsubscript{BASE}\(= \expr{R$bic["base"]}\) and AIC\textsubscript{BVU}\(=\expr{R$aic["bvu"]}\), AIC\textsubscript{RF}\(= \expr{R$aic["rf"]}\), and AIC\textsubscript{BASE}\(= \expr{R$aic["base"]}\) (lower values indicate better fit).
-\added[id=jj2]{Even when restricting the learning rate $\delta$ to 1 in the Bayesian model, the Bayesian model outperforms the relative frequency model.}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described 26 of 40 or 65\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 1 participants best.}}
+
+\textit{Quantitative Model Fit.} The Bayesian value updating model described the majority of the participants best (30 of 40; 75\%). The relative frequency model described 9 participants best (22\%); the baseline model described 1 participants best. Figure \ref{fig:fig2} shows the evidence strength for the models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}\(=\Sexpr{R1$bic["bvu"]}\)
+BIC\textsubscript{RF}\(= \Sexpr{R1$bic["rf"]}\), and BIC\textsubscript{BASE}\(= \Sexpr{R1$bic["base"]}\) and AIC\textsubscript{BVU}\(=\Sexpr{R1$aic["bvu"]}\), AIC\textsubscript{RF}\(= \Sexpr{R1$aic["rf"]}\), and AIC\textsubscript{BASE}\(= \Sexpr{R1$aic["base"]}\) (lower values indicate better fit). \added[id=jj2]{Even when restricting the learning rate $\delta$ to 1 in the Bayesian model, the Bayesian model outperforms the relative frequency model.}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described 26 of 40 or 65\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 1 participants best.}}
 
 \begin{figure}[htb] \centering
     \includegraphics[width=.8\linewidth]{../figures/fig2-1}
