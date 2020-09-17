@@ -59,7 +59,7 @@ options(digits = 3)
 opts_chunk$set(fig.path="../analyses/figures/")
 opts_chunk$set(fig.pos = 'H', echo=FALSE)
 source("setup_knitr.R")
-R1 <- readRDS("results4tex1.rds")
+R1 <- readRDS("results1.rds")
 @
 
 \maketitle
