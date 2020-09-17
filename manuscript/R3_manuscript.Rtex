@@ -245,16 +245,14 @@ AIC\textsubscript{BASE}\(= \Sexpr{R1$aic["base"]}\)
 \end{figure}
 
 The estimated parameters of the best-fitting models are shown in Table
-\ref{tab:study1_parameter}. The power utility exponent (\(\tau\)) did
+\ref{tab:study1_parameter}. The power utility exponent that captures the subjective values of outcomes (\(\tau\)) did
 not differ substantially between the participants that were best described
-by the Bayesian value updating (BVU) model (\(M_{\tau}= \Sexpr{R1$par$bvu["alpha"]}\)) and those best described by a relative frequency model (\(M_{\tau}=\Sexpr{R1$par$rf["alpha"]}\)),
-\(\Delta\) \Sexpr{R1$par$BF}. The prior beliefs about the
-probability of gains was \(0.46\) (resulting from estimated prior
-parameters \(\alpha_0 = 0.92\), \(\beta_0 = 1.08\)) for the participants
-best described by the BVU model. The learning rate of the mean
-participant that was best described by the BVU model was
-\(M_{\delta}=1.36\) (a model with values \(>\) 1 revises its priors
-faster than optimal Bayesian, 1 is optimal Bayesian, \(<\) 1 is
+by the Bayesian value updating (BVU) model (\(M_{\tau}= \Sexpr{R1$par$bvu["tau"]}\)) and those best described by a relative frequency model (\(M_{\tau}=\Sexpr{R1$par$rf["tau"]}\)) (t-test of
+\(\Delta\) \Sexpr{R1$par$BF}). The prior beliefs about the
+probability of gains was $\Pr(\text{gain})=$\(\Sexpr{ R1$par$bvu["count_x"]/ sum(R1$par$bvu[c("count_x", "count_0")])}\) (resulting from estimated prior
+parameters \(\alpha_0 = \Sexpr{R1$par$bvu["count_0"]}\), \(\beta_0 = \Sexpr{R1$par$bvu["count_x"]}\)) for the participants
+best described by the BVU model. The learning rate of the participants described by the BVU model was, on average,
+\(M_{\delta}=\Sexpr{R1$par$bvu["delta"]}\) (a model with values \(>\) 1 revises its priors faster than optimal Bayesian, 1 is optimal Bayesian, \(<\) 1 is
 conservative compared to optimal Bayesian). The liberal learning rate is
 unusual given that previous work has found conservative learning
 \citep{Edwards1967,Tauber2017}. This fast learning in our task
