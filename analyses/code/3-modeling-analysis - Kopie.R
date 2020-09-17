@@ -44,7 +44,7 @@ R <- readRDS("../../manuscript/results1.rds")
 R$fig_modelcomparison <- fig
 R$aic <- aic[, mean(gof), by = model][, setNames(V1, model)]
 R$bic <- bic[, mean(gof), by = model][, setNames(V1, model)]
-saveRDS(R, file = "../../manuscript/results1.rds")
+saveRDS(R, file = "../../manuscript/results1.rds", version = 2)
 
 
 # Model parameter -------------------------------------------------------------
