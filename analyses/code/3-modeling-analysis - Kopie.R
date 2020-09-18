@@ -9,7 +9,7 @@ source("setup_models.R")
 
 ## ---- load ----
 # Load data -----------------------------------------------------------------
-study <- 1
+study <- 2
 fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 
 
@@ -82,7 +82,7 @@ R$par$rf <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
 R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
 R$par$BF <- papaja::apa_print(r_ttest)$full_result
 R$qual_cor <- r_pred.obs[, mean(V1)]
-R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", toupper(winner), ")", collapse = " and ")]
+R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", factor(winner, model_levels, model_labels), ")", collapse = " and ")]
 R$fig_qual <- fig
 saveRDS(R, file = sub("X", study, "../../manuscript/resultsX.rds"), version = 2, ascii = TRUE)
 
