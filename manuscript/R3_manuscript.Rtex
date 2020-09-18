@@ -309,7 +309,7 @@ As before, the analyses were conducted in the software R, models were estimated 
 
 \subsection{Evaluations of Gambles by Condition and Sample Size}
 
-Table \ref{tab:means_study2} displays participants' mean and median
+Table \ref{table:study2means} displays participants' mean and median
 evaluations per gamble in the experience and description conditions by
 sample-size. The results resemble the findings of Study 1, namely that
 larger sample sizes do not lead to systematic changes in mean
@@ -319,12 +319,13 @@ expected value as random factor and gamble type as fixed factor gamble
 additional interaction between sample size and gamble type:
 \(BF\textsubscript{01} > 1,000\)).
 
-<<table1_study2>>=
+<<study2means>>=
 R2$tab1
 
 @
 
 \subsubsection{Modeling Results}
+
 The next section presents the quantitative cognitive model fit, the qualitative model fit, and the effects of sample size conditional on the models that describe participants.
 
 \textit{Quantitative Model Fit.} The Bayesian value updating model
@@ -349,6 +350,11 @@ BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
 \added[id=jj]{
 The estimated parameter of the winning models are shown in Table \ref{tab:study2_parameter}. The mean power utility exponent $\alpha$ is relatively similar for participants classified as using a Bayesian value updating strategy ($M_{\alpha}= 2.19$) compared to those using a relative frequency strategy ($M_{\alpha}=2.15$), $M = 0.04$ 95\% HDI $[-1.08$, $1.16]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. Like in Study 1, the participants using the Bayesian strategy had a loss prior, on avarage; they believed that gains occur with 45\% (gain prior $\theta_G = 0.91$; zero-outcome prior $\theta_0 = 1.09$). Again, the learning rate parameter $\delta$ shows liberal learning ($M_{\delta}=2.27$).
 }
+
+<<table_par_study2>>=
+R2$tab_par
+
+@
 
 \begin{table}[tbp]
 
