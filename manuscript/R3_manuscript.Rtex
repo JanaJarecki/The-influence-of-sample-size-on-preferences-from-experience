@@ -324,71 +324,8 @@ R2$tab1
 
 @
 
-\begin{table}[tbp]
-
-\begin{center}
-\begin{threeparttable}
-
-\caption{\label{tab:means_study2}Valuations of Gambles in Study 1}
-
-\begin{tabular}{lccccrr}
-\toprule
-Condition & Sample size category & Effective sample size & \textit{Med} & \textit{M} & D--E & D--E:$BF\textsubscript{10}$\\
-\midrule
-Gamble ID 1 &  &  &  &  &  & \\
-\ \ \ E & xs & 5 & 5.15 & 6.29 & -0.85 & 11\\
-\ \ \ E & s & 10 & 5.00 & 6.39 & -0.96 & 354\\
-\ \ \ E & m & 15 & 5.95 & 6.38 & -0.95 & 72\\
-\ \ \ E & l & 30 & 6.00 & 6.53 & -1.09 & 174\\
-\ \ \ D & -- & -- & 4.00 & 5.43 & -- & --\\
-Gamble ID 2 &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 4.00 & 4.55 & -0.24 & 0\\
-\ \ \ E & s & 12 & 4.00 & 4.72 & -0.41 & 1\\
-\ \ \ E & m & 18 & 5.00 & 4.88 & -0.57 & 4\\
-\ \ \ E & l & 36 & 4.95 & 4.78 & -0.47 & 3\\
-\ \ \ D & -- & -- & 3.35 & 4.31 & -- & --\\
-Gamble ID 3 &  &  &  &  &  & \\
-\ \ \ E & xs & 7 & 8.95 & 10.65 & -1.41 & 6\\
-\ \ \ E & s & 14 & 10.00 & 10.26 & -1.01 & 1\\
-\ \ \ E & m & 21 & 9.70 & 10.37 & -1.12 & 2\\
-\ \ \ E & l & 42 & 10.00 & 11.18 & -1.93 & 235\\
-\ \ \ D & -- & -- & 6.00 & 9.25 & -- & --\\
-Gamble ID 4 &  &  &  &  &  & \\
-\ \ \ E & xs & 5 & 3.30 & 2.91 & 0.29 & 13\\
-\ \ \ E & s & 10 & 3.20 & 2.94 & 0.26 & 27\\
-\ \ \ E & m & 15 & 3.20 & 3.02 & 0.19 & 2\\
-\ \ \ E & l & 30 & 3.20 & 3.09 & 0.11 & 0\\
-\ \ \ D & -- & -- & 3.50 & 3.20 & -- & --\\
-Gamble ID 5 &  &  &  &  &  & \\
-\ \ \ E & xs & 6 & 2.00 & 1.82 & 0.10 & 1\\
-\ \ \ E & s & 12 & 2.00 & 1.85 & 0.07 & 0\\
-\ \ \ E & m & 18 & 2.00 & 1.85 & 0.06 & 0\\
-\ \ \ E & l & 36 & 2.10 & 1.95 & -0.03 & 0\\
-\ \ \ D & -- & -- & 2.00 & 1.92 & -- & --\\
-Gamble ID 6 &  &  &  &  &  & \\
-\ \ \ E & xs & 7 & 4.00 & 3.68 & 0.16 & 1\\
-\ \ \ E & s & 14 & 4.10 & 3.78 & 0.07 & 0\\
-\ \ \ E & m & 21 & 4.15 & 3.85 & -0.01 & 0\\
-\ \ \ E & l & 42 & 4.20 & 3.90 & -0.05 & 0\\
-\ \ \ D & -- & -- & 4.10 & 3.84 & -- & --\\
-\bottomrule
-\addlinespace
-\end{tabular}
-
-\begin{tablenotes}[para]
-\normalsize{\textit{Note.} \textit{M} = mean, \textit{Med} = median, D--E = difference between mean description-based valuations and experience-based valuations, $BF\textsubscript{10}$ = Bayes Factor quantifying the evidence for a linear model $\mathrm{M}\textsubscript{1}$ predicting that valuations differ between description and experience over a linear model $\mathrm{M}\textsubscript{0}$ predicting no such differences; both models models contain a by-participant random effect. Gambles IDs 1, 2, and 3 are \$-bets; Gamble IDs 4, 5, and 6 are p-bets.}
-\end{tablenotes}
-
-\end{threeparttable}
-\end{center}
-
-\end{table}
-
-\subsection{Cognitive modeling of experience-based evaluations}
-\added[id=jj]{The modeling procedure followed the procedure in Study~1.}
-
 \subsubsection{Modeling Results}
-\added[id=jj]{The next section presents the quantitative cognitive model fit, the qualitative model fit, and lastly the effects of sample size given the cognitive strategies.}
+The next section presents the quantitative cognitive model fit, the qualitative model fit, and the effects of sample size conditional on the models that describe participants.
 
 \textit{Quantitative Model Fit.} The Bayesian value updating model
 described the majority of the participants best (23 of 40; 57\%). The
