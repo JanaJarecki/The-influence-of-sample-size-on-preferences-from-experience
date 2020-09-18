@@ -8,7 +8,7 @@ pacman::p_load_gh("crsh/papaja@devel")
 
 
 # Load data ----------------------------------------------------------------
-study <- 2
+study <- 1
 d <- fread(sub("X", study, "../../data/processed/studyX.csv"),
   select = c("id", "condition", "samplesizecat", "samplesize", "gambletype", "value", "gambleid"),
   colClasses = list(factor = c("id", "condition"), double = c("samplesize", "gambleid")))
@@ -64,5 +64,5 @@ tab <- apa_table(M
 
 # Append results for Rtex manuscript ------------------------------------------
 R <- readRDS(sub("X", study, "../../manuscript/resultsX.rds"))
-R$tab1 <- tab
+R$tab_evaluations <- tab
 saveRDS(R, file=sub(  "X", study, "../../manuscript/resultsX.rds"), version = 2, ascii=TRUE)
