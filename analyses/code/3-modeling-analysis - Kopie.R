@@ -9,7 +9,7 @@ source("setup_models.R")
 
 ## ---- load ----
 # Load data -----------------------------------------------------------------
-study <- 1
+study <- 2
 fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 
 
@@ -61,8 +61,8 @@ d <- d[condition == "experience"]
 pred[, c("pred", "obs") := .(pred * d$gamblex, obs * d$gamblex)]
 r_pred.obs <- pred[, cor(pred,obs), by = .(id,winner)]
 r_ttest <- ttestBF(
-  x = parameter["bvu"][par=="tau", val],
-  y = parameter["rf"][par=="tau", val])
+  x = parameter[grepl("bvu", winner)][par=="tau", val],
+  y = parameter[grepl("rf", winner)][par=="tau", val])
 
 # Plot
 source("fig3.R")

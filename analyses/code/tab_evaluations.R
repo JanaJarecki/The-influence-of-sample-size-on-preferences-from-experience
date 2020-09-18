@@ -53,7 +53,7 @@ M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7
 
 tab <- apa_table(M
     , caption = gsub("X",study,"Valuations of Gambles in Study X
-      \\label{table:studyXmeans}")
+      \\label{tab:studyX_evaluations}")
     , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Mdn}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
     , align = c('l', rep('c', 4), 'r', 'r')
     , digits = c(0,0,0,2,2,2,0)
