@@ -356,7 +356,7 @@ R2$tab_par
 
 \textit{Qualitative Model Fit.}
 Figure \ref{fig:qual2} illustrates the qualitative model fit by plotting the predictions of the best-fitting models against the observed evaluations. The models generally describe the data well (mean Pearson's $r\textsubscript{pred,obs} =$ \Sexpr{R2$qual_cor}). However four participants' data were qualitatively not well described by the winning models
-( \Sexpr{gsub("[|])", "", R2$qual_no_fit)} with $r\textsubscript{pred,obs} < 0.40$)$. For one of these cases, the relative frequency model was favored, for the remaining three cases the Bayesian value updating model was favored.\footnote{Note, that participant number 7 evaluated all gambles with zero, which indicates inattentiveness or not comprehending the task.}}
+( \Sexpr{R2$qual_no_fit} with $r\textsubscript{pred,obs} < 0.40$). For most of these cases the relative frequency model was the best-fitting model.
 
 \begin{figure}[htb] {\centering
     \includegraphics[width=\textwidth]{../figures/fig3-2}}
