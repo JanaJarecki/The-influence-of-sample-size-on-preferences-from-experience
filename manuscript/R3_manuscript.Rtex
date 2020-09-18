@@ -354,42 +354,13 @@ R2$tab_par
 
 @
 
-\begin{table}[tbp]
-
-\begin{center}
-\begin{threeparttable}
-
-\caption{\label{tab:study2_parameter}Parameter Estimates of Winning Models, \textit{M (SD)}}
-
-\begin{tabular}{lcccc}
-\toprule
-Winning Model & $\alpha$ & $\delta$ & $\theta_G$ & $\sigma$\\
-\midrule
-BVU (\textit{n}$=$23) & 2.19 (2.35) & 2.27 (3.39) & 0.91 (0.79) & 0.23 (0.22)\\
-RF (\textit{n}$=$17) & 2.15 (1.45) & -- & -- & 0.15 (0.04)\\
-\bottomrule
-\addlinespace
-\end{tabular}
-
-\begin{tablenotes}[para]
-\normalsize{\textit{Note.} \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model. Parameters denote: $\alpha=$ power utility exponent, $\theta_G$ gain prior, $\sigma$ standard deviation.}
-\end{tablenotes}
-
-\end{threeparttable}
-\end{center}
-
-\end{table}
-
 \textit{Qualitative Model Fit.}
-\added[id=jj]{Figure \ref{fig:ind_fits1} illustrates the qualitative model fit by plotting the predictions of the best-fitting models against the observed evaluations. The models generally describe the data well (mean $r\textsubscript{pred,obs} = 0.70$). However, some participants data are qualitatively not well described by the winning models (participants number 02, 07, 14, 27, with $r\textsubscript{pred,obs} < 0.40$). For one of these cases, the relative frequency model was favored, for the remaining three cases the Bayesian value updating model was favored.\footnote{Note, however, that participant number 7 evaluated all gambles with zero, which indicates inattentiveness or not comprehending the task.}}
+Figure \ref{fig:qual2} illustrates the qualitative model fit by plotting the predictions of the best-fitting models against the observed evaluations. The models generally describe the data well (mean Pearson's $r\textsubscript{pred,obs} =$ \Sexpr{R2$qual_cor}). However four participants' data were qualitatively not well described by the winning models
+( \Sexpr{gsub("[|])", "", R2$qual_no_fit)} with $r\textsubscript{pred,obs} < 0.40$)$. For one of these cases, the relative frequency model was favored, for the remaining three cases the Bayesian value updating model was favored.\footnote{Note, that participant number 7 evaluated all gambles with zero, which indicates inattentiveness or not comprehending the task.}}
 
-\begin{figure}[htb]
-
-{\centering \includegraphics{../figures/ind_fits1-1} 
-
-}
-
-\caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model.}\label{fig:ind_fits1}
+\begin{figure}[htb] {\centering
+    \includegraphics[width=\textwidth]{../figures/fig3-2}}
+    \caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model.}\label{fig:ind_fits1}
 \end{figure}
 
 \added[id=jj]{The cognitive modeling results thus show greater heterogeneity in Study 2 (compared to Study 1), slightly more than half the participants could be described by a Bayesian strategy, the remaining participants followed a relative-frequency strategy. The higher prevalence of the relative frequency strategy in Study 2 can be explained considering that Study 2 initially withheld the information about the magnitude of the gain outcomes as opposed to Study 1, where participants received outcome information. If participants learn not only probabilities but also outcomes, the task might require more cognitive effort and this might take attention away from prior beliefs.}
