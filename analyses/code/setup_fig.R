@@ -2,9 +2,9 @@ pacman::p_load(ggplot2, scales, patchwork)
 pacman::p_load_gh("janajarecki/themejj")
 theme_set(themejj())
 
-model_levels <- c("bvu", "rf", "base")
-model_labels <- c(bvu="BVU", rf="RF", base="BASE")
-model_colors <- c(BASE = "#f3f3f3", BVU = "#252629", RF = "#afb2b7")
+model_levels <- c("bvu", "rf", "base", "rf_wv", "bvu_p")
+model_labels <- c(bvu="BVU", rf="RF", base="BASE", rf_wv = "RF[LINEAR]", bvu_p = "BVU[UNIFORM]")
+model_colors <- c(BASE = "#f3f3f3", BVU = "#252629", RF = "#afb2b7", `BVU[UNIFORM]` = "#252629", `RF[LINEAR]` = "#afb2b7")
 model_colors_compl <- c(BASE = "#252629", BVU = "white", RF = "#252629")
 
 order_evidence <- function(id, evidence) {

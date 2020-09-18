@@ -15,7 +15,11 @@ fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 
 ## ---- gof ----
 # Goodness of model fit -----------------------------------------------------
-models <- c("bvu", "rf", "base")
+# Select model with overall lowest mean BIC
+M <- fit[, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)][, mean(gof), by = model]
+M[, class := tstrsplit(model, "_")[[1]]]
+models <- M[, model[which.min(V1)], by = class]$V1
+# Compare models
 bic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::BIC(x$logLik()))), by = .(id, model)]
 aic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)]
 # Mean AIC and BIC by model
@@ -27,9 +31,11 @@ weights <- dcast(aicw, id ~ model, value.var = "w")
 weights[, winner := factor(which.max(.SD), 1:3, names(.SD)), by = id]
 winners <- sort(table(weights$winner))
 weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
+winners
 
 # Plot
 source("fig2.R")
+plot(fig)
 ggsave(sub("X", study, "../figures/fig2-X.pdf"), fig, w = 7, h = 3)
 
 
@@ -78,7 +84,7 @@ R$par$BF <- papaja::apa_print(r_ttest)$full_result
 R$qual_cor <- r_pred.obs[, mean(V1)]
 R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", toupper(winner), ")", collapse = " and ")]
 R$fig_qual <- fig
-saveRDS(R, file = sub("X", study, "../../manuscript/results1.rds"), version = 2, ascii = TRUE)
+saveRDS(R, file = sub("X", study, "../../manuscript/resultsX.rds"), version = 2, ascii = TRUE)
 
 
 
