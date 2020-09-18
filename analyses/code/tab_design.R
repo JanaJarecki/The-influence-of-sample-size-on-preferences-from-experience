@@ -23,4 +23,5 @@ tab <- apa_table(tab,
   col_spanners = list("Sample Size" = c(6,9))
   )
 
-saveRDS(list(tab1 = tab), file = "../../manuscript/results4tex1.rds", version = 2)
+
+saveRDS(list(tab = tab), file = "../../manuscript/tab_design.rds", version = 2, ascii = TRUE)
