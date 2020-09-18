@@ -161,7 +161,7 @@ The analyses were conducted in statistical software R 4.0.2 (2020-06-22) \citep{
 
 \subsubsection{Evaluations of gambles and sample sizes}
 
-Table \ref{table:means_study1} summarizes the evaluations of the gambles
+Table \ref{tab:study1_evaluations} summarizes the evaluations of the gambles
 by format (description vs.~experience) and sample size (xs, s, m, l).
 For instance, across sample sizes xs, s, m, and l, the participants
 evaluated gamble 4 with an average of \(2.80, 2.91, 2.80, 2.95, 3.08\)
@@ -191,9 +191,9 @@ predictor mean of the second half of samples
 (\(BF\textsubscript{02} = 6.7\)).
 
 \textit{Description versus experience.}
-<<table2, include = TRUE, results = "asis">>=
+<<s1_eval>>=
 
-R1$tab2
+R1$tab_evaluations
 
 @
 
@@ -309,7 +309,7 @@ As before, the analyses were conducted in the software R, models were estimated 
 
 \subsection{Evaluations of Gambles by Condition and Sample Size}
 
-Table \ref{table:study2means} displays participants' mean and median
+Table \ref{tab:study2_evaluations} displays participants' mean and median
 evaluations per gamble in the experience and description conditions by
 sample-size. The results resemble the findings of Study 1, namely that
 larger sample sizes do not lead to systematic changes in mean
@@ -320,7 +320,7 @@ additional interaction between sample size and gamble type:
 \(BF\textsubscript{01} > 1,000\)).
 
 <<study2means>>=
-R2$tab1
+R2$tab_evaluations
 
 @
 
@@ -328,10 +328,8 @@ R2$tab1
 
 The next section presents the quantitative cognitive model fit, the qualitative model fit, and the effects of sample size conditional on the models that describe participants.
 
-\textit{Quantitative Model Fit.} The Bayesian value updating model
-described the majority of the participants best (23 of 40; 57\%). The
-relative frequency model described 17 participants best (42\%); the
-baseline model described no participants best. Figure
+\textit{Quantitative Model Fit.} The Relative frequency model, Bayesian value updating model, and baseline model
+described \Sexpr{sort(R2$winners, decreasing=T)} of 40 participants best (respectively \Sexpr{round(sort(prop.table(R2$winners), decreasing=T)*100)}\%). Figure
 \ref{fig:study2_model_weights} shows the evidence strength for the
 models by participant. The models' mean Bayesian information criterion
 across all participants equaled BIC\textsubscript{BVU}\(= -96\),
