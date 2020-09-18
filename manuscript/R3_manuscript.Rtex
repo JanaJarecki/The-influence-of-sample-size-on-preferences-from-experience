@@ -346,7 +346,7 @@ BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
 \end{figure}
 
 \added[id=jj]{
-The estimated parameter of the winning models are shown in Table \ref{tab:study2_parameter}. The mean power utility exponent $\alpha$ is relatively similar for participants classified as using a Bayesian value updating strategy ($M_{\alpha}= 2.19$) compared to those using a relative frequency strategy ($M_{\alpha}=2.15$), $M = 0.04$ 95\% HDI $[-1.08$, $1.16]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. Like in Study 1, the participants using the Bayesian strategy had a loss prior, on avarage; they believed that gains occur with 45\% (gain prior $\theta_G = 0.91$; zero-outcome prior $\theta_0 = 1.09$). Again, the learning rate parameter $\delta$ shows liberal learning ($M_{\delta}=2.27$).
+The estimated parameter of the winning models are shown in Table \ref{tab:study2_parameter}. The mean power utility exponent $\alpha$ is relatively similar for participants classified as using a Bayesian value updating strategy ($M_{\alpha}= \Sexpr{R2$par$bvu}$) compared to those using a relative frequency strategy ($M_{\alpha}=2.15$), $M = 0.04$ 95\% HDI $[-1.08$, $1.16]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. Like in Study 1, the participants using the Bayesian strategy had a loss prior, on avarage; they believed that gains occur with 45\% (gain prior $\theta_G = 0.91$; zero-outcome prior $\theta_0 = 1.09$). Again, the learning rate parameter $\delta$ shows liberal learning ($M_{\delta}=2.27$).
 }
 
 <<table_par_study2>>=
