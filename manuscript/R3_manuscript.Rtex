@@ -60,6 +60,7 @@ opts_chunk$set(fig.path="../analyses/figures/")
 opts_chunk$set(fig.pos = 'H', echo=FALSE)
 source("setup_knitr.R")
 R1 <- readRDS("results1.rds")
+R2 <- readRDS("results2.rds")
 @
 
 \maketitle
@@ -317,6 +318,11 @@ expected value as random factor and gamble type as fixed factor gamble
 (additional fixed factor sample size: \(BF\textsubscript{01} = 285\);
 additional interaction between sample size and gamble type:
 \(BF\textsubscript{01} > 1,000\)).
+
+<<table1_study2>>=
+R2$tab1
+
+@
 
 \begin{table}[tbp]
 
