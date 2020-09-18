@@ -32,15 +32,19 @@ reverse_power <- function(x, rp) {
   return((sign(rp) * x)^((1/rp)*(rp!=0)) * exp(x)^(rp==0))
 }
 
-# RF
-RF <- function(dt, fix = c(gamman=1,gammap=1), w="TK1992", v="TK1992") {
+# RF with weighting of the values (v) and no probability weighting (w)
+RF <- function(dt, fix = c(gamman=1,gammap=1), w=NA, v="TK1992") {
   model_options$lb <- model_options$lb["sigma"] # only bound on sigma
   dt$gamble_y <- 0
-  fix <- c(fix, c(lambda=1,beta=1))
+  fix <- c(fix, c(lambda=1,beta=1,gamman=1))
   M <- cognitivemodel(data = dt) +
     cpt_c(value_scaled ~ gamblex + relfreq_x + gamble_y , weighting=w, value=v, fix = fix) +
     function(pred, data, par) {
-      y <- reverse_power(pred, rp = par["alpha"])
+      if ("alpha" %in% names(par)) {
+        y <- reverse_power(pred, rp = par["alpha"])
+      } else {
+        y <- pred
+      }      
       y <- replace(y, y > data$gamblex, data$gamblex[y > data$gamblex])
       y / data$gamblex # Scale to common range 0 - 1
     }
@@ -48,12 +52,14 @@ RF <- function(dt, fix = c(gamman=1,gammap=1), w="TK1992", v="TK1992") {
   return(M)
 }
 
+# RF with only weighting of the probabilities (w) and no value weighting (v)
 RF_w <- function(dt) {
-  RF(dt = dt, fix = c(alpha=1), v = NA)
+  RF(dt = dt, fix = c(alpha=1), w = "TK1992", v = NA)
 }
 
+# RF with neither probability weighting (w) nor value weighting (v)
 RF_wv <- function(dt) {
-  RF(dt = dt, v = NA, w=NA)
+  RF(dt = dt, v = NA, w = NA)
 }
 
 

@@ -25,18 +25,18 @@ d[, value_scaled := value / gamblex]
 # Modeling ------------------------------------------------------------------
 source("setup_models.R")
 model_list <- list(
-  bvu = BVU,          # Bayesian value updating model
-  bvu_d = BVU_d,    # Bayesian value updating model with delta = 1
-  bvu_a = BVU_a,
-  bvu_p = BVU_p,
-  bvu_ad = BVU_ad,
-  bvu_ap = BVU_ap,
-  bvu_pd = BVU_pd,
-  bvu_apd = BVU_apd,
-  rf = RF,             # Relative frequency model
+  # bvu = BVU,          # Bayesian value updating model
+  # bvu_d = BVU_d,    # Bayesian value updating model with delta = 1
+  # bvu_a = BVU_a,
+  # bvu_p = BVU_p,
+  # bvu_ad = BVU_ad,
+  # bvu_ap = BVU_ap,
+  # bvu_pd = BVU_pd,
+  # bvu_apd = BVU_apd,
+  rf = RF,# Relative frequency model
   rf_w = RF_w,
-  rf_wv = RF_wv,
-  base = BASE        # Baseline model
+  rf_wv = RF_wv #,
+  # base = BASE        # Baseline model
   )
 
 # Cross-validation ----------------------------------------------------------

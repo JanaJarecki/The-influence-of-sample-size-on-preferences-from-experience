@@ -9,7 +9,7 @@ source("setup_models.R")
 
 ## ---- load ----
 # Load data -----------------------------------------------------------------
-study <- 2
+study <- 1
 fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 
 
