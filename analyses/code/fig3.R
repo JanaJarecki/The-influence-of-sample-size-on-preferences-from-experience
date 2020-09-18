@@ -7,7 +7,7 @@ pred[, group := factor(paste0(factor(winner, levels = model_levels, labels = mod
 dummy_range <- pred[, .(obs = range(c(obs,pred)), pred = range(c(obs,pred))), by = group]
 fig <- ggplot(pred, aes(x = obs, y = pred)) +
   geom_abline(linetype = 2, size = 0.4) +
-  geom_point(aes(fill = factor(winner, levels = model_levels, labels = model_labels)), shape=21, color = "black", alpha = 0.4, size = 1) +
+  geom_point(aes(fill = factor(winner, levels = model_levels, labels = model_labels)), shape=21, color = "black", alpha = 0.4, size = 2) +
   geom_blank(data = dummy_range) +
   facet_wrap(~group, scales = "free", nrow = 5, drop=F, shrink=FALSE) +
   themejj(facet=TRUE) +

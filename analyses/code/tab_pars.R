@@ -5,6 +5,6 @@ tab <- papaja::apa_table(tab[names(sort(-winners)), c("winner_n", "tau", "delta"
       , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
       , col.names = c("Winning Model","$\\tau$", "$\\delta$", "$\\theta_G$","$\\sigma$")
       , align = c("l", rep("c", 4)),
-      , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model. Parameters denote: $\\tau=$ power utility exponent, $\\theta_G$ gain prior, $\\sigma$ standard deviation of the PDF."
+      , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, $n=$ count of participants best-described by a model; parameters denote: $\\tau=$ power utility exponent, $\\delta=$ learning rate, $\\theta_G$ gain prior, $\\sigma$ standard deviation of the PDF."
       , escape = FALSE
       )

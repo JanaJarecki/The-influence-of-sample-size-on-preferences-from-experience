@@ -8,9 +8,8 @@ pacman::p_load_gh("crsh/papaja@devel")
 
 
 # Load data ----------------------------------------------------------------
-study <- 1
-path <- sub("x", study, "../../data/processed/studyx.csv")
-d <- fread(path,
+study <- 2
+d <- fread(sub("X", study, "../../data/processed/studyX.csv"),
   select = c("id", "condition", "samplesizecat", "samplesize", "gambletype", "value", "gambleid"),
   colClasses = list(factor = c("id", "condition"), double = c("samplesize", "gambleid")))
 d[condition=="description", samplesizecat := "--"]
@@ -52,9 +51,9 @@ names(M) <- paste("Gamble ID", names(M))
 # format the Bayes Factor such that BF > 1000 is displayed as > 1000
 M <- lapply(M, function(x) cbind(x[, 1:6], replace(round(x[, 7], 0), round(x[, 7], 0) > 1000, ">1000")))
 
-tab2 <- apa_table(M
-    , caption = "Valuations of Gambles in Study 1
-      \\label{table:study1means}"
+tab <- apa_table(M
+    , caption = gsub("X",study,"Valuations of Gambles in Study X
+      \\label{table:studyXmeans}")
     , col.names = c("Condition", 'Sample size category', 'Sample size', '\\textit{Mdn}', '\\textit{M}', 'D--E', 'D--E:$BF\\textsubscript{10}$')
     , align = c('l', rep('c', 4), 'r', 'r')
     , digits = c(0,0,0,2,2,2,0)
@@ -64,6 +63,6 @@ tab2 <- apa_table(M
 
 
 # Append results for Rtex manuscript ------------------------------------------
-R <- readRDS("../../manuscript/results4tex1.rds")
-R$tab2 <- tab2
-saveRDS(R, file = "../../manuscript/results4tex1.rds", version = 2)
+R <- readRDS(sub("X", study, "../../manuscript/resultsX.rds"))
+R$tab1 <- tab
+saveRDS(R, file=sub(  "X", study, "../../manuscript/resultsX.rds"), version = 2, ascii=TRUE)

@@ -1,13 +1,12 @@
 # ==========================================================================
-# Produces table 1
+# Produces table of design
+# Author: Jana B. Jarecki
 # ==========================================================================
 pacman::p_load(data.table)
 pacman::p_load_gh("crsh/papaja@devel")
-# if this fails, remove.packages("rlang")
-
 # Set working directory to this file location
 
-
+# Load data ----------------------------------------------------
 d <- fread("../../data/processed/study1.csv", colClasses = list(factor = c("id", "gambletype", "samplesizecat", "gambleid")))
 d[, samplesizecat := factor(samplesizecat, levels = c("xs", "s", "m", "l"))]
 d[, gambleev := gamblex * gamblep]

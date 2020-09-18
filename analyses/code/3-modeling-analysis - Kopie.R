@@ -16,27 +16,19 @@ fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 ## ---- gof ----
 # Goodness of model fit -----------------------------------------------------
 models <- c("bvu", "rf", "base")
-# BIC
 bic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::BIC(x$logLik()))), by = .(id, model)]
-
-# AIC
 aic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)]
-
-# AICweights
+# Mean AIC and BIC by model
+Maic <- aic[, mean(gof), by = model][, setNames(V1, model)]
+Mbic <- bic[, mean(gof), by = model][, setNames(V1, model)]
+# AICw - evidence weights
 aicw <- aic[, .(model, w = akaike_weight(gof)), by = id]
 weights <- dcast(aicw, id ~ model, value.var = "w")
 weights[, winner := factor(which.max(.SD), 1:3, names(.SD)), by = id]
 winners <- sort(table(weights$winner))
 weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
 
-
-# save to results object
-R <- readRDS("../../manuscript/results1.rds")
-R$aic <- aic[, mean(gof), by = model][, setNames(V1, model)]
-R$bic <- bic[, mean(gof), by = model][, setNames(V1, model)]
-R$winners <- winners
-
-# plot
+# Plot
 source("fig2.R")
 ggsave(sub("X", study, "../figures/fig2-X.pdf"), fig, w = 7, h = 3)
 
@@ -50,31 +42,43 @@ fit <- fit[weights[, c("id", "winner")], on = .NATURAL]
 parameter <- fit[model==winner][, .(par=names(coef(V2[[1]])), val=coef(V2[[1]])), by=.(id, winner)]
 parameter[par %in% c("rp", "alpha"), par := "tau"]
 source("tab_pars.R")
-R$tab_pars <- tab
 
-# save to results object
-setkey(parameter, winner) # allows faster subsetting
-R$par$rf  <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
-R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
-R$par$BF <- papaja::apa_print(ttestBF(parameter["bvu"][par=="tau", val], parameter["rf"][par=="tau", val]))$full_result
 
 
 ## ---- qualitative ----
 # Qualitative model fit ------------------------------------------------------
-# Prediction data
-pred <- fit[model==winner][, .(pred = predict(V2[[1]]), obs = unlist(V2[[1]]$res)), by = .(id,winner)]
+pred <- fit[model==winner][, .(
+  pred = predict(V2[[1]]),
+  obs = unlist(V2[[1]]$res)), by = .(id,winner)]
 d <- fread(sub("X", study, "../../data/processed/studyX.csv"))
 d <- d[condition == "experience"]
 pred[, c("pred", "obs") := .(pred * d$gamblex, obs * d$gamblex)]
+r_pred.obs <- pred[, cor(pred,obs), by = .(id,winner)]
+r_ttest <- ttestBF(
+  x = parameter["bvu"][par=="tau", val],
+  y = parameter["rf"][par=="tau", val])
+
+# Plot
 source("fig3.R")
 ggsave(sub("X", study, "../figures/fig3-X.pdf"), fig, w = 7, h = 7)
 
-# assign
-r_pred.obs <- pred[, cor(pred,obs), by = .(id,winner)]
+
+
+# Store results -----------------------------------------------
+# Save to results object for *.Rtex
+R <- readRDS(sub("X", study, "../../manuscript/resultsX.rds"))
+R$aic <- Maic
+R$bic <- Mbic
+R$winners <- winners
+R$tab_pars <- tab
+setkey(parameter, winner) # allows faster subsetting
+R$par$rf <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
+R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
+R$par$BF <- papaja::apa_print(r_ttest)$full_result
 R$qual_cor <- r_pred.obs[, mean(V1)]
 R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", toupper(winner), ")", collapse = " and ")]
 R$fig_qual <- fig
-saveRDS(R, file = "../../manuscript/results1.rds", version = 2, ascii = TRUE)
+saveRDS(R, file = sub("X", study, "../../manuscript/results1.rds"), version = 2, ascii = TRUE)
 
 
 

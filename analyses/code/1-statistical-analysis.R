@@ -5,11 +5,12 @@
 pacman::p_load(data.table, brms, BayesFactor, update = TRUE)
 
 # Load fitted cognitive models and participant data
-#study <- 2
-fits <- readRDS(sub("x", study, "../modelfits/studyx_cognitive_models_fit.rds"))
-d <- fread(sub("x", study, "../../data/processed/studyx.csv"))
+study <- 2
+fits <- readRDS(sub("x",study,"../modelfits/studyx_cognitive_models_fit.rds"))
+d <- fread(sub("X", study, "../../data/processed/studyX.csv"))
 # Make factors for anovas
-d[, c("id", "gambletype", "samplesizecat", "condition") := .(factor(id), factor(gambletype), factor(samplesizecat, levels = c("xs", "s", "m", "l", "--")), factor(condition))]
+d[, c("id", "gambletype", "samplesizecat", "condition") := 
+  .(factor(id), factor(gambletype), factor(samplesizecat, levels = c("xs", "s", "m", "l", "--")), factor(condition))]
 
 #
 # Influence of gambletype x condition
