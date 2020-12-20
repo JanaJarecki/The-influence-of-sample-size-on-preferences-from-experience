@@ -238,7 +238,7 @@ BIC\textsubscript{BASE} \(= \Sexpr{R1$bic["base"]}\) and the mean Akaike Informa
 AIC\textsubscript{BVU} \(=\Sexpr{R1$aic["bvu"]}\),
 AIC\textsubscript{RF}  \(= \Sexpr{R1$aic["rf"]}\), and 
 AIC\textsubscript{BASE}\(= \Sexpr{R1$aic["base"]}\)
-(lower values indicate better fit).}
+(lower values indicate better fit). Without the learning rate parameter, the BVU model fit 14 participants best, which indicates that individual differences in the learning rate matter.}
 
 \begin{figure}[htb] \centering
     \includegraphics[width=.8\linewidth]{../figures/fig2-1}
@@ -328,13 +328,13 @@ R2$tab_evaluations
 
 The next section presents the quantitative cognitive model fit, the qualitative model fit, and the effects of sample size conditional on the models that describe participants.
 
-\textit{Quantitative Model Fit.} The Relative frequency model, Bayesian value updating model, and baseline model
-described \Sexpr{sort(R2$winners, decreasing=T)} of 40 participants best (respectively \Sexpr{round(sort(prop.table(R2$winners), decreasing=T)*100)}\%). Figure
+\textit{Quantitative Model Fit.} \added[jj2]{The relative frequency model and the Bayesian value updating model 
+described \Sexpr{paste(sort(R2$winners, decreasing=T)[1:2], collapse = " and ")} of 40 participants best (respectively \Sexpr{round(sort(prop.table(R2$winners), decreasing=T)*100)[1:2]}\%), the baseline model described $n=$\Sexpr{R2$winners["base"]}. Figure
 \ref{fig:study2_model_weights} shows the evidence strength for the
 models by participant. The models' mean Bayesian information criterion
 across all participants equaled BIC\textsubscript{BVU}\(= -96\),
 BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
-(lower values indicate better fit).
+(lower values indicate better fit). A version of the BVU model without the learning rate parameter fit 14 participants best.}
 
 \begin{figure}[htb]
 
