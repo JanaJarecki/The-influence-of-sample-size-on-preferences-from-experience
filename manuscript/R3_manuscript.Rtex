@@ -59,6 +59,7 @@ options(digits = 3)
 opts_chunk$set(fig.path="../analyses/figures/")
 opts_chunk$set(fig.pos = 'H', echo=FALSE)
 source("setup_knitr.R")
+D <-readRDS("tab_design.rds")
 R1 <- readRDS("results1.rds")
 R2 <- readRDS("results2.rds")
 @
@@ -138,9 +139,8 @@ The design was a within-subject design, participants evaluated two-outcome gambl
 To avoid memory effects between trials, 18 filler trials were shown\footnote{Filler trials involved six gambles with outcomes identical to Table~\ref{table:Lotteries}, but probabilities changed to 75\% (\$-bets) and 25\% (p-bets). The filler gambles' sample sizes were 4, 8, and 16.} Filler trials were excluded from analyses, because they only aimed at minimizing memory-effects.
 
 
-<<table1>>=
-R1$tab1
-
+<<tab_design>>=
+D$tab
 @
 
 After the experience block, participants saw each gamble three times in a description format. In this block, participants received a description of the gamble's outcome and the associated probability; probabilities were rounded to one decimal place (1/5 = 20\%, 1/6 = 16.7\%, 1/7 = 14.3\%). Again, presentation order of all trials was fully randomized.
@@ -238,7 +238,7 @@ BIC\textsubscript{BASE} \(= \Sexpr{R1$bic["base"]}\) and the mean Akaike Informa
 AIC\textsubscript{BVU} \(=\Sexpr{R1$aic["bvu"]}\),
 AIC\textsubscript{RF}  \(= \Sexpr{R1$aic["rf"]}\), and 
 AIC\textsubscript{BASE}\(= \Sexpr{R1$aic["base"]}\)
-(lower values indicate better fit). Even when restricting the learning rate $\delta$ to 1 in the Bayesian model, the Bayesian model outperforms the relative frequency model.}\footnote{\added[id=jj2]{A constrained Bayesian value updating model with no variation in the learning rate ($\delta=1$) described 26 of 40 or 65\% best; and the relative frequency model described 13 participants best (32\%); the baseline model described 1 participants best.}}
+(lower values indicate better fit).}
 
 \begin{figure}[htb] \centering
     \includegraphics[width=.8\linewidth]{../figures/fig2-1}
