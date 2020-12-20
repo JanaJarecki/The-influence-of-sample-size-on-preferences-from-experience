@@ -12,13 +12,10 @@ source("setup_models.R")
 source("utilities.R")
 
 # Read the data and model fits ---------------------------------------------
-study <- 2 # use 2 for study 2
+study <- 1 # use 2 for study 2
 d <- fread(sub("X", study, "../../data/processed/studyX.csv"))
 fits <- readRDS(sub("X", study,"../fittedmodels/studyX_cognitive_models.rds"))
-fits <- dcast(fits, id ~ model, value.var = "fit")
-hist(fits[, as.list(coef(bvu[[1]])), by = id]$delta)
-parspace(fits$bvu[[1]])
-
+fits <- dcast(fits, id ~ model)
 
 
 

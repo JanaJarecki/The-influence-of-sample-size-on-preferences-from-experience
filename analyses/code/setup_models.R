@@ -7,19 +7,22 @@
 
 ## Options for parameter estimation ----------------------------------------
 model_options <- list(
-  lb = c(rp = 0, sigma = 0.0001), # par lower bound: alpha (rp) and sigma
-  ub = c(sigma = 1),              # par upper bound
-  solver = c("solnp"),    # optimization solver
-  fit_args = list(                # type of likelihood function
+  lb = c(rp = -20, sigma = 0.0001), # par lower bound: alpha (rp) and sigma
+  ub = c(          sigma = 0.50),   # par upper bound
+  solver = c("grid", "solnp"),      # optimization solver
+  fit_args = list(                  # type of likelihood function
+      nbest = 3,
+      nsteps = 5,
       pdf = "truncnormal",
       a = 0,                      # lower bound of the trunc. normal dist.
       b = 1                       # upper bound of the trunc. normal dist.
     ),
   solver_args = list(
-    options = list(trace = 1)
-  )                     
+    nsteps = 3,
+    control = list(trace = 0), # print trace of solnp
+    delta = 1.0e-3  # Relative step size in forward difference evaluation
+  )                  
   )
-
 
 ## Set up the models -------------------------------------------------------
 # RF: relative frequency model
@@ -29,7 +32,8 @@ model_options <- list(
 
 # Reverse the power utility function
 reverse_power <- function(x, rp) {
-  return((sign(rp) * x)^((1/rp)*(rp!=0)) * exp(x)^(rp==0))
+  if (rp==0) { return(exp(x)) }
+  return((sign(rp) * x)^(1/rp))
 }
 
 # RF with weighting of the values (v) and no probability weighting (w)
@@ -69,7 +73,7 @@ BVU <- function(dt, fix = NULL) {
   fixb <- fix[names(fix) %in% c("count_x", "count_0", "delta")]
   fixu <- fix[names(fix) %in% c("rp")]
   M <- cognitivemodel(data = dt) +
-    bayes_beta_d(~ count_x + count_0, format = "count", fix = fixb, choicerule = "none", prior_sum = 2) +
+    bayes_beta_d(~ count_x + count_0, format = "count", fix = fixb, choicerule = "none", prior_sum = 4) +
     utility_pow_c(value_scaled ~ gamblex, fix = c(list(rn = NA), fixu)) +
     function(pred, data, par) {
       y <- data$pr_c * pred # pred = value prediction pr_c = subj probability

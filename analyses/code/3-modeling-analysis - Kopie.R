@@ -12,13 +12,13 @@ source("setup_models.R")
 study <- 2
 fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 
-
 ## ---- gof ----
 # Goodness of model fit -----------------------------------------------------
 # Select model with overall lowest mean BIC
-M <- fit[, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)][, mean(gof), by = model]
+M <- fit[, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)][, median(gof), by = model]
 M[, class := tstrsplit(model, "_")[[1]]]
 models <- M[, model[which.min(V1)], by = class]$V1
+models <- c("bvu", "rf", "base")
 # Compare models
 bic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::BIC(x$logLik()))), by = .(id, model)]
 aic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)]
@@ -28,10 +28,11 @@ Mbic <- bic[, mean(gof), by = model][, setNames(V1, model)]
 # AICw - evidence weights
 aicw <- aic[, .(model, w = akaike_weight(gof)), by = id]
 weights <- dcast(aicw, id ~ model, value.var = "w")
-weights[, winner := factor(which.max(.SD), 1:3, names(.SD)), by = id]
+weights[, winner := factor(which.max(.SD), seq_along(models), names(.SD)), by = id]
 winners <- sort(table(weights$winner))
 weights[, winner := relevel(winner, names(winners)[which.max(winners)])]
 winners
+
 
 # Plot
 source("fig2.R")
@@ -79,7 +80,7 @@ R$winners <- winners
 R$tab_pars <- tab
 setkey(parameter, winner) # allows faster subsetting
 R$par$rf <- parameter["rf",mean(val),by=.(winner,par)][,setNames(V1,par)]
-R$par$bvu <- parameter["bvu",mean(val),by=.(winner,par)][,setNames(V1,par)]
+R$par$bvu <- parameter[grepl("bvu",winner),mean(val),by=.(winner,par)][,setNames(V1,par)]
 R$par$BF <- papaja::apa_print(r_ttest)$full_result
 R$qual_cor <- r_pred.obs[, mean(V1)]
 R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", factor(winner, model_levels, model_labels), ")", collapse = " and ")]
@@ -88,9 +89,8 @@ saveRDS(R, file = sub("X", study, "../../manuscript/resultsX.rds"), version = 2,
 
 
 
-
-
-setnames(pred, "V1", "pred_scaled")
+setnames(pred, "V1", "pred_scaled", skip_absent=TRUE)
+setnames(pred, "pred", "pred_scaled", skip_absent=TRUE)
 d[condition == "experience", pred_scaled := ..pred[, pred_scaled]]
 d <- weights[, c("id", "winner")][d, on = "id"]
 d[, pred := pred_scaled * gamblex]
