@@ -9,7 +9,7 @@ source("setup_models.R")
 
 ## ---- load ----
 # Load data -----------------------------------------------------------------
-study <- 2
+study <- 1
 fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 
 ## ---- gof ----
@@ -18,7 +18,7 @@ fit <- readRDS(sub("X", study ,"../fittedmodels/studyX_cognitive_models.rds"))
 M <- fit[, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)][, median(gof), by = model]
 M[, class := tstrsplit(model, "_")[[1]]]
 models <- M[, model[which.min(V1)], by = class]$V1
-models <- c("bvu", "rf", "base")
+models <- c("rf", "base", "bvu")
 # Compare models
 bic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::BIC(x$logLik()))), by = .(id, model)]
 aic <- fit[model %in% models][, .(gof = map_dbl(V2, function(x) stats::AIC(x$logLik()))), by = .(id, model)]
@@ -85,6 +85,7 @@ R$par$BF <- papaja::apa_print(r_ttest)$full_result
 R$qual_cor <- r_pred.obs[, mean(V1)]
 R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", factor(winner, model_levels, model_labels), ")", collapse = " and ")]
 R$fig_qual <- fig
+R$winners_delta1 <- winners_delta1
 saveRDS(R, file = sub("X", study, "../../manuscript/resultsX.rds"), version = 2, ascii = TRUE)
 
 
