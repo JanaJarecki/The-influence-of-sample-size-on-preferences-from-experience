@@ -8,10 +8,9 @@ tab[, winner_n := paste0(
 parnames <- intersect(c("tau", "delta", "count_x","sigma"), colnames(tab))
 
 tab <- papaja::apa_table(tab[names(sort(-winners)), c("winner_n", ..parnames)]
-      , caption = "Parameter Estimates of Winning Models, \\textit{M (SD)}"
+      , caption = paste0("Parameter Estimates of Winning Models, \\textit{M (SD)} \\label{", sub("X", study, "tab:studyX_parameter"),"}")
       , col.names = c("Winning Model", paste0("$\\", parnames, "$"))
       , align = c("l", rep("c", 4)),
       , note = "\\textit{BVU}$=$ Bayesian value updating model, \\textit{RF}$=$ relative frequency model, $n=$ count of participants best-described by a model; parameters denote: $\\tau=$ power utility exponent, $\\delta=$ learning rate, $\\theta_G$ gain prior, $\\sigma$ standard deviation of the PDF."
       , escape = FALSE
-      , label = sub("X", study, "studyX_parameter")
       )

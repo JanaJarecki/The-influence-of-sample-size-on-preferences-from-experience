@@ -85,7 +85,6 @@ R$par$BF <- papaja::apa_print(r_ttest)$full_result
 R$qual_cor <- r_pred.obs[, mean(V1)]
 R$qual_no_fit <- r_pred.obs[V1 < .40][, paste(id, collapse =", "), by = winner][, paste0(V1, " (", factor(winner, model_levels, model_labels), ")", collapse = " and ")]
 R$fig_qual <- fig
-R$winners_delta1 <- winners_delta1
 saveRDS(R, file = sub("X", study, "../../manuscript/resultsX.rds"), version = 2, ascii = TRUE)
 
 
