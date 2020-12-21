@@ -2,9 +2,8 @@
 # Judgments by prior and sample size
 # Pooled across both studies
 # ==========================================================================
-require(data.table)
-require(BayesFactor)
-
+pacman::p_load(data.table, BayesFactor, modelr, purrr)
+source("setup_models.R")
 # Options: set sum contrasts
 #          to ease interpretastion of higher-order interactions
 options(contrasts = c("contr.sum", "contr.poly"))
@@ -15,25 +14,25 @@ d <- rbind(
   fread("../../data/processed/study2.csv"))
 # Load and merge model fits of both studies
 fits <- rbind(
-  readRDS("../modelfits/study1_cognitive_models_fit.rds"),
-  readRDS("../modelfits/study2_cognitive_models_fit.rds"))
-fits <- dcast(fits, id ~ model, value.var = "fit")
+  readRDS("../fittedmodels/study1_cognitive_models.rds"),
+  readRDS("../fittedmodels/study2_cognitive_models.rds"))
+setnames(fits, "V2", "fit")
 
 # Goodness of model fit
-weights <- fits[, as.data.table(cbind(model=c("base","rf","bvu"), anova(base[[1]], bvu[[1]], rf[[1]])[, c("wAIC"), drop=FALSE])), by = id]
-weights <- dcast(weights, id ~ model, value.var = "wAIC")
-weights[, winner := names(.SD)[which.max(.SD)], by = id]
+models <- c("rf", "bvu", "base")
+aic <- fits[model %in% models][, .(gof = map_dbl(fit, function(x) stats::AIC(x$logLik()))), by = .(id, model)]
+aicw <- aic[, .(model, w = cognitiveutils::akaike_weight(gof)), by = id]
+weights <- dcast(aicw, id ~ model, value.var = "w")
+weights[, winner := factor(which.max(.SD), seq_along(models), names(.SD)), by = id]
 d <- d[weights[, c("id", "winner")], on = "id"]
 
 # Exclude condition and participants
 d <- d[condition == "experience"]
-d <- d[!id %in% c("s05", "s19", "s24", "s38", "s42", "s47", "s54", "s67")]
+d <- d[!id %in% c("s05", "s19", "s24", "s38", "s42", "s54", "s67", "s68")]
 d <- d[winner != "base"]
 N <- d[, length(unique(id))]
 
 # Obtain best-ftting parameter from fits and merge them in
-fits <- melt(fits, 1, variable = "model", value = "fit")
-# Obtain best-fitting parameters
 parameter <- weights[, c("id", "winner")][fits, on = "id"][winner==model]
 parameter <- parameter[, .(par = names(coef(fit[[1]])), val = coef(fit[[1]])), by = .(id, winner)]
 d <- parameter[par == "count_x"][d, on = c("id", "winner")]
@@ -73,8 +72,8 @@ setnames(d, c("samplesizecat_num", "priorx_cat", "gambletype", "winner"), c("ss"
 #   whichRandom = "id",
 #   neverExclude = "id")
 # # bfFull <- recompute(bfFull, iterations = 500000)
-# saveRDS(bfFull, "../modelfits/regression_evaluations_by_prior.rds")
-bfFull <- readRDS("../modelfits/regression_evaluations_by_prior.rds")
+# saveRDS(bfFull, "../fittedmodels/regression_evaluations_by_prior.rds")
+bfFull <- readRDS("../fittedmodels/regression_evaluations_by_prior.rds")
 # The Bayes factor in favor of the full model
 BF_value1 <- extractBF(bfFull["ss + type + prior + ss:prior + type:prior + id"] / bfFull["ss + type + prior + type:prior + id"], onlybf = TRUE)
 # The Bayes factor in favor of the full model over a model without prior:type
@@ -92,11 +91,11 @@ modal <- function(v) {
 
 
 # fitValue <- lmBF(value_scaled ~ ss + type + prior + ss:prior + type:prior + id,
-#   data = d,
-#   whichRandom = "id")
-# chains = posterior(fitValue, iterations = 10000)
-# saveRDS(chains, "../modelfits/regression_evaluations_chains.rds")
-chains <- readRDS("../modelfits/regression_evaluations_chains.rds")
+#    data = d,
+#    whichRandom = "id")
+# # chains = posterior(fitValue, iterations = 10000)
+#saveRDS(chains, "../fittedmodels/regression_evaluations_chains.rds")
+chains <- readRDS("../fittedmodels/regression_evaluations_chains.rds")
 format_mcmc_beta <- function(x) {paste0("$=", sprintf("%.2f", modal(x)), "$ (89\\% HDI $", paste(sprintf("%.2f", bayestestR::hdi(as.numeric(x))[-1]), collapse = ", "), "$)")}
 # The marginal coefficient of p-bet x loss prior
 cc <- rowSums(chains[, c("ss:prior-zero", "type:prior-p-bet.&.zero")])
@@ -124,13 +123,13 @@ d[, conf_scaled := scale(confidence), by = id]
 d[is.na(conf_scaled), conf_scaled := 0]
 # Bayes factor of full model against null
 # bfFull = generalTestBF(
-#   formula = conf_scaled ~ samplesizecat_num * winner * gambletype + id,
+#   formula = conf_scaled ~ ss * model * type + id,
 #   data = d,
 #   whichRandom = "id",
 #   neverExclude = "id")
-# # # bfFull <- recompute(bfFull, iterations = 500000)
-# saveRDS(bfFull,   "../modelfits/regression_confidence_by_prior.rds")
-bfFull <- readRDS("../modelfits/regression_confidence_by_prior.rds")
+# bfFull <- recompute(bfFull, iterations = 500000)
+#saveRDS(bfFull,   "../fittedmodels/regression_confidence_by_prior.rds")
+bfFull <- readRDS("../fittedmodels/regression_confidence_by_prior.rds")
 # [15] samplesizecat_num + priorx_cat + samplesizecat_num:priorx_cat + gambletype + priorx_cat:gambletype + id
 head(bfFull, 2)
 BF_conf_prior <- extractBF(bfFull[15], onlybf = TRUE)

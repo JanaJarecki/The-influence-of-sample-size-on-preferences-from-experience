@@ -25,18 +25,19 @@ header-includes:
 ---
 
 ```{r setupknitr, include=0, cache=0}
-  source("setup_knitr.R")
+  source("../../manuscript/setup_knitr.R")
 ```
 
 ```{r setupR, include=0, cache=0}
-  source("./code/setup_fig.R")
+  source("code/setup_fig.R")
+  source("code/utilities.R")
   options(papaja.na_string = "--")
   require(data.table)
   require(BayesFactor)
 ```
 
 ```{r loadData, include=0, cache=1}
-source("./code/4-evaluations-by-prior.R", chdir = TRUE)
+source("code/4-evaluations-by-prior.R", chdir = TRUE)
 ```
 
 
