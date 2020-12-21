@@ -360,7 +360,7 @@ Figure \ref{fig:qual2} illustrates the qualitative model fit by plotting the pre
 
 \begin{figure}[htb] {\centering
     \includegraphics[width=\textwidth]{../figures/fig3-2}}
-    \caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model.}\label{fig:ind_fits1}
+    \caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model.}\label{fig:fig5}
 \end{figure}
 
 \added[id=jj]{The cognitive modeling results thus show greater heterogeneity in Study 2 (compared to Study 1), slightly more than half the participants could be described by a Bayesian strategy, the remaining participants followed a relative-frequency strategy. The higher prevalence of the relative frequency strategy in Study 2 can be explained considering that Study 2 initially withheld the information about the magnitude of the gain outcomes as opposed to Study 1, where participants received outcome information. If participants learn not only probabilities but also outcomes, the task might require more cognitive effort and this might take attention away from prior beliefs.}
@@ -379,7 +379,7 @@ Given the cognitive modeling results, participants were classified as relative-f
 
 }
 
-\caption{Mean evaluation (standardized to 0 - 1) by winning model and prior beliefs of the BVU model. \textit{BVU}$=$Bayesian value updating model, \textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. \textit{\$-bet}: low-probability high-outcome gambles, \textit{p-bet}: high-probability low-outcome gambles. Sample sizes (xs, x, m, l), see Table \ref{tab:Lotteries}. \textit{n=16, 13, 6} denotes the number of participants best-described by the respective models.}\label{fig:qual2}
+\caption{Mean evaluation (standardized to 0 - 1) by winning model and prior beliefs of the BVU model. \textit{BVU}$=$Bayesian value updating model, \textit{RF}$=$ Relative frequency model. Error bars indicate standard errors. \textit{\$-bet}: low-probability high-outcome gambles, \textit{p-bet}: high-probability low-outcome gambles. Sample sizes (xs, x, m, l), see Table \ref{table:Lotteries}. \textit{n=16, 13, 6} denotes the number of participants best-described by the respective models.}\label{fig:qual2}
 \end{figure}
 
 \subsubsection{Effect of gamble type and sampling order}
