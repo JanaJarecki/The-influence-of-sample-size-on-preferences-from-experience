@@ -13,6 +13,7 @@ d[, gambleev := gamblex * gamblep]
 
 tab <- unique(d[condition != "description", c("gambleid", "gambletype", "gamblex", "gamblep", "gambleev", "samplesizecat", "samplesize")])[order(gambleid)]
 tab <- dcast(tab, ... ~ samplesizecat, value.var = "samplesize")
+tab[gambletype == "$-bet", gambletype := paste0("\\", gambletype)]
 
 tab <- apa_table(tab,
   col.names = c("Gamble ID", "Type", "X", "Pr", "EV", "xs", "s", "m", "l"),
