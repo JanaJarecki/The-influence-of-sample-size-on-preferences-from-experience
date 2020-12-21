@@ -136,7 +136,7 @@ Forty people (31 women, 9 men) from the participant pool of the University of Ba
 \subsubsection{Stimuli and Design}
 The design was a within-subject design, participants evaluated two-outcome gambles from experience and from description. Six gambles with either a gain or a zero outcome were created by crossing two gamble types (\textit{\$-bet}, \textit{p-bet}) with three expected values (2.00, 3.20, 4.00), see Table \ref{table:Lotteries}. Three gambles offered a high gain with low probability (\$-bet), and three offered a small gain with high probability (p-bet, notation following \citealp{Lichtenstein1971}). In the experience-based valuation each gamble was crossed with four sample sizes: extra small, small, medium, large (xs, s, m, l), listed in Table \ref{table:Lotteries}. As shown in Table~ \ref{table:Lotteries} the extra small sample size (xs) consisted of a sample size of 5, 6, or 7 outcomes, which allowed us to represent rare events of 1/5, 1/6, and 1/7 (20\%,  17\%, 14\%, respectively). The small sample size equaled xs $\times$ 2, the medium sample size equaled xs $\times$ 3, and the large sample size equaled xs $\times$ 6. Participants saw each gamble with each of the four sample sizes three times in fully randomized order (each gamble was seen 12 times).
 
-To avoid memory effects between trials, 18 fil ler trials were shown\footnote{Filler trials involved six gambles with outcomes identical to Table~\ref{table:Lotteries}, but probabilities changed to 75\% (\$-bets) and 25\% (p-bets). The filler gambles' sample sizes were 4, 8, and 16.} Filler trials were excluded from analyses, because they only aimed at minimizing memory-effects.
+To avoid memory effects between trials, 18 filler trials were shown\footnote{Filler trials involved six gambles with outcomes identical to Table~\ref{table:Lotteries}, but probabilities changed to 75\% (\$-bets) and 25\% (p-bets). The filler gambles' sample sizes were 4, 8, and 16.} Filler trials were excluded from analyses, because they only aimed at minimizing memory-effects.
 
 
 <<tab_design>>=
@@ -197,7 +197,7 @@ R1$tab_evaluations
 
 @
 
-Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table \ref{tab:means_study1}, rightmost column). The \$-bets were evaluated higher based on experience ($M=5.78, SD=3.94$) compared to description ($M=4.93, SD=3.45$). By contrast p-bets were evaluated lower on the basis of experience ($M=2.74, SD=1.09$) compared to description ($M=2.86, SD=0.98$), $BF > 1000$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In Study 1, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when participants made valuations from experience.
+Participants' valuations from description and experience differed for most of the gambles and sample sizes (Table 2, rightmost column). The \$-bets were evaluated higher based on experience ($M=5.78, SD=3.94$) compared to description ($M=4.93, SD=3.45$). By contrast p-bets were evaluated lower on the basis of experience ($M=2.74, SD=1.09$) compared to description ($M=2.86, SD=0.98$), $BF > 1000$ in favor of an ANOVA including a gamble-type x condition interaction over a model with only the main effects. Thus, we found a D--E gap that differs from the classic D--E gap observed in choice paradigms. In Study 1, participants valued gambles as if they overweighted rare events from description \textit{and} experience. This effect was even stronger when participants made valuations from experience.
 
 At the aggregate level, sample size seems to not influence the
 evaluations of gambles in our decision from experience paradigm, but the
@@ -331,15 +331,18 @@ The next section presents the quantitative cognitive model fit, the qualitative 
 \textit{Quantitative Model Fit.} \added[jj2]{The relative frequency model and the Bayesian value updating model 
 described \Sexpr{paste(sort(R2$winners, decreasing=T)[1:2], collapse = " and ")} of 40 participants best (respectively \Sexpr{round(sort(prop.table(R2$winners), decreasing=T)*100)[1:2]}\%), the baseline model described $n=$\Sexpr{R2$winners["base"]}. Figure
 \ref{fig:study2_model_weights} shows the evidence strength for the
-models by participant. The models' mean Bayesian information criterion
-across all participants equaled BIC\textsubscript{BVU}\(= -96\),
-BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
+models by participant. The models' mean Bayesian information criterion across all participants equaled BIC\textsubscript{BVU}  \(=\Sexpr{R2$bic["bvu"]}\),
+BIC\textsubscript{RF}   \(= \Sexpr{R2$bic["rf"]}\), and
+BIC\textsubscript{BASE} \(= \Sexpr{R2$bic["base"]}\) and the mean Akaike Information criterion was
+AIC\textsubscript{BVU} \(=\Sexpr{R2$aic["bvu"]}\),
+AIC\textsubscript{RF}  \(= \Sexpr{R2$aic["rf"]}\), and 
+AIC\textsubscript{BASE}\(= \Sexpr{R2$aic["base"]}\)
 (lower values indicate better fit). A version of the BVU model without the learning rate parameter fit 14 participants best.}
 
 \begin{figure}[htb]
 
-{\centering \includegraphics{../figures/study2_model_weights-1} 
-
+{
+\centering \includegraphics{../figures/fig2-2}
 }
 
 \caption{Evidence for the models for individual participants. \textit{RF}$=$ relative frequency model, \textit{BVU}$=$ Bayesian value updating model, \textit{BASE}$=$ Baseline model.}\label{fig:study2_model_weights}
@@ -356,14 +359,14 @@ R2$tab_par
 
 \textit{Qualitative Model Fit.}
 Figure \ref{fig:qual2} illustrates the qualitative model fit by plotting the predictions of the best-fitting models against the observed evaluations. The models generally describe the data well (mean Pearson's $r\textsubscript{pred,obs} =$ \Sexpr{R2$qual_cor}). However four participants' data were qualitatively not well described by the winning models
-( \Sexpr{R2$qual_no_fit} with $r\textsubscript{pred,obs} < 0.40$). For most of these cases the relative frequency model was the best-fitting model.
+( \Sexpr{R2$qual_no_fit} with $r\textsubscript{pred,obs} < 0.40$). For these cases with poor fit, the relative frequency model would have been the best-fitting model.
 
 \begin{figure}[htb] {\centering
     \includegraphics[width=\textwidth]{../figures/fig3-2}}
     \caption{Predicted evaluations from the best-fitting models plotted against the observed evaluations (by participant). \textit{BVU}$=$ Bayesian value updating model, \textit{RF}$=$ relative frequency model, \textit{BASE}$=$baseline model.}\label{fig:fig5}
 \end{figure}
 
-\added[id=jj]{The cognitive modeling results thus show greater heterogeneity in Study 2 (compared to Study 1), slightly more than half the participants could be described by a Bayesian strategy, the remaining participants followed a relative-frequency strategy. The higher prevalence of the relative frequency strategy in Study 2 can be explained considering that Study 2 initially withheld the information about the magnitude of the gain outcomes as opposed to Study 1, where participants received outcome information. If participants learn not only probabilities but also outcomes, the task might require more cognitive effort and this might take attention away from prior beliefs.}
+\added[id=jj]{The cognitive modeling results thus show greater heterogeneity in Study 2 (compared to Study 1), slightly less than half the participants could be described by a Bayesian strategy, the remaining participants followed a relative-frequency strategy. The higher prevalence of the relative frequency strategy in Study 2 can be explained considering that Study 2 initially withheld the information about the magnitude of the gain outcomes as opposed to Study 1, where participants received outcome information. If participants learn not only probabilities but also outcomes, the task might require more cognitive effort and this might take attention away from prior beliefs.}
 
 \emph{The effect of sample size given cognitive strategies.}
 \added[id=jj]{We qualitatively investigated how sample size affects the evaluations of relative-frequency-type and Bayesian-type learners. The Bayesian model predicts that sample size changes the evaluations in interaction with the prior beliefs. Participants with a gain prior should decrease the evaluations of \$-bets as sample sizes increase; participants with a zero-outcome prior should increase their evaluations of p-bets as sample size increases.
@@ -456,7 +459,7 @@ Study 2 tested whether the results of Study 1  generalize to typical sampling pa
 
 
 \textit{Predictions about gamble valuations.}
-\added[id=jj]{Regarding the valuations, the relative frequency model predicts no effect of sample size on valuations in our task (because the relative frequencies did not differ across sample sizes). In contrast, the Bayesian value updating model predicts that given different prior beliefs the frequency of experienced outcomes will change people's beliefs in different directions, and that this change is stronger with larger sample size (Figure~\ref{fig:sensi}). According to the Bayesian value updating model, participants with a prior belief that zero outcomes are more likely than gain outcomes (zero-outcome prior) who sample p-bets should increase their evaluations with higher sample size. By contrast, participants with a prior belief that gains are more likely than zero outcomes (gain prior) who sample \$-bets should decrease their valuations with higher sample size.}
+Regarding the valuations, the relative frequency model predicts no effect of sample size on valuations in our task (because the relative frequencies did not differ across sample sizes). In contrast, the Bayesian value updating model predicts that given different prior beliefs the frequency of experienced outcomes will change people's beliefs in different directions, and that this change is stronger with larger sample size (Figure~\ref{fig:sensi}). According to the Bayesian value updating model, participants with a prior belief that zero outcomes are more likely than gain outcomes (zero-outcome prior) who sample p-bets should increase their evaluations with higher sample size. By contrast, participants with a prior belief that gains are more likely than zero outcomes (gain prior) who sample \$-bets should decrease their valuations with higher sample size.
 
 \input{analyses/reports/results_evaluation-by-prior}
 
