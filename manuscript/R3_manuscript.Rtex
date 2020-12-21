@@ -346,7 +346,7 @@ BIC\textsubscript{RF}\(= -91\), and BIC\textsubscript{BASE}\(= -17\)
 \end{figure}
 
 \added[id=jj]{
-The estimated parameter of the winning models are shown in Table \ref{tab:study2_parameter}. The mean power utility exponent $\alpha$ is relatively similar for participants classified as using a Bayesian value updating strategy ($M_{\alpha}= \Sexpr{R2$par$bvu}$) compared to those using a relative frequency strategy ($M_{\alpha}=2.15$), $M = 0.04$ 95\% HDI $[-1.08$, $1.16]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. Like in Study 1, the participants using the Bayesian strategy had a loss prior, on avarage; they believed that gains occur with 45\% (gain prior $\theta_G = 0.91$; zero-outcome prior $\theta_0 = 1.09$). Again, the learning rate parameter $\delta$ shows liberal learning ($M_{\delta}=2.27$).
+The estimated parameter of the winning models are shown in Table \ref{tab:study2_parameter}. The mean power utility exponent $\alpha$ differs for participants classified as using a Bayesian value updating strategy ($M_{\alpha}= \Sexpr{R2$par$bvu}$) compared to those using a relative frequency strategy ($M_{\alpha}=2.15$), $M = 0.04$ 95\% HDI $[-1.08$, $1.16]$, $\mathrm{BF}_{\textrm{01}} = 3.21$. Like in Study 1, the participants using the Bayesian strategy had a loss prior, on avarage; they believed that gains occur with 45\% (gain prior $\theta_G = 0.91$; zero-outcome prior $\theta_0 = 1.09$). Again, the learning rate parameter $\delta$ shows liberal learning ($M_{\delta}=2.27$).
 }
 
 <<table_par_study2>>=
@@ -413,7 +413,7 @@ addition includes the sample-size category as a predictor
 
 \subsubsection{Description versus experience}
 
-The above Table \ref{tab:means_study2} summarizes the valuations from
+The above Table \ref{tab:study2_evaluations} summarizes the valuations from
 description; it also shows the difference between the mean valuations in
 the experience and description conditions (column D--E, separately for
 different sample sizes). Further, it provides the Bayes factors,
@@ -421,7 +421,7 @@ quantifying the evidence in favor of a difference between valuations
 from experience and those from description.
 
 Valuations made from description and experience differed for most of the
-gambles and sample sizes (see Table \ref{tab:means_study2}, rightmost
+gambles and sample sizes (see Table \ref{tab:study2_evaluations}, rightmost
 column). In particular, participants attached a higher value to
 experienced than to described \$-bets (Gambles 1--3) but attached a
 higher value to described than to experienced p-bets (Gambles 4--6).
@@ -447,7 +447,7 @@ not differ.
 \clearpage
 
 \subsection{Discussion of Study 2}
-Study 2 tested whether the results of Study 1  generalize to typical sampling paradigms where people learn the outcome values from experience. The results of Studies 1 and 2 are very similar: participants mean evaluations were not influenced by sample size systematically, and in line with Study 1, we found that a substantial proportion of people could be classified as Bayesian learners. In Study 2, however, a greater proportion of participants was described by a \added[id=jj]{potentially cognitively simpler} relative-frequency-based cognitive model.
+Study 2 tested whether the results of Study 1  generalize to typical sampling paradigms where people learn the outcome values from experience. The results of Studies 1 and 2 are very similar: participants mean evaluations were not influenced by sample size systematically, and in line with Study 1, we found that a substantial proportion of people could be classified as Bayesian learners. In Study 2, however, a greater proportion of participants was described by a potentially cognitively simpler relative-frequency-based cognitive model.
 
 \clearpage %forces figures and tables to be printed HERE
 
@@ -456,7 +456,7 @@ Study 2 tested whether the results of Study 1  generalize to typical sampling pa
 
 
 \textit{Predictions about gamble valuations.}
-\added[id=jj]{Regarding the valuations, the relative frequency model predicts no effect of sample size on valuations in our task (because the relative frequencies did not differ across sample sizes). In contrast, the Bayesian value updating model predicts that given different prior beliefs the frequency of experienced outcomes will change people's beliefs in different directions, and that this change is stronger with larger sample size (Figure~ \ref{fig:sensi}). According to the Bayesian value updating model, participants with a prior belief that zero outcomes are more likely than gain outcomes (zero-outcome prior) who sample p-bets should increase their evaluations with higher sample size. By contrast, participants with a prior belief that gains are more likely than zero outcomes (gain prior) who sample \$-bets should decrease their valuations with higher sample size.}
+\added[id=jj]{Regarding the valuations, the relative frequency model predicts no effect of sample size on valuations in our task (because the relative frequencies did not differ across sample sizes). In contrast, the Bayesian value updating model predicts that given different prior beliefs the frequency of experienced outcomes will change people's beliefs in different directions, and that this change is stronger with larger sample size (Figure~\ref{fig:sensi}). According to the Bayesian value updating model, participants with a prior belief that zero outcomes are more likely than gain outcomes (zero-outcome prior) who sample p-bets should increase their evaluations with higher sample size. By contrast, participants with a prior belief that gains are more likely than zero outcomes (gain prior) who sample \$-bets should decrease their valuations with higher sample size.}
 
 \input{analyses/reports/results_evaluation-by-prior}
 
