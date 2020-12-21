@@ -18,7 +18,7 @@ tab <- apa_table(tab,
   col.names = c("Gamble ID", "Type", "X", "Pr", "EV", "xs", "s", "m", "l"),
   align = c("l", "l", rep("c", 7)),
   note = "X = gain in Swiss Fr., Pr = probability of gain, EV = expected value, Sample Size = total number of observations in the experience condition categorized as xs = extra small, s = small, m = medium, l = large. The probability is expressed as the ratio of the relative frequency of the number of gain observations to the number of observations in the smallest sample size category (xs) of this gamble, namely 1/5, 1/6, 1/7, 4/5, 5/6, and 6/7 for gamble IDS 1 through 6, respectively.",
-  caption = "Gambles and Sample Sizes Used in Studies 1 and 2 \\label{table:Lotteries}}",
+  caption = "Gambles and Sample Sizes Used in Studies 1 and 2 \\\\label{table:Lotteries}}",
   placement = "H",
   col_spanners = list("Sample Size" = c(6,9))
   )
