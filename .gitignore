@@ -1,5 +1,6 @@
 data/*
 !data/codebooks/
+!data/processed/
 
 # These files are too big
 study1_cognitive_models.rds
