@@ -1,9 +1,9 @@
 ---
-title: "Codebook for data in Hoffart, Jarecki, Duthil & Rieskamp"
+title: "Codebook for data in Hoffart, Jarecki, Duthil, & Rieskamp"
 author: "Jana B. Jarecki & Elina Lutz"
 date: "`r Sys.Date()`"
 output: html_document
-  # github_document: # add this again
+  # github_document:
   #   css: css.css
   # html_document:
   #   toc: false
@@ -21,7 +21,8 @@ This document contains codebooks explaining the variables and labels of the data
 
 ```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
 # No need to change anything in this block
-library(codebook)
+if (!require(pacman)) install.packages("pacman")
+pacman::p_load(data.table, codebook, labelled, sjlabelled, dplyr, ggthemes)
 knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
@@ -30,7 +31,7 @@ knitr::opts_chunk$set(
   fig.margin = TRUE,
   fig.height = 1.4,
   fig.width = 3,
-  echo=FALSE
+  echo = FALSE
 )
 pander::panderOptions("table.split.table", Inf)
 ggplot2::theme_set(ggthemes::theme_tufte(base_family = "sans", ticks = FALSE))
@@ -39,21 +40,34 @@ ggplot2::theme_set(ggthemes::theme_tufte(base_family = "sans", ticks = FALSE))
 ```{r meta_info}
 # Define a list with information about the authors, affiliation, methods of data collection, and so forth (called meta information)
 meta_info <- list(
-  citation = "Hoffart, Jarecki, Duthil & Rieskamp",
-  creator =list(
+  citation = "Hoffart, Jarecki, Duthil, & Rieskamp",
+  creator =list( # maybe use affiliation only in the end?
+    "@type" = "Person", 
+    givenName = "Janine C.", 
+    familyName = "Hoffart",
+    email = "janine.hoffart@gmail.com",
+    
     "@type" = "Person",
     givenName = "Jana B.",
     familyName = "Jarecki",
     email = "jj@janajarecki.com", 
     affiliation = list(
       "@type" = "Organization",
-      name = "University of Basel, Switzerland")
-      ),
-  spatialCoverage = "NA", # take this out when having the info for studies 1 & 2 respectively
-  temporalCoverage = "NA",
-  measurementTechnique = "Experimental data with human participants, within-subjects design",
-  funder = "Center for Economic Psychology, University of Basel",
-  keywords = c("online study", "risky choice", "risky gamble", "decisions from experience", "psychology", "cognition", "cognitive modeling", "heuristics", "bayesian cognitive model")
+      name = "University of Basel, Switzerland"),
+    
+    "@type" = "Person", 
+    givenName = "Gilles", 
+    familyName = "Duthil",
+    
+    "@type" = "Person", 
+    givenName = "Jörg", 
+    familyName = "Rieskamp"
+    ),
+  spatialCoverage = "laboratory",
+  temporalCoverage = "NA"
+  # measurementTechnique = "Experimental data with human participants, within-subjects design",
+  # funder = "Center for Economic Psychology, University of Basel",
+  # keywords = c("online study", "risky choice", "risky gamble", "decisions from experience", "psychology", "cognition", "cognitive modeling", "heuristics", "bayesian cognitive model")
   )
 
 # Function that defines how to print the codebook, only change
@@ -70,16 +84,13 @@ print_options <- list(
 
 # Study 1
 ```{r codebook study1}
-if (!require(pacman)) install.packages("pacman")
-pacman::p_load(data.table, codebook, labelled, sjlabelled, dplyr, ggthemes)
-  
 # Preparation
 study1 <- fread("../processed/study1.csv")
 fa <- c("condition", "gambleid", "samplesizecat", "gambletype")
 study1[, c(fa) := lapply(.SD, factor), .SDcols = fa]
 setcolorder(study1, c("id", "condition", "trial", "gambleid", "gamblex", "gamblep", "gambletype", "samplesizecat", "samplesize"))
 
-# val_labels
+# var_label
 variables_explained <- list(
   id = "Participant identifier",
   condition = "Within-subjects condition",
@@ -88,11 +99,11 @@ variables_explained <- list(
    trial = "Trial number for each participant",
    gamblep = "Probability of the risky gamble stimulus",
    gamblex = "Outcome of the risky gamble stimulus",
-   value = "Respondents' evaluation response to the gamble", # 'to the gamble' necessary?
+   value = "Respondents' evaluation of the gamble",
    gambleid = "Identifier of the gamble",
    gambletype = "Type of gamble (two-outcome gambles with either a gain or a zero outcome)", # part in brackets necessary?
    samplesize = "Number of samples the participant drew; is NA if condition is 'description'",
-   confidence = "Respondents' self-reported confidence of their evaluation",
+   confidence = "Respondents' self-reported confidence in their evaluation",
    samplesizecat = "Level of sample size; is '--' if condition is 'description'"
 
 #   state = "Number of points accumulated until this trial",
@@ -118,8 +129,6 @@ variables_explained <- list(
 var_label(study1) <- variables_explained
 
 # val_labels
-# ?
-
 # val_labels(study1$choice_1isHighVar) <- c(
 #   "Low-variance option" = 0,
 #   "High-variance option"  = 1)
@@ -129,7 +138,8 @@ var_label(study1) <- variables_explained
 
 # Meta data
 metadata(study1) <- meta_info
-metadata(study1)$description <- "Choice data from the decision from experience experiment by Hoffart, Jarecki, Duthil & Rieskamp; possible outcomes known before sampling phase" # why was this left out of meta_info?
+metadata(study1)$name <- "study1"
+metadata(study1)$description <- "Choice data from the decision from experience experiment by Hoffart, Jarecki, Duthil, and Rieskamp investigating how the size of the sample that people experience affects their preferences between risky options. Study 1: Possible outcomes known before sampling phase."
    
 # Generating the codebook
 codebook(study1,
@@ -151,13 +161,10 @@ setcolorder(study2, c("id", "condition", "trial", "gambleid", "gamblex", "gamble
 # var_label
 var_label(study2) <- variables_explained
 
-# val_labels
-# ?
-
 # Meta data
 metadata(study2) <- meta_info
-metadata(study2)$name <- "Study 2"
-metadata(study2)$description <- "Choice data from the decision from experience experiment by Hoffart, Jarecki, Duthil & Rieskamp; possible outcomes learned during sampling phase" # why was this left out of meta_info?
+metadata(study2)$name <- "study2"
+metadata(study2)$description <- "Choice data from the decision from experience experiment by Hoffart, Jarecki, Duthil, and Rieskamp investigating how the size of the sample that people experience affects their preferences between risky options. Study 2: Possible outcomes learned during sampling phase."
 
 # Generating the codebook
 compact_codebook(study2)
