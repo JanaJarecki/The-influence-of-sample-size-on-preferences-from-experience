@@ -1,7 +1,7 @@
 # Risk Preferences and Risk Perception Affect the Acceptance of Digital Contact Tracing
 
 ### Contributing Authors
-J. C. Hoffart, Jana B Jarecki, G. Dutilh, & J. Rieskamp
+Janine C. Hoffart, Jana B Jarecki, Gilles Dutilh, & Jörg Rieskamp
 
 ### Dates
 Paper published in 2021.
