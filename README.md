@@ -1,4 +1,4 @@
-# Risk Preferences and Risk Perception Affect the Acceptance of Digital Contact Tracing
+# The Influence of Sample Size on Preferences from Experience
 
 ### Contributing Authors
 Janine C. Hoffart, Jana B Jarecki, Gilles Dutilh, & Jörg Rieskamp
