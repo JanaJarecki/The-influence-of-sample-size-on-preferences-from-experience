@@ -1,3 +1,4 @@
 *.TeX -linguist-detectable
 *.bib -linguist-detectable
 *.html -linguist-detectable
+*.PostScript -linguist-detectable
